@@ -1,8 +1,16 @@
 openapi: 3.0.0
 info:
   description: >
-    The BriAPI was designed for users to interact with the Briengine, creating
-    new images with specific requests. Visit the Bria website to see more of our
+    The BriAPI was designed for users to interact with the Briengine, creating new images with specific requests. This document will outline the capabilities of the BriAPI and explain to users how to interact with it, step by step.
+    
+    
+    The common process for consumption of the BriAPI, orderly placed, is as follows:
+      - /upload - Using the upload route to upload a new image to the database
+      - /info - Using the info route to clarify the possible actions for each element in the image
+      - /create - Using the create route to create a new visual with requested changes to a previous one
+    
+    
+    Visit the Bria website to see more of our
     products, at [http://bria.ai](http://bria.ai) 
 
 
@@ -35,6 +43,202 @@ info:
   version: '1'
   title: BriAPI
 paths:
+  /upload:
+    post:
+      tags:
+        - upload
+      summary: Uploading file
+      description: >-
+
+        **Description**
+        
+        
+        The upload method is used to upload visuals to the database.
+        
+        
+        In case of success, the upload route will return to the user a visual identification. The upload route is the first step for consuming the BriAPI for new visuals.
+        
+
+        **Response**
+
+
+        visual_id - The visual id in the reponse of the upload route must be kept by the user in order to query image info and make changes to it
+
+
+        ```{ "visual_id": "9ea9a4d2d19977a7c" }```
+        
+        
+        The *visual_id* in the response of the /upload route can be used for the /info and /create routes, but also to access the Bria web tool with the uploaded visual.
+        
+        
+        In order to do that, the user can access the following url: ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}* comes from the response of the */upload* route
+        
+        
+        In Bria's web tool, the user has the ability to make many changes to the visual and also generate live videos, using an intuitive interactive platform.
+
+        Bria's web tool can also be embedded in other websites, with the use of an iframe HTML element:
+        
+        
+            <iframe src="https://labs.bria.ai/tools/{visual_id}" />
+            
+            
+        <img src="https://bria-web-serving.s3.amazonaws.com/Screen+Shot+2021-08-01+at+15.14.22.png" />
+        
+        
+        **Constrain**
+
+
+        File should not be larger than 25mb
+        
+        
+        The status code 413 will be returned in case of the file exceeding its maximum size
+      operationId: upload
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:     
+                file:  
+                  type: string
+                  format: binary
+        description: Upload new image
+        required: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  visual_id: 
+                    type: string
+                    description: unique visual identification
+        '405':
+          description: Method not allowed.
+        '413':
+          description: Request entity too large.
+        '415':
+          description: Unsuported media type.
+  /info:
+    post:
+      tags:
+        - info
+      summary: Getting image info
+      description: >-
+        
+        **Description**
+        
+        
+        The info method is used to retrieve useful information on a specific visual that was previously uploaded to the database.
+        
+        
+        In case of success, the info route will return to the user a description of the scene and the possible actions for each element within it. 
+        
+        
+        The info route will clarify the possible changes that the BriAPI supports for each element in the scene.
+        
+
+        
+        **Response**
+
+
+        Dict - A dictionary of relevant information about the required image. An object with JSON format, containing two key-value pairs:
+        
+          - **description**: a brief description of the visual
+          - **scene**: an array of objects representing each of the elements recognized in the visual.
+          
+        Each object inside the *scene* array will contain:
+          
+          - **id**: the id of the specific individual
+          - **labels**: an array with known information on the element, such as age range and gender
+          - **actions**: an object containing the available changes for the */create* route.
+          
+        The *actions* object contains the following key-value pairs:
+        
+          - **age**: an array containing the available age modifications for the element. Example:
+              
+              
+            { "age": [ "mid-20", "mid-40" ] }  *
+
+              
+              
+          - **diversify**: an array containing the available ethnicity modifications for the element. Example:
+              
+              
+            { "diversify": [ "africa", "brazil", "mexico" ] }  *
+
+            
+          - **glasses**: an array containing the available glasses modifications for the element. Example:
+              
+              
+            { "glasses": [ "light", "none" ] }  *
+
+            
+          - **smile**: an array containing the available smile modifications for the element. Example:
+              
+              
+            { "smile": [ "calm", "serious" ] }  *
+        
+          
+          *check response schema for full enums
+      operationId: info
+      parameters:
+        - in: query
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          description: visual hash of the image
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    description: description of the image
+                  scene:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        actions: 
+                          type: object
+                          properties:
+                            age:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["mid-20", "mid-40", "mid-60"]
+                            diversify:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france", "unsplash"]
+                            glasses:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["light", "heavy", "none"]
+                            smile:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["happy", "calm", "serious"]
+                        id: 
+                          type: string
+                        labels:
+                          type: array
+                          items:
+                            type: string
+                            
+        '400':
+          description: Bad request.
   /create:
     post:
       tags:
@@ -49,10 +253,13 @@ paths:
  
         
         
-        The create method is used to create a new visual based on a previously existing one and the changes requested by the user.  It takes as parameters the api_token and api_secret, on the headers of the request, and , in the body of the request, a JSON format object containing the visual hash of the image and a array of changes - **described in detail in the body parameters section**.
+        The create method is used to create a new visual based on a previously existing one and the changes requested by the user.
         
         
-        In case of success, the create route will return to the user a JSON format object, containing the url for accessing the new generated image and the confidence that Bria has on the quality of the  generated visual. The create route is the way to interact with the Bria magic.
+        In case of success, the create route will return the url for accessing the new generated image and the confidence that Bria has on the quality of the generated visual. 
+        
+        
+        The create route is the way to interact with the Bria platform.
         
 
         **Response**
@@ -121,199 +328,5 @@ paths:
         '400':
           description: Bad request.
 
-  /info:
-    post:
-      tags:
-        - info
-      summary: Getting image info
-      description: >-
-        
-        **Description**
-        
-        
-        The info method is used to retrieve usefull information on a specific visual previously uploaded to the database.  It takes as parameters the api_token and api_secret, on the headers of the request, and the visual hash of the required image, in query parameters.
-        
-        
-        In case of success, the info route will return to the user a JSON format object, containing a description of the visual and the possible actions to be used in the creation route - **check response code 200 for details on the format of the response**. The info route will clarify the possible changes the BriAPI supports for a specific image and its individuals.
-        
-
-        
-        **Response**
-
-
-        Dict - A dictionary of relevant information about the required image. An object with JSON format, containing two key-value pairs:
-        
-          - **description**: a brief description of the visual
-          - **scene**: an array of objects representing each of the individuals recognized in the visual.
-          
-        Each object inside the *scene* array will contain:
-          
-          - **id**: the id of the specific individual
-          - **labels**: an array with known information on the individual, such as age range and gender
-          - **actions**: an object containing the available changes for the */create* route.
-          
-        The *actions* object contains the following key-value pairs:
-        
-          - **age**: an array containing the available age modifications for the individual. Example:
-              
-              
-            { "age": [ "mid-20", "mid-40" ] }  *
-
-              
-              
-          - **diversify**: an array containing the available ethnicity modifications for the individual. Example:
-              
-              
-            { "diversify": [ "africa", "brazil", "mexico" ] }  *
-
-            
-          - **glasses**: an array containing the available glasses modifications for the individual. Example:
-              
-              
-            { "glasses": [ "light", "none" ] }  *
-
-            
-          - **smile**: an array containing the available smile modifications for the individual. Example:
-              
-              
-            { "smile": [ "calm", "serious" ] }  *
-        
-          
-          *check response schema for full enums
-      operationId: info
-      parameters:
-        - in: query
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          description: visual hash of the image
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  description:
-                    type: string
-                    description: description of the image
-                  scene:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        actions: 
-                          type: object
-                          properties:
-                            age:
-                              type: array
-                              items:
-                                type: string
-                                enum: ["mid-20", "mid-40", "mid-60"]
-                            diversify:
-                              type: array
-                              items:
-                                type: string
-                                enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france", "unsplash"]
-                            glasses:
-                              type: array
-                              items:
-                                type: string
-                                enum: ["light", "heavy", "none"]
-                            smile:
-                              type: array
-                              items:
-                                type: string
-                                enum: ["happy", "calm", "serious"]
-                        id: 
-                          type: string
-                        labels:
-                          type: array
-                          items:
-                            type: string
-                            
-        '400':
-          description: Bad request.
-  /upload:
-    post:
-      tags:
-        - upload
-      summary: Uploading file
-      description: >-
-
-        **Description**
-        
-        
-        The upload method is used to upload visuals to the database. It takes as parameters the api_token and api_secret, on the headers of the request, and the file to be uploaded, in the body of the request.
-        
-        
-        In case of success, the upload route will return to the user a visual id (visual_id), which is the unique identification of this new visual. The visual hash will be used for the user for the *create* and *info* routes. The upload route is the first step for consuming the BriAPI for new visuals.  
-        
-
-        **Response**
-
-
-        visual_id - The visual id in the reponse of the upload route must be kept by the user in order to query image info and make changes to it
-
-
-        ```{ "visual_id": "9ea9a4d2d19977a7c" }```
-        
-        
-        The *visual_id* in the response of the /upload route can be used for the /info and /create routes, but also to access the Bria web tool with the uploaded visual.
-        
-        
-        In order to do that, the user can access the following url: ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}* comes from the response of the */upload* route
-        
-        
-        At Bria's web tool, the user has the ability to make many changes to the visual and also generate live videos, all in a intuitive interactive platform.
-        
-        
-        Bria's web tool can also be embedded in other website, with the use of an iframe HTML element:
-        
-        
-            <iframe src="https://labs.bria.ai/tools/{visual_id}" />
-            
-            
-        <img src="https://bria-web-serving.s3.amazonaws.com/Screen+Shot+2021-07-29+at+12.12.37.png" />
-        
-        
-        **Constrain**
-
-
-        File should not be larger than 25mb
-        
-        
-        The status code 413 will be returned in case of file exceeding maximum size
-      operationId: upload
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:     
-                file:  
-                  type: string
-                  format: binary
-        description: Upload new image
-        required: true
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  visual_id: 
-                    type: string
-                    description: unique visual identification
-        '405':
-          description: Method not allowed.
-        '413':
-          description: Request entity too large.
-        '415':
-          description: Unsuported media type.
 servers:
   - url: 'https://briator-api.bria.ai:5000/v1'

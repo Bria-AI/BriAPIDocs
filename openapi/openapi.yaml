@@ -1,30 +1,25 @@
 openapi: 3.0.0
 info:
   description: >
-    The BriAPI was designed for users to interact with the Briengine, creating new images with specific requests. This document will outline the capabilities of the BriAPI and explain to users how to interact with it, step by step.
+    The Bria's API was designed for users to interact with the BriEngine, creating new images with specific requests. This document will outline the capabilities of the BriAPI and explain to users how to implement the API.
     
     
-    The common process for consumption of the BriAPI, orderly placed, is as follows:
-      - /upload - Use the upload route to upload a new image to the database
-      - /info - Use the info route to receive a list of the possible actions for each element in the image
-      - /create - Specify changes for a previous existing visual to create a new visual 
+    The common use of the BriAPI, is according to the following order:
+      - /upload - Using the *Upload Route* to upload a new image to the database
+      - /info - Using the *Info Route* to understand the modification possibilities for each element in the image 
+      - /create - Using the *Create Route* to create a new visual with requested modifications of elements according to Info Route possibilities.   
     
-    
-    Visit the Bria website to see more of our
-    products, at [http://bria.ai](http://bria.ai) 
 
 
     # Versioning
 
 
-    The current version of the web API is known as V1 and is considered to be
-    in a draft phase. While we don’t expect public endpoints to change greatly,
-    keep in mind that the API is still under development.
+    The current version of the web API is known as V1 and is considered to be in a draft phase. While we don’t expect public endpoints to materially change, please bear in mind that the API is still under development.
 
 
     # Authentication
     
-      The BriAPI consists of a number of methods for uploading and creating new visual assets. The REST API methods can be called directly from within your own custom code.
+      The BriAPI consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
 
         curl --location --request POST 'https://briator-api.bria.ai:5000/v1' \
         --header: 'api_token: <...>' \
@@ -53,16 +48,16 @@ paths:
         **Description**
         
         
-        The upload method is used to upload visuals to the database.
+        The *Upload Method* is used to upload visuals to the database.
         
         
-        In case of success, the upload route will return to the user a visual identification. The upload route is the first step for consuming the BriAPI for new visuals.
+        The *Upload Method* will return to the user a visual identification. The Upload Method is the first step for consuming the BriAPI for new visuals.
         
 
         **Response**
 
 
-        visual_id - The visual id in the reponse of the upload route must be kept by the user in order to query image info and make changes to it
+        The visual id in the response of the Upload Route must be kept by the user in order to query image info and make changes to it
 
 
         ```{ "visual_id": "9ea9a4d2d19977a7c" }```
@@ -131,20 +126,20 @@ paths:
         **Description**
         
         
-        The info method is used to retrieve useful information on a specific visual that was previously uploaded to the database.
+        The *Info Route* is used to retrieve useful information on a specific visual that was previously uploaded to the database.
         
         
-        In case of success, the info route will return to the user a description of the scene and the possible actions for each element within it. 
+        The the *Info Route* will return to the user a description of the scene and the possible actions for each element within it. 
         
         
-        The info route will clarify the possible changes that the BriAPI supports for each element in the scene.
+        The *Info Route* will list the possible changes that the BriAPI supports for each element in the scene.
         
 
         
         **Response**
 
 
-        Dict - A dictionary of relevant information about the required image. An object with JSON format, containing two key-value pairs:
+        Dictionary - Relevant information about the required image. An object with JSON format, containing two key-value pairs:
         
           - **description**: a brief description of the visual
           - **scene**: an array of objects representing each of the elements recognized in the visual.
@@ -253,13 +248,10 @@ paths:
  
         
         
-        The create method is used to create a new visual based on a previously existing one and the changes requested by the user.
+        The *Create Route* is used to create a new visual, based the changes requested by the user on a previously uploaded visual.
         
         
-        In case of success, the create route will return the url for accessing the new generated image and the confidence that Bria has on the quality of the generated visual. 
-        
-        
-        The create route is the way to interact with the Bria platform.
+        The *Create Route* will return the url for accessing the new generated image and the confidence that Bria has on the quality of the generated visual.
         
 
         **Response**

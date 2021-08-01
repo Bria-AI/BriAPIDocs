@@ -5,9 +5,9 @@ info:
     
     
     The common process for consumption of the BriAPI, orderly placed, is as follows:
-      - /upload - Using the upload route to upload a new image to the database
-      - /info - Using the info route to clarify the possible actions for each element in the image
-      - /create - Using the create route to create a new visual with requested changes to a previous one
+      - /upload - Use the upload route to upload a new image to the database
+      - /info - Use the info route to receive a list of the possible actions for each element in the image
+      - /create - Specify changes for a previous existing visual to create a new visual 
     
     
     Visit the Bria website to see more of our
@@ -82,7 +82,7 @@ paths:
             <iframe src="https://labs.bria.ai/tools/{visual_id}" />
             
             
-        <img src="https://bria-web-serving.s3.amazonaws.com/Screen+Shot+2021-08-01+at+15.14.22.png" />
+        <img src="https://bria-web-serving.s3.amazonaws.com/Screen+Shot+2021-07-29+at+12.12.37.png" />
         
         
         **Constrain**

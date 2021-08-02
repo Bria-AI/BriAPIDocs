@@ -1,10 +1,10 @@
 openapi: 3.0.0
 info:
   description: >
-    The Bria's API was designed for users to interact with the BriEngine, creating new images with specific requests. This document will outline the capabilities of the BriAPI and explain to users how to implement the API.
+    The Bria's API was designed for users to interact with the BriEngine, creating new images with specific requests. This document will outline the capabilities of the API and explain to users how to implement it.
     
     
-    The common use of the BriAPI, is according to the following order:
+    The common use of the Bria's API is according to the following order:
       - /upload - Using the *Upload Route* to upload a new image to the database
       - /info - Using the *Info Route* to understand the modification possibilities for each element in the image 
       - /create - Using the *Create Route* to create a new visual with requested modifications of elements according to Info Route possibilities.   
@@ -19,7 +19,7 @@ info:
 
     # Authentication
     
-      The BriAPI consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
+      The Bria's API consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
 
         curl --location --request POST 'https://briator-api.bria.ai:5000/v1' \
         --header: 'api_token: <...>' \
@@ -32,11 +32,11 @@ info:
       
     # Demonstration of usage
       
-      For a full example of the BriAPI usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo.py)
+      For a full example of the Bria's API usage, using python code, [please check this link](https://github.com/Bria-AI/Bria's API/blob/main/demo.py)
 
             
   version: '1'
-  title: BriAPI
+  title: Bria's API
 paths:
   /upload:
     post:
@@ -48,16 +48,16 @@ paths:
         **Description**
         
         
-        The *Upload Method* is used to upload visuals to the database.
+        The *Upload Route* is used to upload visuals to the database.
         
         
-        The *Upload Method* will return to the user a visual identification. The Upload Method is the first step for consuming the BriAPI for new visuals.
+        The *Upload Route* will return to the user a visual identification. It is the first step for consuming the Bria's API for new visuals.
         
 
         **Response**
 
 
-        The visual id in the response of the Upload Route must be kept by the user in order to query image info and make changes to it
+        The visual id in the response of the *Upload Route* must be kept by the user in order to query image info and make changes to it
 
 
         ```{ "visual_id": "9ea9a4d2d19977a7c" }```
@@ -70,6 +70,7 @@ paths:
         
         
         In Bria's web tool, the user has the ability to make many changes to the visual and also generate live videos, using an intuitive interactive platform.
+
 
         Bria's web tool can also be embedded in other websites, with the use of an iframe HTML element:
         
@@ -129,10 +130,10 @@ paths:
         The *Info Route* is used to retrieve useful information on a specific visual that was previously uploaded to the database.
         
         
-        The the *Info Route* will return to the user a description of the scene and the possible actions for each element within it. 
+        The *Info Route* will return to the user a description of the scene and the possible actions for each element within it. 
         
         
-        The *Info Route* will list the possible changes that the BriAPI supports for each element in the scene.
+        The *Info Route* will list the possible changes that the Bria's API supports for each element in the scene.
         
 
         
@@ -146,7 +147,7 @@ paths:
           
         Each object inside the *scene* array will contain:
           
-          - **id**: the id of the specific individual
+          - **id**: the id of the specific element
           - **labels**: an array with known information on the element, such as age range and gender
           - **actions**: an object containing the available changes for the */create* route.
           
@@ -248,10 +249,10 @@ paths:
  
         
         
-        The *Create Route* is used to create a new visual, based the changes requested by the user on a previously uploaded visual.
+        The *Create Route* is used to create a new visual, based on the changes requested by the user for a previously uploaded visual.
         
         
-        The *Create Route* will return the url for accessing the new generated image and the confidence that Bria has on the quality of the generated visual.
+        The *Create Route* will return the url for accessing the new generated visual and the confidence that Bria has in the quality of the new visual.
         
 
         **Response**
@@ -283,7 +284,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        description: id of the individual in the image
+                        description: id of the element in the image
                       actions:
                         type: object
                         description: the changes the user wishes to perform for this person in the image

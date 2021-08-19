@@ -34,7 +34,7 @@ info:
       - Age
       
       
-         ["mid-20", "mid-30", "mid-40", "mid-50", "mid-60"]
+         ["mid-20", "mid-40", "mid-60"]
          
          
       - Diversify
@@ -49,10 +49,10 @@ info:
          ["light", "heavy", "none"]
          
          
-      - Expressions
+      - Smile
       
       
-         ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+         ["happy", "calm", "serious"]
     
 
 
@@ -166,14 +166,14 @@ paths:
         '415':
           description: Unsuported media type.
   /info:
-    post:
+    get:
       tags:
         - info
       summary: Getting image info
       description: >-
         
         
-        <img src="https://bria-web-serving.s3.amazonaws.com/_info1.png" />
+        <img src="https://bria-web-serving.s3.amazonaws.com/_info2.png" />
         
         
         **Description**
@@ -228,10 +228,10 @@ paths:
             { "glasses": [ "light", "none" ] }
 
             
-          - **expressions**: an array containing the available smile modifications for the element. Example:
+          - **smile**: an array containing the available smile modifications for the element. Example:
               
               
-            { "expressions": [ "happy", "fear", "angry", "sad" ] }
+            { "smile": [ "happy", "calm", "serious"] }
         
           
           ***check response schema for full enum of each action**
@@ -266,7 +266,7 @@ paths:
                               type: array
                               items:
                                 type: string
-                                enum: ["mid-20", "mid-30", "mid-40", "mid-50", "mid-60"]
+                                enum: ["mid-20", "mid-40", "mid-60"]
                             diversify:
                               type: array
                               items:
@@ -277,11 +277,11 @@ paths:
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
-                            expressions:
+                            smile:
                               type: array
                               items:
                                 type: string
-                                enum: ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+                                enum: ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
                         id: 
                           type: string
                         labels:
@@ -347,7 +347,7 @@ paths:
                         properties:
                           age:
                             type: string
-                            enum: ["mid-20", "mid-30", "mid-40", "mid-50", "mid-60"]
+                            enum: ["mid-20", "mid-40", "mid-60"]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
                           diversify:
                             type: string

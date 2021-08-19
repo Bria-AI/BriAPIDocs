@@ -18,6 +18,41 @@ info:
         
       The following route can be used at any moment:
       - /generate - (coming soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image
+      
+      
+      
+    # Bria API's supported values and responses
+
+
+    This section of the documentation serves as a dictionary of the possible values to be used in the API routes.
+    
+    
+    For applicability of each list of values, please attent yourself to each route of the API.
+    
+    
+      For the **human** class, these are the relevant lists of values:
+      - Age
+      
+      
+         ["mid-20", "mid-30", "mid-40", "mid-50", "mid-60"]
+         
+         
+      - Diversify
+      
+      
+         ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
+         
+         
+      - Glasses
+      
+      
+         ["light", "heavy", "none"]
+         
+         
+      - Expressions
+      
+      
+         ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
     
 
 
@@ -31,7 +66,7 @@ info:
     
       The Bria's API consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
 
-        curl --location --request POST 'https://briator-api.bria.ai:5000/v1' \
+        curl --location --request POST 'http://bria-api.com:5000/v1' \
         --header: 'api_token: <...>' \
         --header: 'api_secret: <...>' \
         ...
@@ -89,12 +124,9 @@ paths:
 
 
         Bria's web tool can also be embedded in other websites, with the use of an iframe HTML element:
-        
-        
-            <iframe src="https://labs.bria.ai/tools/{visual_id}" />
             
             
-        <img src="https://bria-web-serving.s3.amazonaws.com/Screen+Shot+2021-08-03+at+11.14.16.png" />
+        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool.png" />
         
         
         **Constrain**
@@ -140,6 +172,10 @@ paths:
       summary: Getting image info
       description: >-
         
+        
+        <img src="https://bria-web-serving.s3.amazonaws.com/_info1.png" />
+        
+        
         **Description**
         
         
@@ -164,37 +200,41 @@ paths:
         Each object inside the *scene* array will contain:
           
           - **id**: the id of the specific element
+          - **class**: the class type of the element (human, object, etc)
           - **labels**: an array with known information on the element, such as age range and gender
-          - **actions**: an object containing the available changes for the */create* route.
+          - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
           
-        The *actions* object contains the following key-value pairs:
+        The content of *actions* object will depend on the class of the element it refers to. The currently suported classes are listed below, with their respective possible actions:
+        
+        
+        *Human class:*
         
           - **age**: an array containing the available age modifications for the element. Example:
               
               
-            { "age": [ "mid-20", "mid-40" ] }  *
+             { "age": [ "mid-20", "mid-40" ] }
 
               
               
           - **diversify**: an array containing the available ethnicity modifications for the element. Example:
               
               
-            { "diversify": [ "africa", "brazil", "mexico" ] }  *
+            { "diversify": [ "africa", "brazil", "mexico" ] }
 
             
           - **glasses**: an array containing the available glasses modifications for the element. Example:
               
               
-            { "glasses": [ "light", "none" ] }  *
+            { "glasses": [ "light", "none" ] }
 
             
-          - **smile**: an array containing the available smile modifications for the element. Example:
+          - **expressions**: an array containing the available smile modifications for the element. Example:
               
               
-            { "smile": [ "calm", "serious" ] }  *
+            { "expressions": [ "happy", "fear", "angry", "sad" ] }
         
           
-          *check response schema for full enums
+          ***check response schema for full enum of each action**
       operationId: info
       parameters:
         - in: query
@@ -226,22 +266,22 @@ paths:
                               type: array
                               items:
                                 type: string
-                                enum: ["mid-20", "mid-40", "mid-60"]
+                                enum: ["mid-20", "mid-30", "mid-40", "mid-50", "mid-60"]
                             diversify:
                               type: array
                               items:
                                 type: string
-                                enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france", "unsplash"]
+                                enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
                             glasses:
                               type: array
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
-                            smile:
+                            expressions:
                               type: array
                               items:
                                 type: string
-                                enum: ["calm", "serious", "happy", "fear"]
+                                enum: ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
                         id: 
                           type: string
                         labels:
@@ -258,7 +298,7 @@ paths:
       summary: Create new image based on changes requested by user
       description: >-
         
-        <img src="https://bria-web-serving.s3.amazonaws.com/_create1.png" />
+        <img src="https://bria-web-serving.s3.amazonaws.com/_create3.png" />
         
         
         **Description**
@@ -307,19 +347,19 @@ paths:
                         properties:
                           age:
                             type: string
-                            enum: ["mid-20", "mid-40", "mid-60"]
+                            enum: ["mid-20", "mid-30", "mid-40", "mid-50", "mid-60"]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
                           diversify:
                             type: string
-                            enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france", "unsplash"]
+                            enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
                           glasses:
                             type: string
                             enum: ["light", "heavy", "none"]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
-                          smile:
+                          expressions:
                             type: string
-                            enum: ["happy", "calm", "serious"]
+                            enum: ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
       responses:
         '200':
@@ -413,4 +453,4 @@ paths:
         '400':
           description: Bad request.
 servers:
-  - url: 'https://briator-api.bria.ai:5000/v1'
+  - url: 'http://bria-api.com:5000/v1'

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: >
-    The Bria's API was designed for users to interact with the BriEngine, creating new images and videos with specific requests. This document will outline the capabilities of the API and explain to users how to implement it.
+    The Bria's API 2 was designed for users to interact with the BriEngine, creating new images and videos with specific requests. This document will outline the capabilities of the API and explain to users how to implement it.
     
     
     **The common use of the Bria's API is according to the following order:**

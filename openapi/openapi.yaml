@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: >
-    The Bria's API 2 was designed for users to interact with the BriEngine, creating new images and videos with specific requests. This document will outline the capabilities of the API and explain to users how to implement it.
+    The Bria's API was designed for users to interact with the BriEngine, creating new images and videos with specific requests. This document will outline the capabilities of the API and explain to users how to implement it.
     
     
     **The common use of the Bria's API is according to the following order:**
@@ -59,7 +59,7 @@ info:
     # Versioning
 
 
-    The current version of the web API is known as V1 and is considered to be in a draft phase. While we don’t expect public endpoints to materially change, please bear in mind that the API is still under development.
+    The current version of the web API is known as V2 and is considered to be in a draft phase. While we don’t expect public endpoints to materially change, please bear in mind that the API is still under development.
 
 
     # Authentication
@@ -80,7 +80,7 @@ info:
       For a full example of the Bria's API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo.py)
 
             
-  version: '1'
+  version: 1.0.0
   title: Bria's API
 paths:
   /upload:
@@ -202,37 +202,31 @@ paths:
           - **id**: the id of the specific element
           - **class**: the class type of the element (human, object, etc)
           - **labels**: an array with known information on the element, such as age range and gender
+          - **rect**: the dimensions of the element
           - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
           
         The content of *actions* object will depend on the class of the element it refers to. The currently suported classes are listed below, with their respective possible actions:
         
         
         *Human class:*
-        
-          - **age**: an array containing the available age modifications for the element. Example:
               
-              
-             { "age": [ "mid-20", "mid-40" ] }
-
-              
-              
-          - **diversify**: an array containing the available ethnicity modifications for the element. Example:
-              
-              
-            { "diversify": [ "africa", "brazil", "mexico" ] }
+        - **diversify**: an array containing the available ethnicity modifications for the element. Example:
+            
+             { "diversify": [ "africa", "brazil", "mexico" ] }
+           
+           Note: Sliders' values should be normalized to range 0 - 10
+         
 
             
-          - **glasses**: an array containing the available glasses modifications for the element. Example:
+          - **expressions**: an array containing the available expressions modifications for the element. Example:
               
               
-            { "glasses": [ "light", "none" ] }
-
+            { "expressions": [ "happy","calm","serious" ] }
             
-          - **smile**: an array containing the available smile modifications for the element. Example:
-              
-              
-            { "smile": [ "happy", "calm", "serious"] }
-        
+          - **appearance**: an array containing the available appearance modifications for the element. Example:
+         
+                { "appearnce": [ "age", "glasses", "femininity", "masculinity", "dark_hair", "light_hair", "hair_line", "makeup" ] }
+            
           
           ***check response schema for full enum of each action**
       operationId: info
@@ -262,26 +256,21 @@ paths:
                         actions: 
                           type: object
                           properties:
-                            age:
-                              type: array
-                              items:
-                                type: string
-                                enum: ["mid-20", "mid-40", "mid-60"]
                             diversify:
                               type: array
                               items:
                                 type: string
                                 enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
-                            glasses:
-                              type: array
-                              items:
-                                type: string
-                                enum: ["light", "heavy", "none"]
-                            smile:
+                            expressions:
                               type: array
                               items:
                                 type: string
                                 enum: ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+                            appearance:
+                              type: array
+                              items: 
+                                type: object
+                                enum: [{"age": {name: "age", min: 0, max: 10}},{"glasses":{name: "glasses", min: 0, max: 10}}]
                         id: 
                           type: string
                         labels:
@@ -345,21 +334,17 @@ paths:
                         type: object
                         description: the changes the user wishes to perform for this person in the image
                         properties:
-                          age:
-                            type: string
-                            enum: ["mid-20", "mid-40", "mid-60"]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
                           diversify:
                             type: string
                             enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
-                          glasses:
-                            type: string
-                            enum: ["light", "heavy", "none"]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
                           expressions:
                             type: string
                             enum: ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+                            description: Value must be included in the response of the info route in order for the request to be succesfull
+                          appearnce:
+                            type: object
+                            enum: [{ "name": "age", value: 1 },{ name: "glasses", value: 1 }]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
       responses:
         '200':
@@ -380,7 +365,7 @@ paths:
     post:
       tags:
         - generate
-      summary: Coming soon - Generate new original visual from scratch
+      summary: Coming soon - Generate new original visual from scratchhhhhh
       description: >-
         
         

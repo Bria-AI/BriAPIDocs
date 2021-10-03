@@ -337,14 +337,12 @@ paths:
                           diversify:
                             type: string
                             enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
-                             or
                             type: object
                             enum: [{name: "original", value: 5}, {name: "africa", value: 5}, {name: "korea", value: 5}, {name: "india", value: 5}, {name: "japan", value: 5}, {name: "sweden", value: 5}, {name: "germany", value: 5}, {name: "russia", value: 5}, {name: "mexico", value: 5}, {name: "brazil", value: 5}, {name: "england", value: 5}, {name: "spain", value: 5}, {name: "france", value: 5}]
                             description: Value must be included in the response of the info route in order for the request to be succesfull
                           expressions:
                             type: string
                             enum: ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
-                             or
                             type: object
                             enum: [{name: "happy", value: 5}, {name: "surprised", value: 5}, {name: "calm", value: 5},  {name: "dreaming", value: 5}, {name: "angry", value: 5}, {name: "fear", value: 5}, {name: "contempt", value: 5}, {name: "disgusted", value: 5}, {name: "sad", value: 5}]
                             description: Value must be included in the response of the info route in order for the request to be succesfull

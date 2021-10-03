@@ -269,7 +269,7 @@ paths:
                             appearance:
                               type: array
                               items: 
-                                type: object
+                                type: string
                                 enum: ["age","glasses","femininity", "masculinity", "dark_hair", "light_hair", "hair_line", "makeup"]
                         id: 
                           type: string

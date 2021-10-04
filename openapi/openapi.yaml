@@ -31,7 +31,7 @@ info:
     values to be used in the API routes.
 
 
-    For applicability of each list of values, please attent yourself to each
+    For applicability of each list of values, please attend yourself to each
     route of the API.
 
 
@@ -121,7 +121,7 @@ paths:
         in cases where the tool is licensed as part of the project.
 
 
-        In order to do that, the user can access the following URL:
+        In order to do that, the user can access the following url:
         ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}*
         comes from the response of the */upload route*
 
@@ -141,7 +141,7 @@ paths:
         **Constrain**
 
 
-        File should not be larger than 25MB
+        File should not be larger than 25mb
 
 
         The status code 413 will be returned in case of the file exceeding its
@@ -174,7 +174,7 @@ paths:
         '413':
           description: Request entity too large.
         '415':
-          description: Unsuported media type.
+          description: Unsupported media type.
   /info:
     get:
       tags:
@@ -229,20 +229,21 @@ paths:
         - **diversify**: an array containing the available ethnicity
         modifications for the element. Example:
             
-             { "diversify": [ "africa", "brazil", "mexico" ] }
+              { "diversify": [ "africa", "brazil", "mexico" ] }
            
-           Note: Sliders' values should be normalized to range 0 - 10
+          **Note: Sliders' values should be normalized to range 0 - 10**
          
-
-            
-          - **expressions**: an array containing the available expressions modifications for the element. Example:
+        - **expressions**: an array containing the available expressions modifications for the element. Example:
               
-              
-            { "expressions": [ "happy","calm","serious" ] }
+              { "expressions": [ "happy","calm","serious", "angry" ] }
+        
+          **Note: Sliders' values should be normalized to range 0 - 10**
             
-          - **appearance**: an array containing the available appearance modifications for the element. Example:
+        - **appearance**: an array containing the available appearance modifications for the element. Example:
          
-                { "appearnce": [ "age", "glasses", "femininity", "masculinity", "dark_hair", "light_hair", "hair_line", "makeup" ] }
+              { "appearance": [ "age", "glasses",  "dark_hair", "light_hair" ] }
+        
+          **Note: Sliders' values should be normalized to range 0 - 10**
             
           
           ***check response schema for full enum of each action**
@@ -320,6 +321,12 @@ paths:
                                   - makeup
                         id:
                           type: string
+                        class:
+                          type: string
+                        rect:
+                          type: array
+                          items:
+                            type: number
                         labels:
                           type: array
                           items:
@@ -344,7 +351,7 @@ paths:
         requested by the user for a previously uploaded visual.
 
 
-        The *Create Route* will return the URL for accessing the new generated
+        The *Create Route* will return the url for accessing the new generated
         visual and the confidence that Bria has in the quality of the new
         visual.
 
@@ -352,7 +359,7 @@ paths:
         **Response**
 
 
-        image_res - URL to new created image
+        image_res - url to new created image
 
 
         confidence - string indicating the level of confidence Bria has in the
@@ -485,7 +492,7 @@ paths:
                                 value: 1
                             description: >-
                               Value must be included in the response of the info
-                              route in order for the request to be succesfull
+                              route in order for the request to be successful
       responses:
         '200':
           description: Successful operation.
@@ -498,7 +505,7 @@ paths:
                     type: string
                   confidence:
                     type: string
-                    description: 'Low, high or intermidiate'
+                    description: Low, high or intermidiate
         '400':
           description: Bad request.
   /generate:
@@ -521,7 +528,7 @@ paths:
 
 
 
-        The *Create Route* will return the URL for accessing the new generated
+        The *Create Route* will return the url for accessing the new generated
         visual and the confidence that Bria has in the quality of the new
         visual.
       operationId: generate
@@ -537,7 +544,7 @@ paths:
                     type: string
                   confidence:
                     type: string
-                    description: 'Low, high or intermediate'
+                    description: Low, high or intermediate
         '400':
           description: Bad request.
   /video:
@@ -552,7 +559,7 @@ paths:
 
 
 
-        With the *Video Route*, an 8-15 seconds video can be generated from a
+        With the *Video Route*, a 8-15 seconds video can be generated from a
         single still image.
 
 
@@ -560,7 +567,7 @@ paths:
 
 
 
-        The *Video Route* will return the URL for accessing the new generated
+        The *Video Route* will return the url for accessing the new generated
         video.
       operationId: video
       responses:
@@ -575,8 +582,8 @@ paths:
                     type: string
                   confidence:
                     type: string
-                    description: 'Low, high or intermediate'
+                    description: Low, high or intermediate
         '400':
           description: Bad request.
 servers:
-  - URL: 'http://bria-api.com:5000/v1'
+  - url: http://bria-api.com:5000/v1

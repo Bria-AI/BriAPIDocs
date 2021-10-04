@@ -36,16 +36,17 @@ info:
 
 
       For the **human** class, these are the relevant lists of values:
-      - Diversify
+      - Diversity
       
       
-           ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
+          ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
          
          
       - Expressions
       
       
-           ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+          ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+        
         
       - Appearance
       
@@ -80,7 +81,7 @@ info:
       For a full example of the Bria's API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo.py)
 
             
-  version: 1.0.0-oas3
+  version: 2-oas3
   title: Bria's API
 paths:
   /upload:
@@ -101,8 +102,8 @@ paths:
 
 
         **Response**
-        
-        
+
+
         Dictionary - Relevant information about the required image. An object
         with JSON format, containing three key-value pairs:
 
@@ -117,7 +118,7 @@ paths:
 
         The *visual_id* in the response of the /upload route can be used for all
         other routes.
-        
+
           - **description**: a brief description of the visual
           - **scene**: an array of objects representing each of the elements recognized in the visual.
           
@@ -196,7 +197,7 @@ paths:
                         actions:
                           type: object
                           properties:
-                            diversify:
+                            diversity:
                               type: array
                               items:
                                 type: string
@@ -266,15 +267,13 @@ paths:
           description: Request entity too large.
         '415':
           description: Unsupported media type.
-  /info:
+  /{visual_id}/info:
     get:
       tags:
         - info
       summary: Getting image info
       description: >-
 
-
-        <img src="https://bria-web-serving.s3.amazonaws.com/_info2.png" />
 
 
         **Description**
@@ -317,30 +316,28 @@ paths:
 
         *Human class:*
               
-        - **diversify**: an array containing the available ethnicity
+        - **diversity**: an array containing the available ethnicity
         modifications for the element. Example:
             
-              { "diversify": [ "africa", "brazil", "mexico" ] }
-           
-          **Note: Sliders' values should be normalized to range 0 - 10**
+              { "diversity": [ "africa", "brazil", "mexico" ] }
+              
          
-        - **expressions**: an array containing the available expressions modifications for the element. Example:
+        - **expressions**: an array containing the available expressions
+        modifications for the element. Example:
               
               { "expressions": [ "happy","calm","serious", "angry" ] }
-        
-          **Note: Sliders' values should be normalized to range 0 - 10**
+              
             
-        - **appearance**: an array containing the available appearance modifications for the element. Example:
+        - **appearance**: an array containing the available appearance
+        modifications for the element. Example:
          
               { "appearance": [ "age", "glasses",  "dark_hair" ] }
-        
-          **Note: Sliders' values should be normalized to range 0 - 10**
             
           
           ***check response schema for full enum of each action**
       operationId: info
       parameters:
-        - in: query
+        - in: path
           name: visual_id
           required: true
           schema:
@@ -365,7 +362,7 @@ paths:
                         actions:
                           type: object
                           properties:
-                            diversify:
+                            diversity:
                               type: array
                               items:
                                 type: string
@@ -431,14 +428,12 @@ paths:
                             type: string
         '400':
           description: Bad request.
-  /create:
+  /{visual_id}/create:
     post:
       tags:
         - create
       summary: Create new image based on changes requested by user
       description: >-
-
-        <img src="https://bria-web-serving.s3.amazonaws.com/_create3.png" />
 
 
         **Description**
@@ -452,31 +447,25 @@ paths:
         The *Create Route* will return the url for accessing the new generated
         visual and the confidence that Bria has in the quality of the new
         visual.
-        
-        
+
+
         **Request body**
-        
+
+
         - **changes**: the changes requested by the user to apply to the visual
-        
-        
-        If the change is in diversity, a single change can be sent at a time.
-        
-        
-        If the change is in expressions, a single change can be sent at a time.
-        
-        
-        If the change is in appearance, multiple changes can be sent at a time.
-        
-        
-        The change can be sent as an object containing the name and the value of the change, for example:
-        
-        
-          ```{ diversity: "japan", value: "0.5"}```
-        
-        
-        or as a string containing the name of the change, and the value should be considered as the default value, for example:
-        
-        
+
+
+        The change can be sent as an object containing the name and the value of
+        the change, for example:
+
+
+          ```{ key: "japan", value: 5}```
+
+
+        or as a string containing the name of the change which will take the
+        default value, for example:
+
+
           ```"japan"```
 
 
@@ -493,23 +482,23 @@ paths:
         ```{ "image_res": "...", "confidence": "..." }```
       operationId: create
       parameters:
-        - in: query
+        - in: path
           name: visual_id
           required: true
           schema:
             type: string
-          description: visual hash of the image
+          description: visual id of the image the user wants to create a new one from
+        - in: query
+          name: include_layers
+          schema:
+            type: boolean
+          description: whether to include layers or not
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                visual_id:
-                  type: string
-                  description: >-
-                    visual id of the image the user wants to create a new one
-                    from
                 changes:
                   type: array
                   items:
@@ -524,7 +513,7 @@ paths:
                           the changes the user wishes to perform for this person
                           in the image
                         properties:
-                          diversify:
+                          diversity:
                             type: string
                             enum:
                               - original
@@ -540,41 +529,14 @@ paths:
                               - england
                               - spain
                               - france
+                              - '{''name'':''africa'',''value'':0}'
+                              - '{''name'':''korea'',''value'':5}'
+                              - '{''name'':''india'',''value'':10}'
                             description: >-
-                              Value must be included in the response of the info
-                              route in order for the request to be successful
-                          diversify2:
-                            type: object
-                            enum:
-                              - name: original
-                                value: 5
-                              - name: africa
-                                value: 5
-                              - name: korea
-                                value: 5
-                              - name: india
-                                value: 5
-                              - name: japan
-                                value: 5
-                              - name: sweden
-                                value: 5
-                              - name: germany
-                                value: 5
-                              - name: russia
-                                value: 5
-                              - name: mexico
-                                value: 5
-                              - name: brazil
-                                value: 5
-                              - name: england
-                                value: 5
-                              - name: spain
-                                value: 5
-                              - name: france
-                                value: 5
-                            description: >-
-                              Value must be included in the response of the info
-                              route in order for the request to be successful
+                              Value must be in range [0-10] where 0 means no
+                              change and 10 means max change, and if value is
+                              not specified it should be considered as the
+                              default value
                           expressions:
                             type: string
                             enum:
@@ -587,53 +549,29 @@ paths:
                               - contempt
                               - disgusted
                               - sad
+                              - '{''name'':''happy'',''value'':0}'
+                              - '{''name'':''surprised'',''value'':5}'
+                              - '{''name'':''calm'',''value'':10}'
                             description: >-
-                              Value must be included in the response of the info
-                              route in order for the request to be successful
-                          expressions2:
-                            type: object
-                            enum:
-                              - name: happy
-                                value: 5
-                              - name: surprised
-                                value: 5
-                              - name: calm
-                                value: 5
-                              - name: dreaming
-                                value: 5
-                              - name: angry
-                                value: 5
-                              - name: fear
-                                value: 5
-                              - name: contempt
-                                value: 5
-                              - name: disgusted
-                                value: 5
-                              - name: sad
-                                value: 5
-                            description: >-
-                              Value must be included in the response of the info
-                              route in order for the request to be successful
+                              Value must be in range [0-10] where 0 means no
+                              change and 10 means max change, and if value is
+                              not specified it should be considered as the
+                              default value
                           appearance:
                             type: array
                             items:
                               enum:
-                              - age
-                              - glasses
+                                - age
+                                - glasses
+                                - dark_hair
+                                - '{''name'':''age'',''value'':0}'
+                                - '{''name'':''glasses'',''value'':5}'
+                                - '{''name'':''dark_hair'',''value'':10}'
                             description: >-
-                              Value must be included in the response of the info
-                              route in order for the request to be successful
-                          appearance2:
-                            type: array
-                            items:
-                              enum:
-                              - name: age
-                                value: 1
-                              - name: glasses
-                                value: 1
-                            description: >-
-                              Value must be included in the response of the info
-                              route in order for the request to be successful
+                              Value must be in range [0-10] where 0 means no
+                              change and 10 means max change, and if value is
+                              not specified it should be considered as the
+                              default value
       responses:
         '200':
           description: Successful operation.
@@ -649,11 +587,11 @@ paths:
                     description: Low, high or intermidiate
         '400':
           description: Bad request.
-  /generate:
+  /create_thumbnail_video:
     post:
       tags:
-        - generate
-      summary: Coming soon - Generate new original visual from scratch
+        - thumbnail video
+      summary: Generate a thumbnail video from a still image
       description: >-
 
 
@@ -661,18 +599,25 @@ paths:
 
 
 
-        With the *Generate Route*, an image can be created without uploading a
-        seed image first.
-
-
-        For beta testing, please contact us through info@bria.ai
+        With the *Thumbnail Video Route*, a 3 seconds video can be generated
+        from a single still image.
 
 
 
-        The *Create Route* will return the url for accessing the new generated
-        visual and the confidence that Bria has in the quality of the new
-        visual.
-      operationId: generate
+        The *Thumbnail Video Route* will return the url for accessing the new
+        generated thumbnail video.
+      operationId: thumbnail_video
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                visual_id:
+                  type: string
+                  description: >-
+                    visual id of the image the user wants to create a new one
+                    from
       responses:
         '200':
           description: Successful operation.
@@ -681,7 +626,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  image_res:
+                  video_res:
                     type: string
                   confidence:
                     type: string
@@ -692,7 +637,7 @@ paths:
     post:
       tags:
         - video
-      summary: Coming soon - Generate a video from a still image
+      summary: Generate a video from a still image
       description: >-
 
 
@@ -700,17 +645,13 @@ paths:
 
 
 
-        With the *Video Route*, a 8-15 seconds video can be generated from a
-        single still image.
+        With the *Video Route*, a 8-15 seconds high quality video can be
+        generated from a single still image.
 
 
 
         The *Video Route* will return the url for accessing the new generated
         video.
-        
-        The *Video Route* will return a string indicating the success or the failure of the operation.
-        
-        
       operationId: video
       requestBody:
         content:
@@ -723,10 +664,42 @@ paths:
                   description: >-
                     visual id of the image the user wants to create a new one
                     from
-                email:
+                email_address:
                   type: string
-                  description: >-
-                    the email of the current user
+                  description: email address for send movies
+                movie_name:
+                  type: string
+                  description: name of movie
+                frame_rate:
+                  type: number
+                  description: number of frames per second
+                number_of_frames:
+                  type: number
+                  description: a speed parameter
+                zoom_type:
+                  type: string
+                  enum:
+                    - deep
+                    - shallow
+                    - medium
+                  description: zoom type
+                movie_direction:
+                  type: string
+                  enum:
+                    - random
+                    - constant
+                    - up
+                    - down
+                  description: the direction of the video
+                zoom_param:
+                  type: number
+                  description: zoom parameter
+                sharpnes_value:
+                  type: string
+                  description: sharpness value
+                depth_value:
+                  type: number
+                  description: depth value
       responses:
         '200':
           description: Successful operation.
@@ -743,4 +716,4 @@ paths:
         '400':
           description: Bad request.
 servers:
-  - url: http://bria-api.com:5000/v1
+  - url: http://bria-api.com:5000/v2

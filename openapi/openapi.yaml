@@ -101,9 +101,14 @@ paths:
 
 
         **Response**
+        
+        
+        Dictionary - Relevant information about the required image. An object
+        with JSON format, containing three key-value pairs:
 
-
-        The visual id in the response of the *Upload Route* must be kept by the
+          - **visual_id**: a unique id for the image
+          
+          The visual id in the response of the *Upload Route* must be kept by the
         user in order to query image info and make changes to it
 
 
@@ -112,6 +117,17 @@ paths:
 
         The *visual_id* in the response of the /upload route can be used for all
         other routes.
+        
+          - **description**: a brief description of the visual
+          - **scene**: an array of objects representing each of the elements recognized in the visual.
+          
+        Each object inside the *scene* array will contain:
+          
+          - **id**: the id of the specific element
+          - **class**: the class type of the element (human, object, etc)
+          - **labels**: an array with known information on the element, such as age range and gender
+          - **rect**: the dimensions of the element
+          - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
 
 
         **Bria generative Web tool**
@@ -169,6 +185,81 @@ paths:
                   visual_id:
                     type: string
                     description: unique visual identification
+                  description:
+                    type: string
+                    description: description of the image
+                  scene:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        actions:
+                          type: object
+                          properties:
+                            diversify:
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - original
+                                  - africa
+                                  - korea
+                                  - india
+                                  - japan
+                                  - sweden
+                                  - germany
+                                  - russia
+                                  - mexico
+                                  - brazil
+                                  - england
+                                  - spain
+                                  - france
+                            expressions:
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - happy
+                                  - calm
+                                  - serious
+                                  - dreaming
+                                  - angry
+                                  - fear
+                                  - contempt
+                                  - disgusted
+                                  - sad
+                            appearance:
+                              type: array
+                              items:
+                                type: string
+                                enum:
+                                  - age
+                                  - glasses
+                                  - femininity
+                                  - masculinity
+                                  - dark_hair
+                                  - light_hair
+                                  - hair_line
+                                  - makeup
+                        id:
+                          type: string
+                        class:
+                          type: string
+                        rect:
+                          type: object
+                          properties:
+                            width:
+                              type: number
+                            height:
+                              type: number
+                            top:
+                              type: number
+                            left:
+                              type: number
+                        labels:
+                          type: array
+                          items:
+                            type: string
         '405':
           description: Method not allowed.
         '413':
@@ -324,9 +415,16 @@ paths:
                         class:
                           type: string
                         rect:
-                          type: array
-                          items:
-                            type: number
+                          type: object
+                          properties:
+                            width:
+                              type: number
+                            height:
+                              type: number
+                            top:
+                              type: number
+                            left:
+                              type: number
                         labels:
                           type: array
                           items:
@@ -354,6 +452,32 @@ paths:
         The *Create Route* will return the url for accessing the new generated
         visual and the confidence that Bria has in the quality of the new
         visual.
+        
+        
+        **Request body**
+        
+        - **changes**: the changes requested by the user to apply to the visual
+        
+        
+        If the change is in diversity, a single change can be sent at a time.
+        
+        
+        If the change is in expressions, a single change can be sent at a time.
+        
+        
+        If the change is in appearance, multiple changes can be sent at a time.
+        
+        
+        The change can be sent as an object containing the name and the value of the change, for example:
+        
+        
+          ```"japan"```
+        
+        
+        or as a string containing the name of the change, and the value should be considered as the default value, for example:
+        
+        
+          ```{ diversity: "japan", value: "0.5"}```
 
 
         **Response**
@@ -368,6 +492,13 @@ paths:
 
         ```{ "image_res": "...", "confidence": "..." }```
       operationId: create
+      parameters:
+        - in: query
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          description: visual hash of the image
       requestBody:
         content:
           application/json:
@@ -484,8 +615,18 @@ paths:
                               Value must be included in the response of the info
                               route in order for the request to be successful
                           appearance:
-                            type: object
-                            enum:
+                            type: array
+                            items:
+                              enum:
+                              - age
+                              - glasses
+                            description: >-
+                              Value must be included in the response of the info
+                              route in order for the request to be successful
+                          appearance2:
+                            type: array
+                            items:
+                              enum:
                               - name: age
                                 value: 1
                               - name: glasses

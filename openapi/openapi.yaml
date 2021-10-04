@@ -81,7 +81,7 @@ info:
       For a full example of the Bria's API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo.py)
 
             
-  version: 2-oas3
+  version: '2'
   title: Bria's API
 paths:
   /upload:
@@ -587,7 +587,7 @@ paths:
                     description: Low, high or intermidiate
         '400':
           description: Bad request.
-  /create_thumbnail_video:
+  /{visual_id}/create_thumbnail_video:
     post:
       tags:
         - thumbnail video
@@ -607,17 +607,13 @@ paths:
         The *Thumbnail Video Route* will return the url for accessing the new
         generated thumbnail video.
       operationId: thumbnail_video
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                visual_id:
-                  type: string
-                  description: >-
-                    visual id of the image the user wants to create a new one
-                    from
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          description: visual id of the image the user wants to create a thumbnail video from
       responses:
         '200':
           description: Successful operation.
@@ -662,8 +658,7 @@ paths:
                 visual_id:
                   type: string
                   description: >-
-                    visual id of the image the user wants to create a new one
-                    from
+                    visual id of the image the user wants to create a new video from
                 email_address:
                   type: string
                   description: email address for send movies

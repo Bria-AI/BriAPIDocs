@@ -1,9 +1,12 @@
 openapi: 3.0.0
 info:
   description: >
-    The Bria's API was designed for users to interact with the BriEngine, creating new images and videos with specific requests. This document will outline the capabilities of the API and explain to users how to implement it.
-    
-    
+    The Bria's API was designed for users to interact with the BriEngine,
+    creating new images and videos with specific requests. This document will
+    outline the capabilities of the API and explain to users how to implement
+    it.
+
+
     **The common use of the Bria's API is according to the following order:**
       - /upload - Using the *Upload Route* to upload a new image to the database
       - /info - Using the *Info Route* to understand the modification possibilities for each element in the image 
@@ -24,46 +27,43 @@ info:
     # Bria API's supported values and responses
 
 
-    This section of the documentation serves as a dictionary of the possible values to be used in the API routes.
-    
-    
-    For applicability of each list of values, please attent yourself to each route of the API.
-    
-    
+    This section of the documentation serves as a dictionary of the possible
+    values to be used in the API routes.
+
+
+    For applicability of each list of values, please attent yourself to each
+    route of the API.
+
+
       For the **human** class, these are the relevant lists of values:
-      - Age
-      
-      
-         ["mid-20", "mid-40", "mid-60"]
-         
-         
       - Diversify
       
       
          ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
          
          
-      - Glasses
+      - Expressions
       
       
-         ["light", "heavy", "none"]
-         
-         
-      - Smile
+         ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+        
+      - Appearance
       
       
-         ["happy", "calm", "serious"]
-    
+        ["age","glasses","femininity", "masculinity", "dark_hair", "light_hair", "hair_line", "makeup"]
+
 
 
     # Versioning
 
 
-    The current version of the web API is known as V2 and is considered to be in a draft phase. While we don’t expect public endpoints to materially change, please bear in mind that the API is still under development.
+    The current version of the web API is known as V2 and is considered to be in
+    a draft phase. While we don’t expect public endpoints to materially change,
+    please bear in mind that the API is still under development.
 
 
     # Authentication
-    
+
       The Bria's API consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
 
         curl --location --request POST 'http://bria-api.com:5000/v1' \
@@ -80,7 +80,7 @@ info:
       For a full example of the Bria's API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo.py)
 
             
-  version: 1.0.0
+  version: 1.0.0-oas3
   title: Bria's API
 paths:
   /upload:
@@ -91,59 +91,69 @@ paths:
       description: >-
 
         **Description**
-        
-        
+
+
         The *Upload Route* is used to upload visuals to the database.
-        
-        
-        The *Upload Route* will return to the user a visual identification. It is the first step for consuming the Bria's API for new visuals.
-        
+
+
+        The *Upload Route* will return to the user a visual identification. It
+        is the first step for consuming the Bria's API for new visuals.
+
 
         **Response**
 
 
-        The visual id in the response of the *Upload Route* must be kept by the user in order to query image info and make changes to it
+        The visual id in the response of the *Upload Route* must be kept by the
+        user in order to query image info and make changes to it
 
 
         ```{ "visual_id": "9ea9a4d2d19977a7c" }```
-        
-        
-        The *visual_id* in the response of the /upload route can be used for all other routes.
-        
-        
+
+
+        The *visual_id* in the response of the /upload route can be used for all
+        other routes.
+
+
         **Bria generative Web tool**
 
-      
-        The uploaded visual can be seen and used in the Bria generative web tool in cases where the tool is licensed as part of the project.
-        
-        
-        In order to do that, the user can access the following url: ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}* comes from the response of the */upload route*
-        
-        
-        In Bria's web tool, the user has the ability to make many changes to the visual and also generate live videos, using an intuitive interactive platform.
+
+        The uploaded visual can be seen and used in the Bria generative web tool
+        in cases where the tool is licensed as part of the project.
 
 
-        Bria's web tool can also be embedded in other websites, with the use of an iframe HTML element:
+        In order to do that, the user can access the following url:
+        ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}*
+        comes from the response of the */upload route*
+
+
+        In Bria's web tool, the user has the ability to make many changes to the
+        visual and also generate live videos, using an intuitive interactive
+        platform.
+
+
+        Bria's web tool can also be embedded in other websites, with the use of
+        an iframe HTML element:
             
             
         <img src="https://bria-web-serving.s3.amazonaws.com/new_tool.png" />
-        
-        
+
+
         **Constrain**
 
 
         File should not be larger than 25mb
-        
-        
-        The status code 413 will be returned in case of the file exceeding its maximum size
+
+
+        The status code 413 will be returned in case of the file exceeding its
+        maximum size
       operationId: upload
       requestBody:
         content:
           multipart/form-data:
             schema:
               type: object
-              properties:     
-                file:  
+              properties:
+                file:
                   type: string
                   format: binary
         description: Upload new image
@@ -156,7 +166,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  visual_id: 
+                  visual_id:
                     type: string
                     description: unique visual identification
         '405':
@@ -171,29 +181,33 @@ paths:
         - info
       summary: Getting image info
       description: >-
-        
-        
-        <img src="https://bria-web-serving.s3.amazonaws.com/_info2.png" />
-        
-        
-        **Description**
-        
-        
-        The *Info Route* is used to retrieve useful information on a specific visual that was previously uploaded to the database.
-        
-        
-        The *Info Route* will return to the user a description of the scene and the possible actions for each element within it. 
-        
-        
-        The *Info Route* will list the possible changes that the Bria's API supports for each element in the scene.
-        
 
-        
+
+        <img src="https://bria-web-serving.s3.amazonaws.com/_info2.png" />
+
+
+        **Description**
+
+
+        The *Info Route* is used to retrieve useful information on a specific
+        visual that was previously uploaded to the database.
+
+
+        The *Info Route* will return to the user a description of the scene and
+        the possible actions for each element within it. 
+
+
+        The *Info Route* will list the possible changes that the Bria's API
+        supports for each element in the scene.
+
+
+
         **Response**
 
 
-        Dictionary - Relevant information about the required image. An object with JSON format, containing two key-value pairs:
-        
+        Dictionary - Relevant information about the required image. An object
+        with JSON format, containing two key-value pairs:
+
           - **description**: a brief description of the visual
           - **scene**: an array of objects representing each of the elements recognized in the visual.
           
@@ -205,12 +219,15 @@ paths:
           - **rect**: the dimensions of the element
           - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
           
-        The content of *actions* object will depend on the class of the element it refers to. The currently suported classes are listed below, with their respective possible actions:
-        
-        
+        The content of *actions* object will depend on the class of the element
+        it refers to. The currently suported classes are listed below, with
+        their respective possible actions:
+
+
         *Human class:*
               
-        - **diversify**: an array containing the available ethnicity modifications for the element. Example:
+        - **diversify**: an array containing the available ethnicity
+        modifications for the element. Example:
             
              { "diversify": [ "africa", "brazil", "mexico" ] }
            
@@ -253,31 +270,60 @@ paths:
                     items:
                       type: object
                       properties:
-                        actions: 
+                        actions:
                           type: object
                           properties:
                             diversify:
                               type: array
                               items:
                                 type: string
-                                enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
+                                enum:
+                                  - original
+                                  - africa
+                                  - korea
+                                  - india
+                                  - japan
+                                  - sweden
+                                  - germany
+                                  - russia
+                                  - mexico
+                                  - brazil
+                                  - england
+                                  - spain
+                                  - france
                             expressions:
                               type: array
                               items:
                                 type: string
-                                enum: ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
+                                enum:
+                                  - happy
+                                  - calm
+                                  - serious
+                                  - dreaming
+                                  - angry
+                                  - fear
+                                  - contempt
+                                  - disgusted
+                                  - sad
                             appearance:
                               type: array
-                              items: 
+                              items:
                                 type: string
-                                enum: ["age","glasses","femininity", "masculinity", "dark_hair", "light_hair", "hair_line", "makeup"]
-                        id: 
+                                enum:
+                                  - age
+                                  - glasses
+                                  - femininity
+                                  - masculinity
+                                  - dark_hair
+                                  - light_hair
+                                  - hair_line
+                                  - makeup
+                        id:
                           type: string
                         labels:
                           type: array
                           items:
                             type: string
-                            
         '400':
           description: Bad request.
   /create:
@@ -286,43 +332,47 @@ paths:
         - create
       summary: Create new image based on changes requested by user
       description: >-
-        
+
         <img src="https://bria-web-serving.s3.amazonaws.com/_create3.png" />
-        
-        
+
+
         **Description**
- 
-        
-        
-        The *Create Route* is used to create a new visual, based on the changes requested by the user for a previously uploaded visual.
-        
-        
-        The *Create Route* will return the url for accessing the new generated visual and the confidence that Bria has in the quality of the new visual.
-        
+
+
+
+        The *Create Route* is used to create a new visual, based on the changes
+        requested by the user for a previously uploaded visual.
+
+
+        The *Create Route* will return the url for accessing the new generated
+        visual and the confidence that Bria has in the quality of the new
+        visual.
+
 
         **Response**
 
 
         image_res - url to new created image
-        
-        
-        confidence - string indicating the level of confidence Bria has in the quality of the created image
+
+
+        confidence - string indicating the level of confidence Bria has in the
+        quality of the created image
 
 
         ```{ "image_res": "...", "confidence": "..." }```
-        
-        
       operationId: create
       requestBody:
         content:
           application/json:
             schema:
               type: object
-              properties:     
-                visual_id:  
+              properties:
+                visual_id:
                   type: string
-                  description: visual id of the image the user wants to create a new one from
-                changes:  
+                  description: >-
+                    visual id of the image the user wants to create a new one
+                    from
+                changes:
                   type: array
                   items:
                     type: object
@@ -332,28 +382,110 @@ paths:
                         description: id of the element in the image
                       actions:
                         type: object
-                        description: the changes the user wishes to perform for this person in the image
+                        description: >-
+                          the changes the user wishes to perform for this person
+                          in the image
                         properties:
                           diversify:
                             type: string
-                            enum: ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
+                            enum:
+                              - original
+                              - africa
+                              - korea
+                              - india
+                              - japan
+                              - sweden
+                              - germany
+                              - russia
+                              - mexico
+                              - brazil
+                              - england
+                              - spain
+                              - france
+                            description: >-
+                              Value must be included in the response of the info
+                              route in order for the request to be succesfull
                           diversify2:
                             type: object
-                            enum: [{name: "original", value: 5}, {name: "africa", value: 5}, {name: "korea", value: 5}, {name: "india", value: 5}, {name: "japan", value: 5}, {name: "sweden", value: 5}, {name: "germany", value: 5}, {name: "russia", value: 5}, {name: "mexico", value: 5}, {name: "brazil", value: 5}, {name: "england", value: 5}, {name: "spain", value: 5}, {name: "france", value: 5}]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
+                            enum:
+                              - name: original
+                                value: 5
+                              - name: africa
+                                value: 5
+                              - name: korea
+                                value: 5
+                              - name: india
+                                value: 5
+                              - name: japan
+                                value: 5
+                              - name: sweden
+                                value: 5
+                              - name: germany
+                                value: 5
+                              - name: russia
+                                value: 5
+                              - name: mexico
+                                value: 5
+                              - name: brazil
+                                value: 5
+                              - name: england
+                                value: 5
+                              - name: spain
+                                value: 5
+                              - name: france
+                                value: 5
+                            description: >-
+                              Value must be included in the response of the info
+                              route in order for the request to be succesfull
                           expressions:
                             type: string
-                            enum: ["happy", "surprised", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
+                            enum:
+                              - happy
+                              - surprised
+                              - calm
+                              - dreaming
+                              - angry
+                              - fear
+                              - contempt
+                              - disgusted
+                              - sad
+                            description: >-
+                              Value must be included in the response of the info
+                              route in order for the request to be succesfull
                           expressions2:
                             type: object
-                            enum: [{name: "happy", value: 5}, {name: "surprised", value: 5}, {name: "calm", value: 5},  {name: "dreaming", value: 5}, {name: "angry", value: 5}, {name: "fear", value: 5}, {name: "contempt", value: 5}, {name: "disgusted", value: 5}, {name: "sad", value: 5}]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
+                            enum:
+                              - name: happy
+                                value: 5
+                              - name: surprised
+                                value: 5
+                              - name: calm
+                                value: 5
+                              - name: dreaming
+                                value: 5
+                              - name: angry
+                                value: 5
+                              - name: fear
+                                value: 5
+                              - name: contempt
+                                value: 5
+                              - name: disgusted
+                                value: 5
+                              - name: sad
+                                value: 5
+                            description: >-
+                              Value must be included in the response of the info
+                              route in order for the request to be succesfull
                           appearnce:
                             type: object
-                            enum: [{ "name": "age", value: 1 },{ name: "glasses", value: 1 }]
-                            description: Value must be included in the response of the info route in order for the request to be succesfull
+                            enum:
+                              - name: age
+                                value: 1
+                              - name: glasses
+                                value: 1
+                            description: >-
+                              Value must be included in the response of the info
+                              route in order for the request to be succesfull
       responses:
         '200':
           description: Successful operation.
@@ -373,24 +505,25 @@ paths:
     post:
       tags:
         - generate
-      summary: Coming soon - Generate new original visual from scratchhhhhh
+      summary: Coming soon - Generate new original visual from scratch
       description: >-
-        
-        
+
+
         **Description**
- 
-        
-        
-        With the *Generate Route*, an image can be created without uploading a seed image first.
-        
-        
+
+
+
+        With the *Generate Route*, an image can be created without uploading a
+        seed image first.
+
+
         For beta testing, please contact us through info@bria.ai
 
 
-        
-        The *Create Route* will return the url for accessing the new generated visual and the confidence that Bria has in the quality of the new visual.
-        
-        
+
+        The *Create Route* will return the url for accessing the new generated
+        visual and the confidence that Bria has in the quality of the new
+        visual.
       operationId: generate
       responses:
         '200':
@@ -413,22 +546,22 @@ paths:
         - video
       summary: Coming soon - Generate a video from a still image
       description: >-
-        
-        
+
+
         **Description**
- 
-        
-        
-        With the *Video Route*, a 8-15 seconds video can be generated from a single still image.
-        
-        
+
+
+
+        With the *Video Route*, a 8-15 seconds video can be generated from a
+        single still image.
+
+
         For beta testing, please contact us through info@bria.ai
 
 
-        
-        The *Video Route* will return the url for accessing the new generated video.
-        
-        
+
+        The *Video Route* will return the url for accessing the new generated
+        video.
       operationId: video
       responses:
         '200':
@@ -446,4 +579,4 @@ paths:
         '400':
           description: Bad request.
 servers:
-  - url: 'http://bria-api.com:5000/v1'
+  - url: http://bria-api.com:5000/v1

@@ -532,7 +532,7 @@ paths:
                               - england
                               - spain
                               - france
-                              - or '{''key'':''africa'',''value'':0}'
+                              - "or {'key':'africa','value':0}"
                               - '{''key'':''korea'',''value'':5}'
                               - '{''key'':''indea'',''value'':10}'
                             description: >-
@@ -552,7 +552,7 @@ paths:
                               - contempt
                               - disgusted
                               - sad
-                              - or '{''key'':''happy'',''value'':0}'
+                              - "or {'key':'happy','value':0}"
                               - '{''key'':''surprised'',''value'':5}'
                               - '{''key'':''calm'',''value'':10}'
                             description: >-
@@ -567,7 +567,7 @@ paths:
                                 - age
                                 - glasses
                                 - dark_hair
-                                - or '{''key'':''age'',''value'':0}'
+                                - "or {'key':'age','value':0}"
                                 - '{''key'':''glasses'',''value'':5}'
                                 - '{''key'':''dark_hair'',''value'':10}'
                             description: >-

@@ -351,6 +351,9 @@ paths:
               schema:
                 type: object
                 properties:
+                  visual_id:
+                    type: string
+                    description: unique visual identification
                   description:
                     type: string
                     description: description of the image
@@ -529,9 +532,9 @@ paths:
                               - england
                               - spain
                               - france
-                              - '{''name'':''africa'',''value'':0}'
-                              - '{''name'':''korea'',''value'':5}'
-                              - '{''name'':''india'',''value'':10}'
+                              - or {"key":"africa","value":0}
+                              - {"key":"korea","value":5}
+                              - {"key":"india","value":10}
                             description: >-
                               Value must be in range [0-10] where 0 means no
                               change and 10 means max change, and if value is
@@ -549,9 +552,9 @@ paths:
                               - contempt
                               - disgusted
                               - sad
-                              - '{''name'':''happy'',''value'':0}'
-                              - '{''name'':''surprised'',''value'':5}'
-                              - '{''name'':''calm'',''value'':10}'
+                              - or '{''key'':''happy'',''value'':0}'
+                              - '{''key'':''surprised'',''value'':5}'
+                              - '{''key'':''calm'',''value'':10}'
                             description: >-
                               Value must be in range [0-10] where 0 means no
                               change and 10 means max change, and if value is
@@ -564,9 +567,9 @@ paths:
                                 - age
                                 - glasses
                                 - dark_hair
-                                - '{''name'':''age'',''value'':0}'
-                                - '{''name'':''glasses'',''value'':5}'
-                                - '{''name'':''dark_hair'',''value'':10}'
+                                - 'or {''key'':''age'',''value'':0}'
+                                - '{''key'':''glasses'',''value'':5}'
+                                - '{''key'':''dark_hair'',''value'':10}'
                             description: >-
                               Value must be in range [0-10] where 0 means no
                               change and 10 means max change, and if value is
@@ -614,6 +617,30 @@ paths:
           schema:
             type: string
           description: visual id of the image the user wants to create a thumbnail video from
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number_of_frames:
+                  type: number
+                  description: a speed parameter
+                zoom_type:
+                  type: string
+                  enum:
+                    - deep
+                    - shallow
+                    - medium
+                  description: zoom type
+                movie_direction:
+                  type: string
+                  enum:
+                    - random
+                    - constant
+                    - up
+                    - down
+                  description: the direction of the video
       responses:
         '200':
           description: Successful operation.
@@ -629,7 +656,7 @@ paths:
                     description: Low, high or intermediate
         '400':
           description: Bad request.
-  /video:
+  /{visual_id}/video:
     post:
       tags:
         - video
@@ -649,16 +676,19 @@ paths:
         The *Video Route* will return the url for accessing the new generated
         video.
       operationId: video
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          description: visual id of the image the user wants to create a new video from
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
-                visual_id:
-                  type: string
-                  description: >-
-                    visual id of the image the user wants to create a new video from
                 email_address:
                   type: string
                   description: email address for send movies

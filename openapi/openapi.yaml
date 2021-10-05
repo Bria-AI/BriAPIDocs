@@ -532,9 +532,9 @@ paths:
                               - england
                               - spain
                               - france
-                              - or {"key":"africa","value":0}
-                              - {"key":"korea","value":5}
-                              - {"key":"india","value":10}
+                              - or '{''key'':''africa'',''value'':0}'
+                              - '{''key'':''korea'',''value'':5}'
+                              - '{''key'':''indea'',''value'':10}'
                             description: >-
                               Value must be in range [0-10] where 0 means no
                               change and 10 means max change, and if value is
@@ -567,7 +567,7 @@ paths:
                                 - age
                                 - glasses
                                 - dark_hair
-                                - 'or {''key'':''age'',''value'':0}'
+                                - or '{''key'':''age'',''value'':0}'
                                 - '{''key'':''glasses'',''value'':5}'
                                 - '{''key'':''dark_hair'',''value'':10}'
                             description: >-

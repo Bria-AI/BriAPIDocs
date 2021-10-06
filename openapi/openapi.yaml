@@ -36,6 +36,12 @@ info:
 
 
       For the **human** class, these are the relevant lists of values:
+      - Age
+      
+      
+         ["mid-20", "mid-40", "mid-60"]
+         
+         
       - Diversity
       
       
@@ -46,12 +52,35 @@ info:
       
       
           ["happy", "calm", "serious", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
-        
-        
-      - Appearance
+          
+      - Glasses
       
       
-          ["age","glasses","femininity", "masculinity", "dark_hair", "light_hair", "hair_line", "makeup"]
+          ["light", "heavy", "none"]
+        
+        
+      - Hair Color
+         
+         
+          ["light_hair", "dark_hair"]
+              
+              
+      - Gender
+         
+         
+          ["femininity", "masculinity"]
+              
+            
+      - Makeup
+         
+         
+          ["light", "heavy", "none"]
+              
+            
+      - Hair Line
+         
+         
+          ["high", "low"]
 
 
 
@@ -103,11 +132,6 @@ paths:
 
         **Response**
 
-
-        Dictionary - Relevant information about the required image. An object
-        with JSON format, containing three key-value pairs:
-
-          - **visual_id**: a unique id for the image
           
           The visual id in the response of the *Upload Route* must be kept by the
         user in order to query image info and make changes to it
@@ -118,17 +142,6 @@ paths:
 
         The *visual_id* in the response of the /upload route can be used for all
         other routes.
-
-          - **description**: a brief description of the visual
-          - **scene**: an array of objects representing each of the elements recognized in the visual.
-          
-        Each object inside the *scene* array will contain:
-          
-          - **id**: the id of the specific element
-          - **class**: the class type of the element (human, object, etc)
-          - **labels**: an array with known information on the element, such as age range and gender
-          - **rect**: the dimensions of the element
-          - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
 
 
         **Bria generative Web tool**
@@ -186,81 +199,6 @@ paths:
                   visual_id:
                     type: string
                     description: unique visual identification
-                  description:
-                    type: string
-                    description: description of the image
-                  scene:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        actions:
-                          type: object
-                          properties:
-                            diversity:
-                              type: array
-                              items:
-                                type: string
-                                enum:
-                                  - original
-                                  - africa
-                                  - korea
-                                  - india
-                                  - japan
-                                  - sweden
-                                  - germany
-                                  - russia
-                                  - mexico
-                                  - brazil
-                                  - england
-                                  - spain
-                                  - france
-                            expressions:
-                              type: array
-                              items:
-                                type: string
-                                enum:
-                                  - happy
-                                  - calm
-                                  - serious
-                                  - dreaming
-                                  - angry
-                                  - fear
-                                  - contempt
-                                  - disgusted
-                                  - sad
-                            appearance:
-                              type: array
-                              items:
-                                type: string
-                                enum:
-                                  - age
-                                  - glasses
-                                  - femininity
-                                  - masculinity
-                                  - dark_hair
-                                  - light_hair
-                                  - hair_line
-                                  - makeup
-                        id:
-                          type: string
-                        class:
-                          type: string
-                        rect:
-                          type: object
-                          properties:
-                            width:
-                              type: number
-                            height:
-                              type: number
-                            top:
-                              type: number
-                            left:
-                              type: number
-                        labels:
-                          type: array
-                          items:
-                            type: string
         '405':
           description: Method not allowed.
         '413':
@@ -306,7 +244,6 @@ paths:
           - **id**: the id of the specific element
           - **class**: the class type of the element (human, object, etc)
           - **labels**: an array with known information on the element, such as age range and gender
-          - **rect**: the dimensions of the element
           - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
           
         The content of *actions* object will depend on the class of the element
@@ -315,6 +252,11 @@ paths:
 
 
         *Human class:*
+        
+        - **age**: an array containing the available age modifications for the element. Example:
+            
+              { "age": [ "mid-20", "mid-40", "mid-60" ] }
+        
               
         - **diversity**: an array containing the available ethnicity
         modifications for the element. Example:
@@ -327,11 +269,30 @@ paths:
               
               { "expressions": [ "happy","calm","serious", "angry" ] }
               
-            
-        - **appearance**: an array containing the available appearance
-        modifications for the element. Example:
+              
+        - **glasses**: an array containing the available glasses modifications for the element. Example:
          
-              { "appearance": [ "age", "glasses",  "dark_hair" ] }
+              { "glasses": [ "light", "heavy", "none" ] }
+              
+              
+        - **hair_color**: an array containing the available hair color modifications for the element. Example:
+         
+              { "hair_color": [ "light_hair", "dark_hair" ] }
+              
+              
+        - **gender**: an array containing the available gender modifications for the element. Example:
+         
+              { "gender": [ "femininity", "masculinity" ] }
+              
+            
+        - **makeup**: an array containing the available makeup modifications for the element. Example:
+         
+              { "makeup": [ "light", "heavy", "none" ] }
+              
+            
+        - **hair_line**: an array containing the available hair line modifications for the element. Example:
+         
+              { "hair_line": [ "high", "low" ] }
             
           
           ***check response schema for full enum of each action**
@@ -351,9 +312,6 @@ paths:
               schema:
                 type: object
                 properties:
-                  visual_id:
-                    type: string
-                    description: unique visual identification
                   description:
                     type: string
                     description: description of the image
@@ -365,6 +323,11 @@ paths:
                         actions:
                           type: object
                           properties:
+                            age:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["mid-20", "mid-40", "mid-60"]
                             diversity:
                               type: array
                               items:
@@ -397,34 +360,35 @@ paths:
                                   - contempt
                                   - disgusted
                                   - sad
-                            appearance:
+                            glasses:
                               type: array
                               items:
                                 type: string
-                                enum:
-                                  - age
-                                  - glasses
-                                  - femininity
-                                  - masculinity
-                                  - dark_hair
-                                  - light_hair
-                                  - hair_line
-                                  - makeup
+                                enum: ["light", "heavy", "none"]
+                            hair_color:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["dark_hair", "light_hair"]
+                            gender:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["femininity","masculinity"]
+                            makeup:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["makeup", "no_makeup"]
+                            hair_line:
+                              type: array
+                              items:
+                                type: string
+                                enum: ["high", "low"]
                         id:
                           type: string
                         class:
                           type: string
-                        rect:
-                          type: object
-                          properties:
-                            width:
-                              type: number
-                            height:
-                              type: number
-                            top:
-                              type: number
-                            left:
-                              type: number
                         labels:
                           type: array
                           items:
@@ -575,6 +539,26 @@ paths:
                               change and 10 means max change, and if value is
                               not specified it should be considered as the
                               default value
+                          glasses:
+                            type: string
+                            enum: ["light", "heavy", "none"]
+                            description: Value must be included in the response of the info route in order for the request to be successfull
+                          hair_color:
+                            type: string
+                            enum: ["dark_hair", "light_hair"]
+                            description: Value must be included in the response of the info route in order for the request to be successfull
+                          gender:
+                            type: string
+                            enum: ["femininity","masculinity"]
+                            description: Value must be included in the response of the info route in order for the request to be successfull
+                          makeup:
+                            type: string
+                            enum: ["makeup", "no_makeup"]
+                            description: Value must be included in the response of the info route in order for the request to be successfull
+                          hair_line:
+                            type: string
+                            enum: ["high", "low"]
+                            description: Value must be included in the response of the info route in order for the request to be successfull
       responses:
         '200':
           description: Successful operation.
@@ -590,72 +574,7 @@ paths:
                     description: Low, high or intermidiate
         '400':
           description: Bad request.
-  /{visual_id}/create_thumbnail_video:
-    post:
-      tags:
-        - thumbnail video
-      summary: Generate a thumbnail video from a still image
-      description: >-
 
-
-        **Description**
-
-
-
-        With the *Thumbnail Video Route*, a 3 seconds video can be generated
-        from a single still image.
-
-
-
-        The *Thumbnail Video Route* will return the url for accessing the new
-        generated thumbnail video.
-      operationId: thumbnail_video
-      parameters:
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          description: visual id of the image the user wants to create a thumbnail video from
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                number_of_frames:
-                  type: number
-                  description: a speed parameter
-                zoom_type:
-                  type: string
-                  enum:
-                    - deep
-                    - shallow
-                    - medium
-                  description: zoom type
-                movie_direction:
-                  type: string
-                  enum:
-                    - random
-                    - constant
-                    - up
-                    - down
-                  description: the direction of the video
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  video_res:
-                    type: string
-                  confidence:
-                    type: string
-                    description: Low, high or intermediate
-        '400':
-          description: Bad request.
   /{visual_id}/video:
     post:
       tags:

@@ -480,6 +480,10 @@ paths:
                           the changes the user wishes to perform for this person
                           in the image
                         properties:
+                          age:
+                            type: string
+                            enum: ["mid-20", "mid-40", "mid-60"]
+                            description: Value must be included in the response of the info route in order for the request to be successfull
                           diversity:
                             type: string
                             enum:
@@ -519,21 +523,6 @@ paths:
                               - "or {'key':'happy','value':0}"
                               - '{''key'':''surprised'',''value'':5}'
                               - '{''key'':''calm'',''value'':10}'
-                            description: >-
-                              Value must be in range [0-10] where 0 means no
-                              change and 10 means max change, and if value is
-                              not specified it should be considered as the
-                              default value
-                          appearance:
-                            type: array
-                            items:
-                              enum:
-                                - age
-                                - glasses
-                                - dark_hair
-                                - "or {'key':'age','value':0}"
-                                - '{''key'':''glasses'',''value'':5}'
-                                - '{''key'':''dark_hair'',''value'':10}'
                             description: >-
                               Value must be in range [0-10] where 0 means no
                               change and 10 means max change, and if value is

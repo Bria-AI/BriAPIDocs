@@ -455,11 +455,6 @@ paths:
           schema:
             type: string
           description: visual id of the image the user wants to create a new one from
-        - in: query
-          name: include_layers
-          schema:
-            type: boolean
-          description: whether to include layers or not
       requestBody:
         content:
           application/json:

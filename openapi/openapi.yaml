@@ -1,21 +1,21 @@
 openapi: 3.0.0
 info:
   description: >
-    The Bria's API was designed for users to interact with the BriEngine,
+    The Bria API was designed for users to interact with the BriEngine,
     creating new images and videos with specific requests. This document will
     outline the capabilities of the API and explain to users how to implement
     it.
 
 
-    **The common use of the Bria's API is according to the following order:**
+    **The common use of the Bria API is according to the following order:**
       - /upload - Using the *Upload Route* to upload a new image to the database
-      - /info - Using the *Info Route* to understand the modification possibilities for each element in the image 
+      - /info - Using the *Info Route* to understand the change possibilities for each element in the image 
       
       
-      With the response from the *Info Route*, the following routes can be used without particular order:
+      With the response from the *Info Route*, the following routes can be used without any particular order:
       
       
-      - /create - Using the *Create Route* to create a new visual with requested modifications of elements according to Info Route possibilities.   
+      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the Info Route possibilities.   
       - /video - (coming soon) Using the *Video Route* to make a short video out of a single still image
         
         
@@ -24,14 +24,14 @@ info:
       
       
       
-    # Bria API's supported values and responses
+    # The Bria API's supported values and responses
 
 
     This section of the documentation serves as a dictionary of the possible
     values to be used in the API routes.
 
 
-    For applicability of each list of values, please attend yourself to each
+    For the applicability of each list of values, please see each individual
     route of the API.
 
 
@@ -94,7 +94,7 @@ info:
 
     # Authentication
 
-      The Bria's API consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
+      The Bria API consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
 
         curl --location --request POST 'http://bria-api.com:5000/v2' \
         --header: 'api_token: <...>' \
@@ -107,11 +107,11 @@ info:
       
     # Demonstration of usage
       
-      For a full example of the Bria's API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py)
+      For a full example of the Bria API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py)
 
             
   version: '2'
-  title: Bria's API
+  title: The Bria API
 paths:
   /upload:
     post:
@@ -126,8 +126,8 @@ paths:
         The *Upload Route* is used to upload visuals to the database.
 
 
-        The *Upload Route* will return to the user a visual identification. It
-        is the first step for consuming the Bria's API for new visuals.
+        The *Upload Route* will return a visual identification to the user. It's
+        the first step for consuming the Bria API for new visuals.
 
 
         **Response**
@@ -151,9 +151,9 @@ paths:
         in cases where the tool is licensed as part of the project.
 
 
-        In order to do that, the user can access the following url:
+        To do so, the user can access the following url:
         ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}*
-        comes from the response of the */upload route*
+        comes from the response of the */upload route*.
 
 
         In Bria's web tool, the user has the ability to make many changes to the
@@ -168,14 +168,14 @@ paths:
         <img src="https://bria-web-serving.s3.amazonaws.com/new_tool.png" />
 
 
-        **Constrain**
+        **Constraints**
 
 
-        File should not be larger than 25mb
+        Files should not be larger than 12MB
 
 
-        The status code 413 will be returned in case of the file exceeding its
-        maximum size
+        The status code 413 will be returned if the file exceeds its
+        maximum size.
       operationId: upload
       requestBody:
         content:
@@ -221,11 +221,11 @@ paths:
         visual that was previously uploaded to the database.
 
 
-        The *Info Route* will return to the user a description of the scene and
+        The *Info Route* will return a description of the scene to the user and
         the possible actions for each element within it. 
 
 
-        The *Info Route* will list the possible changes that the Bria's API
+        The *Info Route* will list the possible changes that the Bria API
         supports for each element in the scene.
 
 
@@ -246,51 +246,51 @@ paths:
           - **labels**: an array with known information on the element, such as age range and gender
           - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
           
-        The content of *actions* object will depend on the class of the element
+        The content of the *actions* object will depend on the class of the element
         it refers to. The currently supported classes are listed below, with
         their respective possible actions:
 
 
         *Human class:*
         
-        - **age**: an array containing the available age modifications for the element. Example:
+        - **age**: an array containing the available age changes for the element. Example:
             
               { "age": [ "mid-20", "mid-40", "mid-60" ] }
         
               
         - **diversity**: an array containing the available ethnicity
-        modifications for the element. Example:
+        changes for the element. Example:
             
               { "diversity": [ "africa", "brazil", "mexico" ] }
               
          
         - **expressions**: an array containing the available expressions
-        modifications for the element. Example:
+        changes for the element. Example:
               
               { "expressions": [ "happy","calm","serious", "angry" ] }
               
               
-        - **glasses**: an array containing the available glasses modifications for the element. Example:
+        - **glasses**: an array containing the available glasses changes for the element. Example:
          
               { "glasses": [ "light", "heavy", "none" ] }
               
               
-        - **hair_color**: an array containing the available hair color modifications for the element. Example:
+        - **hair_color**: an array containing the available hair color changes for the element. Example:
          
               { "hair_color": [ "light_hair", "dark_hair" ] }
               
               
-        - **gender**: an array containing the available gender modifications for the element. Example:
+        - **gender**: an array containing the available gender changes for the element. Example:
          
               { "gender": [ "femininity", "masculinity" ] }
               
             
-        - **makeup**: an array containing the available makeup modifications for the element. Example:
+        - **makeup**: an array containing the available makeup changes for the element. Example:
          
               { "makeup": [ "light", "heavy", "none" ] }
               
             
-        - **hair_line**: an array containing the available hair line modifications for the element. Example:
+        - **hair_line**: an array containing the available hair line changes for the element. Example:
          
               { "hair_line": [ "high", "low" ] }
             
@@ -303,7 +303,7 @@ paths:
           required: true
           schema:
             type: string
-          description: visual hash of the image
+          description: visual id of the image
       responses:
         '200':
           description: Successful operation.
@@ -439,7 +439,7 @@ paths:
         **Response**
 
 
-        image_res - url to new created image
+        image_res - url to the new created image
 
 
         confidence - string indicating the level of confidence Bria has in the
@@ -562,7 +562,7 @@ paths:
   /{visual_id}/video:
     post:
       tags:
-        - video
+        - video (coming soon)
       summary: Generate a video from a still image
       description: >-
 
@@ -571,7 +571,7 @@ paths:
 
 
 
-        With the *Video Route*, a 8-15 seconds high quality video can be
+        With the *Video Route*, a high-quality video of 8-15 seconds can be
         generated from a single still image.
 
 

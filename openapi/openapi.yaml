@@ -102,12 +102,12 @@ info:
         ...
         
         
-      You can access the API Token and API Secret through Bria's platform [by clicking here](https://labs.bria.ai/organization/).
+      You can access the API Token and API Secret through Bria's platform [by clicking here](https://labs.bria.ai/organization/){:target="_blank"}.
       
       
     # Demonstration of usage
       
-      For a full example of the Bria API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py)
+      For a full example of the Bria API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py){:target="_blank"}.
 
             
   version: '2'
@@ -165,7 +165,7 @@ paths:
         an iframe HTML element:
             
             
-        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool.png" />
+        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool_27_03_2022.png" />
 
 
         **Constraints**

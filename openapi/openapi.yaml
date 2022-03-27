@@ -107,7 +107,7 @@ info:
       
     # Demonstration of usage
       
-      For a full example of the Bria API usage, using python code, [please check this link](https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py){:target="_blank"}.
+      For a full example of the Bria API usage, using python code, <a href="https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py" target="_blank">please check this link</a>}.
 
             
   version: '2'

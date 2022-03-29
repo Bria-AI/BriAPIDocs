@@ -165,7 +165,7 @@ paths:
         an iframe HTML element:
             
             
-        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool_27_03_2022.png" />
+        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool_29_03_2022.png" />
 
 
         **Constraints**
@@ -267,7 +267,7 @@ paths:
         - **expressions**: an array containing the available expressions
         changes for the element. Example:
               
-              { "expressions": [ "happy","calm","serious", "angry" ] }
+              { "expressions": [ "happy","calm", "angry" ] }
               
               
         - **glasses**: an array containing the available glasses changes for the element. Example:

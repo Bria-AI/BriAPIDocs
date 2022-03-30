@@ -353,7 +353,6 @@ paths:
                                 enum:
                                   - happy
                                   - calm
-                                  - serious
                                   - dreaming
                                   - angry
                                   - fear

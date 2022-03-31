@@ -22,68 +22,7 @@ info:
       The following route can be used at any moment:
       - /generate - (coming soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image
       
-      
-      
-    # The Bria API's supported values and responses
-
-
-    This section of the documentation serves as a dictionary of the possible
-    values to be used in the API routes.
-
-
-    For the applicability of each list of values, please see each individual
-    route of the API.
-
-
-      For the **human** class, these are the relevant lists of values:
-      - Age
-      
-      
-         ["mid-20", "mid-40", "mid-60"]
-         
-         
-      - Diversity
-      
-      
-          ["original", "africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil", "england", "spain", "france"]
-         
-         
-      - Expressions
-      
-      
-          ["happy", "calm", "dreaming", "angry", "fear", "contempt", "disgusted", "sad"]
-          
-      - Glasses
-      
-      
-          ["light", "heavy", "none"]
-        
-        
-      - Hair Color
-         
-         
-          ["light_hair", "dark_hair"]
-              
-              
-      - Gender
-         
-         
-          ["femininity", "masculinity"]
-              
-            
-      - Makeup
-         
-         
-          ["light", "heavy", "none"]
-              
-            
-      - Hair Line
-         
-         
-          ["high", "low"]
-
-
-
+ 
     # Versioning
 
 

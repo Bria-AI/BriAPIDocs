@@ -524,7 +524,7 @@ paths:
           schema:
             type: string
           description: visual id of the image the user wants to create a new video from
-        - in: path
+        - in: header
           name: visual_url
           required: false
           schema:

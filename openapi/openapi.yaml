@@ -524,8 +524,8 @@ paths:
           schema:
             type: string
           description: visual id of the image the user wants to create a new video from
-        - in: path
-          name: visual_url_test
+        - in: 
+          name: visual_url
           required: false
           schema:
             type: string
@@ -536,9 +536,6 @@ paths:
             schema:
               type: object
               properties:
-                movie_name:
-                  type: string
-                  description: name of movie
                 frame_rate:
                   type: number
                   description: number of frames per second

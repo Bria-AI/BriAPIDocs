@@ -530,9 +530,6 @@ paths:
             schema:
               type: object
               properties:
-                email_address:
-                  type: string
-                  description: email address for send movies
                 movie_name:
                   type: string
                   description: name of movie

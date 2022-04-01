@@ -524,6 +524,12 @@ paths:
           schema:
             type: string
           description: visual id of the image the user wants to create a new video from
+        - in: path
+          name: visual_url
+          required: false
+          schema:
+            type: string
+          description: visual url of the image the user wants to create a new video from
       requestBody:
         content:
           application/json:

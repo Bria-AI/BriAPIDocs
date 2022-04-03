@@ -237,7 +237,7 @@ paths:
           ***check response schema for full enum of each action**
       operationId: info
       parameters:
-        - in: query
+        - in: path
           name: visual_id
           required: true
           schema:

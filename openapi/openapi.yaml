@@ -497,7 +497,7 @@ paths:
         '400':
           description: Bad request.
 
-  /{visual_id}/video:
+  /video:
     post:
       tags:
         - video (coming soon)

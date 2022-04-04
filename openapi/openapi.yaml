@@ -403,11 +403,11 @@ paths:
                     properties:
                       id:
                         type: string
-                        description: id of the element in the image
+                        description: id of the object in the image
                       actions:
                         type: object
                         description: >-
-                          the changes the user wishes to perform for this person
+                          the changes the user wishes to perform for this object
                           in the image
                         properties:
                           age:
@@ -530,36 +530,30 @@ paths:
             schema:
               type: object
               properties:
-                frame_rate:
-                  type: number
-                  description: number of frames per second
-                number_of_frames:
-                  type: number
-                  description: a speed parameter
-                zoom_type:
-                  type: string
-                  enum:
-                    - deep
-                    - shallow
-                    - medium
-                  description: zoom type
-                movie_direction:
-                  type: string
-                  enum:
-                    - random
-                    - constant
-                    - up
-                    - down
-                  description: the direction of the video
-                zoom_param:
-                  type: number
-                  description: zoom parameter
-                sharpnes_value:
-                  type: string
-                  description: sharpness value
-                depth_value:
-                  type: number
-                  description: depth value
+                changes:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: id of the object in the image
+                      actions:
+                        type: object
+                        description: >-
+                          the video type the user wishes to create based on the selected object in the image
+                        properties:
+                          camera_movement:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                enum: ["zoom_in", "zoom_out"]
+                                description: this property will determine the type of movement in the video. Additional type will be added in the future.
+                              focus_area:
+                                type: string
+                                enum: ["zoom_in", "zoom_out"]
+                                description: this property will determine the type of movement in the video. Additional type will be added in the future.
       responses:
         '200':
           description: Successful operation.

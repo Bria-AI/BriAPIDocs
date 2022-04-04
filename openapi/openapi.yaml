@@ -537,7 +537,7 @@ paths:
                     properties:
                       id:
                         type: string
-                        description: id of the object in the image
+                        description: id of the object in the image. If the required action is camera_movement, then id should get the value visual_id.
                       actions:
                         type: object
                         description: >-
@@ -549,11 +549,13 @@ paths:
                               type:
                                 type: string
                                 enum: ["zoom_in", "zoom_out"]
-                                description: this property will determine the type of movement in the video. Additional type will be added in the future.
+                                description: determines the type of movement in the video. Additional types will be added in the future.
+                                default: "zoom_in"
                               focus_area:
                                 type: string
-                                enum: ["zoom_in", "zoom_out"]
-                                description: this property will determine the type of movement in the video. Additional type will be added in the future.
+                                enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
+                                description: determines the focus area in the video and which area in the image will be the final frame of the video.
+                                default: "center_middle"
       responses:
         '200':
           description: Successful operation.

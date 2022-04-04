@@ -114,7 +114,8 @@ paths:
         maximum size.
         
         
-        Currently the Bria APi supports only jpeg files.
+        There is currently only support for JPEG files in the Bria API.
+        
       operationId: upload
       requestBody:
         content:

@@ -203,10 +203,10 @@ paths:
               { "diversity": [ "africa", "brazil", "mexico" ] }
               
          
-        - **expressions**: an array containing the available expressions
+        - **expression**: an array containing the available expressions
         changes for the element. Example:
               
-              { "expressions": [ "happy","calm", "angry" ] }
+              { "expression": [ "happy","calm", "angry" ] }
               
               
         - **glasses**: an array containing the available glasses changes for the element. Example:
@@ -285,7 +285,7 @@ paths:
                                   - england
                                   - spain
                                   - france
-                            expressions:
+                            expression:
                               type: array
                               items:
                                 type: string
@@ -441,7 +441,7 @@ paths:
                               change and 10 means max change, and if value is
                               not specified it should be considered as the
                               default value
-                          expressions:
+                          expression:
                             type: string
                             enum:
                               - happy

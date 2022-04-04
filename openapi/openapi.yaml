@@ -9,14 +9,15 @@ info:
 
     **The common use of the Bria API is according to the following order:**
       - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database
-      - /info - Using the *Info Route* to understand the change possibilities for each element in the image 
+      - /info - Using the *Info Route* to understand the change possibilities for each object in the image 
       
       
       With the response from the *Info Route*, the following routes can be used without any particular order:
       
       
-      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the Info Route possibilities.   
-      - /video - (Coming Soon) Using the *Video Route* to make a short video out of a single still image
+      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities.   
+      - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
+      - /remove_bg - (Coming Soon) Using the *Remove BG Route* to remove the background of a stil image.
         
         
       The following route can be used at any moment:
@@ -488,7 +489,7 @@ paths:
         '400':
           description: Bad request.
 
-  /video:
+  /{visual_id}/video:
     post:
       tags:
         - video (Coming Soon)
@@ -500,16 +501,15 @@ paths:
 
 
 
-        With the *Video Route*, a high-quality video of 8-15 seconds can be
-        generated from a single still image.
+        The *Video Route* is used to create a new video, based on a previously uploaded single still image. 
+        
+        This route can also be used on an image that has been changed by the user using the /create route.
+        
+        The *Video Route* will return the URL for accessing the new generated video and the confidence that Bria has in the quality of this video.
 
-
-
-        The *Video Route* will return the url for accessing the new generated
-        video.
       operationId: video
       parameters:
-        - in: query
+        - in: path
           name: visual_id
           required: true
           schema:
@@ -520,7 +520,7 @@ paths:
           required: false
           schema:
             type: string
-          description: visual url of the image the user wants to create a new video from
+          description: URL of the new image the user has created from the original image using the */create* route
       requestBody:
         content:
           application/json:

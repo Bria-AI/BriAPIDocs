@@ -503,9 +503,12 @@ paths:
 
         The *Video Route* is used to create a new video, based on a previously uploaded single still image. 
         
+        
         This route can also be used on an image that has been changed by the user using the /create route.
         
+        
         The *Video Route* will return the URL for accessing the new generated video and the confidence that Bria has in the quality of this video.
+        
 
       operationId: video
       parameters:

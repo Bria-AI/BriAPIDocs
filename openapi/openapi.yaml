@@ -110,11 +110,10 @@ paths:
         **Constraints**
 
 
-        Files should not be larger than 12MB
-
-
-        The status code 413 will be returned if the file exceeds its
+        Files should not be larger than 12MB. The status code 413 will be returned if the file exceeds its
         maximum size.
+        
+        Currently the Bria APi supports only jpeg files.
       operationId: upload
       requestBody:
         content:

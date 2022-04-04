@@ -272,7 +272,6 @@ paths:
                               items:
                                 type: string
                                 enum:
-                                  - original
                                   - africa
                                   - korea
                                   - india
@@ -294,10 +293,6 @@ paths:
                                   - calm
                                   - dreaming
                                   - angry
-                                  - fear
-                                  - contempt
-                                  - disgusted
-                                  - sad
                             glasses:
                               type: array
                               items:
@@ -420,7 +415,6 @@ paths:
                           diversity:
                             type: string
                             enum:
-                              - original
                               - africa
                               - korea
                               - india
@@ -449,10 +443,6 @@ paths:
                               - calm
                               - dreaming
                               - angry
-                              - fear
-                              - contempt
-                              - disgusted
-                              - sad
                               - "or {'key':'happy','value':0}"
                               - '{''key'':''surprised'',''value'':5}'
                               - '{''key'':''calm'',''value'':10}'

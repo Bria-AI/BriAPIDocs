@@ -144,7 +144,7 @@ paths:
           description: Request entity too large.
         '415':
           description: Unsupported media type.
-  /info:
+  /{visual_id}/info:
     get:
       tags:
         - info
@@ -237,7 +237,7 @@ paths:
           ***check response schema for full enum of each action**
       operationId: info
       parameters:
-        - in: query
+        - in: path
           name: visual_id
           required: true
           schema:

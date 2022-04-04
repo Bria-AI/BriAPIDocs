@@ -144,7 +144,7 @@ paths:
           description: Request entity too large.
         '415':
           description: Unsupported media type.
-  /{visual_id}/info:
+  /info/{visual_id}:
     get:
       tags:
         - info

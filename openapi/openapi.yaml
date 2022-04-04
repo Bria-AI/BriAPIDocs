@@ -8,7 +8,7 @@ info:
 
 
     **The common use of the Bria API is according to the following order:**
-      - /upload - Using the *Upload Route* to upload a new image to the database
+      - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database
       - /info - Using the *Info Route* to understand the change possibilities for each element in the image 
       
       
@@ -16,11 +16,11 @@ info:
       
       
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the Info Route possibilities.   
-      - /video - (coming soon) Using the *Video Route* to make a short video out of a single still image
+      - /video - (Coming Soon) Using the *Video Route* to make a short video out of a single still image
         
         
       The following route can be used at any moment:
-      - /generate - (coming soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image
+      - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image
       
  
     # Versioning
@@ -55,7 +55,7 @@ paths:
   /upload:
     post:
       tags:
-        - upload
+        - upload (Coming Soon)
       summary: Uploading file
       description: >-
 
@@ -491,7 +491,7 @@ paths:
   /video:
     post:
       tags:
-        - video (coming soon)
+        - video (Coming Soon)
       summary: Generate a video from a still image
       description: >-
 

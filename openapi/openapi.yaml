@@ -592,7 +592,6 @@ paths:
                         description: >-
                           the video type the user wishes to create based on the selected object in the image
                         properties:
-                          skipOptionalParameters: true
                           camera_movement:
                             type: object
                             properties:

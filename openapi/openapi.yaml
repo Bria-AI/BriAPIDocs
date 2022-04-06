@@ -593,7 +593,7 @@ paths:
                     description: URL that represents the video created in the request.
                   confidence:
                     type: string
-                    description: Indicating the level of confidence Bria has in the quality of the created video. At present, the response will be blank.        '400':
+                    description: Indicating the level of confidence Bria has in the quality of the created video. At present, the response will be blank.       '400':
         '400':
           description: Either `pace` or `duration' are required.
 servers:

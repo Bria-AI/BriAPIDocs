@@ -576,7 +576,7 @@ paths:
                                 default: "medium"
                                 example: "medium"
                               duration:
-                                type: number
+                                type: integer
                                 description: Determines the duration of the video in seconds. > This property is incompatible with `pace` (you can use only one in a single call).
                                 default: 5
                                 example: 5

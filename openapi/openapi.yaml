@@ -595,6 +595,6 @@ paths:
                     type: string
                     description: Indicating the level of confidence Bria has in the quality of the created video. At present, the response will be blank.
         '400':
-          description: Either `pace` or `duration' are required.
+          description: Either 'pace' or 'duration' are required.
 servers:
   - url: http://bria-api.com:5000/v2

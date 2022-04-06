@@ -616,8 +616,8 @@ paths:
                               boomerang_loop:
                                 type: boolean
                                 description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
-                                default: "FALSE"
-                                example: "FALSE"
+                                default: FALSE
+                                example: FALSE
                               pace:
                                 type: string
                                 enum: ["slow", "medium","fast"]

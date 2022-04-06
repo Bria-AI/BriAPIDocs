@@ -4,6 +4,8 @@ info:
   version: '2'
   description: >
     # Info
+    
+    
     The Bria API was designed for users to interact with the BriEngine,
     creating new images and videos with specific requests. This document will
     outline the capabilities of the API and explain to users how to implement

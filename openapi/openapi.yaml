@@ -3,24 +3,19 @@ info:
   title: The Bria API
   version: '2'
     # Info
-    
-    
     The Bria API was designed for users to interact with the BriEngine,
     creating new images and videos with specific requests. This document will
     outline the capabilities of the API and explain to users how to implement
     it.
 
-
     **The common use of the Bria API is according to the following order:**
       - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database
       - /info - Using the *Info Route* to understand the change possibilities for each object in the image 
-      
       
     **With the response from the *Info Route*, the following routes can be used without any particular order:*
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
       - /remove_bg - (Coming Soon) Using the *Remove BG Route* to remove the background of a stil image.
       - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
-        
         
     **The following route can be used at any moment:*
       - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image

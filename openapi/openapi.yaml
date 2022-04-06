@@ -15,11 +15,13 @@ info:
     **The common use of the Bria API is according to the following order:**
       - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database
       - /info - Using the *Info Route* to understand the change possibilities for each object in the image 
-      
-    With the response from the *Info Route*, the following routes can be used without any particular order:
-      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
+    
+    With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - (Coming Soon) Using the *Remove BG Route* to remove the background of a stil image.
       - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
+      
+    With the response from the *Info Route*, the following route can be used without any particular order:
+      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
         
     The following route can be used at any moment:
       - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image

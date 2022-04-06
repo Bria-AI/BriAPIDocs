@@ -188,6 +188,7 @@ paths:
               schema:
                 type: object
                 properties:
+                  description:
                     type: string
                     description: (Coming Soon) A brief description of the visual
                   scene:

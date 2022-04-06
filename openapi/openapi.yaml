@@ -551,12 +551,35 @@ paths:
                                 enum: ["zoom_in", "zoom_out"]
                                 description: Determines the type of movement in the video. Additional types will be added in the future.
                                 default: "zoom_in"
+                                example: "zoom_in"
                               focus_area:
                                 type: string
                                 enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
                                 description: Determines the focus area in the video and which area in the image will be the final frame of the video.
                                 default: "center_middle"
                                 example: "center_middle"
+                              video_depth:
+                                type: string
+                                enum: ["shallow", "medium","deep"]
+                                description: Determines how deep in the focus area the camera will move. 
+                                default: "shallow"
+                                example: "shallow"
+                              boomerang_loop:
+                                type: boolean
+                                description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
+                                default: "FALSE"
+                                example: "FALSE"
+                              pace:
+                                type: string
+                                enum: ["slow", "medium","fast"]
+                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
+                                default: "medium"
+                                example: "medium"
+                              duration:
+                                type: number
+                                description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
+                                default: 5
+                                example: 5
       responses:
         '200':
           description: Successful operation.
@@ -565,12 +588,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  video_res:
+                  video_response:
                     type: string
+                    description: URL that represents the video created in the request.
                   confidence:
                     type: string
-                    description: Low, high or intermediate
+                    description: Indicating the level of confidence Bria has in the quality of the created video. At present, the response will be blank.        '400':
         '400':
-          description: Bad request.
+          description: Either `pace` or `duration' are required.
 servers:
   - url: http://bria-api.com:5000/v2

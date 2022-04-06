@@ -1,6 +1,7 @@
 openapi: 3.0.0
 info:
   description: >
+    # Intro
     The Bria API was designed for users to interact with the BriEngine,
     creating new images and videos with specific requests. This document will
     outline the capabilities of the API and explain to users how to implement
@@ -15,9 +16,9 @@ info:
       With the response from the *Info Route*, the following routes can be used without any particular order:
       
       
-      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities.   
-      - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
+      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
       - /remove_bg - (Coming Soon) Using the *Remove BG Route* to remove the background of a stil image.
+      - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
         
         
       The following route can be used at any moment:
@@ -621,8 +622,7 @@ paths:
                               pace:
                                 type: string
                                 enum: ["slow", "medium","fast"]
-                                description: >-
-                                  Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
+                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
                                 default: "medium"
                                 example: "medium"
                               duration:
@@ -645,6 +645,6 @@ paths:
                     type: string
                     description: Indicating the level of confidence Bria has in the quality of the created video. At present, the response will be blank.
         '400':
-          description: Either 'pace' or 'duration' are required.
+          description: Either `pace` or `duration` are required.
 servers:
   - url: http://bria-api.com:5000/v2

@@ -1,6 +1,10 @@
 openapi: 3.0.0
 info:
-  description: >    
+  title: The Bria API
+  version: '2'
+    # Info
+    
+    
     The Bria API was designed for users to interact with the BriEngine,
     creating new images and videos with specific requests. This document will
     outline the capabilities of the API and explain to users how to implement
@@ -12,18 +16,17 @@ info:
       - /info - Using the *Info Route* to understand the change possibilities for each object in the image 
       
       
-      With the response from the *Info Route*, the following routes can be used without any particular order:
-      
-      
+    **With the response from the *Info Route*, the following routes can be used without any particular order:*
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
       - /remove_bg - (Coming Soon) Using the *Remove BG Route* to remove the background of a stil image.
       - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
         
         
-      The following route can be used at any moment:
+    **The following route can be used at any moment:*
       - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image
       
- 
+      
+      
     # Versioning
 
 
@@ -50,8 +53,6 @@ info:
       For a full example of the Bria API usage, using python code, <a href="https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py" target="_blank">please check this link</a>.
 
             
-  version: '2'
-  title: The Bria API
 paths:
   /upload:
     post:

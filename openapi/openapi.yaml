@@ -117,7 +117,7 @@ paths:
         maximum size.
         
         
-        There is currently only support for JPEG files in the Bria API.
+        Bria API currently only supports JPEG files. The status code 415 will be returned if the file is of a different type.
         
       operationId: upload
       requestBody:
@@ -172,73 +172,6 @@ paths:
         supports for each element in the scene.
 
 
-
-        **Response**
-
-
-        Dictionary - Relevant information about the required image. An object
-        with JSON format, containing two key-value pairs:
-
-          - **description**: a brief description of the visual
-          - **scene**: an array of objects representing each of the elements recognized in the visual.
-          
-        Each object inside the *scene* array will contain:
-          
-          - **id**: the id of the specific element
-          - **class**: the class type of the element (human, object, etc)
-          - **labels**: an array with known information on the element, such as age range and gender
-          - **actions**: an object containing the available changes for the */create* route for this specific element, depending directly on its class and specificity
-          
-        The content of the *actions* object will depend on the class of the element
-        it refers to. The currently supported classes are listed below, with
-        their respective possible actions:
-
-
-        *Human class:*
-        
-        - **age**: an array containing the available age changes for the element. Example:
-            
-              { "age": [ "mid-20", "mid-40", "mid-60" ] }
-        
-              
-        - **diversity**: an array containing the available ethnicity
-        changes for the element. Example:
-            
-              { "diversity": [ "africa", "brazil", "mexico" ] }
-              
-         
-        - **expression**: an array containing the available expressions
-        changes for the element. Example:
-              
-              { "expression": [ "happy","calm", "angry" ] }
-              
-              
-        - **glasses**: an array containing the available glasses changes for the element. Example:
-         
-              { "glasses": [ "light", "heavy", "none" ] }
-              
-              
-        - **hair_color**: an array containing the available hair color changes for the element. Example:
-         
-              { "hair_color": [ "light_hair", "dark_hair" ] }
-              
-              
-        - **gender**: an array containing the available gender changes for the element. Example:
-         
-              { "gender": [ "femininity", "masculinity" ] }
-              
-            
-        - **makeup**: an array containing the available makeup changes for the element. Example:
-         
-              { "makeup": [ "light", "heavy", "none" ] }
-              
-            
-        - **hair_line**: an array containing the available hair line changes for the element. Example:
-         
-              { "hair_line": [ "high", "low" ] }
-            
-          
-          ***check response schema for full enum of each action**
       operationId: info
       parameters:
         - in: path
@@ -246,7 +179,7 @@ paths:
           required: true
           schema:
             type: string
-          description: visual id of the image
+          description: visual id of the image, received after using the /upload route.
       responses:
         '200':
           description: Successful operation.
@@ -255,11 +188,11 @@ paths:
               schema:
                 type: object
                 properties:
-                  description:
                     type: string
-                    description: description of the image
+                    description: (Coming Soon) A brief description of the visual
                   scene:
                     type: array
+                    description: An array of objects representing each of the elements recognized in the visual.
                     items:
                       type: object
                       properties:

@@ -622,14 +622,14 @@ paths:
                               pace:
                                 type: string
                                 enum: ["slow", "medium","fast"]
-                                description: >
+                                description: >-
                                 Determines the pace of the video.  
                                 This property is incompatible with `duration` (you can use only one in a single call).
                                 default: "medium"
                                 example: "medium"
                               duration:
                                 type: integer
-                                description: >
+                                description: >-
                                 Determines the duration of the video in seconds.  
                                 This property is incompatible with `pace` (you can use only one in a single call).
                                 default: 5

@@ -1,6 +1,5 @@
 openapi: 3.0.0
 info:
-    # Intro
     description: >    
    
     The Bria API was designed for users to interact with the BriEngine,

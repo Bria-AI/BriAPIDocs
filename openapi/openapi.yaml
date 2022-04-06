@@ -489,6 +489,55 @@ paths:
         '400':
           description: Bad request.
 
+  /{visual_id}/remove_bg:
+    post:
+      tags:
+        - remove_bg (Coming Soon)
+      summary: Remove the background of an image
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Remove BG Route* is used to remove the background of a previously uploaded image. 
+        
+        
+        This route can also be used on an image that has been changed by the user using the /create route.
+        
+        
+        The *Remove BG Route* will return the URL for accessing the updated image.
+        
+
+      operationId: remove_bg
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          description: visual id  of the image from which the user wishes to remove the background
+        - in: query
+          name: visual_url
+          required: false
+          schema:
+            type: string
+          description: URL of the new image the user has created from the original image, using the */create* route
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  no_bg_image_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request.
+        '400':
+          description: Bad request.
+
   /{visual_id}/video:
     post:
       tags:
@@ -523,7 +572,7 @@ paths:
           required: false
           schema:
             type: string
-          description: URL of the new image the user has created from the original image using the */create* route
+          description: URL of the new image the user has created from the original image, using the */create* route
       requestBody:
         content:
           application/json:
@@ -543,6 +592,7 @@ paths:
                         description: >-
                           the video type the user wishes to create based on the selected object in the image
                         properties:
+                        skipOptionalParameters: true
                           camera_movement:
                             type: object
                             properties:

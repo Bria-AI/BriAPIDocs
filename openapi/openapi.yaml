@@ -68,7 +68,7 @@ paths:
         The *Upload Route* is used to upload visuals to the database.
 
 
-        The *Upload Route* will return a visual identification to the user. It's
+        This route returns a visual identification to the user. It's
         the first step for consuming the Bria API for new visuals.
 
 
@@ -163,13 +163,10 @@ paths:
         The *Info Route* is used to retrieve useful information on a specific
         visual that was previously uploaded to the database.
 
-
-        The *Info Route* will return a description of the scene to the user and
-        the possible actions for each element within it. 
-
-
-        The *Info Route* will list the possible changes that the Bria API
-        supports for each element in the scene.
+        
+        Additionally, it provides a description of each element within the scene 
+        along with its available changes, which are supported by the Bria API. 
+       
 
 
       operationId: info

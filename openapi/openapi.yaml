@@ -208,24 +208,24 @@ paths:
                           example: "person"
                         labels:
                           type: array
-                          description: An array with known information about the element, such as age range and gender.
+                          description: The known information about the element, such as age range and gender.
                           example: ["age_36-54", "calm", "Male"]
                           items:
                             type: string
                         actions:
                           type: object
-                          description: An object that contains the changes available for the /create route for this specific element, based directly on its type and specificity.
+                          description: The available changes for the /create route for this specific element, based directly on its type and specificity.
                           properties:
                             age:
                               type: array
-                              description: An array of the available age changes for this element. 
+                              description: The available age changes for this element. 
                               example: ["mid-20", "mid-40", "mid-60"]
                               items:
                                 type: string
                                 enum: ["mid-20", "mid-40", "mid-60"]
                             diversity:
                               type: array
-                              description: An array of the available diversity changes for this element. 
+                              description: The available diversity changes for this element. 
                               example: ["africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil"]
                               items:
                                 type: string
@@ -244,7 +244,7 @@ paths:
                                   - france
                             expression:
                               type: array
-                              description: An array of the available expression changes for this element. 
+                              description: The available expression changes for this element. 
                               example: ["happy", "calm", "surprised", "dreaming", "angry"]
                               items:
                                 type: string
@@ -255,42 +255,42 @@ paths:
                                   - angry
                             glasses:
                               type: array
-                              description: An array of the available glasses changes for this element.
+                              description: The available glasses changes for this element.
                               example: ["light", "heavy", "none"]
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
                             haircolor:
                               type: array
-                              description: An array of the available hair color changes for this element.
+                              description: The available hair color changes for this element.
                               example: ["black", "brown", "red", "blond", "gray"]
                               items:
                                 type: string
                                 enum: ["black", "brown", "red", "blond", "gray"]
                             gender:
                               type: array
-                              description: An array of the available gender changes for this element.
+                              description: The available gender changes for this element.
                               example: ["femininity","masculinity"]
                               items:
                                 type: string
                                 enum: ["femininity","masculinity"]
                             makeup:
                               type: array
-                              description: An array of the available makeup changes for this element.
+                              description: The available makeup changes for this element.
                               example: ["light", "heavy", "none"]
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
                             hair_line:
                               type: array
-                              description: An array of the available hair line changes for this element.
+                              description: The available hair line changes for this element.
                               example: ["high", "low"]
                               items:
                                 type: string
                                 enum: ["high", "low"]
                             beard:
                               type: array
-                              description: An array of the available facial hair changes for this element.
+                              description: The available facial hair changes for this element.
                               example: ["shaved", "medium", "full"]
                               items:
                                 type: string

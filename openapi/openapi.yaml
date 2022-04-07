@@ -191,6 +191,7 @@ paths:
                   description:
                     type: string
                     description: (Coming Soon) A brief description of the visual
+                    example: "Coming Soon"
                   scene:
                     type: array
                     description: An array of objects representing each of the elements recognized in the visual.

@@ -197,16 +197,33 @@ paths:
                     items:
                       type: object
                       properties:
+                        id:
+                          type: string
+                          description: The id of the element
+                          example: "8c52cf181e93b9f9ba3292eae1630a3fc9e06bc97ec6b03085f46545d64f1f64"
+                        type:
+                          type: string
+                          description: The type of the element 
+                          example: "person"
+                        labels:
+                          type: array
+                          description: An array with known information about the element, such as age range and gender.
+                          example: ["age_36-54", "calm", "Male"]
+                          items:
+                            type: string
                         actions:
                           type: object
+                          description: An object that contains the changes available for the /create route for this specific element, based directly on its type and specificity.
                           properties:
                             age:
                               type: array
+                              description: An array of the available age changes for this element. 
                               items:
                                 type: string
                                 enum: ["mid-20", "mid-40", "mid-60"]
                             diversity:
                               type: array
+                              description: An array of the available diversity changes for this element. 
                               items:
                                 type: string
                                 enum:
@@ -224,6 +241,7 @@ paths:
                                   - france
                             expression:
                               type: array
+                              description: An array of the available expression changes for this element. 
                               items:
                                 type: string
                                 enum:
@@ -233,37 +251,40 @@ paths:
                                   - angry
                             glasses:
                               type: array
+                              description: An array of the available glasses changes for this element.
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
-                            hair_color:
+                            haircolor:
                               type: array
+                              description: An array of the available hair color changes for this element.
                               items:
                                 type: string
-                                enum: ["dark_hair", "light_hair"]
+                                enum: ["black", "brown", "red", "blond", "gray"]
                             gender:
                               type: array
+                              description: An array of the available gender changes for this element.
                               items:
                                 type: string
                                 enum: ["femininity","masculinity"]
                             makeup:
                               type: array
+                              description: An array of the available makeup changes for this element.
                               items:
                                 type: string
-                                enum: ["makeup", "no_makeup"]
+                                enum: ["light", "heavy", "none"]
                             hair_line:
                               type: array
+                              description: An array of the available hair line changes for this element.
                               items:
                                 type: string
                                 enum: ["high", "low"]
-                        id:
-                          type: string
-                        class:
-                          type: string
-                        labels:
-                          type: array
-                          items:
-                            type: string
+                            beard:
+                              type: array
+                              description: An array of the available facial hair changes for this element.
+                              items:
+                                type: string
+                                enum: ["shaved", "medium", "full"]
         '400':
           description: Bad request.
   /{visual_id}/create:

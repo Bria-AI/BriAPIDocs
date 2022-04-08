@@ -176,8 +176,8 @@ paths:
           required: true
           schema:
             type: string
+            example: "8487fb411f3c6716"
           description: visual id of the image, received after using the /upload route.
-          example: "8487fb411f3c6716"
       responses:
         '200':
           description: Successful operation.
@@ -322,8 +322,8 @@ paths:
           required: true
           schema:
             type: string
+            example: "8487fb411f3c6716"
           description: visual id of the image the user wants to create a new visual from.
-          example: "8487fb411f3c6716"
       requestBody:
         content:
           application/json:
@@ -339,6 +339,7 @@ paths:
                       id:
                         type: string
                         description: Id of the selected object in the image, to which the user would like to make changes.
+                        example: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
@@ -379,7 +380,7 @@ paths:
                             type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the glasses of a selected object.
-                            example: None
+                            example: ""
                           haircolor:
                             type: string
                             enum: ["black", "brown", "red", "blond", "gray"]

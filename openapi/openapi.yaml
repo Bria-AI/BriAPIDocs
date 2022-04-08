@@ -174,7 +174,8 @@ paths:
         - in: path
           name: visual_id
           required: true
-          type: string
+          schema:
+            type: string
           example: "8487fb411f3c6716"
           description: visual id of the image, received after using the /upload route.
       responses:
@@ -321,7 +322,7 @@ paths:
           required: true
           schema:
             type: string
-            example: "8487fb411f3c6716"
+          example: "8487fb411f3c6716"
           description: visual id of the image the user wants to create a new visual from.
       requestBody:
         content:

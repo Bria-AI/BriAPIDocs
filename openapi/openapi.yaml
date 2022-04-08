@@ -374,7 +374,7 @@ paths:
                               - dreaming
                               - angry
                             description: Changing the expression of a selected object.
-                            expression: "happy"
+                            example: "happy"
                           glasses:
                             type: string
                             enum: ["light", "heavy", "none"]

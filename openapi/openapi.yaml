@@ -164,7 +164,7 @@ paths:
         visual that was previously uploaded to the database.
 
         
-        Additionally, it provides a description of each element within the scene 
+        Additionally, it provides a description of each object and element within the scene 
         along with its available changes, which are supported by the Bria API. 
        
 
@@ -177,6 +177,7 @@ paths:
           schema:
             type: string
           description: visual id of the image, received after using the /upload route.
+          example: "8487fb411f3c6716"
       responses:
         '200':
           description: Successful operation.
@@ -191,38 +192,38 @@ paths:
                     example: "Coming Soon"
                   scene:
                     type: array
-                    description: An array of objects representing each of the elements recognized in the visual.
+                    description: An array of objects representing each of the objects recognized in the visual.
                     items:
                       type: object
                       properties:
                         id:
                           type: string
-                          description: The id of the element
-                          example: "8c52cf181e93b9f9ba3292eae1630a3fc9e06bc97ec6b03085f46545d64f1f64"
+                          description: The id of the object
+                          example: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
                         type:
                           type: string
-                          description: The type of the element 
+                          description: The type of the object 
                           example: "person"
                         labels:
                           type: array
-                          description: The known information about the element, such as age range and gender.
-                          example: ["age_36-54", "calm", "Male"]
+                          description: The known information about the object, such as age range and gender.
+                          example: ["age_22-34", "calm", "Male"]
                           items:
                             type: string
                         actions:
                           type: object
-                          description: The available changes for the /create route for this specific element, based directly on its type and specificity.
+                          description: The available changes for the /create route for this specific object, based directly on its type and specificity.
                           properties:
                             age:
                               type: array
-                              description: The available age changes for this element. 
+                              description: The available age changes for this object. 
                               example: ["mid-20", "mid-40", "mid-60"]
                               items:
                                 type: string
                                 enum: ["mid-20", "mid-40", "mid-60"]
                             diversity:
                               type: array
-                              description: The available diversity changes for this element. 
+                              description: The available diversity changes for this object. 
                               example: ["africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil"]
                               items:
                                 type: string
@@ -241,7 +242,7 @@ paths:
                                   - france
                             expression:
                               type: array
-                              description: The available expression changes for this element. 
+                              description: The available expression changes for this object. 
                               example: ["happy", "calm", "surprised", "dreaming", "angry"]
                               items:
                                 type: string
@@ -252,42 +253,42 @@ paths:
                                   - angry
                             glasses:
                               type: array
-                              description: The available glasses changes for this element.
+                              description: The available glasses changes for this object.
                               example: ["light", "heavy", "none"]
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
                             haircolor:
                               type: array
-                              description: The available hair color changes for this element.
+                              description: The available hair color changes for this object.
                               example: ["black", "brown", "red", "blond", "gray"]
                               items:
                                 type: string
                                 enum: ["black", "brown", "red", "blond", "gray"]
                             gender:
                               type: array
-                              description: The available gender changes for this element.
+                              description: The available gender changes for this object.
                               example: ["femininity","masculinity"]
                               items:
                                 type: string
                                 enum: ["femininity","masculinity"]
                             makeup:
                               type: array
-                              description: The available makeup changes for this element.
+                              description: The available makeup changes for this object.
                               example: ["light", "heavy", "none"]
                               items:
                                 type: string
                                 enum: ["light", "heavy", "none"]
                             hair_line:
                               type: array
-                              description: The available hair line changes for this element.
+                              description: The available hair line changes for this object.
                               example: ["high", "low"]
                               items:
                                 type: string
                                 enum: ["high", "low"]
                             beard:
                               type: array
-                              description: The available facial hair changes for this element.
+                              description: The available facial hair changes for this object.
                               example: ["shaved", "medium", "full"]
                               items:
                                 type: string
@@ -314,38 +315,6 @@ paths:
         visual and the confidence that Bria has in the quality of the new
         visual.
 
-
-        **Request body**
-
-
-        - **changes**: the changes requested by the user to apply to the visual
-
-
-        The change can be sent as an object containing the name and the value of
-        the change, for example:
-
-
-          ```{ key: "japan", value: 5}```
-
-
-        or as a string containing the name of the change which will take the
-        default value, for example:
-
-
-          ```"japan"```
-
-
-        **Response**
-
-
-        image_res - url to the new created image
-
-
-        confidence - string indicating the level of confidence Bria has in the
-        quality of the created image
-
-
-        ```{ "image_res": "...", "confidence": "..." }```
       operationId: create
       parameters:
         - in: path
@@ -353,7 +322,8 @@ paths:
           required: true
           schema:
             type: string
-          description: visual id of the image the user wants to create a new one from
+          description: visual id of the image the user wants to create a new visual from.
+          example: "8487fb411f3c6716"
       requestBody:
         content:
           application/json:
@@ -362,22 +332,22 @@ paths:
               properties:
                 changes:
                   type: array
+                  description: The requested changes to the original visual.
                   items:
                     type: object
                     properties:
                       id:
                         type: string
-                        description: id of the object in the image
+                        description: Id of the selected object in the image, to which the user would like to make changes.
                       actions:
                         type: object
-                        description: >-
-                          the changes the user wishes to perform for this object
-                          in the image
+                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
                         properties:
                           age:
                             type: string
                             enum: ["mid-20", "mid-40", "mid-60"]
-                            description: Value must be included in the response of the info route in order for the request to be successfull
+                            description: Changing the age of a selected object.
+                            example: "mid-60"
                           diversity:
                             type: string
                             enum:
@@ -393,14 +363,8 @@ paths:
                               - england
                               - spain
                               - france
-                              - "or {'key':'africa','value':0}"
-                              - '{''key'':''korea'',''value'':5}'
-                              - '{''key'':''indea'',''value'':10}'
-                            description: >-
-                              Value must be in range [0-10] where 0 means no
-                              change and 10 means max change, and if value is
-                              not specified it should be considered as the
-                              default value
+                            description: Changing the diversity of a selected object.
+                            example: "france"
                           expression:
                             type: string
                             enum:
@@ -409,34 +373,38 @@ paths:
                               - calm
                               - dreaming
                               - angry
-                              - "or {'key':'happy','value':0}"
-                              - '{''key'':''surprised'',''value'':5}'
-                              - '{''key'':''calm'',''value'':10}'
-                            description: >-
-                              Value must be in range [0-10] where 0 means no
-                              change and 10 means max change, and if value is
-                              not specified it should be considered as the
-                              default value
+                            description: Changing the expression of a selected object.
+                            expression: "happy"
                           glasses:
                             type: string
                             enum: ["light", "heavy", "none"]
-                            description: Value must be included in the response of the info route in order for the request to be successfull
-                          hair_color:
+                            description: Changing the glasses of a selected object.
+                            example: None
+                          haircolor:
                             type: string
-                            enum: ["dark_hair", "light_hair"]
-                            description: Value must be included in the response of the info route in order for the request to be successfull
+                            enum: ["black", "brown", "red", "blond", "gray"]
+                            description: Changing the hair color of a selected object.
+                            example: None
                           gender:
                             type: string
                             enum: ["femininity","masculinity"]
-                            description: Value must be included in the response of the info route in order for the request to be successfull
+                            description: Changing the gender of a selected object.
+                            example: None
                           makeup:
                             type: string
-                            enum: ["makeup", "no_makeup"]
-                            description: Value must be included in the response of the info route in order for the request to be successfull
+                            enum: ["light", "heavy", "none"]
+                            description: Changing the makeup of a selected object.
+                            example: None
                           hair_line:
                             type: string
                             enum: ["high", "low"]
-                            description: Value must be included in the response of the info route in order for the request to be successfull
+                            description: Changing the hair line of a selected object.
+                            example: None
+                          beard:
+                            type: string
+                            enum: ["shaved", "medium", "full"]
+                            description: Changing the facial hair of a selected object.
+                            example: None
       responses:
         '200':
           description: Successful operation.
@@ -447,9 +415,11 @@ paths:
                 properties:
                   image_res:
                     type: string
+                    description: URL that represents the new visual created in the request.
                   confidence:
                     type: string
-                    description: Low, high or intermidiate
+                    description: Indicating the level of confidence Bria has in the quality of the created visual.
+                    example: "intermediate"
         '400':
           description: Bad request.
 

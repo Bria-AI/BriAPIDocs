@@ -380,32 +380,32 @@ paths:
                             type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the glasses of a selected object.
-                            example: ""
+                            example: "light"
                           haircolor:
                             type: string
                             enum: ["black", "brown", "red", "blond", "gray"]
                             description: Changing the hair color of a selected object.
-                            example: None
+                            example: "brown"
                           gender:
                             type: string
                             enum: ["femininity","masculinity"]
                             description: Changing the gender of a selected object.
-                            example: None
+                            example: "masculinity"
                           makeup:
                             type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the makeup of a selected object.
-                            example: None
+                            example: "none"
                           hair_line:
                             type: string
                             enum: ["high", "low"]
                             description: Changing the hair line of a selected object.
-                            example: None
+                            example: "high"
                           beard:
                             type: string
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected object.
-                            example: None
+                            example: "medium"
       responses:
         '200':
           description: Successful operation.
@@ -417,10 +417,11 @@ paths:
                   image_res:
                     type: string
                     description: URL that represents the new visual created in the request.
+                    example: "https://d1uzvjowrxhw13.cloudfront.net/api/create_results/8487fb411f3c6716_05e8a8dc-b723-11ec-be15-c28fc8b4a55b.JPEG?AWSAccessKeyId=ASIAUL5JH7ABM5GPF244&Signature=OaE%2BTJW%2FBJFDB2xGXpy%2F%2F8TYkAE%3D&x-amz-security-token=FwoGZXIvYXdzEEsaDHAX5TxTwymFAQYSwSKYBK3lKAwEipl9tjg1QQwWMdQDqS%2B0rYkexasgxxW78Vz4DvJUVPISpnTOZk4h%2Fy6%2BikLC5%2FYGY86SL8980ZHZzRgqcodDJ0n6ljB7SgbkfJnSpgx%2F8iCHzoDH%2BS7YrUjnR7e%2FUz%2B4sIbV%2BSHGn36EXTNnrm%2FOgCsiL9vqLSGFEo5R1pLYIbezxWCEWMLcDO5x9WsVoPRYW7c%2B5B%2B1Ku3qybQEBFRex4BVisJU4NTXbwQKFWMbkTjHg5vK%2FEdQn7OzmCA7SfCSHe%2FqDZIBQG0ki%2BHt%2Fs4bAYYTZpl%2FjoUJTldlltdWH2uitj%2BBeyQKcUnHrPjTY1CsAOEC6OV%2FKlZfOjbNJTvlmHc7%2BKP3iICKlCVJwvRK6%2FnmU7mUVOb%2FmgD2kIvBq5G6fNxXQlKfFGZE2lSs8HR83sp44Qz8hm60DPfK45hE0XdVnIS2jY%2F1a%2BYBmijCr4HDTgv52D53CdnOiQ%2BQ8Yld0bBZRC4aDBATcvcsDcnO4BBMY0NS1c%2BSJ6b4IMxDK2OKdanf9EYiDgzr3ebsS1m7j4NX3pEvNC99YF%2B5PQwDYhbMwlMCAG9AMs9%2FF86Al3czOJFOxV1ClBEoUKy2TgntGraCp76UoLmRrHuRq7WKQUvIj2HAXsIlyNkBg3z498M1Gh7vyD%2F7xQgA0Ny6zYeC1gBH4HmYtFlBS%2BJimmxFlCoCuyFhBmUXp7p6oBI3APuSyQYLKLmQwJIGMioiS3mUno68q7GAsD%2FPmSCM8xMeEWF8IegvlU4XWAQuNnQJLVtqwkZb1Qo%3D&Expires=1650276159"
                   confidence:
                     type: string
                     description: Indicating the level of confidence Bria has in the quality of the created visual.
-                    example: "intermediate"
+                    example: "low"
         '400':
           description: Bad request.
 
@@ -452,6 +453,7 @@ paths:
           required: true
           schema:
             type: string
+            example: "8487fb411f3c6716"
           description: visual id  of the image from which the user wishes to remove the background
         - in: query
           name: visual_url
@@ -470,6 +472,7 @@ paths:
                   no_bg_image_url:
                     type: string
                     description: URL that represents the updated visual created in the request.
+                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
         '400':
           description: Bad request.
 

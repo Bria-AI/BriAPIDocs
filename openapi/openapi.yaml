@@ -519,6 +519,7 @@ paths:
               properties:
                 changes:
                   type: array
+                  description: The requested change to the selected visual and object.
                   items:
                     type: object
                     properties:

@@ -562,7 +562,7 @@ paths:
               properties:
                 changes:
                   type: array
-                  description: The requested change to the selected visual and object.
+                  description: The requested change to the selected visual or object.
                   items:
                     type: object
                     properties:
@@ -572,7 +572,7 @@ paths:
                       actions:
                         type: object
                         description: >-
-                          the video type the user wishes to create based on the selected object in the image
+                          the video type the user wishes to create based on the selected object in the image. Currently, only one action can be sent per request.
                         properties:
                           zoom:
                             type: object

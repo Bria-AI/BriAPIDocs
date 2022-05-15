@@ -574,13 +574,13 @@ paths:
                         description: >-
                           the video type the user wishes to create based on the selected object in the image
                         properties:
-                          camera_movement:
+                          zoom:
                             type: object
                             properties:
                               type:
                                 type: string
                                 enum: ["zoom_in", "zoom_out"]
-                                description: Determines the type of movement in the video. Additional types will be added in the future.
+                                description: Determines the type of zoom in the video. 
                                 default: "zoom_in"
                                 example: "zoom_in"
                               focus_area:
@@ -611,6 +611,63 @@ paths:
                                 description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
                                 default: 5
                                 example: 5
+                          hover:
+                            type: object
+                            properties:
+                              start_area:
+                                type: string
+                                enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
+                                description: Determines the area in the video from which the video will start.
+                                default: "top_left"
+                                example: "top_left"
+                              end_area:
+                                type: string
+                                enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
+                                description: Determines the area in the video in which the video will end.
+                                default: "center_middle"
+                                example: "center_middle"
+                              video_depth:
+                                type: string
+                                enum: ["shallow", "medium","deep"]
+                                description: Determines how deep in the focus area the camera will move. 
+                                default: "shallow"
+                                example: "shallow"
+                              boomerang_loop:
+                                type: boolean
+                                description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
+                                default: FALSE
+                                example: FALSE
+                              pace:
+                                type: string
+                                enum: ["slow", "medium","fast"]
+                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
+                                default: "medium"
+                                example: "medium"
+                              duration:
+                                type: integer
+                                description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
+                                default: 5
+                                example: 5
+                          super_zoom:
+                            type: object
+                            properties:
+                              boomerang_loop:
+                                type: boolean
+                                description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
+                                default: FALSE
+                                example: FALSE
+                              pace:
+                                type: string
+                                enum: ["slow", "medium","fast"]
+                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
+                                default: "medium"
+                                example: "medium"
+                              duration:
+                                type: integer
+                                description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
+                                default: 5
+                                example: 5
+                            
       responses:
         '200':
           description: Successful operation.

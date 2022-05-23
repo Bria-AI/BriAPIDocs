@@ -522,7 +522,7 @@ paths:
   /search:
     post:
       tags:
-        - search
+        - search (Coming Soon)
       summary: search for images matching the given text query
       description: >-
 

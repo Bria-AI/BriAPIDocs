@@ -523,7 +523,7 @@ paths:
     post:
       tags:
         - search (Coming Soon)
-      summary: search for images matching the given text query
+      summary: Search for images matching the given text query
       description: >-
 
 

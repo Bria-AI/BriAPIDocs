@@ -520,7 +520,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
           
   /search:
-    post:
+    get:
       tags:
         - search (Coming Soon)
       summary: Search for images matching the given text query

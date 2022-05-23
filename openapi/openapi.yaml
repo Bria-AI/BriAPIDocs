@@ -17,8 +17,8 @@ info:
       - /info - Using the *Info Route* to understand the change possibilities for each object in the image 
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
-      - /remove_bg - (Coming Soon) Using the *Remove BG Route* to remove the background of a stil image.
-      - /video - (Coming Soon) Using the *Video Route* to make a short video based on a single still image.
+      - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
+      - /video - Using the *Video Route* to make a short video based on a single still image.
       
     With the response from the *Info Route*, the following route can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
@@ -463,7 +463,7 @@ paths:
   /{visual_id}/remove_bg:
     post:
       tags:
-        - remove_bg (Coming Soon)
+        - remove_bg
       summary: Remove the background of an image
       description: >-
 
@@ -522,7 +522,7 @@ paths:
   /{visual_id}/video:
     post:
       tags:
-        - video (Coming Soon)
+        - video
       summary: Generate a video from a still image
       description: >-
 

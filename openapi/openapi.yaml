@@ -518,6 +518,90 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+          
+  /search:
+    post:
+      tags:
+        - search
+      summary: search for images matching the given text query
+      description: >-
+
+
+        **Description**
+
+
+
+        By using the *Search Route*, you can send a text query and receive relevant images that match the query.
+        
+        
+        The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
+       
+        
+        The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
+        
+
+      operationId: search
+      parameters:
+        - in: query
+          name: query
+          required: false
+          schema:
+            type: string
+          description: the text query for which the user is looking for matching images.
+          example: "woman traveling in the world"
+        - in: query
+          name: num_results_per_page
+          required: false
+          schema:
+            type: integer
+          description: how many images you would like to receive in the current call.
+          default: 50
+          example: 200
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: int
+          description: which batch of images you would like to receive in the current call.
+          default: 1
+          example: 2
+        - in: query
+          name: embedding_name
+          required: false
+          schema:
+            type: string
+          description: Bria will provide you with this parameter which represents your account's image gallery.
+          example: "your_embedding_name"
+      responses:
+      '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. For each image, the object contains the match score and the vhash (same as visual_id). The images in the array are sorted by the match score, from highest match to lowest match. If the spesified batch (=page) is empty, the results array will be empty.
+                    items:
+                      type: object
+                      properties:
+                        score:
+                          type: float
+                          description: a score of how well the image matches the text query.
+                          example: 0.27
+                        vhash:
+                          type: string
+                          description: visual id of the image, documented in Bria.
+                          example: "a169a6862f24de75"
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
 
   /{visual_id}/video:
     post:

@@ -554,16 +554,14 @@ paths:
           required: false
           schema:
             type: integer
-          description: how many images you would like to receive in the current call.
-          default: 50
+          description: how many images you would like to receive in the current call. The default value is 50.
           example: 200
         - in: query
           name: page
           required: false
           schema:
-            type: int
-          description: which batch of images you would like to receive in the current call.
-          default: 1
+            type: integer
+          description: which batch of images you would like to receive in the current call. The default value is 1.
           example: 2
         - in: query
           name: embedding_name
@@ -587,7 +585,7 @@ paths:
                       type: object
                       properties:
                         score:
-                          type: float
+                          type: number
                           description: a score of how well the image matches the text query.
                           example: 0.27
                         vhash:

@@ -572,8 +572,8 @@ paths:
             type: string
           description: Bria will provide you with this parameter which represents your account's image gallery.
           example: "your_embedding_name"
-     responses:
-      '200':
+      responses:
+        '200':
           description: Successful operation.
           content:
             application/json:

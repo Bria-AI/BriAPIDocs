@@ -555,13 +555,13 @@ paths:
           example: 200
           minimum: 1
         - name: page
-          name: query
+          in: query
           type: integer
           description: which batch of images you would like to receive in the current call. The default value is 1.
           example: 2
           minimum: 1
         - name: embedding_name
-          name: query
+          in: query
           schema:
             type: string
           description: Bria will provide you with this parameter which represents your account's image gallery.

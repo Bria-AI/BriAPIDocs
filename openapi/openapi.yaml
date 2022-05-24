@@ -542,32 +542,26 @@ paths:
 
       operationId: search
       parameters:
-        - in: query
-          name: query
-          required: false
+        - name: query
+          in: query
           schema:
             type: string
           description: the text query for which the user is looking for matching images.
           example: "woman traveling in the world"
-        - in: query
-          name: num_results_per_page
-          required: false
+        - name: num_results_per_page
+          in: query
           type: integer
           description: how many images you would like to receive in the current call. The default value is 50.
           example: 200
           minimum: 1
-          maximum: 10000000000
-        - in: query
-          name: page
-          required: false
+        - name: page
+          name: query
           type: integer
           description: which batch of images you would like to receive in the current call. The default value is 1.
           example: 2
           minimum: 1
-          maximum: 10000000000
-        - in: query
-          name: embedding_name
-          required: false
+        - name: embedding_name
+          name: query
           schema:
             type: string
           description: Bria will provide you with this parameter which represents your account's image gallery.

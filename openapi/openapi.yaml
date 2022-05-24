@@ -13,18 +13,21 @@ info:
 
 
     **The common use of the Bria API is according to the following order:**
-      - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database
-      - /info - Using the *Info Route* to understand the change possibilities for each object in the image 
+      - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database.
+      - /info - Using the *Info Route* to understand the change possibilities for each object in the image.
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /video - Using the *Video Route* to make a short video based on a single still image.
+      - /search - (Coming Soon) Utilizing the *Search Route* to look for images you uploaded to Bria that match a text query.
+      - /search_on_image - (Coming Soon) Utilizing the *Search On Image Route* to look for images you uploaded to Bria that match another image you uploaded to Bria.
+
       
     With the response from the *Info Route*, the following route can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
         
     The following route can be used at any moment:
-      - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image
+      - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image.
       
       
       
@@ -596,6 +599,85 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+
+  /search_on_image:
+    get:
+      tags:
+        - search_on_image (Coming Soon)
+      summary: Search for images matching the given image
+      description: >-
+
+
+        **Description**
+
+
+
+        By using the *Search On Image Route*, you can send an image as a query and receive relevant images that match the image.
+        
+        
+        The *Search On Image Route* returns the images, sorted by the match score, from highest match to lowest match.
+       
+        
+        The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
+        
+
+      operationId: search
+      parameters:
+        - name: vhash
+          in: query
+          schema:
+            type: string
+          description: the vhash (visual_id) of the image for which the user is looking for matching images.
+          example: "e01592ef1188df76"
+        - name: num_results_per_page
+          in: query
+          schema:
+            type: integer
+          description: how many images you would like to receive in the current call. The default value is 50.
+          example: 1
+        - name: page
+          in: query
+          schema:
+            type: integer          
+          description: which batch of images you would like to receive in the current call. The default value is 1.
+          example: 1
+        - name: embedding_name
+          in: query
+          schema:
+            type: string
+          description: Bria will provide you with this parameter which represents your account's image gallery.
+          example: "your_embedding_name"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. For each image, the object contains the match score and the vhash (same as visual_id). The images in the array are sorted by the match score, from highest match to lowest match. If the specified batch (=page) is empty or the vhash in the request doesn't exist, the results array will be empty.
+                    items:
+                      type: object
+                      properties:
+                        score:
+                          type: number
+                          description: a score of how well the image in the result matches the requested image.
+                          example: 0.27
+                        vhash:
+                          type: string
+                          description: visual id of the image, documented in Bria.
+                          example: "a169a6862f24de75"
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+
 
   /{visual_id}/video:
     post:

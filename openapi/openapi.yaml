@@ -550,16 +550,16 @@ paths:
           example: "woman traveling in the world"
         - name: num_results_per_page
           in: query
-          type: integer
+          schema:
+            type: integer
           description: how many images you would like to receive in the current call. The default value is 50.
-          example: 200
-          minimum: 1
+          example: 1
         - name: page
           in: query
-          type: integer
+          schema:
+            type: integer          
           description: which batch of images you would like to receive in the current call. The default value is 1.
-          example: 2
-          minimum: 1
+          example: 1
         - name: embedding_name
           in: query
           schema:

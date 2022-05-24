@@ -552,8 +552,7 @@ paths:
         - in: query
           name: num_results_per_page
           required: false
-          schema:
-            type: integer
+          type: integer
           description: how many images you would like to receive in the current call. The default value is 50.
           example: 200
           minimum: 1
@@ -561,8 +560,7 @@ paths:
         - in: query
           name: page
           required: false
-          schema:
-            type: integer
+          type: integer
           description: which batch of images you would like to receive in the current call. The default value is 1.
           example: 2
           minimum: 1

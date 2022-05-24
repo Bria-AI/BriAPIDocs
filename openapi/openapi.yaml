@@ -621,7 +621,7 @@ paths:
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
         
 
-      operationId: search
+      operationId: search_on_image
       parameters:
         - name: vhash
           in: query

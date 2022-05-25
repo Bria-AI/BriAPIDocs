@@ -62,7 +62,7 @@ paths:
     post:
       tags:
         - upload (Coming Soon)
-      summary: Uploading file
+      summary: Upload a file
       description: >-
 
         **Description**
@@ -174,7 +174,7 @@ paths:
     get:
       tags:
         - info
-      summary: Getting image info
+      summary: Get image info and available actions
       description: >-
 
 
@@ -329,7 +329,7 @@ paths:
     post:
       tags:
         - create
-      summary: Create new image based on changes requested by user
+      summary: Create a new image based on changes requested by the user
       description: >-
 
 

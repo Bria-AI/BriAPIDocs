@@ -133,8 +133,8 @@ paths:
                 file:
                   type: string
                   format: binary
-            description: The file you would like to upload to Bria.
-            required: true
+              description: The file you would like to upload to Bria.
+              required: true
       responses:
         '200':
           description: Successful operation.

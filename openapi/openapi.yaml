@@ -233,6 +233,7 @@ paths:
         
       operationId: onboard
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -241,7 +242,6 @@ paths:
                 org_image_key:
                   type: string
                   description: The internal image id in your API, of the image you would like to onboard to Bria (without uploading it).
-                  required: true
                   example: "12345acbd"
       responses:
         '200':

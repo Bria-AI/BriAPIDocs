@@ -182,8 +182,10 @@ paths:
 
 
         A new image can be onboarded to Bria without being uploaded to the database using the *Onboard Route*.
+        
 
         This route returns a visual identification to the user. 
+        
         
         It's the first step for consuming the Bria API for new visuals (instead of using the /upload route).
 

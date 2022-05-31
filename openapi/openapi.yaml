@@ -157,7 +157,7 @@ paths:
                 properties:
                   visual_id:
                     type: string
-                    description: unique visual identification
+                    description: Unique visual identification
         '400':
           description: Request doesn't contain file part.
         '405':
@@ -265,7 +265,7 @@ paths:
                 properties:
                   visual_id:
                     type: string
-                    description: unique visual identification
+                    description: Unique visual identification
         '400':
           description: Bad request.
         '405':

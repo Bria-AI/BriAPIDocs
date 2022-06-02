@@ -14,7 +14,7 @@ info:
 
     **The common use of the Bria API is according to the following order:**
       - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database.
-      - /onboard - (Coming Soon) By using the *Onboard Route*, a new image can be sent to Bria without being uploaded to the database.
+      - /register - (Coming Soon) By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
       - /info - Using the *Info Route* to understand the change possibilities for each object in the image.
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
@@ -171,17 +171,17 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
           
-  /onboard:
+  /register:
     post:
       tags:
-        - onboard (Coming Soon)
-      summary: Onboard an image
+        - register (Coming Soon)
+      summary: Register an image
       description: >-
 
         **Description**
 
 
-        A new image can be onboarded to Bria without being uploaded to the database using the *Onboard Route*.
+        A new image can be registered to Bria without being uploaded to the database using the *Register Route*.
         
 
         This route returns a visual identification to the user. 
@@ -193,27 +193,27 @@ paths:
         **Response**
 
           
-          The visual id in the response of the *Onboard Route* must be kept by the
+          The visual id in the response of the *Register Route* must be kept by the
         user in order to query image info and make changes to it
 
 
         ```{ "visual_id": "9ea9a4d2d19977a7c" }```
 
 
-        The *visual_id* in the response of the /upload route can be used for all
+        The *visual_id* in the response of the /register route can be used for all
         other routes.
 
 
         **Bria generative Web tool**
 
 
-        The onboarded visual can be seen and used in the Bria generative web tool
+        The registered visual can be seen and used in the Bria generative web tool
         in cases where the tool is licensed as part of the project.
 
 
         To do so, the user can access the following url:
         ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}*
-        comes from the response of the */upload route*.
+        comes from the response of the */register route*.
 
 
         In Bria's web tool, the user has the ability to make many changes to the
@@ -233,7 +233,7 @@ paths:
 
         Bria API currently only supports JPEG files, which are larger than 12MB. 
         
-      operationId: onboard
+      operationId: register
       requestBody:
         required: true
         content:
@@ -243,7 +243,7 @@ paths:
               properties:
                 org_image_key:
                   type: string
-                  description: The internal image id in your API, of the image you would like to onboard to Bria (without uploading it).
+                  description: The internal image id in your API, of the image you would like to register to Bria (without uploading it).
                   example: "12345acbd"
       responses:
         '200':
@@ -257,7 +257,7 @@ paths:
                     type: string
                     description: Unique visual identification
         '208':
-          description: Image already onboarded.
+          description: Image already registered.
           content:
             application/json:
               schema:

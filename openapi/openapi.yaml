@@ -13,9 +13,11 @@ info:
 
 
     **The common use of the Bria API is according to the following order:**
-      - /upload - (Coming Soon) Using the *Upload Route* to upload a new image to the database.
-      - /register - (Coming Soon) By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
-      - /info - Using the *Info Route* to understand the change possibilities for each object in the image.
+      - /upload (Coming Soon) - By using the *Upload Route*, you can to upload a new image to Bria database.
+      - /register (Coming Soon) - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
+      - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image.
+      - /caption (Coming Soon) - By using the *Caption Route*, you can get a caption that describes the given image.
+
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.

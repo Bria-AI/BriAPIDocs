@@ -430,6 +430,57 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+          
+  /{visual_id}/caption:
+    get:
+      tags:
+        - caption (Coming Soon)
+      summary: Get a caption that describes the image
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Caption Route* is used to get a caption that describes the given image.
+        
+
+      operationId: caption
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image for which you'd like a caption
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        caption:
+                          type: string
+                          example: "woman walking on a bridge in the jungle"
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
   /{visual_id}/create:
     post:
       tags:
@@ -597,7 +648,7 @@ paths:
           schema:
             type: string
             example: "8487fb411f3c6716"
-          description: visual id  of the image from which the user wishes to remove the background
+          description: visual id of the image from which the user wishes to remove the background
         - in: query
           name: visual_url
           required: false

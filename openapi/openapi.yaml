@@ -659,7 +659,7 @@ paths:
               properties:
                 visual_url:
                   type: string
-                  description: URL of the new image the user has created from the original image, using the */create* route
+                  description: URL of the new image the user has created from the original image, using any other route
       responses:
         '200':
           description: Successful operation.
@@ -869,18 +869,15 @@ paths:
           schema:
             type: string
           description: visual id of the image the user wants to create a new video from
-        - in: query
-          name: visual_url
-          required: false
-          schema:
-            type: string
-          description: URL of the new image the user has created from the original image, using the */create* route
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
+                visual_url:
+                  type: string
+                  description: URL of the new image the user has created from the original image, using any other route
                 changes:
                   type: array
                   description: The requested change to the selected visual or object.

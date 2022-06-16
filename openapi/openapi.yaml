@@ -651,12 +651,15 @@ paths:
             type: string
             example: "8487fb411f3c6716"
           description: visual id of the image from which the user wishes to remove the background
-        - in: query
-          name: visual_url
-          required: false
-          schema:
-            type: string
-          description: URL of the new image the user has created from the original image, using the */create* route
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                visual_url:
+                  type: string
+                  description: URL of the new image the user has created from the original image, using the */create* route
       responses:
         '200':
           description: Successful operation.

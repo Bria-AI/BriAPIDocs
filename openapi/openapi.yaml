@@ -37,7 +37,7 @@ info:
     # Versioning
 
 
-    The current version of the web API is known as V2 and is considered to be in
+    The current version of the web API is known as V1 and is considered to be in
     a draft phase. While we don’t expect public endpoints to materially change,
     please bear in mind that the API is still under development.
 

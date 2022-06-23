@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: The Bria API
-  version: '2'
+  version: '1'
   description: >
     # Introduction
     
@@ -1011,4 +1011,4 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
 servers:
-  - url: http://bria-api.com:5000/v2
+  - url: https://engine.prod.bria-api.com/v1

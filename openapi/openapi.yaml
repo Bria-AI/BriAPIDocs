@@ -46,7 +46,7 @@ info:
 
       The Bria API consists of a number of methods for uploading and creating new visual assets. The REST (representational state transfer) API methods can be called directly from within your own custom code.
 
-        curl --location --request POST 'http://bria-api.com:5000/v2' \
+        curl --location --request POST 'https://engine.prod.bria-api.com/v1' \
         --header: 'api_token: <...>' \
         --header: 'api_secret: <...>' \
         ...

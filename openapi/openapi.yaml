@@ -13,17 +13,17 @@ info:
 
 
     **The common use of the Bria API is according to the following order:**
-      - /upload (Coming Soon) - By using the *Upload Route*, you can to upload a new image to Bria database.
-      - /register (Coming Soon) - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
+      - /upload - By using the *Upload Route*, you can to upload a new image to Bria database.
+      - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
       - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image.
-      - /caption (Coming Soon) - By using the *Caption Route*, you can get a caption that describes the given image.
+      - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
 
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /video - Using the *Video Route* to make a short video based on a single still image.
-      - /search - (Coming Soon) Utilizing the *Search Route* to look for images you uploaded to Bria that match a text query.
-      - /search_on_image - (Coming Soon) Utilizing the *Search On Image Route* to look for images you uploaded to Bria that match another image you uploaded to Bria.
+      - /search - Utilizing the *Search Route* to look for images you uploaded to Bria that match a text query.
+      - /search_on_image - Utilizing the *Search On Image Route* to look for images you uploaded to Bria that match another image you uploaded to Bria.
 
       
     With the response from the *Info Route*, the following route can be used without any particular order:
@@ -64,7 +64,7 @@ paths:
   /upload:
     post:
       tags:
-        - upload (Coming Soon)
+        - upload
       summary: Upload a file
       description: >-
 
@@ -176,7 +176,7 @@ paths:
   /register:
     post:
       tags:
-        - register (Coming Soon)
+        - register
       summary: Register an image
       description: >-
 
@@ -436,7 +436,7 @@ paths:
   /{visual_id}/caption:
     get:
       tags:
-        - caption (Coming Soon)
+        - caption
       summary: Get a caption that describes the image
       description: >-
 
@@ -686,7 +686,7 @@ paths:
   /search:
     get:
       tags:
-        - search (Coming Soon)
+        - search
       summary: Search for images matching the given text query
       description: >-
 
@@ -764,7 +764,7 @@ paths:
   /search_on_image:
     get:
       tags:
-        - search_on_image (Coming Soon)
+        - search_on_image
       summary: Search for images matching the given image
       description: >-
 

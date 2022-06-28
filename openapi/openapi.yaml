@@ -653,7 +653,7 @@ paths:
           description: visual id of the image from which the user wishes to remove the background
         - in: query
           name: visual_url
-          required: true
+          required: false
           schema:
             type: string
           description: URL of the new image the user has created from the original image, using any other route

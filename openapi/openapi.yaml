@@ -622,7 +622,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
 
   /{visual_id}/remove_bg:
-    post:
+    get:
       tags:
         - remove_bg
       summary: Remove the background of an image

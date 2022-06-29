@@ -349,79 +349,54 @@ paths:
                               example: ["mid-20", "mid-40", "mid-60"]
                               items:
                                 type: string
-                                enum: ["mid-20", "mid-40", "mid-60"]
                             diversity:
                               type: array
                               description: The available diversity changes for this object. 
                               example: ["africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil"]
                               items:
                                 type: string
-                                enum:
-                                  - africa
-                                  - korea
-                                  - india
-                                  - japan
-                                  - sweden
-                                  - germany
-                                  - russia
-                                  - mexico
-                                  - brazil
-                                  - england
-                                  - spain
-                                  - france
                             expression:
                               type: array
                               description: The available expression changes for this object. 
-                              example: ["happy", "calm", "surprised", "dreaming", "angry"]
+                              example: ["happy", "calm", "surprised", "dreaming", "angry","fear", "contempt", "disgusted", "sad"]
                               items:
                                 type: string
-                                enum:
-                                  - happy
-                                  - calm
-                                  - dreaming
-                                  - angry
                             glasses:
                               type: array
                               description: The available glasses changes for this object.
                               example: ["light", "heavy", "none"]
                               items:
                                 type: string
-                                enum: ["light", "heavy", "none"]
                             haircolor:
                               type: array
                               description: The available hair color changes for this object.
                               example: ["black", "brown", "red", "blond", "gray"]
                               items:
                                 type: string
-                                enum: ["black", "brown", "red", "blond", "gray"]
                             gender:
                               type: array
                               description: The available gender changes for this object.
                               example: ["femininity","masculinity"]
                               items:
                                 type: string
-                                enum: ["femininity","masculinity"]
                             makeup:
                               type: array
                               description: The available makeup changes for this object.
                               example: ["light", "heavy", "none"]
                               items:
                                 type: string
-                                enum: ["light", "heavy", "none"]
                             hair_line:
                               type: array
                               description: The available hair line changes for this object.
                               example: ["high", "low"]
                               items:
                                 type: string
-                                enum: ["high", "low"]
                             beard:
                               type: array
                               description: The available facial hair changes for this object.
                               example: ["shaved", "medium", "full"]
                               items:
                                 type: string
-                                enum: ["shaved", "medium", "full"]
         '400':
           description: One of the details does not meet specification. Please call /info again.
         '404':
@@ -562,6 +537,10 @@ paths:
                               - calm
                               - dreaming
                               - angry
+                              - fear
+                              - contempt
+                              - disgusted
+                              - sad
                             description: Changing the expression of a selected object.
                             example: "happy"
                           glasses:

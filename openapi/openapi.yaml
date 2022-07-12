@@ -233,7 +233,7 @@ paths:
         **Constraints**
 
 
-        Bria API currently only supports JPEG files, which are larger than 12MB. 
+        Bria API currently only supports JPEG files, which are not larger than 12MB. 
         
       operationId: register
       requestBody:

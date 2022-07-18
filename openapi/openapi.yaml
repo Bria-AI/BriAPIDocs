@@ -239,7 +239,7 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          text/plain:
             schema:
               type: object
               properties:

@@ -241,7 +241,7 @@ paths:
         content:
           text/plain:
             schema:
-              type: object
+              type: data-raw
               properties:
                 org_image_key:
                   type: string

@@ -239,9 +239,9 @@ paths:
       requestBody:
         required: true
         content:
-          text/plain:
+          multipart/form-data:
             schema:
-              type: data-raw
+              type: object
               properties:
                 org_image_key:
                   type: string

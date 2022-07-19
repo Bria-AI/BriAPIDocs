@@ -137,6 +137,9 @@ paths:
                   description: The file you would like to upload to Bria.
                   type: string
                   format: binary
+                image_url:
+                  description: The URL of the file you would like to upload to Bria. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
+                  type: string
       responses:
         '200':
           description: Successful operation.
@@ -247,6 +250,9 @@ paths:
                   type: string
                   description: The internal image id in your API, of the image you would like to register to Bria (without uploading it).
                   example: "12345acbd"
+                image_url:
+                  description: The URL of the image you would like to register to Bria. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url.
+                  type: string
       responses:
         '200':
           description: Successful operation.

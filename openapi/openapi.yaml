@@ -48,7 +48,6 @@ info:
 
         curl --location --request POST 'https://engine.prod.bria-api.com/v1' \
         --header: 'api_token: <...>' \
-        --header: 'api_secret: <...>' \
         ...
         
         

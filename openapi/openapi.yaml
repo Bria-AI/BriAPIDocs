@@ -412,13 +412,13 @@ paths:
                              "heavy",
                              "none"
                           ]
-                          }
-                        id: a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b
+                          },
+                        id: a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b,
                         labels:
                           [
                             "age_23-35",
                             "calm"
-                          ]
+                          ],
                         oracle:
                           {
                             "age":{
@@ -463,7 +463,7 @@ paths:
                             "haircolor":{
                                "haircolor":"high"
                             }
-                         }
+                         },
                         type: person
                       },
                       {
@@ -472,13 +472,13 @@ paths:
                             "remove":[
                                true
                             ]
-                          }
-                        id: 26bf1a1e6b7c5a802b804a52be420a14e44c7d4a393d695afb9d58c9f869cac3
-                        labels: null
+                          },
+                        id: 26bf1a1e6b7c5a802b804a52be420a14e44c7d4a393d695afb9d58c9f869cac3,
+                        labels: null,
                         oracle:
                           {
                             "remove":true
-                          }
+                          },
                         type: background
                                       }
                     ]

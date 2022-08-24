@@ -323,85 +323,165 @@ paths:
                   description:
                     type: string
                     description: (Coming Soon) A brief description of the visual
-                    example: "Coming Soon"
                   scene:
                     type: array
                     description: An array of objects representing each of the objects recognized in the visual.
                     items:
                       type: object
                       properties:
+                        actions:
+                          type: object
+                          description: The available API actions for this specific object, based directly on its type and specificity
                         id:
                           type: string
                           description: The id of the object
-                          example: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
+                        labels:
+                          type: array
+                          description: The known information about the object, such as age range and gender
+                        oracle:
+                          type: string
+                          description: The predicted quality of the available actions for this specific object
                         type:
                           type: string
                           description: The type of the object 
-                          example: "person"
+              examples:
+                example:
+                  value:
+                    description: Coming Soon
+                    scene: [
+                      {
+                        actions: 
+                          {
+                          "age":[
+                             "mid-20",
+                             "mid-40",
+                             "mid-60"
+                          ],
+                          "beard":[
+                             "shaved",
+                             "medium",
+                             "full"
+                          ],
+                          "diversity":[
+                             "africa",
+                             "korea",
+                             "india",
+                             "japan",
+                             "sweden",
+                             "germany",
+                             "russia",
+                             "mexico",
+                             "brazil",
+                             "england",
+                             "spain",
+                             "france"
+                          ],
+                          "expression":[
+                             "happy",
+                             "calm",
+                             "surprised",
+                             "dreaming",
+                             "angry",
+                             "fear",
+                             "contempt",
+                             "disgusted",
+                             "sad"
+                          ],
+                          "gender":[
+                             "femininity",
+                             "masculinity"
+                          ],
+                          "glasses":[
+                             "light",
+                             "none",
+                             "heavy"
+                          ],
+                          "hair_line":[
+                             "high",
+                             "low"
+                          ],
+                          "haircolor":[
+                             "black",
+                             "brown",
+                             "red",
+                             "blond",
+                             "gray"
+                          ],
+                          "makeup":[
+                             "light",
+                             "heavy",
+                             "none"
+                          ]
+                          }
+                        id: a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b
                         labels:
-                          type: array
-                          description: The known information about the object, such as age range and gender.
-                          example: ["age_22-34", "calm", "Male"]
-                          items:
-                            type: string
+                          [
+                            "age_23-35",
+                            "calm"
+                          ]
+                        oracle:
+                          {
+                            "age":{
+                               "age":"high"
+                            },
+                            "beard":{
+                               "beard":"high"
+                            },
+                            "diversity":{
+                               "africa":"high",
+                               "brazil":"high",
+                               "england":"high",
+                               "france":"high",
+                               "germany":"high",
+                               "india":"high",
+                               "japan":"high",
+                               "korea":"high",
+                               "mexico":"high",
+                               "russia":"high",
+                               "spain":"high",
+                               "sweden":"high"
+                            },
+                            "expression":{
+                               "angry":"high",
+                               "calm":"high",
+                               "contempt":"high",
+                               "disgusted":"high",
+                               "dreaming":"high",
+                               "fear":"high",
+                               "happy":"high",
+                               "surprised":"high"
+                            },
+                            "gender":{
+                               "gender":"high"
+                            },
+                            "glasses":{
+                               "glasses":"high"
+                            },
+                            "hair_line":{
+                               "hair_line":"high"
+                            },
+                            "haircolor":{
+                               "haircolor":"high"
+                            }
+                         }
+                        type: person
+                      },
+                      {
                         actions:
-                          type: object
-                          description: The available changes for the /create route for this specific object, based directly on its type and specificity.
-                          properties:
-                            age:
-                              type: array
-                              description: The available age changes for this object. 
-                              example: ["mid-20", "mid-40", "mid-60"]
-                              items:
-                                type: string
-                            diversity:
-                              type: array
-                              description: The available diversity changes for this object. 
-                              example: ["africa", "korea", "india", "japan", "sweden", "germany", "russia", "mexico", "brazil"]
-                              items:
-                                type: string
-                            expression:
-                              type: array
-                              description: The available expression changes for this object. 
-                              example: ["happy", "calm", "surprised", "dreaming", "angry","fear", "contempt", "disgusted", "sad"]
-                              items:
-                                type: string
-                            glasses:
-                              type: array
-                              description: The available glasses changes for this object.
-                              example: ["light", "heavy", "none"]
-                              items:
-                                type: string
-                            haircolor:
-                              type: array
-                              description: The available hair color changes for this object.
-                              example: ["black", "brown", "red", "blond", "gray"]
-                              items:
-                                type: string
-                            gender:
-                              type: array
-                              description: The available gender changes for this object.
-                              example: ["femininity","masculinity"]
-                              items:
-                                type: string
-                            makeup:
-                              type: array
-                              description: The available makeup changes for this object.
-                              example: ["light", "heavy", "none"]
-                              items:
-                                type: string
-                            hair_line:
-                              type: array
-                              description: The available hair line changes for this object.
-                              example: ["high", "low"]
-                              items:
-                                type: string
-                            beard:
-                              type: array
-                              description: The available facial hair changes for this object.
-                              example: ["shaved", "medium", "full"]
-                              items:
-                                type: string
+                          {
+                            "remove":[
+                               true
+                            ]
+                          }
+                        id: 26bf1a1e6b7c5a802b804a52be420a14e44c7d4a393d695afb9d58c9f869cac3
+                        labels: null
+                        oracle:
+                          {
+                            "remove":true
+                          }
+                        type: background
+                                      }
+                    ]
         '400':
           description: One of the details does not meet specification. Please call /info again.
         '404':

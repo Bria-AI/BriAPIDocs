@@ -339,7 +339,7 @@ paths:
                           type: array
                           description: The known information about the object, such as age range and gender
                         oracle:
-                          type: string
+                          type: object
                           description: The predicted quality of the available actions for this specific object
                         type:
                           type: string

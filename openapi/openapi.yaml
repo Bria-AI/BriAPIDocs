@@ -110,7 +110,7 @@ paths:
                   images_paths:
                     type: array
                     description: The array contains the URLs of all the generated images.
-                    Example: ["https://bria-temp.s3.amazonaws.com/api/generate_image/A_digital_illustration_of_a_steampunk_library_with_clockwork_machines_4k_detailed_trending_in_artstation_fantasy_vivid_colors_seed_6960420665443975977/stable_diffusion/bc16c77c-3281-11ed-a6f0-0242ac110002.png?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=5QhlEoxe%2B6ZbakivISZVIrB6hsY%3D&Expires=1663840830"]
+                    example: ["https://bria-temp.s3.amazonaws.com/api/generate_image/A_digital_illustration_of_a_steampunk_library_with_clockwork_machines_4k_detailed_trending_in_artstation_fantasy_vivid_colors_seed_6960420665443975977/stable_diffusion/bc16c77c-3281-11ed-a6f0-0242ac110002.png?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=5QhlEoxe%2B6ZbakivISZVIrB6hsY%3D&Expires=1663840830"]
         '400':
           description: Bad request.
         '405':

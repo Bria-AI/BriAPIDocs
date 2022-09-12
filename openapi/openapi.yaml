@@ -762,9 +762,7 @@ paths:
         
         
         The *Replace BG Route* will return the URL for accessing the updated image.
-        
-
-      operationId: replace_bg          
+          
   /search:
     get:
       tags:

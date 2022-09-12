@@ -22,7 +22,7 @@ info:
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
-      - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image.
+      - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image with a generated image.
       - /video - Using the *Video Route* to make a short video based on a single still image.
       - /search - Utilizing the *Search Route* to look for images you uploaded to Bria that match a text query.
       - /search_on_image - Utilizing the *Search On Image Route* to look for images you uploaded to Bria that match another image you uploaded to Bria.
@@ -815,7 +815,7 @@ paths:
 
 
 
-        The *Replace BG Route* is used to replace the background of a previously uploaded image. 
+        The *Replace BG Route* is used to replace the background of a previously uploaded image, with a generated background.
         
         
         This route can also be used on an image that has been changed by the user using the /create route.
@@ -844,9 +844,9 @@ paths:
             schema:
               type: object
               properties:
-                bg_url:
+                bg_prompt:
                   type: string
-                  description: The URL of the image the user wants to replace the background with. 
+                  description: Text from which you wish to generate the new background
       responses:
         '200':
           description: Successful operation.

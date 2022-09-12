@@ -17,10 +17,12 @@ info:
       - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
       - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image.
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
+      - /generate_img_from_txt - (Coming Soon) Using the *Generate Img From Txt* to generate a completely new visual without the need to upload a seed image.
 
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
+      - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image.
       - /video - Using the *Video Route* to make a short video based on a single still image.
       - /search - Utilizing the *Search Route* to look for images you uploaded to Bria that match a text query.
       - /search_on_image - Utilizing the *Search On Image Route* to look for images you uploaded to Bria that match another image you uploaded to Bria.
@@ -29,9 +31,6 @@ info:
     With the response from the *Info Route*, the following route can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
         
-    The following route can be used at any moment:
-      - /generate - (Coming Soon) Using the *Generate Route* to generate a completely new visual without the need to upload a seed image.
-      
       
       
     # Versioning
@@ -744,6 +743,28 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
           
+  /{visual_id}/replace_bg:
+    get:
+      tags:
+        - replace_bg (Coming Soon)
+      summary: Replace the background of an image
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Replace BG Route* is used to replace the background of a previously uploaded image. 
+        
+        
+        This route can also be used on an image that has been changed by the user using the /create route.
+        
+        
+        The *Replace BG Route* will return the URL for accessing the updated image.
+        
+
+      operationId: replace_bg          
   /search:
     get:
       tags:

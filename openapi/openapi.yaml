@@ -88,13 +88,14 @@ paths:
                   type: string
                   description: Text from which you wish to generate images
                 num_results:
-                  type: int
-                  limit: 6
+                  type: integer
+                  maximum: 6
                   default: 4
                   description: The number of images you would like generated from the provided text
                 seed:
                   type: string
-                  description: Text from which you wish to generate imagesn
+                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same results again in the future by choosing a value between 1 and 2,147,483,647, and choosing the same value the next time. You can exclude this parameter if you are not interested in recreating your results.
+                  default: -1
       responses:
         '200':
           description: Successful operation.

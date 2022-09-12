@@ -17,7 +17,7 @@ info:
       - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
       - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image.
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
-      - /generate_img_from_txt - (Coming Soon) Using the *Generate Img From Txt* to generate a completely new visual without the need to upload a seed image.
+      - /generate_img_from_txt - (Coming Soon) Using the *Generate Img From Txt* to generate a completely new visual, based on any input text.
 
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
@@ -59,6 +59,72 @@ info:
 
             
 paths:
+  /generate_img_from_txt:
+    get:
+      tags:
+        - generate_img_from_txt (Coming Soon)
+      summary: Generate an image based on any text you choose.
+      description: >-
+
+
+
+        **Description**
+
+
+        The *Generate Img From Txt Route* is used to generate a completely new visual, based on any input text
+
+
+       
+
+
+      operationId: generate_img_from_txt
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: Text from which you wish to generate images
+                num_results:
+                  type: int
+                  limit: 6
+                  default: 4
+                  description: The number of images you would like generated from the provided text
+                seed:
+                  type: string
+                  description: Text from which you wish to generate imagesn
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. For each image, the object contains the match score and the vhash (same as visual_id). The images in the array are sorted by the match score, from highest match to lowest match. If the spesified batch (=page) is empty, the results array will be empty.
+                    items:
+                      type: object
+                      properties:
+                        score:
+                          type: number
+                          description: a score of how well the image matches the text query.
+                          example: 0.27
+                        vhash:
+                          type: string
+                          description: visual id of the image, documented in Bria.
+                          example: "a169a6862f24de75"
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API. 
   /upload:
     post:
       tags:

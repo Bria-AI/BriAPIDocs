@@ -762,6 +762,54 @@ paths:
         
         
         The *Replace BG Route* will return the URL for accessing the updated image.
+      
+      operationId: replace_bg
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image for which the user wishes to replace the background
+        - in: query
+          name: visual_url
+          required: false
+          schema:
+            type: string
+          description: URL of the new image the user has created from the original image, using any other route. This parameter is optional.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bg_url:
+                  type: string
+                  description: The URL of the image the user wants to replace the background with. 
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_res:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+          
           
   /search:
     get:

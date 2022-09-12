@@ -87,11 +87,13 @@ paths:
                 prompt:
                   type: string
                   description: Text from which you wish to generate images
+                  example: "A digital illustration of a steampunk library with clockwork machines, 4k, detailed, trending in artstation, fantasy vivid colors"
                 num_results:
                   type: integer
                   minimum: 1
                   maximum: 6
                   default: 4
+                  example: 1
                   description: The number of images you would like generated from the provided text
                 seed:
                   type: string
@@ -105,20 +107,10 @@ paths:
               schema:
                 type: object
                 properties:
-                  results:
+                  images_paths:
                     type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. For each image, the object contains the match score and the vhash (same as visual_id). The images in the array are sorted by the match score, from highest match to lowest match. If the spesified batch (=page) is empty, the results array will be empty.
-                    items:
-                      type: object
-                      properties:
-                        score:
-                          type: number
-                          description: a score of how well the image matches the text query.
-                          example: 0.27
-                        vhash:
-                          type: string
-                          description: visual id of the image, documented in Bria.
-                          example: "a169a6862f24de75"
+                    description: The array contains the URLs of all the generated images.
+                    Example: ["https://bria-temp.s3.amazonaws.com/api/generate_image/A_digital_illustration_of_a_steampunk_library_with_clockwork_machines_4k_detailed_trending_in_artstation_fantasy_vivid_colors_seed_6960420665443975977/stable_diffusion/bc16c77c-3281-11ed-a6f0-0242ac110002.png?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=5QhlEoxe%2B6ZbakivISZVIrB6hsY%3D&Expires=1663840830"]
         '400':
           description: Bad request.
         '405':

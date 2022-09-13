@@ -356,7 +356,7 @@ paths:
     post:
       tags:
         - add_labels
-      summary: Connect new labels to an image that was already uploaded or registered.
+      summary: Connect new labels to an image.
       description: >-
 
         **Description**
@@ -403,7 +403,7 @@ paths:
     post:
       tags:
         - delete_labels
-      summary: Delete labels from an image that was already uploaded or registered.
+      summary: Delete labels from an image.
       description: >-
 
         **Description**

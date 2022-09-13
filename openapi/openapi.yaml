@@ -23,9 +23,11 @@ info:
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image with a generated image.
-      - /video - Using the *Video Route* to make a short video based on a single still image.
-      - /search - Utilizing the *Search Route* to look for images you uploaded to Bria that match a text query.
-      - /search_on_image - Utilizing the *Search On Image Route* to look for images you uploaded to Bria that match another image you uploaded to Bria.
+      - /video - Using the *Video Route* to create a short video based on a single still image.
+      - /add_labels - Using the *Add Labels* to connect new labels to an image that was already uploaded or registered.
+      - /delete_labels - Using the *Delete Labels* to delete labels you have connected to an image that was already uploaded or registered.
+      - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. Any labels you've added to images can also be included in the text query.
+      - /search_on_image - Utilizing the *Search On Image Route* to look for images you uploaded or registered to Bria that match another image you uploaded or registered to Bria.
 
       
     With the response from the *Info Route*, the following route can be used without any particular order:
@@ -129,7 +131,9 @@ paths:
         **Description**
 
 
-        The *Upload Route* is used to upload visuals to the database.
+        The *Upload Route* is used to upload visuals to the database. 
+        
+        You can upload the visual with any labels you would like, and those labels can be used as part of the /search route.
 
 
         This route returns a visual identification to the user. It's
@@ -198,6 +202,9 @@ paths:
                 image_url:
                   description: The URL of the file you would like to upload to Bria. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
                   type: string
+                labels:
+                  description: For any file, you can connect a list of labels. In the /search route, these labels can be used.
+                  type: array
       responses:
         '200':
           description: Successful operation.
@@ -244,8 +251,9 @@ paths:
         **Description**
 
 
-        A new image can be registered to Bria without being uploaded to the database using the *Register Route*.
+        A new visual can be registered to Bria without being uploaded to the database using the *Register Route*.
         
+        You can register the visual with any labels you would like, and those labels can be used as part of the /search route.
 
         This route returns a visual identification to the user. 
         
@@ -311,6 +319,9 @@ paths:
                 image_url:
                   description: The URL of the image you would like to register to Bria. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url.
                   type: string
+                labels:
+                  description: For any image, you can connect a list of labels. In the /search route, these labels can be used.
+                  type: array
       responses:
         '200':
           description: Successful operation.
@@ -334,6 +345,99 @@ paths:
                     description: Unique visual identification
         '400':
           description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.          
+          
+  /{visual_id}/add_labels:
+    post:
+      tags:
+        - add_labels
+      summary: Connect new labels to an image that was already uploaded or registered.
+      description: >-
+
+        **Description**
+
+
+        Labels can be added to images that have already been uploaded or registered. 
+        
+        The /search route can include labels you have added to images as part of the text query.
+        
+       
+      operationId: add_labels
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "8487fb411f3c6716"
+          description: visual id of the image, to which you would like to connect new labels.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labels:
+                  description: The list of labels you would like to connect to the selected image. In the /search route, these labels can be used.
+                  type: array
+      responses:
+        '200':
+          description: Successful operation.
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.          
+  /{visual_id}/delete_labels:
+    post:
+      tags:
+        - delete_labels
+      summary: Delete labels from an image that was already uploaded or registered.
+      description: >-
+
+        **Description**
+
+
+        Labels can be deleted from images that have already been uploaded or registered. 
+       
+       
+      operationId: delete_labels
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "8487fb411f3c6716"
+          description: visual id of the image, from which you would like to delete labels.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                labels:
+                  description: The list of labels you would like to delete from the selected image. 
+                  type: array
+      responses:
+        '200':
+          description: Successful operation.
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
         '405':
           description: Method not allowed.
         '500':
@@ -885,6 +989,7 @@ paths:
 
         By using the *Search Route*, you can send a text query and receive relevant images that match the query.
         
+        Any labels you've added to images can also be included in the text query.
         
         The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
        

@@ -987,12 +987,18 @@ paths:
 
 
 
-        By using the *Search Route*, you can send a text query and receive relevant images that match the query.
+        By using the *Search Route*, you can utilize Bria's generative search capabilities, which don't require labels or keywords.
         
-        Any labels you've added to images can also be included in the text query.
+        
+        The user can send any text query and receive relevant images that match the query.
+        
+        
+        It is possible if needed, to connect labels to images when uploading or registering them, and as well by using the /add_labels route.
+        
+        Any labels you've added to images can also be included in the text query as part of the *Search Route*.
+        
         
         The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
-       
         
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
         

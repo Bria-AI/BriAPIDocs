@@ -62,7 +62,7 @@ info:
             
 paths:
   /generate_img_from_txt:
-    post:
+    get:
       tags:
         - generate_img_from_txt (Coming Soon)
       summary: Generate an image based on any text you choose.
@@ -908,7 +908,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
           
   /{visual_id}/replace_bg:
-    post:
+    get:
       tags:
         - replace_bg (Coming Soon)
       summary: Replace the background of an image

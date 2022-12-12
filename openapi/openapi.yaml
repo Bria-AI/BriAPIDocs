@@ -1090,24 +1090,27 @@ paths:
             type: string
           description: the text query for which the user is looking for matching images.
           example: "woman traveling in the world"
-        - name: num_results_per_page
-          in: query
-          schema:
-            type: integer
-          description: how many images you would like to receive in the current call. The default value is 50.
-          example: 1
-        - name: page
-          in: query
-          schema:
-            type: integer          
-          description: which batch of images you would like to receive in the current call. The default value is 1.
-          example: 1
-        - name: embedding_name
-          in: query
-          schema:
-            type: string
-          description: Bria will provide you with this parameter which represents your account's image gallery.
-          example: "your_embedding_name"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                num_results_per_page:
+                  type: integer
+                  default: 50
+                  maximum: 500
+                  example: 1
+                  description: how many images you would like to receive in the current call.
+                page:
+                  type: integer
+                  default: 1
+                  description: which batch of images you would like to receive in the current call.
+                  example: 1
+                gallery_id:
+                  type: string
+                  description: Bria will provide you with this parameter which represents your account's image gallery.
+                  example: "123abc"
       responses:
         '200':
           description: Successful operation.
@@ -1118,20 +1121,18 @@ paths:
                 properties:
                   results:
                     type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. For each image, the object contains the match score and the vhash (same as visual_id). The images in the array are sorted by the match score, from highest match to lowest match. If the spesified batch (=page) is empty, the results array will be empty.
+                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. The images in the array are sorted by the similarity score, from the highest to the lowest. If the specified batch (=page) is empty, the results array will be empty.
                     items:
                       type: object
                       properties:
-                        score:
-                          type: number
-                          description: a score of how well the image matches the text query.
-                          example: 0.27
-                        vhash:
+                        visual_id:
                           type: string
                           description: visual id of the image, documented in Bria.
                           example: "a169a6862f24de75"
         '400':
           description: Bad request.
+        '404':
+          description: Specified Image does not exist.
         '405':
           description: Method not allowed.
         '500':
@@ -1142,7 +1143,7 @@ paths:
   /search_similar_images:
     get:
       tags:
-        - search_on_image
+        - search_similar_images
       summary: Search for images matching the given image
       description: >-
 
@@ -1151,41 +1152,48 @@ paths:
 
 
 
-        By using the *Search On Image Route*, you can send an image as a query and receive relevant images that match the image.
+        By using the *Search Similar Images Route*, you can send an image as a query and receive relevant images that are similar.
         
         
-        The *Search On Image Route* returns the images, sorted by the match score, from highest match to lowest match.
+        The *Search Similar Images Route* returns the images, sorted by the similarity score, from the highest to the lowest.
        
         
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
         
 
-      operationId: search_on_image
+      operationId: search_similar_images
       parameters:
-        - name: vhash
-          in: query
+        - name: visual_id
+          in: path
           schema:
             type: string
-          description: the vhash (visual_id) of the image for which the user is looking for matching images.
+          description: the visual id of the image for which the user is looking for similar images.
           example: "e01592ef1188df76"
-        - name: num_results_per_page
-          in: query
-          schema:
-            type: integer
-          description: how many images you would like to receive in the current call. The default value is 50.
-          example: 1
-        - name: page
-          in: query
-          schema:
-            type: integer          
-          description: which batch of images you would like to receive in the current call. The default value is 1.
-          example: 1
-        - name: embedding_name
-          in: query
-          schema:
-            type: string
-          description: Bria will provide you with this parameter which represents your account's image gallery.
-          example: "your_embedding_name"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                num_results_per_page:
+                  type: integer
+                  default: 50
+                  maximum: 500
+                  example: 1
+                  description: how many images you would like to receive in the current call.
+                page:
+                  type: integer
+                  default: 1
+                  description: which batch of images you would like to receive in the current call.
+                  example: 1
+                gallery_id:
+                  type: string
+                  description: Bria will provide you with this parameter which represents your account's image gallery.
+                  example: "123abc"
+                url:
+                  type: string
+                  description: URL of an image, for which you would like to find similar images. When you want to search based on modified images, or images that have not been uploaded or registered to Bria, you can use this parameter. When this parameter is provided, the visual_id parameter can be None. 
+                  example: "123abc"
       responses:
         '200':
           description: Successful operation.
@@ -1196,20 +1204,18 @@ paths:
                 properties:
                   results:
                     type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. For each image, the object contains the match score and the vhash (same as visual_id). The images in the array are sorted by the match score, from highest match to lowest match. If the specified batch (=page) is empty or the vhash in the request doesn't exist, the results array will be empty.
+                    description: there are multiple objects in this array (based on the amount specified in num_results_per_page) and each object represents a single image. The images in the array are sorted by the similarity score, from the highest to the lowest. If the specified batch (=page) is empty, the results array will be empty.
                     items:
                       type: object
                       properties:
-                        score:
-                          type: number
-                          description: a score of how well the image in the result matches the requested image.
-                          example: 0.27
-                        vhash:
+                        visual_id:
                           type: string
                           description: visual id of the image, documented in Bria.
                           example: "a169a6862f24de75"
         '400':
           description: Bad request.
+        '404':
+          description: Specified Image does not exist.
         '405':
           description: Method not allowed.
         '500':

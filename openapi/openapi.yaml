@@ -1036,6 +1036,8 @@ paths:
                 properties:
                   result:
                     type: array
+                    items:
+                      type: array
                     description: The array contains the results created in the request. In each result, the first value represents the URL of the result, and the second value represents the seed. You can recreate the same results again in the future by using the seed as part of the request.
               examples:
                 example:

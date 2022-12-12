@@ -896,6 +896,13 @@ paths:
             type: string
             example: "8487fb411f3c6716"
           description: visual id of the image from which the user wishes to remove the background
+        - in: query
+          name: desired_resultion
+          schema:
+            type: string
+            enum: ['nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
+            example: "nhd"
+          description: the desired resulution of the updated image. This field is optional.
       responses:
         '200':
           description: Successful operation.

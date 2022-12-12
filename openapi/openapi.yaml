@@ -208,8 +208,10 @@ paths:
                   type: string
                   default: true
                 labels:
-                  description: For any file, you can connect a list of labels. In the /search route, these labels can be used.
+                  description: For any file, you can connect a list of labels. These labels can be used in the /search route.
                   type: array
+                  items:
+                    type: string
                 
       responses:
         '200':

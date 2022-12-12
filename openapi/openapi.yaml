@@ -21,17 +21,18 @@ info:
 
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
-      - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
-      - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image with a generated image.
-      - /video - Using the *Video Route* to create a short video based on a single still image.
+      - /video - (Coming Soon) Using the *Video Route* to create a short video based on a single still image.
       - /add_labels - Using the *Add Labels* to connect new labels to an image that was already uploaded or registered.
       - /delete_labels - Using the *Delete Labels* to delete labels you have connected to an image that was already uploaded or registered.
       - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. Any labels you've added to images can also be included in the text query.
-      - /search_on_image - Utilizing the *Search On Image Route* to look for images you uploaded or registered to Bria that match another image you uploaded or registered to Bria.
+      - /search_similar_images - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
 
       
     With the response from the *Info Route*, the following route can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
+      - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
+      - /blur_bg - Using the *Blur BG Route* to create a blur effect on the background of a stil image.
+      - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image with a generated image.
         
       
       
@@ -202,9 +203,14 @@ paths:
                 image_url:
                   description: The URL of the file you would like to upload to Bria. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
                   type: string
+                is_private:   
+                  description: The image can be included in the Bria public gallery (is_private=False) or only in the Bria gallery of your organization (is_private=True).
+                  type: string
+                  default: True
                 labels:
                   description: For any file, you can connect a list of labels. In the /search route, these labels can be used.
                   type: array
+                
       responses:
         '200':
           description: Successful operation.

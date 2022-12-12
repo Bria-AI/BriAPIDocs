@@ -948,7 +948,7 @@ paths:
           schema:
             type: string
             example: "8487fb411f3c6716"
-          description: visual id of the image for which the user wishes to blur the background
+          description: visual id of the image for which the background should be blurred.
       responses:
         '200':
           description: Successful operation.

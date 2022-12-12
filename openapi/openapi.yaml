@@ -1040,6 +1040,7 @@ paths:
               examples:
                 example:
                   value:
+                    result: {
                       [
                         [
                             "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_1.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=shkYBjQZcAGXdlluZrPD%2BpHlQ7k%3D&Expires=1671622039",
@@ -1056,7 +1057,7 @@ paths:
                         [
                             "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_4.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=0Ml%2BJw3PSaow7ZEQpDKPu63ej08%3D&Expires=1671622039",
                             4
-                        ]
+                        ]}
         '400':
           description: Bad request.
         '404':

@@ -1026,7 +1026,6 @@ paths:
                   type: integer
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results.
       responses:
-      responses:
         '200':
           description: Successful operation.
           content:

@@ -1037,24 +1037,24 @@ paths:
                   result:
                     type: array
                     description: The array contains the results created in the request. In each result, the first value represents the URL of the result, and the second value represents the seed. You can recreate the same results again in the future by using the seed as part of the request.
-                    example: [
-        [
-            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_1.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=shkYBjQZcAGXdlluZrPD%2BpHlQ7k%3D&Expires=1671622039",
-            1
-        ],
-        [
-            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_2.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=MEg7syN2yWhiQov04ewdBDRmuXI%3D&Expires=1671622039",
-            2
-        ],
-        [
-            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_3.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=uFHD148AfYZDSWRRWhuUBbNVJQI%3D&Expires=1671622039",
-            3
-        ],
-        [
-            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_4.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=0Ml%2BJw3PSaow7ZEQpDKPu63ej08%3D&Expires=1671622039",
-            4
-        ]
-                        
+                    example: 
+                      [
+                        [
+                            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_1.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=shkYBjQZcAGXdlluZrPD%2BpHlQ7k%3D&Expires=1671622039",
+                            1
+                        ],
+                        [
+                            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_2.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=MEg7syN2yWhiQov04ewdBDRmuXI%3D&Expires=1671622039",
+                            2
+                        ],
+                        [
+                            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_3.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=uFHD148AfYZDSWRRWhuUBbNVJQI%3D&Expires=1671622039",
+                            3
+                        ],
+                        [
+                            "https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_4.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=0Ml%2BJw3PSaow7ZEQpDKPu63ej08%3D&Expires=1671622039",
+                            4
+                        ]
         '400':
           description: Bad request.
         '404':

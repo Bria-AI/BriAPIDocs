@@ -1,6 +1,7 @@
 openapi: 3.0.0
 info:
   title: The Bria API
+  version: 2
   description: >
     # Introduction
     

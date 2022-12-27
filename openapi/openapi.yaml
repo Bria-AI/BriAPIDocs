@@ -559,7 +559,6 @@ paths:
                           ],
                           "expression":[
                              "happy",
-                             "calm",
                              "surprised",
                              "dreaming",
                              "angry",
@@ -624,7 +623,6 @@ paths:
                             },
                             "expression":{
                                "angry":"high",
-                               "calm":"high",
                                "contempt":"high",
                                "disgusted":"high",
                                "dreaming":"high",
@@ -800,7 +798,6 @@ paths:
                             enum:
                               - happy
                               - surprised
-                              - calm
                               - dreaming
                               - angry
                               - fear

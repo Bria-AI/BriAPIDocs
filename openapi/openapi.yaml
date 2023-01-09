@@ -784,7 +784,7 @@ paths:
           name: desired_resolution
           schema:
             type: string
-            enum: ['nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
+            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
             example: "nhd"
           description: the desired resolution of the updated image. This field is optional.
       responses:

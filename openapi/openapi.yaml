@@ -977,10 +977,9 @@ paths:
           example: false
         - name: num_results_per_page
           in: query
-          maximum: 500
           schema:
             type: integer
-          description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results. The default value is 50.
+          description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results. The default value is 50. The maximum value is 500.
           example: 1
         - name: page
           in: query
@@ -998,28 +997,28 @@ paths:
           in: query
           schema:
             type: string
-            enums: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
+            enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
           description: Which style you would like to see in your results, this parameter is optional.
           example: "photo realistic"
         - name: atmosphere
           in: query
           schema: 
             type: string
-            enums: ['dramatic','vivid','warm','cool']
+            enum: ['dramatic','vivid','warm','cool']
           description: Which atmosphere you would like to get in your results, this parameter is optional.
           example: "dramatic"
         - name: camera
           in: query
           schema: 
             type: string
-            enums: ['portrait','close up','aerial','landscape']
+            enum: ['portrait','close up','aerial','landscape']
           description: Which camera angle you would like to see in your results, this parameter is optional.
           example: "portrait"
         - name: medium
           in: query
           schema: 
             type: string
-            enums: ['photography','art']
+            enum: ['photography','art']
           description: Which medium should be included in your results, this parameter is optional.
           example: "photography"
       responses:

@@ -639,6 +639,12 @@ paths:
             type: string
           example: "8487fb411f3c6716"
           description: visual id of the image the user wants to create a new visual from.
+        - in: query
+          name: sid
+          schema:
+            type: string
+            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       requestBody:
         content:
           application/json:
@@ -778,6 +784,12 @@ paths:
             example: "8487fb411f3c6716"
           description: visual id of the image from which the user wishes to remove the background
         - in: query
+          name: sid
+          schema:
+            type: string
+            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+        - in: query
           name: desired_resolution
           schema:
             type: string
@@ -837,6 +849,12 @@ paths:
             type: string
             example: "8487fb411f3c6716"
           description: visual id of the image for which the background should be blurred.
+        - in: query
+          name: sid
+          schema:
+            type: string
+            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       responses:
         '200':
           description: Successful operation.
@@ -889,6 +907,12 @@ paths:
             type: string
             example: "8487fb411f3c6716"
           description: visual id of the image for which the user wishes to replace the background
+        - in: query
+          name: sid
+          schema:
+            type: string
+            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       requestBody:
         content:
           application/json:
@@ -973,13 +997,6 @@ paths:
             type: string
             example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-        - in: query
-          name: desired_resolution
-          schema:
-            type: string
-            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
-            example: "original"
-          description: The desired resolution of the updated image. 
       requestBody:
         required: false
         content:

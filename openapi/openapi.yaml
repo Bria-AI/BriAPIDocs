@@ -971,25 +971,22 @@ paths:
           example: "woman traveling in the world"
         - name: synthetic_search
           in: query
-          default: false
           schema:
             type: boolean
-          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being sent.
+          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being sent. The default value is false.
           example: false
         - name: num_results_per_page
           in: query
-          default: 50
           maximum: 500
           schema:
             type: integer
-          description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results.
+          description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results. The default value is 50.
           example: 1
         - name: page
           in: query
-          default: 1
           schema:
             type: integer
-          description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1.
+          description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1. The default value is 1.
           example: 1
         - name: embedding_name
           in: query
@@ -999,30 +996,30 @@ paths:
           example: "123abc"
         - name: style
           in: query
-          enums: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
           schema:
             type: string
+            enums: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
           description: Which style you would like to see in your results, this parameter is optional.
           example: "photo realistic"
         - name: atmosphere
           in: query
-          enums: ['dramatic','vivid','warm','cool']
           schema: 
             type: string
+            enums: ['dramatic','vivid','warm','cool']
           description: Which atmosphere you would like to get in your results, this parameter is optional.
           example: "dramatic"
         - name: camera
           in: query
-          enums: ['portrait','close up','aerial','landscape']
           schema: 
             type: string
+            enums: ['portrait','close up','aerial','landscape']
           description: Which camera angle you would like to see in your results, this parameter is optional.
           example: "portrait"
         - name: medium
           in: query
-          enums: ['photography','art']
           schema: 
             type: string
+            enums: ['photography','art']
           description: Which medium should be included in your results, this parameter is optional.
           example: "photography"
       responses:

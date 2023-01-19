@@ -23,6 +23,7 @@ info:
     With the response from the *Upload Route*, the following routes can be used without any particular order:
       - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
       - /search_similar_images - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
+      - /crop - The *Crop Route* is used to crop an image without a background, tightly around the remaining region of interest.
       - /video - (Coming Soon) Using the *Video Route* to create a short video based on a single still image.
 
       
@@ -623,11 +624,11 @@ paths:
 
         The *Create Route* is used to create a new visual, based on the changes
         requested by the user for a previously uploaded visual.
+        
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
 
 
-        The *Create Route* will return the url for accessing the new generated
-        visual and the confidence that Bria has in the quality of the new
-        visual.
+        This route returns both the URL and the sid associated with the updated image.
 
       operationId: create
       parameters:
@@ -735,10 +736,6 @@ paths:
                     type: string
                     description: URL that represents the new visual created in the request. It is a temporary URL that will expire
                     example: "https://d1uzvjowrxhw13.cloudfront.net/api/create_results/8487fb411f3c6716_05e8a8dc-b723-11ec-be15-c28fc8b4a55b.JPEG?AWSAccessKeyId=ASIAUL5JH7ABM5GPF244&Signature=OaE%2BTJW%2FBJFDB2xGXpy%2F%2F8TYkAE%3D&x-amz-security-token=FwoGZXIvYXdzEEsaDHAX5TxTwymFAQYSwSKYBK3lKAwEipl9tjg1QQwWMdQDqS%2B0rYkexasgxxW78Vz4DvJUVPISpnTOZk4h%2Fy6%2BikLC5%2FYGY86SL8980ZHZzRgqcodDJ0n6ljB7SgbkfJnSpgx%2F8iCHzoDH%2BS7YrUjnR7e%2FUz%2B4sIbV%2BSHGn36EXTNnrm%2FOgCsiL9vqLSGFEo5R1pLYIbezxWCEWMLcDO5x9WsVoPRYW7c%2B5B%2B1Ku3qybQEBFRex4BVisJU4NTXbwQKFWMbkTjHg5vK%2FEdQn7OzmCA7SfCSHe%2FqDZIBQG0ki%2BHt%2Fs4bAYYTZpl%2FjoUJTldlltdWH2uitj%2BBeyQKcUnHrPjTY1CsAOEC6OV%2FKlZfOjbNJTvlmHc7%2BKP3iICKlCVJwvRK6%2FnmU7mUVOb%2FmgD2kIvBq5G6fNxXQlKfFGZE2lSs8HR83sp44Qz8hm60DPfK45hE0XdVnIS2jY%2F1a%2BYBmijCr4HDTgv52D53CdnOiQ%2BQ8Yld0bBZRC4aDBATcvcsDcnO4BBMY0NS1c%2BSJ6b4IMxDK2OKdanf9EYiDgzr3ebsS1m7j4NX3pEvNC99YF%2B5PQwDYhbMwlMCAG9AMs9%2FF86Al3czOJFOxV1ClBEoUKy2TgntGraCp76UoLmRrHuRq7WKQUvIj2HAXsIlyNkBg3z498M1Gh7vyD%2F7xQgA0Ny6zYeC1gBH4HmYtFlBS%2BJimmxFlCoCuyFhBmUXp7p6oBI3APuSyQYLKLmQwJIGMioiS3mUno68q7GAsD%2FPmSCM8xMeEWF8IegvlU4XWAQuNnQJLVtqwkZb1Qo%3D&Expires=1650276159"
-                  confidence:
-                    type: string
-                    description: Indicating the level of confidence Bria has in the quality of the created visual.
-                    example: "low"
         '400':
           description: Bad request.
         '404':
@@ -765,10 +762,10 @@ paths:
         The *Remove BG Route* is used to remove the background of a previously uploaded image. 
         
         
-        This route can also be used on an image that has been changed by the user using the /create route.
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
         
         
-        The *Remove BG Route* will return the URL for accessing the updated image.
+        This route returns both the URL and the sid associated with the updated image.
         
 
       operationId: remove_bg
@@ -825,11 +822,11 @@ paths:
         The *Blur BG Route* is used to create a blur effect on the background of a previously uploaded image. 
         
         
-        This route can also be used on an image that has been changed by the user using the /create route.
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
         
         
-        The *Blur BG Route* will return the URL for accessing the updated image.
-        
+        This route returns both the URL and the sid associated with the updated image.
+         
 
       operationId: blur_bg
       parameters:
@@ -878,10 +875,10 @@ paths:
         The *Replace BG Route* is used to replace the background of a previously uploaded image, with a generated background.
         
         
-        This route can also be used on an image that has been changed by the user using the /create route.
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
         
         
-        The *Replace BG Route* will return the URL for accessing the updated image.
+        This route returns both the URL and the sid associated with the updated image.
       
       operationId: replace_bg
       parameters:
@@ -937,6 +934,90 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
           
+  /{visual_id}/crop:
+    post:
+      tags:
+        - crop
+      summary: Crop an image without a background tightly around the remaining region of interest.
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Crop Route* is used to crop an image without a background tightly around the remaining region of interest.
+        
+        
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+        
+        
+        This route returns both the URL and the sid associated with the updated image.
+        
+        
+        On images without transparent backgrounds, the response will be the provided visual at the selected resolution.
+        
+
+      operationId: crop
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image the user would like to crop
+        - in: query
+          name: sid
+          schema:
+            type: string
+            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+        - in: query
+          name: desired_resolution
+          schema:
+            type: string
+            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
+            example: "original"
+          description: the desired resolution of the updated image. 
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                padding:
+                  type: integer
+                  description: Cropping the object with padding around it. Currently, padding is applied to all four borders of the remaining region. This parameter is optional.
+                  default: 0
+                  example: 1
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_res:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
+                  sid:
+                    type: string
+                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
+                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
           
   /search:
     get:
@@ -967,60 +1048,60 @@ paths:
           in: query
           schema:
             type: string
+            example: "woman traveling in the world"
           description: the text query for which the user is looking for matching images.
-          example: "woman traveling in the world"
         - name: synthetic_search
           in: query
           schema:
             type: boolean
+            example: false
           description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being returned. The default value is false.
-          example: false
         - name: num_results_per_page
           in: query
           schema:
             type: integer
+            example: 1
           description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results. The default value is 50. The maximum value is 500.
-          example: 1
         - name: page
           in: query
           schema:
             type: integer
+            example: 1
           description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1. The default value is 1.
-          example: 1
         - name: embedding_name
           in: query
           schema:
             type: string
+            example: "123abc"
           description: Bria will provide you with this parameter which represents your account's image gallery. You must include this parameter.
-          example: "123abc"
         - name: style
           in: query
           schema:
             type: string
+            example: "photo realistic"
             enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
           description: Which style you would like to see in your results, this parameter is optional.
-          example: "photo realistic"
         - name: atmosphere
           in: query
           schema: 
             type: string
             enum: ['dramatic','vivid','warm','cool']
+            example: "dramatic"
           description: Which atmosphere you would like to get in your results, this parameter is optional.
-          example: "dramatic"
         - name: camera
           in: query
           schema: 
             type: string
             enum: ['portrait','close up','aerial','landscape']
+            example: "portrait"
           description: Which camera angle you would like to see in your results, this parameter is optional.
-          example: "portrait"
         - name: medium
           in: query
           schema: 
             type: string
             enum: ['photography','art']
+            example: "photography"
           description: Which medium should be included in your results, this parameter is optional.
-          example: "photography"
       responses:
         '200':
           description: Successful operation.

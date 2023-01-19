@@ -1007,23 +1007,23 @@ paths:
         - name: atmosphere
           in: query
           enums: ['dramatic','vivid','warm','cool']
-          schema: Which atmosphere you would like to get in your results, this parameter is optional.
+          schema: 
             type: string
-          description: 
+          description: Which atmosphere you would like to get in your results, this parameter is optional.
           example: "dramatic"
         - name: camera
           in: query
           enums: ['portrait','close up','aerial','landscape']
-          schema: Which camera angle you would like to see in your results, this parameter is optional.
+          schema: 
             type: string
-          description: 
+          description: Which camera angle you would like to see in your results, this parameter is optional.
           example: "portrait"
         - name: medium
           in: query
           enums: ['photography','art']
-          schema: Which medium should be included in your results, this parameter is optional.
+          schema: 
             type: string
-          description: 
+          description: Which medium should be included in your results, this parameter is optional.
           example: "photography"
       responses:
         '200':

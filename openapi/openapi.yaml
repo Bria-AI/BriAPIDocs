@@ -973,7 +973,7 @@ paths:
           in: query
           schema:
             type: boolean
-          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being sent. The default value is false.
+          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being returned. The default value is false.
           example: false
         - name: num_results_per_page
           in: query

@@ -783,7 +783,7 @@ paths:
             type: string
             enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
             example: "nhd"
-          description: the desired resolution of the updated image. This field is optional.
+          description: The desired resolution of the updated image. This field is optional.
       responses:
         '200':
           description: Successful operation.
@@ -938,7 +938,7 @@ paths:
     post:
       tags:
         - crop
-      summary: Crop an image without a background tightly around the remaining region of interest.
+      summary: Crop an image around the remaining region of interest.
       description: >-
 
 
@@ -955,7 +955,7 @@ paths:
         This route returns both the URL and the sid associated with the updated image.
         
         
-        On images without transparent backgrounds, the response will be the provided visual at the selected resolution.
+        On images without transparent backgrounds, the response will be the provided image at the selected resolution.
         
 
       operationId: crop
@@ -979,7 +979,7 @@ paths:
             type: string
             enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
             example: "original"
-          description: the desired resolution of the updated image. 
+          description: The desired resolution of the updated image. 
       requestBody:
         required: false
         content:

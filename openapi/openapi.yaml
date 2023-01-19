@@ -969,27 +969,62 @@ paths:
             type: string
           description: the text query for which the user is looking for matching images.
           example: "woman traveling in the world"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                num_results_per_page:
-                  type: integer
-                  default: 50
-                  maximum: 500
-                  example: 1
-                  description: how many images you would like to receive in the current call.
-                page:
-                  type: integer
-                  default: 1
-                  description: which batch of images you would like to receive in the current call.
-                  example: 1
-                gallery_id:
-                  type: string
-                  description: Bria will provide you with this parameter which represents your account's image gallery.
-                  example: "123abc"
+        - name: synthetic_search
+          in: query
+          default: false
+          schema:
+            type: boolean
+          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being sent.
+          example: false
+        - name: num_results_per_page
+          in: query
+          default: 50
+          maximum: 500
+          schema:
+            type: integer
+          description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results.
+          example: 1
+        - name: page
+          in: query
+          default: 1
+          schema:
+            type: integer
+          description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1.
+          example: 1
+        - name: embedding_name
+          in: query
+          schema:
+            type: string
+          description: Bria will provide you with this parameter which represents your account's image gallery. You must include this parameter.
+          example: "123abc"
+        - name: style
+          in: query
+          enums: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
+          schema:
+            type: string
+          description: Which style you would like to see in your results, this parameter is optional.
+          example: "photo realistic"
+        - name: atmosphere
+          in: query
+          enums: ['dramatic','vivid','warm','cool']
+          schema: Which atmosphere you would like to get in your results, this parameter is optional.
+            type: string
+          description: 
+          example: "dramatic"
+        - name: camera
+          in: query
+          enums: ['portrait','close up','aerial','landscape']
+          schema: Which camera angle you would like to see in your results, this parameter is optional.
+            type: string
+          description: 
+          example: "portrait"
+        - name: medium
+          in: query
+          enums: ['photography','art']
+          schema: Which medium should be included in your results, this parameter is optional.
+            type: string
+          description: 
+          example: "photography"
       responses:
         '200':
           description: Successful operation.

@@ -625,6 +625,7 @@ paths:
         The *Create Route* is used to create a new visual, based on the changes
         requested by the user for a previously uploaded visual.
         
+        
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
 
 

@@ -1102,6 +1102,14 @@ paths:
                           type: string
                           description: visual id of the image, documented in Bria.
                           example: "a169a6862f24de75"
+                        org_image_key:
+                          type: string
+                          description: It will be returned if the image was registered using an org_image_key.
+                          example: None
+                        source_url:
+                          type: string
+                          description: It will be returned if the image was registered using a URL.
+                          example: None
         '400':
           description: Bad request.
         '404':
@@ -1185,6 +1193,14 @@ paths:
                           type: string
                           description: visual id of the image, documented in Bria.
                           example: "a169a6862f24de75"
+                        org_image_key:
+                          type: string
+                          description: It will be returned if the image was registered using an org_image_key.
+                          example: None
+                        source_url:
+                          type: string
+                          description: It will be returned if the image was registered using a URL.
+                          example: None
         '400':
           description: Bad request.
         '404':

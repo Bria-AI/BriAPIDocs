@@ -17,7 +17,6 @@ info:
       - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
       - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image.
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
-      - /generate_img_from_txt - (Coming Soon) Using the *Generate Img From Txt* to generate a completely new visual, based on any input text.
 
     
     With the response from the *Upload Route*, the following routes can be used without any particular order:
@@ -61,66 +60,6 @@ info:
 
             
 paths:
-  /generate_img_from_txt:
-    get:
-      tags:
-        - generate_img_from_txt (Coming Soon)
-      summary: Generate an image based on any text you choose.
-      description: >-
-
-
-
-        **Description**
-
-
-        The *Generate Img From Txt Route* is used to generate a completely new visual, based on any input text
-
-
-       
-
-
-      operationId: generate_img_from_txt
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                prompt:
-                  type: string
-                  description: Text from which you wish to generate images
-                  example: "A digital illustration of a steampunk library with clockwork machines, 4k, detailed, trending in artstation, fantasy vivid colors"
-                num_results:
-                  type: integer
-                  minimum: 1
-                  maximum: 6
-                  default: 4
-                  example: 1
-                  description: The number of images you would like generated from the provided text
-                seed:
-                  type: string
-                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same results again in the future by choosing a value between 1 and 2,147,483,647, and choosing the same value the next time. You can exclude this parameter if you are not interested in recreating your results.
-                  default: -1
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  images_paths:
-                    type: array
-                    description: The array contains the URLs of all the generated images.
-                    example: ["https://bria-temp.s3.amazonaws.com/api/generate_image/A_digital_illustration_of_a_steampunk_library_with_clockwork_machines_4k_detailed_trending_in_artstation_fantasy_vivid_colors_seed_6960420665443975977/stable_diffusion/bc16c77c-3281-11ed-a6f0-0242ac110002.png?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=5QhlEoxe%2B6ZbakivISZVIrB6hsY%3D&Expires=1663840830"]
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API. 
   /upload:
     post:
       tags:
@@ -800,7 +739,7 @@ paths:
             type: string
             enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
             example: "nhd"
-          description: The desired resolution of the updated image. This field is optional.
+          description: The desired resolution of the updated image. This parameter is optional.
       responses:
         '200':
           description: Successful operation.
@@ -942,7 +881,7 @@ paths:
                   description: The number of backgrounds you would like generated for the original image
                 seed:
                   type: integer
-                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results.
+                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
       responses:
         '200':
           description: Successful operation.
@@ -1081,25 +1020,37 @@ paths:
             type: string
             example: "woman traveling in the world"
           description: the text query for which the user is looking for matching images.
-        - name: synthetic_search
+        - name: gallery_search
           in: query
           schema:
             type: boolean
-            example: false
-          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. Together with the regular search results, 4 synthetic results are currently being returned. The default value is false.
+            example: true
+          description: Make sure this parameter is set to true if you wish to get search results from your gallery. The default value is true.  
         - name: num_results_per_page
           in: query
           schema:
             type: integer
             example: 1
-          description: how many images you would like to receive in the current call. This only affects the number of results from the gallery, and not the number of synthetic results. The default value is 50. The maximum value is 500.
+          description: how many images you would like to receive from the gallery search. The default value is 50. The maximum value is 500. No need to use this parameter when gallery_search=false.
+        - name: synthetic_search
+          in: query
+          schema:
+            type: boolean
+            example: false
+          description: Make sure this parameter is set to true if you wish to get synthetic, generated results. The default value is false. With gallery_search=true and synthetic_search=true, you will get both types of results, and the first few will be synthetic. 
+        - name: num_synthetic_results_per_page
+          in: query
+          schema:
+            type: integer
+            example: 1
+          description: how many synthetic images you would like to receive. The default value is 4. The maximum value is 4. No need to use this parameter when synthetic_search=false.
         - name: page
           in: query
           schema:
             type: integer
             example: 1
           description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1. The default value is 1.
-        - name: embedding_name
+        - name: gallery_id
           in: query
           schema:
             type: string

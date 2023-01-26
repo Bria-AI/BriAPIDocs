@@ -542,8 +542,6 @@ paths:
               schema:
                 properties:
                     type: array
-                    items:
-                      type: array
                         actions:
                           type: object
                           description: The available API actions for this specific person.

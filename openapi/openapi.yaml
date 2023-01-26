@@ -1150,31 +1150,30 @@ paths:
             type: string
           description: the visual id of the image for which the user is looking for similar images.
           example: "e01592ef1188df76"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                num_results_per_page:
-                  type: integer
-                  default: 50
-                  maximum: 500
-                  example: 1
-                  description: how many images you would like to receive in the current call.
-                page:
-                  type: integer
-                  default: 1
-                  description: which batch of images you would like to receive in the current call.
-                  example: 1
-                gallery_id:
-                  type: string
-                  description: Bria will provide you with this parameter which represents your account's image gallery.
-                  example: "123abc"
-                url:
-                  type: string
-                  description: URL of an image, for which you would like to find similar images. When you want to search based on modified images, or images that have not been uploaded or registered to Bria, you can use this parameter. When this parameter is provided, the visual_id parameter can be None. 
-                  example: "123abc"
+        - name: num_results_per_page
+          in: query
+          schema:
+            type: integer
+            example: 1
+          description: how many images you would like to receive in the current call. The default value is 50. The maximum value is 500. 
+        - name: page
+          in: query
+          schema:
+            type: integer
+            example: 1
+          description: which batch of images you would like to receive in the current call. The default value is 1.
+        - name: gallery_id
+          in: query
+          schema:
+            type: string
+            example: "123abc"
+          description: Bria will provide you with this parameter which represents your account's image gallery. You must include this parameter.
+        - name: url
+          in: query
+          schema:
+            type: string
+            example: None
+          description: URL of an image, for which you would like to find similar images. When you want to search based on modified images, or images that have not been uploaded or registered to Bria, you can use this parameter. When this parameter is provided, the visual_id parameter can be None.
       responses:
         '200':
           description: Successful operation.

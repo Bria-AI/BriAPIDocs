@@ -539,7 +539,7 @@ paths:
           description: Successful operation.
           content:
             application/json:
-              scene:
+              schema:
                 type: array
                 items:
                   type: object

@@ -539,9 +539,11 @@ paths:
           description: Successful operation.
           content:
             application/json:
-              schema:
-                type: object
-                properties:
+               :
+                type: array
+                items:
+                  type: object
+                  properties:
                     actions:
                       type: object
                       description: The available API actions for this specific person.

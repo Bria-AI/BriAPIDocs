@@ -15,7 +15,11 @@ info:
     **The common use of the Bria API is according to the following order:**
       - /upload - By using the *Upload Route*, you can to upload a new image to Bria database.
       - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
-      - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image.
+      - /info - By using the *Info Route*, you an understand the change possibilities for each object in the image. 
+        The following routes can be used if you do not require information for people, objects, and background, but rather only one of them:
+         - /person/info
+         - /objects/info
+         - /background/info
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
 
     
@@ -320,6 +324,12 @@ paths:
             type: string
           example: "8487fb411f3c6716"
           description: visual id of the image, received after using the /upload or /register route.
+        - in: query
+          name: lean
+          schema:
+            type: string
+          example: false
+          description: Set the value 'true' for this parameter if you wish to receive only the high-level information (currently, this means only the description, org_height, and org_width) from the info route. This parameter is optional and as default the value is 'false'. 
       responses:
         '200':
           description: Successful operation.
@@ -331,6 +341,12 @@ paths:
                   description:
                     type: string
                     description: (Coming Soon) A brief description of the visual
+                  org_height:
+                    type: int
+                    description: The height of the image
+                  org_width:
+                    type: int
+                    description: The width of the image
                   scene:
                     type: array
                     description: An array of objects representing each of the objects recognized in the visual.
@@ -847,7 +863,7 @@ paths:
         information and available actions for the objects in the image. 
         With this route, you will save time by only obtaining information that is relevant to your needs.
 
-      operationId: person/info
+      operationId: objects/info
       parameters:
         - in: path
           name: visual_id

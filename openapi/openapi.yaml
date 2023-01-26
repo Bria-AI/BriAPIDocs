@@ -540,26 +540,26 @@ paths:
           content:
             application/json:
               schema:
+                type: object
                 properties:
-                    type: array
-                      actions:
-                        type: object
-                        description: The available API actions for this specific person.
-                      id:
-                        type: string
-                        description: The id of the person
-                      labels:
-                        type: array
-                        description: The known information about the person, such as age range and gender
-                      oracle:
-                        type: object
-                        description: The predicted quality of the available actions for this specific person
-                      rect:
-                        type: object
-                        description: The location of the face inside the image. x and y represent the upper left corner of the face, and by using the w (width) and h (height) you can create a rectangle around the face.
-                      type:
-                        type: string
-                        description: In this route it will allways be 'person'
+                    actions:
+                      type: object
+                      description: The available API actions for this specific person.
+                    id:
+                      type: string
+                      description: The id of the person
+                    labels:
+                      type: array
+                      description: The known information about the person, such as age range and gender
+                    oracle:
+                      type: object
+                      description: The predicted quality of the available actions for this specific person
+                    rect:
+                      type: object
+                      description: The location of the face inside the image. x and y represent the upper left corner of the face, and by using the w (width) and h (height) you can create a rectangle around the face.
+                    type:
+                      type: string
+                      description: In this route it will allways be 'person'
               examples:
                 example:
                   value:

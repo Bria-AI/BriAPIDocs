@@ -567,7 +567,7 @@ paths:
                   value:
                   [
    {
-      "actions":{
+      actions:{
          "age":[
             "mid-20",
             "mid-40",
@@ -631,13 +631,13 @@ paths:
             "none"
          ]
       },
-      "id":"c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
-      "labels":[
+      id:"c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
+      labels:[
          "age_14-26",
          "glasses",
          "Female"
       ],
-      "oracle":{
+      oracle:{
          "age":{
             "age":"low"
          },
@@ -681,16 +681,16 @@ paths:
             "haircolor":"low"
          }
       },
-      "rect":{
+      rect:{
          "h":375.98625326156616,
          "w":280.4049072265625,
          "x":1134.1341552734375,
          "y":290.6307406425476
       },
-      "type":"person"
+      type:"person"
    },
    {
-      "actions":{
+      actions:{
          "age":[
             "mid-20",
             "mid-40",
@@ -754,13 +754,13 @@ paths:
             "none"
          ]
       },
-      "id":"d74da71f722b45de5f18f93e9dd7fc64a50a5a5dda001985ab9c2374807182b8",
-      "labels":[
+      id:"d74da71f722b45de5f18f93e9dd7fc64a50a5a5dda001985ab9c2374807182b8",
+      labels:[
          "age_26-42",
          "happy",
          "Female"
       ],
-      "oracle":{
+      oracle:{
          "age":{
             "age":"high"
          },
@@ -804,13 +804,13 @@ paths:
             "haircolor":"high"
          }
       },
-      "rect":{
+      rect:{
          "h":354.8530983924866,
          "w":282.885498046875,
          "x":555.80419921875,
          "y":486.4655692577362
       },
-      "type":"person"
+      type:"person"
    }
 ]    
         '400':

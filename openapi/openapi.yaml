@@ -502,7 +502,7 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
 
-   /{visual_id}/person/info:
+  /{visual_id}/person/info:
     get:
       tags:
         - person/info

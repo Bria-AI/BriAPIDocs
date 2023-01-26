@@ -342,10 +342,10 @@ paths:
                     type: string
                     description: (Coming Soon) A brief description of the visual
                   org_height:
-                    type: int
+                    type: integer
                     description: The height of the image
                   org_width:
-                    type: int
+                    type: integer
                     description: The width of the image
                   scene:
                     type: array

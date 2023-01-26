@@ -540,12 +540,10 @@ paths:
           content:
             application/json:
               schema:
-                type: object
                 properties:
                     type: array
                     items:
                       type: array
-                    description:
                         actions:
                           type: object
                           description: The available API actions for this specific person.

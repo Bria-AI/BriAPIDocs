@@ -1676,6 +1676,12 @@ paths:
             type: string
             example: "woman traveling in the world"
           description: the text query for which the user is looking for matching images.
+        - name: synchronous
+          in: query
+          schema:
+            type: boolean
+            example: true
+          description: Make sure this parameter is always set to true.  
         - name: gallery_search
           in: query
           schema:

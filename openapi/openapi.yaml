@@ -84,14 +84,15 @@ paths:
 
           
           The visual id in the response of the *Upload Route* must be kept by the
-        user in order to query image info and make changes to it
+        user in order to query image info, modify the image and use the search routes.
 
 
         ```{ "visual_id": "9ea9a4d2d19977a7c" }```
 
 
-        The *visual_id* in the response of the /upload route can be used for all
+        The *visual_id* in the response of the /upload route will be used for all
         other routes.
+        Store the visual_id in your database and map it to your image identification method for easy reference
 
 
         **Bria generative Web tool**
@@ -205,14 +206,15 @@ paths:
 
           
           The visual id in the response of the *Register Route* must be kept by the
-        user in order to query image info and make changes to it
+        user in order to query image info, modify the image and use the search routes.
 
 
         ```{ "visual_id": "9ea9a4d2d19977a7c" }```
 
 
-        The *visual_id* in the response of the /register route can be used for all
+        The *visual_id* in the response of the /upload route will be used for all
         other routes.
+        Store the visual_id in your database and map it to your image identification method for easy reference
 
 
         **Bria generative Web tool**

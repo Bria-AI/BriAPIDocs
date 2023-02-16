@@ -1489,7 +1489,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API. 
           
   /{visual_id}/replace_bg:
-    get:
+    post:
       tags:
         - replace_bg
       summary: Replace the background of an image

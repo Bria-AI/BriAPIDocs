@@ -1571,7 +1571,7 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
           
-    /{visual_id}/increase_resolution:
+  /{visual_id}/increase_resolution:
     get:
       tags:
         - increase_resolution
@@ -1589,7 +1589,7 @@ paths:
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
         
         
-        PNG files are not supported by this feature at the moment.        
+        PNG files with transparency are not supported by this feature at the moment.
                 
 
       operationId: increase_resolution

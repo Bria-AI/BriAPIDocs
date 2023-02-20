@@ -23,14 +23,16 @@ info:
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
 
     
-    With the response from the *Upload Route*, the following routes can be used without any particular order:
+    With the response from the *Upload Route* (visual_id), the following routes can be used without any particular order:
       - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
       - /search_similar_images - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
       - /crop - The *Crop Route* is used to crop an image without a background, tightly around the remaining region of interest.
+      - /increase_resolution - The *Increase Resolution route* is used to upsacle any image. 
+      - /image_to_psd - The *Image To Psd route* is used to create a layered psd file out of any image.
       - /video - (Coming Soon) Using the *Video Route* to create a short video based on a single still image.
 
       
-    With the response from the *Info Route*, the following route can be used without any particular order:
+    With the response from the *Info Route*, the following routes can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /blur_bg - Using the *Blur BG Route* to create a blur effect on the background of a stil image.
@@ -1558,6 +1560,70 @@ paths:
                   value:
                     result: [["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_1.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=shkYBjQZcAGXdlluZrPD%2BpHlQ7k%3D&Expires=1671622039",1,"26b54-9812-11ed-884d-56304cc7efc8.JPEG"],["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_2.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=MEg7syN2yWhiQov04ewdBDRmuXI%3D&Expires=1671622039",2,"26bab854-9812-11ed-884d-56304cc7efc8.JPEG"],["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_3.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=uFHD148AfYZDSWRRWhuUBbNVJQI%3D&Expires=1671622039",3,"26bab854-9812-11ed-884d-563c8.JPEG"],["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_4.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=0Ml%2BJw3PSaow7ZEQpDKPu63ej08%3D&Expires=1671622039",4,"26bab854-9812-884d-56304cc7efc8.JPEG"]]
         
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+          
+    /{visual_id}/increase_resolution:
+    get:
+      tags:
+        - increase_resolution
+      summary: Increase image resolution
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Increase Resolution Route* is used to upsacle the resolution of any image.
+        
+        
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+        
+                
+
+      operationId: increase_resolution
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image the user would like to upscale
+        - in: query
+          name: sid
+          schema:
+            type: string
+            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to apply on the result of that route, please provide this information. This parameter is optional.
+        - in: query
+          name: desired_increase
+          schema:
+            type: integer
+            example: 2
+            enums: 2,4
+          description: The resolution multiplier
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_res:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
         '400':
           description: Bad request.
         '404':

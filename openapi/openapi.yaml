@@ -1588,6 +1588,8 @@ paths:
         
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
         
+        
+        PNG files are not supported by this feature at the moment.        
                 
 
       operationId: increase_resolution
@@ -1610,7 +1612,7 @@ paths:
           schema:
             type: integer
             example: 2
-            enums: 2,4
+            enum: 2,4
           description: The resolution multiplier
       responses:
         '200':

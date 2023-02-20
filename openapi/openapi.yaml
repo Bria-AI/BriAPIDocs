@@ -1612,8 +1612,7 @@ paths:
           schema:
             type: integer
             example: 2
-            enum: 2,4
-          description: The resolution multiplier
+          description: The resolution multiplier. The possible value are 2,4.
       responses:
         '200':
           description: Successful operation.

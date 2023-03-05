@@ -1504,8 +1504,11 @@ paths:
 
         The *Replace BG Route* is used to replace the background of a previously uploaded image, with a generated background.
         
+        Additionally, you can change the canvas size of the final result as well as the positioning of the product or foreground. 
+        This will enable you to create new and unique variations of your original image.
         
-        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+        
+        You can use this route on a modified image by providing the sid from the response of the previously used route.
         
         
         This route returns both the URL and the sid associated with the updated image.
@@ -1531,6 +1534,15 @@ paths:
             schema:
               type: object
               properties:
+                placement_type:
+                  type: string
+                  description: This parameter allows you to control the placement of the foreground in the final image when replacing the background. Placement refers to the combination of position and size of the foreground in the final image. You can choose from the following options:
+                                'original': keeps the current placement of the foreground in the image.
+                                'automatic': allows Bria to place the foreground in different placements in the image.
+                                'manual_placement': enables you to select from a set of 10 specific placements for the foreground in the final image.
+                                'manual_padding': allows you to control the final image size and foreground placement by maintaining the original size of the foreground, and adding padding to all sides.
+                                Use this parameter to achieve the desired result for your images with ease.
+                  enum: ['original','automatic','manual_placement','manual_padding']
                 bg_prompt:
                   type: string
                   description: Text from which you wish to generate the new background
@@ -1538,7 +1550,7 @@ paths:
                   type: integer
                   default: 4
                   example: 4
-                  description: The number of backgrounds you would like generated for the original image
+                  description: The number of backgrounds you would like to generate for the original image. If placement_type!=original, then for each selected placement you will get results in the amount of this parameter. 
                 seed:
                   type: integer
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.

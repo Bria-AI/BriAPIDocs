@@ -1537,11 +1537,7 @@ paths:
                 placement_type:
                   type: string
                   description: This parameter allows you to control the placement of the foreground in the final image when replacing the background. Placement refers to the combination of position and size of the foreground in the final image. You can choose from the following options:
-                                'original': keeps the current placement of the foreground in the image.
-                                'automatic': allows Bria to place the foreground in different placements in the image.
-                                'manual_placement': enables you to select from a set of 10 specific placements for the foreground in the final image.
-                                'manual_padding': allows you to control the final image size and foreground placement by maintaining the original size of the foreground, and adding padding to all sides.
-                                Use this parameter to achieve the desired result for your images with ease.
+                  'original': keeps the current placement of the foreground in the image. 'automatic': allows Bria to place the foreground in different placements in the image. 'manual_placement': enables you to select from a set of 10 specific placements for the foreground in the final image. 'manual_padding': allows you to control the final image size and foreground placement by maintaining the original size of the foreground, and adding padding to all sides. Use this parameter to achieve the desired result for your images with ease.
                   enum: ['original','automatic','manual_placement','manual_padding']
                 bg_prompt:
                   type: string

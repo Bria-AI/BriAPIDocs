@@ -34,7 +34,7 @@ info:
       
     With the response from the *Info Route*, the following routes can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
-      - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait for any profession/theme
+      - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /blur_bg - Using the *Blur BG Route* to create a blur effect on the background of a stil image.
       - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image with a generated image.
@@ -185,8 +185,7 @@ paths:
         '500':
           description: Internal server error.
         '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-          
+          description: Insufficient data. The given input is not supported by the Bria API.   
   /register:
     post:
       tags:
@@ -296,9 +295,7 @@ paths:
         '500':
           description: Internal server error.
         '506':
-          description: Insufficient data. The given input is not supported by the Bria API.          
-             
-        
+          description: Insufficient data. The given input is not supported by the Bria API.           
   /{visual_id}/info:
     get:
       tags:
@@ -522,7 +519,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-
   /{visual_id}/person/info:
     get:
       tags:
@@ -1357,7 +1353,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-
   /{visual_id}/recast_model:
     post:
       tags:
@@ -1434,7 +1429,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /{visual_id}/remove_bg:
     get:
       tags:
@@ -1504,7 +1498,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-         
   /{visual_id}/blur_bg:
     get:
       tags:
@@ -1566,8 +1559,7 @@ paths:
         '500':
           description: Internal server error.
         '506':
-          description: Insufficient data. The given input is not supported by the Bria API. 
-          
+          description: Insufficient data. The given input is not supported by the Bria API.  
   /{visual_id}/replace_bg:
     post:
       tags:
@@ -1649,7 +1641,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /{visual_id}/increase_resolution:
     get:
       tags:
@@ -1714,7 +1705,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /{visual_id}/image_to_psd:
     post:
       tags:
@@ -1773,7 +1763,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /{visual_id}/crop:
     post:
       tags:
@@ -1851,7 +1840,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /search:
     get:
       tags:
@@ -1989,7 +1977,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-
   /{visual_id}/search_similar_images:
     get:
       tags:
@@ -2079,8 +2066,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-
-
   /{visual_id}/video:
     post:
       tags:

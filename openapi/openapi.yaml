@@ -1374,8 +1374,6 @@ paths:
         
         
         This route returns both the URL and the sid associated with the updated image.
-        
-
       operationId: recast_model
       parameters:
         - in: path

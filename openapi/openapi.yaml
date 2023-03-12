@@ -1522,12 +1522,6 @@ paths:
             type: string
             example: "8487fb411f3c6716"
           description: visual id of the image for which the user wishes to replace the background
-        - in: query
-          name: sid
-          schema:
-            type: string
-            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
-          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       requestBody:
         content:
           application/json:
@@ -1545,6 +1539,10 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                sid:
+                  type: string
+                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       responses:
         '200':
           description: Successful operation.

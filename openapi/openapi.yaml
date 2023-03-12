@@ -1404,7 +1404,7 @@ paths:
                   message:
                     type: string
                     example: "Finished sucessfully"
-                    description: A message that describes the request status. The options are: Finished sucessfully, Content might not be safe for work, only 1 face allowed, No face found.
+                    description: A message that describes the request status. The options are Finished sucessfully, Content might not be safe for work, only 1 face allowed, No face found.
                   sid:
                     type: string
                     example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
@@ -1412,7 +1412,7 @@ paths:
                   status:
                     type: string
                     example: "SUCCESS"
-                    description: The request status. The options are: SUCCESS, NSFW, ONE_FACE_ALLOWED, NO_FACES_FOUND.
+                    description: The request status. The options are SUCCESS, NSFW, ONE_FACE_ALLOWED, NO_FACES_FOUND.
         '400':
           description: Bad request.
         '404':

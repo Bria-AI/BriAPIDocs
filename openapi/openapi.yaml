@@ -840,7 +840,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /{visual_id}/objects/info:
     get:
       tags:
@@ -1060,8 +1059,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-   
-          
   /{visual_id}/background/info:
     get:
       tags:
@@ -1155,7 +1152,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-          
   /{visual_id}/caption:
     get:
       tags:
@@ -1343,6 +1339,82 @@ paths:
                     type: string
                     example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
                     description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/recast_model:
+    post:
+      tags:
+        - recast_model
+      summary: Customize a portrait to any profession/theme
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Recast Model Route* is used to create customized and eye-catching images of people that match various themes or professions by modifying their outfit, body structure, hair, and background.
+        
+        
+        This provides an easy and quick way to generate high-quality visuals for businesses, creative projects, or personal use without the need for extensive photography or design work. 
+        
+        
+        The feature is also fun and engaging for social media or entertainment purposes, allowing users to create custom avatars or profile pictures that reflect their personality.
+        
+        
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+        
+        
+        This route returns both the URL and the sid associated with the updated image.
+        
+
+      operationId: recast_model
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image the user wishes to customize.
+        - in: query
+          name: prompt
+          schema:
+            type: string
+            example: "superhero"
+          description: The profession or theme to which you would like to customize your image.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_res:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
+                  message:
+                    type: string
+                    example: "Finished sucessfully"
+                    description: A message that describes the request status. The options are: Finished sucessfully, Content might not be safe for work, only 1 face allowed, No face found.
+                  sid:
+                    type: string
+                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
+                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                  status:
+                    type: string
+                    example: "SUCCESS"
+                    description: The request status. The options are: SUCCESS, NSFW, ONE_FACE_ALLOWED, NO_FACES_FOUND.
         '400':
           description: Bad request.
         '404':

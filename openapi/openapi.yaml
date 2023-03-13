@@ -351,28 +351,31 @@ paths:
                     description: The width of the image
                   scene:
                     type: array
-                    description: An array of objects representing each of the objects recognized in the visual.
+                    description: An array of objects representing each of the elements recognized in the visual.
                     items:
                       type: object
                       properties:
                         actions:
                           type: object
-                          description: The available API actions for this specific object, based directly on its type and specificity
+                          description: The available API actions for this specific element, based directly on its type and specificity
+                        bg_overlap:
+                          type: number
+                          description: The percentage of the object's surface that is mutual with the background. This property is only available for elements with the label 'object'.
                         id:
                           type: string
-                          description: The id of the object
+                          description: The id of the element
                         labels:
                           type: array
-                          description: The known information about the object, such as age range and gender
+                          description: The known information about the element, such as age range and gender
                         oracle:
                           type: object
-                          description: The predicted quality of the available actions for this specific object
+                          description: The predicted quality of the available actions for this specific element
                         rect:
                           type: object
-                          description: The location of the object inside the image. x and y represent the upper left corner of the object, and by using the w (width) and h (height) you can create a rectangle around the object.
+                          description: The location of the element inside the image. x and y represent the upper left corner of the object, and by using the w (width) and h (height) you can create a rectangle around the element.
                         type:
                           type: string
-                          description: The type of the object 
+                          description: The type of the element
               examples:
                 example:
                   value:
@@ -492,6 +495,31 @@ paths:
                             }
                          },
                         type: person
+                      },
+                      {
+                          "id": "0a349cbe603a786570d4eec7dd9cf64e568ef72767a5847251b32988a2b99dff",
+                          "type": "chair",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 647.4609375,
+                              "y": 3910.6640625,
+                              "w": 1139.53125,
+                              "h": 2071.875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.4
                       },
                       {
                         actions:
@@ -900,6 +928,10 @@ paths:
                     oracle:
                       type: object
                       description: The predicted quality of the available actions for this specific object
+                    bg_overlap:
+                      type: number
+                      description: The percentage of the object's surface that is mutual with the background.
+                      
               examples:
                 example:
                   value:
@@ -926,7 +958,8 @@ paths:
                           },
                           "oracle": {
                               "remove": true
-                          }
+                          },
+                          "bg_overlap": 0.4
                       },
                       {
                           "id": "d1b004a7b3b065aa8b98b321b67806cb3e6ca09e596ad6d3f31c625e46e168e2",
@@ -950,7 +983,8 @@ paths:
                           },
                           "oracle": {
                               "remove": true
-                          }
+                          },
+                          "bg_overlap": 0.67
                       },
                       {
                           "id": "f173a0ad62749dbeb97f8055f51d3d125d4c9c968ee3ae46754e911f3fd12000",
@@ -974,7 +1008,8 @@ paths:
                           },
                           "oracle": {
                               "remove": true
-                          }
+                          },
+                          "bg_overlap": 0.89
                       },
                       {
                           "id": "7a3bd30a268840cc3645abf7b512c3b9b8bc2d55d98aa5f7ef8c1e72348a016c",
@@ -998,7 +1033,8 @@ paths:
                           },
                           "oracle": {
                               "remove": true
-                          }
+                          },
+                          "bg_overlap": 1.0
                       },
                       {
                           "id": "0289aaf067a6d7d812738a8d42d17e54ffd2fa79e0decbca46a873018a6d791a",
@@ -1022,7 +1058,8 @@ paths:
                           },
                           "oracle": {
                               "remove": true
-                          }
+                          },
+                          "bg_overlap": 0.0
                       },
                       {
                           "id": "0a349cbe603a786570d4eec7dd9cf64e568ef72767a5847251b32988a2b99dff",
@@ -1046,7 +1083,8 @@ paths:
                           },
                           "oracle": {
                               "remove": true
-                          }
+                          },
+                          "bg_overlap": 0.4
                       }
                   ]
         '400':

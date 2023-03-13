@@ -37,7 +37,7 @@ info:
       - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /blur_bg - Using the *Blur BG Route* to create a blur effect on the background of a stil image.
-      - /replace_bg - (Coming Soon) Using the *Replace BG Route* to replace the background of a stil image with a generated image.
+      - /replace_bg - Using the *Replace BG Route* to replace the background of a stil image with a generated image.
         
       
       

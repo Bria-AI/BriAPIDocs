@@ -6,10 +6,10 @@ info:
     # Introduction
     
     
-    The Bria API was designed for users to interact with the BriEngine,
-    creating new images and videos with specific requests. This document will
-    outline the capabilities of the API and explain to users how to implement
-    it.
+    The Bria API is intended for users to interact with BriEngine and perform various operations, 
+    such as generating new images, customizing uploaded images, and searching. 
+    
+    This document will provide an overview of the API's capabilities and guide users on how to effectively implement it.
 
 
     **The common use of the Bria API is according to the following order:**
@@ -21,9 +21,10 @@ info:
          - /objects/info
          - /background/info
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
+      - /image/generate - By using the *Image Generate* route, you can generate any image you would like, based on the provided prompt.
 
     
-    With the response from the *Upload Route* (visual_id), the following routes can be used without any particular order:
+    With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
       - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
       - /search_similar_images - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
       - /crop - The *Crop Route* is used to crop an image without a background, tightly around the remaining region of interest.
@@ -32,7 +33,7 @@ info:
       - /video - (Coming Soon) Using the *Video Route* to create a short video based on a single still image.
 
       
-    With the response from the *Info Route*, the following routes can be used without any particular order:
+    With the response from the *Info Routes*, the following routes can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
       - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
@@ -57,13 +58,10 @@ info:
         --header: 'api_token: <...>' \
         ...
         
-        
-      You can access the API Token and API Secret through Bria's platform <a href="https://labs.bria.ai/organization/" target="_blank">by clicking here</a>.
+    # API Access
+    
+      You can access the API Token and API Secret through Bria's platform <a href="https://bria.ai/api-plans/" target="_blank">by clicking here</a>.
       
-      
-    # Demonstration of usage
-      
-      For a full example of the Bria API usage, using python code, <a href="https://github.com/Bria-AI/BriAPI/blob/main/demo_v2.py" target="_blank">please check this link</a>.
 
             
 paths:

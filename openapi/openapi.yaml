@@ -1,6 +1,7 @@
 openapi: 3.0.0
 info:
-  title: The Bria API <Button to="#">Default</Button>
+  title: The Bria API 
+  <Button to="#">Default</Button>
   version: ''
   description: >
     # Introduction

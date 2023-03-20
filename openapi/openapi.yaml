@@ -1,7 +1,5 @@
 openapi: 3.0.0
 info:
-  title: The Bria API
-  version: ''
   x-redocly:
     snippets:
       - type: action
@@ -12,6 +10,8 @@ info:
         config:
           label: Get API Access
           href: https://bria.ai/api-plans/
+  title: The Bria API
+  version: ''
   description: >
     # Introduction
     

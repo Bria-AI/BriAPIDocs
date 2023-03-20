@@ -62,7 +62,20 @@ info:
     
       You can access the API Token and API Secret through Bria's platform <a href="https://bria.ai/api-plans/" target="_blank">by clicking here</a>.
       
-         
+redoc:
+  options:
+    scrollYOffset: 70
+    hideDownloadButton: false
+    header:
+      backgroundColor: '#2196f3'
+      height: '70px'
+      logo:
+        url: 'https://example.com/logo.png'
+        altText: 'My API'
+      actions:
+        - label: 'Get API Access'
+          url: 'https://bria.ai/api-plans/'
+          
 paths:
   /upload:
     post:

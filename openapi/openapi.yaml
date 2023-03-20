@@ -7,6 +7,10 @@ info:
     email: support@bria.ai
   description: >
     # Introduction
+    x-code-samples:
+      - lang: shell
+        source: |
+          curl -X GET "https://bria.ai" -H "accept: application/json"
     
     
     The Bria API is intended for users to interact with BriEngine and perform various operations, 

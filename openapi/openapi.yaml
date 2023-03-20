@@ -8,7 +8,7 @@ info:
   x-code-samples:
     - lang: shell
       source: |
-      curl -X GET "https://bria.ai" -H "accept: application/json" 
+      curl -X GET "https://bria.ai/" -H "accept: application/json" 
   description: >
     # Introduction
     

@@ -1,14 +1,5 @@
 openapi: 3.0.0
 info:
-  snippets:
-    - type: action
-      style:
-        position: fixed
-        top: 1rem
-        right: 1rem
-      config:
-        label: Get API Access
-        href: https://bria.ai/api-plans/
   title: The Bria API
   version: ''
   description: >
@@ -72,7 +63,16 @@ info:
       You can access the API Token and API Secret through Bria's platform <a href="https://bria.ai/api-plans/" target="_blank">by clicking here</a>.
       
 
-            
+    x-redocly:
+      snippets:
+        - type: action
+          style:
+            position: fixed
+            top: 1rem
+            right: 1rem
+          config:
+            label: Get API Access
+            href: https://bria.ai/api-plans/          
 paths:
   /upload:
     post:

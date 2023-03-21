@@ -41,7 +41,7 @@ info:
       - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
       - /remove_bg - Using the *Remove BG Route* to remove the background of a stil image.
       - /blur_bg - Using the *Blur BG Route* to create a blur effect on the background of a stil image.
-      - /replace_bg - Using the *Replace BG Route* to replace the background of a stil image with a generated image.
+      - /replace_bg - Using the *Replace BG Route* to generate new backgrounds for an image.
         
       
       
@@ -63,10 +63,10 @@ info:
         
     # API Access
     
-      You can access the API Token and API Secret through Bria's platform <a href="https://bria.ai/api-plans/" target="_blank">by clicking here</a>.
+      You can register and access the API Token through Bria's platform <a href="https://bria.ai/api-plans/" target="_blank">by clicking here</a>.
       
 externalDocs:
-    description: Get API Access
+    description: Register and get API Access
     url: 'https://bria.ai/api-plans'
     
 paths:
@@ -1258,6 +1258,10 @@ paths:
         The *Image Generation Route* allows you to generate images based on any given text prompt. 
         
         
+        2048 x 2048 pixels will be the size of the generated images.
+        
+        
+        
         Here are some examples:
         
         
@@ -1728,7 +1732,7 @@ paths:
     post:
       tags:
         - replace_bg
-      summary: Replace the background of an image
+      summary: Generate a new background of an image
       description: >-
 
 
@@ -1738,8 +1742,75 @@ paths:
 
         The *Replace BG Route* is used to replace the background of a previously uploaded image, with a generated background.
         
-        Additionally, you can change the canvas size of the final result as well as the positioning of the product or foreground. 
+        
+        Additionally, you can change the image size of the final result as well as the positioning of the product or foreground of the image.
+        
+        
         This will enable you to create new and unique variations of your original image.
+        
+        
+        Here are some examples:
+        
+        
+        **original image**: 
+        
+        
+        <img src="https://images.bria.ai/images_resized/e69b992499669933.png" width="200"/>
+        
+        
+        **bg_prompt**: environment living room interior kitchen counter
+        
+        
+        **placement_type**: original
+        
+        
+        **num_results**: 
+        
+        
+        **results**:
+        
+        
+        <img src="https://images.bria.ai/images_resized/e6b05f9d9066811f.jpeg" width="200"/> <img src="https://images.bria.ai/images_resized/b4824b8de120ff79.jpeg" width="200"/>
+        <img src="https://images.bria.ai/images_resized/f699039d09e619e3.jpeg" width="200"/> 
+        
+        
+        **bg_prompt**: environment living room interior kitchen counter
+        
+        
+        **placement_type**: automatic
+        
+        
+        **num_results**: 1
+        
+        
+        **canvas_size**: [1200,1000]
+        
+        
+        **results**:
+        
+        
+        <img src="https://images.bria.ai/images_resized/c3fae3c338429ab8.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/f060269f9f1f07a4.jpg" width="200"/>
+        <img src="https://images.bria.ai/images_resized/fae8d0dcb20d9e21.jpg" width="200"/> <img src="" width="200"/>
+        
+        
+        **bg_prompt**: environment living room interior kitchen counter
+        
+        
+        **placement_type**: manual_padding
+        
+        
+        **num_results**: 6
+        
+        
+        **padding_values**: [100,100,200,200]
+        
+        
+        **results**:
+        
+        
+        <img src="https://images.bria.ai/images_resized/cad31fdb012cd9c1.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/e6c70f0d4c64a7a6.jpg" width="200"/>
+        <img src="https://images.bria.ai/images_resized/fe80f3df006ed848.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/a5eb32da12a55ab4.jpg" width="200"/> 
+        <img src="https://images.bria.ai/images_resized/f6a5895a89669d68.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/e4ab519959a4ab55.jpg" width="200"/> 
         
         
         You can use this route on a modified image by providing the sid from the response of the previously used route.
@@ -1765,17 +1836,46 @@ paths:
                 bg_prompt:
                   type: string
                   description: Text from which you wish to generate the new background
+                  example: a high quality professional photo on a concrete table in front of a city skyline, product photography, shallow depth of field, realistic, front view, close up, product image, bokeh. octane render, symmetrical artwork. cinematic, high detail, 8k, realistic lighting
+                placement_type:
+                  type: string
+                  description: this parameter allows you to control the positioning of the product/foreground in the image. Choosing 'original' will preserve the original position of the product/foreground in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product/foreground. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product/foreground.
+                  example: automatic
+                  enum: ["original","automatic","manual_placement","manual_padding"]
                 num_results:
                   type: integer
                   default: 4
-                  example: 4
-                  description: The number of backgrounds you would like to generate for the original image. If placement_type!=original, then for each selected placement you will get results in the amount of this parameter. 
+                  example: 1
+                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
+                canvas_size:
+                  type: array
+                  items:
+                    type: integer
+                  example: [900,550]
+                  default: [1000,1000]
+                  description: the desired size of the final image, after the replacement of the background. This parameter is only relevant when placement_type=automatic or placement_type=manual placement.
+                manual_placement_selection:
+                  type: array
+                  items:
+                    type: integer
+                  example: []
+                  default: [upper_left]
+                  enum: ["upper_left","upper_right","bottom_left","bottom_right","right_center","left_center","upper_center","bottom_center","center_vertical","center_horizontal"]
+                  description: if you've selected placement_type=manual placement, you should use this parameter in order to specify which placements/positions you would like to use from the list.
+                padding_values:
+                  type: array
+                  items:
+                    type: integer
+                  example: []
+                  default: [0,0,0,0]
+                  description: the desired padding in pixels around the product/foreground, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right].
                 seed:
                   type: integer
+                  example: 
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 sid:
                   type: string
-                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+                  example: ""
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       responses:
         '200':

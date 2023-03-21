@@ -1891,7 +1891,7 @@ paths:
                     type: array
                     items:
                       type: array
-                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed and the third value represents the sid of the result. You can recreate the same results again in the future by using the seed as part of the request. This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed and the third value represents the sid of the result. As this endpoint is asynchronous, the images are not saved to the URLs once the URLs are received in the response. Use API polling on those URLs with a 60-second timeout until you receive the image. Getting a file of size 0 MB indicates that this result is offensive or violates copyrights. You can recreate the same result in the future by using the seed as part of the request. This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
               examples:
                 example:
                   value:

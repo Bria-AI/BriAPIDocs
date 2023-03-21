@@ -1858,9 +1858,9 @@ paths:
                   type: array
                   items:
                     type: string
+                    enum: ["upper_left","upper_right","bottom_left","bottom_right","right_center","left_center","upper_center","bottom_center","center_vertical","center_horizontal"]
                   example: []
                   default: [upper_left]
-                  enum: ["upper_left","upper_right","bottom_left","bottom_right","right_center","left_center","upper_center","bottom_center","center_vertical","center_horizontal"]
                   description: if you've selected placement_type=manual placement, you should use this parameter in order to specify which placements/positions you would like to use from the list.
                 padding_values:
                   type: array

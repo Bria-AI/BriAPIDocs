@@ -1261,44 +1261,46 @@ paths:
         Here are some examples:
         
         
-        **1) prompt:** alien world
+        **prompt:** alien world
         
         
-           **style:** photo realistic
+        **style:** photo realistic
            
            
-           **atmosphere:** dramatic
+        **atmosphere:** dramatic
            
            
-           **camera:** portrait
+        **camera:** portrait
            
            
-           **medium:** photography
+        **medium:** photography
            
            
-           **results:**
+        **results:**
            
-           <img src="https://images.bria.ai/images_resized/c7700f41fe4f2171.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/a5be5a25a41e6b25.jpg" width="200" height="200"/>
-           <img src="https://images.bria.ai/images_resized/b31d95e14cf36f00.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d9db8c0f605352ce.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/c7700f41fe4f2171.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/a5be5a25a41e6b25.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/b31d95e14cf36f00.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d9db8c0f605352ce.jpg" width="200" height="200"/>
         
         
-        2) prompt: owl wearing a hat
+        **prompt:** owl wearing a hat
         
         
-           style: fashion
+        **style:** fashion
            
            
-           atmosphere: vivid
+        **atmosphere:** vivid
            
            
-           camera: close up
+        **camera:** close up
            
            
-           medium: art
+        **medium:** art
            
            
-           results: <img src="https://images.bria.ai/images_resized/b59b21373eaf2103.jpg"/> <img src="https://images.bria.ai/images_resized/af5b3e8c81d1c4cc.jpg"/>
-           <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg"/>
+        **results:**
+        
+        <img src="https://images.bria.ai/images_resized/b59b21373eaf2103.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/af5b3e8c81d1c4cc.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg" width="200" height="200"/>
            
            
       operationId: image/generate

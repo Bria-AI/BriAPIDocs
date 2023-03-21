@@ -1256,19 +1256,44 @@ paths:
 
         The *Image Generation Route* allows you to generate images based on any given text prompt. 
         
+        
         Here are some examples:
+        
+        
         1) prompt: alien world
+        
+        
            style: photo realistic
+           
+           
            atmosphere: dramatic
+           
+           
            camera: portrait
+           
+           
            medium: photography
+           
+           
            results: <img src="https://images.bria.ai/images_resized/c7700f41fe4f2171.jpg"/> <img src="https://images.bria.ai/images_resized/a5be5a25a41e6b25.jpg"/>
            <img src="https://images.bria.ai/images_resized/b31d95e14cf36f00.jpg"/> <img src="https://images.bria.ai/images_resized/d9db8c0f605352ce.jpg"/>
+        
+        
         2) prompt: owl wearing a hat
+        
+        
            style: fashion
+           
+           
            atmosphere: vivid
+           
+           
            camera: close up
+           
+           
            medium: art
+           
+           
            results: <img src="https://images.bria.ai/images_resized/b59b21373eaf2103.jpg"/> <img src="https://images.bria.ai/images_resized/af5b3e8c81d1c4cc.jpg"/>
            <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg"/>
            

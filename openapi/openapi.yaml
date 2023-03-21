@@ -1376,6 +1376,9 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+        '512':
+          description: Insufficient resources to process the request.
+
   /{visual_id}/create:
     post:
       tags:
@@ -1904,6 +1907,8 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+        '512':
+          description: Insufficient resources to process the request.
   /{visual_id}/increase_resolution:
     get:
       tags:

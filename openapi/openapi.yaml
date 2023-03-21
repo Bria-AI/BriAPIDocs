@@ -1857,7 +1857,7 @@ paths:
                 manual_placement_selection:
                   type: array
                   items:
-                    type: integer
+                    type: string
                   example: []
                   default: [upper_left]
                   enum: ["upper_left","upper_right","bottom_left","bottom_right","right_center","left_center","upper_center","bottom_center","center_vertical","center_horizontal"]

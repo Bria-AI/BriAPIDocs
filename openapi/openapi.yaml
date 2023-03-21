@@ -1825,7 +1825,7 @@ paths:
           schema:
             type: string
             example: "8487fb411f3c6716"
-          description: visual id of the image for which the user wishes to replace the background
+          description: The visual id of the image for which the user wishes to replace the background
       requestBody:
         content:
           application/json:
@@ -1838,7 +1838,7 @@ paths:
                   example: a high quality professional photo on a concrete table in front of a city skyline, product photography, shallow depth of field, realistic, front view, close up, product image, bokeh. octane render, symmetrical artwork. cinematic, high detail, 8k, realistic lighting
                 placement_type:
                   type: string
-                  description: this parameter allows you to control the positioning of the product/foreground in the image. Choosing 'original' will preserve the original position of the product/foreground in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product/foreground. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product/foreground.
+                  description: This parameter allows you to control the positioning of the product/foreground in the image. Choosing 'original' will preserve the original position of the product/foreground in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product/foreground. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product/foreground.
                   example: automatic
                   enum: ["original","automatic","manual_placement","manual_padding"]
                 num_results:
@@ -1852,7 +1852,7 @@ paths:
                     type: integer
                   example: [900,550]
                   default: [1000,1000]
-                  description: the desired size of the final image, after the replacement of the background. This parameter is only relevant when placement_type=automatic or placement_type=manual placement.
+                  description: The desired size of the final image, after the replacement of the background. This parameter is only relevant when placement_type=automatic or placement_type=manual placement.
                 manual_placement_selection:
                   type: array
                   items:
@@ -1860,14 +1860,14 @@ paths:
                     enum: ["upper_left","upper_right","bottom_left","bottom_right","right_center","left_center","upper_center","bottom_center","center_vertical","center_horizontal"]
                   example: []
                   default: [upper_left]
-                  description: if you've selected placement_type=manual placement, you should use this parameter in order to specify which placements/positions you would like to use from the list.
+                  description: If you've selected placement_type=manual placement, you should use this parameter in order to specify which placements/positions you would like to use from the list. You can select more then one placement in one request.
                 padding_values:
                   type: array
                   items:
                     type: integer
                   example: []
                   default: [0,0,0,0]
-                  description: the desired padding in pixels around the product/foreground, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right].
+                  description: The desired padding in pixels around the product/foreground, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right].
                 seed:
                   type: integer
                   example: 

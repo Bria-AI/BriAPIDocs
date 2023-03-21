@@ -392,7 +392,7 @@ paths:
                              "mid-40",
                              "mid-60"
                           ],
-                          "beard":[
+                          "Beard":[
                              "shaved",
                              "medium",
                              "full"
@@ -458,8 +458,8 @@ paths:
                             "age":{
                                "age":"high"
                             },
-                            "beard":{
-                               "beard":"high"
+                            "Beard":{
+                               "Beard":"high"
                             },
                             "diversity":{
                                "africa":"high",
@@ -621,7 +621,7 @@ paths:
                               "mid-40",
                               "mid-60"
                            ],
-                           "beard":[
+                           "Beard":[
                               "shaved",
                               "medium",
                               "full"
@@ -689,8 +689,8 @@ paths:
                            "age":{
                               "age":"low"
                            },
-                           "beard":{
-                              "beard":"low"
+                           "Beard":{
+                              "Beard":"low"
                            },
                            "diversity":{
                               "africa":"low",
@@ -744,7 +744,7 @@ paths:
                               "mid-40",
                               "mid-60"
                            ],
-                           "beard":[
+                           "Beard":[
                               "shaved",
                               "medium",
                               "full"
@@ -812,8 +812,8 @@ paths:
                            "age":{
                               "age":"high"
                            },
-                           "beard":{
-                              "beard":"high"
+                           "Beard":{
+                              "Beard":"high"
                            },
                            "diversity":{
                               "africa":"high",
@@ -1495,7 +1495,7 @@ paths:
                             enum: ["high", "low"]
                             description: Changing the hair line of a selected object.
                             example: "high"
-                          beard:
+                          Beard:
                             type: string
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected object.

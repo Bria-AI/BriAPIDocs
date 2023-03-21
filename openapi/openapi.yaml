@@ -1799,7 +1799,7 @@ paths:
         **placement_type**: manual_padding
         
         
-        **num_results**: 6
+        **num_results**: 4
         
         
         **padding_values**: [100,100,200,200]
@@ -1810,7 +1810,6 @@ paths:
         
         <img src="https://images.bria.ai/images_resized/cad31fdb012cd9c1.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/e6c70f0d4c64a7a6.jpg" width="200"/>
         <img src="https://images.bria.ai/images_resized/fe80f3df006ed848.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/a5eb32da12a55ab4.jpg" width="200"/> 
-        <img src="https://images.bria.ai/images_resized/f6a5895a89669d68.jpg" width="200"/> <img src="https://images.bria.ai/images_resized/e4ab519959a4ab55.jpg" width="200"/> 
         
         
         You can use this route on a modified image by providing the sid from the response of the previously used route.

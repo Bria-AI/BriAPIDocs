@@ -540,6 +540,8 @@ paths:
                         type: background
                                       }
                     ]
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
         '400':
           description: One of the details does not meet specification. Please call /info again.
         '404':
@@ -861,6 +863,8 @@ paths:
                         type:"person"
                      }
                   ]    
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
         '400':
           description: One of the details does not meet specification. Please call person/info again.
         '404':
@@ -1090,6 +1094,8 @@ paths:
                           "bg_overlap": 0.4
                       }
                   ]
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
         '400':
           description: One of the details does not meet specification. Please call person/info again.
         '404':
@@ -1183,6 +1189,8 @@ paths:
                           "replace": true
                       }
                   }
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
         '400':
           description: One of the details does not meet specification. Please call person/info again.
         '404':

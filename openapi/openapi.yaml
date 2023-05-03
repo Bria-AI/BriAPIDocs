@@ -185,6 +185,8 @@ paths:
           description: Request entity too large.
         '415':
           description: Unsupported media type.
+        '460':
+          description: Failed to download image.
         '500':
           description: Internal server error.
         '506':
@@ -295,6 +297,8 @@ paths:
           description: Bad request.
         '405':
           description: Method not allowed.
+        '460':
+          description: Failed to download image.
         '500':
           description: Internal server error.
         '506':

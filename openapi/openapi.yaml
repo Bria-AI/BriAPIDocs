@@ -2233,7 +2233,7 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/search_similar_images:
+  /search_similar_images:
     get:
       tags:
         - search_similar_images

@@ -2162,7 +2162,7 @@ paths:
           schema:
             type: integer
             example: 1
-          description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1. The default value is 1.
+          description: which batch of images you would like to receive in the current call. Synthetic results will only be included in page no. 1. The default value is 1. For each query, we support 800 results, so if you set num_results_per_page=50, you will have 16 pages of results.  
         - name: gallery_id
           in: query
           schema:
@@ -2273,7 +2273,7 @@ paths:
           schema:
             type: integer
             example: 1
-          description: which batch of images you would like to receive in the current call. The default value is 1.
+          description: which batch of images you would like to receive in the current call. The default value is 1. For each query, we support 800 results, so if you set num_results_per_page=50, you will have 16 pages of results.  
         - name: gallery_id
           in: query
           schema:

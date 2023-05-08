@@ -2256,8 +2256,8 @@ paths:
 
       operationId: search_similar_images
       parameters:
-        - name: visual_id
-          in: path
+        - name: vhash
+          in: query
           schema:
             type: string
           description: the visual id of the image for which the user is looking for similar images.

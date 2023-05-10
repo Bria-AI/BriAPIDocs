@@ -147,7 +147,7 @@ paths:
                   type: string
                   format: binary
                 image_url:
-                  description: The URL of the file you would like to upload to Bria. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
+                  description: The URL of the file you would like to upload to Bria. The URL should lead to an image publicly available online. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
                   type: string
                 is_private:   
                   description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
@@ -266,7 +266,7 @@ paths:
                   description: The internal image id in your API, of the image you would like to register to Bria (without uploading it). If your images require authentication, you will need to register them using org_image_key after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
                   example: "12345acbd"
                 image_url:
-                  description: The URL of the image you would like to register to Bria. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url. Images can only be registered using image_urls if they do not require authentication.
+                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url. Images can only be registered using image_urls if they do not require authentication.
                   type: string
                 is_private:   
                   description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.

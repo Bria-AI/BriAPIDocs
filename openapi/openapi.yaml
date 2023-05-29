@@ -1668,10 +1668,14 @@ paths:
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.                         properties:
+                        properties:
                           remove:
                             type: boolean
                             description: Use the value true if you would like to remove the object
                             example: true
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.        
       responses:
         '200':
           description: Successful operation.

@@ -1612,7 +1612,95 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.   
-          
+  /{visual_id}/remove_object:
+    post:
+      tags:
+        - remove_object
+      summary: Remove objects from the image
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Remove Object Route* is used to remove objects, using the object id returned in the /info or objects/info request.
+        You can send in one request multiple objects for removal.
+        
+        
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+
+
+        This route returns both the URL and the sid associated with the updated image.
+
+      operationId: remove_object
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image the user wants to remove objects from.
+        - in: query
+          name: desired_resolution
+          schema:
+            type: string
+            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
+            example: "nhd"
+          description: The desired resolution of the updated image. This parameter is optional.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                changes:
+                  type: array
+                  description: The requested changes to the image. You can send in one request multiple objects for removal, each as an object in this array.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Id of the selected object in the image, to which the user would like to make changes (currently the only available action is removal).
+                        example: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
+                      actions:
+                        type: object
+                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.                         properties:
+                          remove:
+                            type: boolean
+                            description: Use the value true if you would like to remove the object
+                            example: true
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.        
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sid:
+                    type: string
+                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
+                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                  image_res:
+                    type: string
+                    description: URL that represents the new visual created in the request. It is a temporary URL that will expire
+                    example: "https://d1uzvjowrxhw13.cloudfront.net/api/create_results/8487fb411f3c6716_05e8a8dc-b723-11ec-be15-c28fc8b4a55b.JPEG?AWSAccessKeyId=ASIAUL5JH7ABM5GPF244&Signature=OaE%2BTJW%2FBJFDB2xGXpy%2F%2F8TYkAE%3D&x-amz-security-token=FwoGZXIvYXdzEEsaDHAX5TxTwymFAQYSwSKYBK3lKAwEipl9tjg1QQwWMdQDqS%2B0rYkexasgxxW78Vz4DvJUVPISpnTOZk4h%2Fy6%2BikLC5%2FYGY86SL8980ZHZzRgqcodDJ0n6ljB7SgbkfJnSpgx%2F8iCHzoDH%2BS7YrUjnR7e%2FUz%2B4sIbV%2BSHGn36EXTNnrm%2FOgCsiL9vqLSGFEo5R1pLYIbezxWCEWMLcDO5x9WsVoPRYW7c%2B5B%2B1Ku3qybQEBFRex4BVisJU4NTXbwQKFWMbkTjHg5vK%2FEdQn7OzmCA7SfCSHe%2FqDZIBQG0ki%2BHt%2Fs4bAYYTZpl%2FjoUJTldlltdWH2uitj%2BBeyQKcUnHrPjTY1CsAOEC6OV%2FKlZfOjbNJTvlmHc7%2BKP3iICKlCVJwvRK6%2FnmU7mUVOb%2FmgD2kIvBq5G6fNxXQlKfFGZE2lSs8HR83sp44Qz8hm60DPfK45hE0XdVnIS2jY%2F1a%2BYBmijCr4HDTgv52D53CdnOiQ%2BQ8Yld0bBZRC4aDBATcvcsDcnO4BBMY0NS1c%2BSJ6b4IMxDK2OKdanf9EYiDgzr3ebsS1m7j4NX3pEvNC99YF%2B5PQwDYhbMwlMCAG9AMs9%2FF86Al3czOJFOxV1ClBEoUKy2TgntGraCp76UoLmRrHuRq7WKQUvIj2HAXsIlyNkBg3z498M1Gh7vyD%2F7xQgA0Ny6zYeC1gBH4HmYtFlBS%2BJimmxFlCoCuyFhBmUXp7p6oBI3APuSyQYLKLmQwJIGMioiS3mUno68q7GAsD%2FPmSCM8xMeEWF8IegvlU4XWAQuNnQJLVtqwkZb1Qo%3D&Expires=1650276159"
+                          '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.          
   /{visual_id}/remove_bg:
     get:
       tags:
@@ -1715,7 +1803,7 @@ paths:
         - in: query
           name: scale
           schema:
-            type: int
+            type: integer
             example: 4
             minimum: 1
             maximum: 5

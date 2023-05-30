@@ -2266,7 +2266,7 @@ paths:
           schema:
             type: string
             example: "photo realistic"
-            enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
+            enum: ['stock photography','photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
           description: Which style you would like to see in your results, this parameter is optional.
         - name: atmosphere
           in: query

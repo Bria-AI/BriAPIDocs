@@ -1211,7 +1211,7 @@ paths:
   /{visual_id}/caption:
     get:
       tags:
-        - caption
+        - Image
       summary: Get a caption that describes the image
       description: >-
 

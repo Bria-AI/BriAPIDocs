@@ -81,25 +81,30 @@ x-tagGroups:
       - increase_resolution
       - image_to_psd
       - crop
+    'x-collapse-tags': true
   - name: Presenter
     tags:
       - person/info
       - create
       - recast_model
+    'x-collapse-tags': true  
   - name: Object
     tags:
       - objects/info
       - remove_object
+    'x-collapse-tags': true  
   - name: Background
     tags:
       - background/info
       - remove_bg
       - blur_bg
       - replace_bg
+    'x-collapse-tags': true  
   - name: Search
     tags:
       - search
       - search_similar_images
+    'x-collapse-tags': true  
      
 paths:
   /upload:

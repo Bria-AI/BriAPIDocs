@@ -70,13 +70,7 @@ info:
 externalDocs:
     description: Register and get API Access
     url: 'https://bria.ai/api-plans'
-x-tagGroups:
-  - name: Recast Model
-    tags:
-      - recast_model
-  - name: Remove Object
-    tags:
-      - remove_object    
+ 
 paths:
   /upload:
     post:

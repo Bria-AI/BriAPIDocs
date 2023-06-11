@@ -70,47 +70,12 @@ info:
 externalDocs:
     description: Register and get API Access
     url: 'https://bria.ai/api-plans'
-x-tagGroups:
-  - name: Image
-    tags:
-      - upload
-      - register
-      - info
-      - caption
-      - /image/generate
-      - increase_resolution
-      - image_to_psd
-      - crop
-    'x-collapse-tags': true
-  - name: Presenter
-    tags:
-      - person/info
-      - create
-      - recast_model
-    'x-collapse-tags': true  
-  - name: Object
-    tags:
-      - objects/info
-      - remove_object
-    'x-collapse-tags': true  
-  - name: Background
-    tags:
-      - background/info
-      - remove_bg
-      - blur_bg
-      - replace_bg
-    'x-collapse-tags': true  
-  - name: Search
-    tags:
-      - search
-      - search_similar_images
-    'x-collapse-tags': true  
-     
+
 paths:
   /upload:
     post:
       tags:
-        - upload
+        - Image
       summary: Upload a file
       description: >-
 
@@ -231,7 +196,7 @@ paths:
   /register:
     post:
       tags:
-        - register
+        - Image
       summary: Register an image
       description: >-
 
@@ -343,7 +308,7 @@ paths:
   /{visual_id}/info:
     get:
       tags:
-        - info
+        - Image
       summary: Get image info and available actions
       description: >-
 
@@ -596,7 +561,7 @@ paths:
   /{visual_id}/person/info:
     get:
       tags:
-        - person/info
+        - Presenter
       summary: Get info and available actions for the people in the image
       description: >-
 
@@ -919,7 +884,7 @@ paths:
   /{visual_id}/objects/info:
     get:
       tags:
-        - objects/info
+        - Object
       summary: Get info and available actions for the objects in the image
       description: >-
 
@@ -1150,7 +1115,7 @@ paths:
   /{visual_id}/background/info:
     get:
       tags:
-        - background/info
+        - Background
       summary: Get info and available actions for the background of the image
       description: >-
 
@@ -1295,7 +1260,7 @@ paths:
   /image/generate:
     get:
       tags:
-        - /image/generate
+        - Image
       summary: Generate images using a prompt
       description: >-
 
@@ -1429,7 +1394,7 @@ paths:
   /{visual_id}/create:
     post:
       tags:
-        - create
+        - Presenter
       summary: Modify an image based on changes requested by the user
       description: >-
 
@@ -1576,7 +1541,7 @@ paths:
   /{visual_id}/recast_model:
     post:
       tags:
-        - recast_model
+        - Presenter
       summary: Customize a portrait to any profession/theme
       description: >-
 
@@ -1650,7 +1615,7 @@ paths:
   /{visual_id}/remove_object:
     post:
       tags:
-        - remove_object
+        - Object
       summary: Remove objects from the image
       description: >-
         **Description**
@@ -1733,7 +1698,7 @@ paths:
   /{visual_id}/remove_bg:
     get:
       tags:
-        - remove_bg
+        - Background
       summary: Remove the background of an image
       description: >-
 
@@ -1802,7 +1767,7 @@ paths:
   /{visual_id}/blur_bg:
     get:
       tags:
-        - blur_bg
+        - Background
       summary: Creates a blur effect on the background of an image
       description: >-
 
@@ -1873,7 +1838,7 @@ paths:
   /{visual_id}/replace_bg:
     post:
       tags:
-        - replace_bg
+        - Background
       summary: Generate a new background of an image
       description: >-
 
@@ -2051,7 +2016,7 @@ paths:
   /{visual_id}/increase_resolution:
     get:
       tags:
-        - increase_resolution
+        - Image
       summary: Increase image resolution
       description: >-
 
@@ -2115,7 +2080,7 @@ paths:
   /{visual_id}/image_to_psd:
     post:
       tags:
-        - image_to_psd
+        - Image
       summary: Create a layered PSD file from any image.
       description: >-
 
@@ -2173,7 +2138,7 @@ paths:
   /{visual_id}/crop:
     post:
       tags:
-        - crop
+        - Image
       summary: Crop an image around the remaining region of interest.
       description: >-
 
@@ -2250,7 +2215,7 @@ paths:
   /search:
     get:
       tags:
-        - search
+        - Search
       summary: Search for images matching the given text query
       description: >-
 
@@ -2363,7 +2328,7 @@ paths:
   /search_similar_images:
     get:
       tags:
-        - search_similar_images
+        - Search
       summary: Search for images matching the given image
       description: >-
 
@@ -2449,172 +2414,3 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/video:
-    post:
-      tags:
-        - video (Coming Soon)
-      summary: Generate a video from a still image
-      description: >-
-
-
-        **Description**
-
-
-
-        The *Video Route* is used to create a new video, based on a previously uploaded single still image. 
-        
-        
-        This route can also be used on an image that has been changed by the user using the /create route.
-        
-        
-        The *Video Route* will return the URL for accessing the new generated video and the confidence that Bria has in the quality of this video.
-        
-
-      operationId: video
-      parameters:
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          description: visual id of the image the user wants to create a new video from
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                changes:
-                  type: array
-                  description: The requested change to the selected visual or object.
-                  items:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        description: id of the object in the image. If the required action is camera_movement, then id should get the value visual_id.
-                      actions:
-                        type: object
-                        description: >-
-                          the video type the user wishes to create based on the selected object in the image. Currently, only one action can be sent per request.
-                        properties:
-                          zoom:
-                            type: object
-                            properties:
-                              type:
-                                type: string
-                                enum: ["zoom_in", "zoom_out"]
-                                description: Determines the type of zoom in the video. 
-                                default: "zoom_in"
-                                example: "zoom_in"
-                              focus_area:
-                                type: string
-                                enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
-                                description: Determines the focus area in the video and which area in the image will be the final frame of the video.
-                                default: "center_middle"
-                                example: "center_middle"
-                              video_depth:
-                                type: string
-                                enum: ["shallow", "medium","deep"]
-                                description: Determines how deep in the focus area the camera will move. 
-                                default: "shallow"
-                                example: "shallow"
-                              boomerang_loop:
-                                type: boolean
-                                description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
-                                default: FALSE
-                                example: FALSE
-                              pace:
-                                type: string
-                                enum: ["slow", "medium","fast"]
-                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
-                                default: "medium"
-                                example: "medium"
-                              duration:
-                                type: integer
-                                description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
-                                default: 5
-                                example: 5
-                          hover:
-                            type: object
-                            properties:
-                              start_area:
-                                type: string
-                                enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
-                                description: Determines the area in the video from which the video will start.
-                                default: "top_left"
-                                example: "top_left"
-                              end_area:
-                                type: string
-                                enum: ["top_left", "top_middle","top_right","center_left","center_middle","center_right","bottom_left","bottom_middle","bottom_right"]
-                                description: Determines the area in the video in which the video will end.
-                                default: "center_middle"
-                                example: "center_middle"
-                              video_depth:
-                                type: string
-                                enum: ["shallow", "medium","deep"]
-                                description: Determines how deep in the focus area the camera will move. 
-                                default: "shallow"
-                                example: "shallow"
-                              boomerang_loop:
-                                type: boolean
-                                description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
-                                default: FALSE
-                                example: FALSE
-                              pace:
-                                type: string
-                                enum: ["slow", "medium","fast"]
-                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
-                                default: "medium"
-                                example: "medium"
-                              duration:
-                                type: integer
-                                description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
-                                default: 5
-                                example: 5
-                          smart_zoom:
-                            type: object
-                            properties:
-                              boomerang_loop:
-                                type: boolean
-                                description: Determines if the final video will include a boomerang loop (TRUE) or not (FALSE).
-                                default: FALSE
-                                example: FALSE
-                              pace:
-                                type: string
-                                enum: ["slow", "medium","fast"]
-                                description: Determines the pace of the video. This property is incompatible with `duration` (you can use only one in a single call).
-                                default: "medium"
-                                example: "medium"
-                              duration:
-                                type: integer
-                                description: Determines the duration of the video in seconds. This property is incompatible with `pace` (you can use only one in a single call).
-                                default: 5
-                                example: 5
-                            
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  video_response:
-                    type: string
-                    description: URL that represents the video created in the request. It is a temporary URL that will expire
-                  confidence:
-                    type: string
-                    description: Indicating the level of confidence Bria has in the quality of the created video. At present, the response will be blank.
-        '400':
-          description: Either `pace` or `duration` are required.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-servers:
-  - url: https://engine.prod.bria-api.com/v1

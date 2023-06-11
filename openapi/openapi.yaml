@@ -1,4 +1,11 @@
 openapi: 3.0.0
+x-tagGroups:
+  - name: Recast Model
+    tags:
+      - recast_model
+  - name: Remove Object
+    tags:
+      - remove_object
 info:
   title: The Bria API
   version: ''

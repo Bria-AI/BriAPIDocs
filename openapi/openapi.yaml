@@ -96,7 +96,7 @@ x-tagGroups:
       - remove_bg
       - blur_bg
       - replace_bg
-   - name: Search
+  - name: Search
     tags:
       - search
       - search_similar_images

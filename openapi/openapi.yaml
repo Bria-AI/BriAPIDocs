@@ -70,7 +70,37 @@ info:
 externalDocs:
     description: Register and get API Access
     url: 'https://bria.ai/api-plans'
- 
+x-tagGroups:
+  - name: Image
+    tags:
+      - upload
+      - register
+      - info
+      - caption
+      - /image/generate
+      - increase_resolution
+      - image_to_psd
+      - crop
+  - name: Presenter
+    tags:
+      - person/info
+      - create
+      - recast_model
+  - name: Object
+    tags:
+      - objects/info
+      - remove_object
+  - name: Background
+    tags:
+      - background/info
+      - remove_bg
+      - blur_bg
+      - replace_bg
+   - name: Search
+    tags:
+      - search
+      - search_similar_images
+     
 paths:
   /upload:
     post:

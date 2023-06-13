@@ -2217,7 +2217,7 @@ paths:
     get:
       tags:
         - Search
-      summary: Search for images matching the given text quer
+      summary: Search for images matching the given text query
       description: >-
 
 

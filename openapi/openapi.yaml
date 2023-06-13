@@ -77,7 +77,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Upload a file
+      summary: Upload an image
       description: >-
 
         **Description**
@@ -563,7 +563,7 @@ paths:
     get:
       tags:
         - Presenter
-      summary: Get info and available actions for the people in the image
+      summary: Get info and available actions for the presenters in the image
       description: >-
 
 
@@ -1396,7 +1396,7 @@ paths:
     post:
       tags:
         - Presenter
-      summary: Modify an image based on changes requested by the user
+      summary: Modify the presenters in the image
       description: >-
 
 
@@ -1543,7 +1543,7 @@ paths:
     post:
       tags:
         - Presenter
-      summary: Customize a portrait to any profession/theme
+      summary: Customize a portrait of a presenter to any profession/theme
       description: >-
 
 
@@ -1617,7 +1617,7 @@ paths:
     post:
       tags:
         - Object
-      summary: Remove objects from the image
+      summary: Remove objects from an image
       description: >-
         **Description**
 
@@ -1840,7 +1840,7 @@ paths:
     post:
       tags:
         - Background
-      summary: Generate a new background of an image
+      summary: Generate a new background for an image
       description: >-
 
 
@@ -2082,7 +2082,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Create a layered PSD file from any image.
+      summary: Create a layered PSD file from any image
       description: >-
 
 
@@ -2140,7 +2140,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Crop an image around the remaining region of interest.
+      summary: Crop an image around the remaining region of interest
       description: >-
 
 
@@ -2217,7 +2217,7 @@ paths:
     get:
       tags:
         - Search
-      summary: Search for images matching the given text query
+      summary: Search for images matching the given text quer
       description: >-
 
 

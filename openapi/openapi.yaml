@@ -2017,7 +2017,7 @@ paths:
   /{visual_id}/image_expansion:
     post:
       tags:
-        - image
+        - Image
         - Background
       summary: Expand an image, using generative AI
       description: >-
@@ -2103,7 +2103,6 @@ paths:
                   items:
                     type: integer
                   example: [301,-66]
-                  default: [1000,1000]
                   description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
                 prompt:
                   type: string

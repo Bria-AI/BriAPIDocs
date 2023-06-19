@@ -69,7 +69,7 @@ info:
       
 externalDocs:
     description: Register and get API Access
-    url: 'https://bria.ai/api-plans'
+    url: 'https://labs.bria.ai/api-plans'
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:

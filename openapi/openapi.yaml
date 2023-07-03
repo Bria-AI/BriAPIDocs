@@ -1668,10 +1668,14 @@ paths:
                         example: ''
                       positive_points:
                         type: array
+                        items:
+                          type: integer
                         description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.
                         example: [313,478]
                       size:
                         type: array
+                        items:
+                          type: integer
                         description: This parameter is only relevant if this object in the array includes the parameter positive_points. Please specify the size in px of the provided image.
                         example: [1537,1025]
                       actions:

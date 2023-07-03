@@ -1622,7 +1622,10 @@ paths:
         **Description**
 
         The *Remove Object Route* is used to remove objects, using the object id returned in the /info or objects/info request.
-        You can send in one request multiple objects for removal.
+
+        You can also remove a part of the image by providing a mask or a single point. That way you can create a brush interface (using the mask) or a click2remove interface (using the point). 
+
+        In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time. 
 
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
 
@@ -1634,14 +1637,14 @@ paths:
           required: true
           schema:
             type: string
-            example: "8487fb411f3c6716"
+            example: "86f9986390596e8f"
           description: visual id of the image the user wants to remove objects from.
         - in: query
           name: desired_resolution
           schema:
             type: string
             enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
-            example: "nhd"
+            example: 'original'
           description: The desired resolution of the updated image. This parameter is optional.
       requestBody:
         content:
@@ -1651,14 +1654,26 @@ paths:
               properties:
                 changes:
                   type: array
-                  description: The requested changes to the image. You can send in one request multiple objects for removal, each as an object in this array.
+                  description: The requested changes to the image. In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time.  
                   items:
                     type: object
                     properties:
                       id:
                         type: string
-                        description: Id of the selected object in the image, to which the user would like to make changes (currently the only available action is removal).
-                        example: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
+                        description: Id of the selected object in the image, which the user would like to remove. If you include a mask or a point, there is no need to use this parameter.
+                        example: ""
+                      mask_url:
+                        type: string
+                        description: A public URL that includes a mask in the following format: PNG file, a binary image in which the area that should be removed should get the value 255 (white) and the rest should get the value 0 (black). If you include an id or a point, there is no need to use this parameter.
+                        example: ""
+                      positive_points:
+                        type: array
+                        description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.
+                        example: [313,478]
+                      size:
+                        type: array
+                        description: This parameter is only relevant if this object in the array includes the parameter positive_points. Please specify the size in px of the provided image.
+                        example: [1537,1025]
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.

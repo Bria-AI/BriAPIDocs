@@ -1663,6 +1663,10 @@ paths:
                         type: string
                         description: Id of the selected object in the image, which the user would like to remove. If you include a mask or a point, there is no need to use this parameter.
                         example: ''
+                      mask_url:
+                        type: string
+                        description: A public URL that includes a mask in the following format: PNG file, a binary image in which the area that should be removed should get the value 255 (white) and the rest should get the value 0 (black). If you include an id or a point, there is no need to use this parameter.
+                        example: ''  
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.

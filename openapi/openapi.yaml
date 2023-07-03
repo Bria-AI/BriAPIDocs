@@ -1661,11 +1661,11 @@ paths:
                       id:
                         type: string
                         description: Id of the selected object in the image, which the user would like to remove. If you include a mask or a point, there is no need to use this parameter.
-                        example: ""
+                        example: ''
                       mask_url:
                         type: string
                         description: A public URL that includes a mask in the following format: PNG file, a binary image in which the area that should be removed should get the value 255 (white) and the rest should get the value 0 (black). If you include an id or a point, there is no need to use this parameter.
-                        example: ""
+                        example: ''
                       positive_points:
                         type: array
                         description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.

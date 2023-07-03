@@ -1630,6 +1630,7 @@ paths:
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
 
         This route returns both the URL and the sid associated with the updated image.
+        
       operationId: remove_object
       parameters:
         - in: path
@@ -1670,14 +1671,14 @@ paths:
                         type: array
                         items:
                           type: integer
-                        description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.
                         example: [313,478]
+                        description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.
                       size:
                         type: array
                         items:
                           type: integer
-                        description: This parameter is only relevant if this object in the array includes the parameter positive_points. Please specify the size in px of the provided image.
                         example: [1537,1025]
+                        description: This parameter is only relevant if this object in the array includes the parameter positive_points. Please specify the size in px of the provided image.
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.

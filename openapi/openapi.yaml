@@ -41,7 +41,7 @@ info:
       - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
       - /remove_object - Using the *Remove Object Route* to remove the objects from an image.
       - /remove_bg - Using the *Remove BG Route* to remove the background of a an image.
-      - /blur_bg - Using the *Blur BG Route* to create a blur effect on the background of an image.
+      - background/blur - Using the *Blur BG Route* to create a blur effect on the background of an image.
       - /replace_bg - Using the *Replace BG Route* to generate new backgrounds for an image.
       
         
@@ -1785,7 +1785,7 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/blur_bg:
+  /{visual_id}/background/blur:
     get:
       tags:
         - Background
@@ -1797,7 +1797,7 @@ paths:
 
 
 
-        The *Blur BG Route* is used to create a blur effect on the background of a previously uploaded image. 
+        The *background/blur Route* is used to create a blur effect on the background of a previously uploaded image. 
         
         
         You can also use this route on a modified image by providing the sid from the response of the previously used route.

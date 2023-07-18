@@ -694,6 +694,383 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/background/info:
+    get:
+      tags:
+        - Background Generation
+      summary: Get info and available actions for the background of the image
+      description: >-
+
+
+
+        **Description**
+
+
+        The *Background/Info Route* is used to retrieve useful information on the background of a specific
+        visual that was previously uploaded to the database.
+
+        
+        Additionally, it provides the available changes for the background, which are supported by the Bria API. 
+        
+        This route should be used instead of the main /info route when you are only interested in 
+        the available actions for the background of the image. 
+        With this route, you will save time by only obtaining information that is relevant to your needs.
+
+      operationId: background/info
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "f49943971e3039c7"
+          description: visual id of the image, received after using the /upload or register route.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The id of the background
+                    type:
+                      type: string
+                      description: In this route it will always be 'background'
+                    labels:
+                      type: array
+                      description: In this route currently it's null
+                    rect:
+                      type: object
+                      description: In this route currently it's null
+                    actions:
+                      type: object
+                      description: The available API actions for the background
+                    oracle:
+                      type: object
+                      description: The predicted quality of the available actions for the background
+              examples:
+                example:
+                  value:
+                    {
+                      "id": "67a9746d4c7939e2753869cdb4330852b6e2472b8110ae1fb59f8c033fc7fe1f",
+                      "type": "background",
+                      "labels": null,
+                      "rect": null,
+                      "actions": {
+                          "remove": [
+                              true
+                          ],
+                          "blur": [
+                              true
+                          ],
+                          "replace": [
+                              true
+                          ]
+                      },
+                      "oracle": {
+                          "remove": true,
+                          "blur": true,
+                          "replace": true
+                      }
+                  }
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
+        '400':
+          description: One of the details does not meet specification. Please call person/info again.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/objects/info:
+    get:
+      tags:
+        - Object Removal
+      summary: Get info and available actions for the objects in the image
+      description: >-
+
+
+
+        **Description**
+
+
+        The *Objects/Info Route* is used to retrieve useful information on the objects in a specific
+        visual that was previously uploaded to the database.
+
+        
+        Additionally, it provides a description of each object within the scene 
+        along with its available changes, which are supported by the Bria API. 
+        
+        This route should be used instead of the main /info route when you are only interested in 
+        information and available actions for the objects in the image. 
+        With this route, you will save time by only obtaining information that is relevant to your needs.
+
+      operationId: objects/info
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "f49943971e3039c7"
+          description: visual id of the image, received after using the /upload or register route.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The id of the object
+                    type:
+                      type: string
+                      description: In this route it will be the type of the object
+                    labels:
+                      type: array
+                      description: In this route it will allways be 'object'
+                    rect:
+                      type: object
+                      description: The location of the object inside the image. x and y represent the upper left corner of the object, and by using the w (width) and h (height) you can create a rectangle around the object.
+                    actions:
+                      type: object
+                      description: The available API actions for this specific object.
+                    oracle:
+                      type: object
+                      description: The predicted quality of the available actions for this specific object
+                    bg_overlap:
+                      type: number
+                      description: The percentage of the object's surface that is mutual with the background.
+                      
+              examples:
+                example:
+                  value:
+                    [
+                      {
+                          "id": "d34ef7cf0b4e1ea2e414cdff7ae9ded80162f1f93bb94df709fe29d9df3dbfb5",
+                          "type": "dining table",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 1294.921875,
+                              "y": 4143.75,
+                              "w": 2253.1640625,
+                              "h": 2071.875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.4
+                      },
+                      {
+                          "id": "d1b004a7b3b065aa8b98b321b67806cb3e6ca09e596ad6d3f31c625e46e168e2",
+                          "type": "potted plant",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 4558.125,
+                              "y": 2667.5390625,
+                              "w": 517.96875,
+                              "h": 725.15625
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.67
+                      },
+                      {
+                          "id": "f173a0ad62749dbeb97f8055f51d3d125d4c9c968ee3ae46754e911f3fd12000",
+                          "type": "vase",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 3366.796875,
+                              "y": 2123.671875,
+                              "w": 595.6640625,
+                              "h": 284.8828125
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.89
+                      },
+                      {
+                          "id": "7a3bd30a268840cc3645abf7b512c3b9b8bc2d55d98aa5f7ef8c1e72348a016c",
+                          "type": "potted plant",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 3263.203125,
+                              "y": 1398.515625,
+                              "w": 854.6484375,
+                              "h": 751.0546875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 1.0
+                      },
+                      {
+                          "id": "0289aaf067a6d7d812738a8d42d17e54ffd2fa79e0decbca46a873018a6d791a",
+                          "type": "chair",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 2900.625,
+                              "y": 3858.8671875,
+                              "w": 1502.109375,
+                              "h": 2486.25
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.0
+                      },
+                      {
+                          "id": "0a349cbe603a786570d4eec7dd9cf64e568ef72767a5847251b32988a2b99dff",
+                          "type": "chair",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 647.4609375,
+                              "y": 3910.6640625,
+                              "w": 1139.53125,
+                              "h": 2071.875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.4
+                      }
+                  ]
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
+        '400':
+          description: One of the details does not meet specification. Please call person/info again.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/caption:
+    get:
+      tags:
+        - AI Search
+      summary: Get a caption that describes the image
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Caption Route* is used to get a caption that describes the given image.
+        
+
+      operationId: caption
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "8487fb411f3c6716"
+          description: visual id of the image for which you'd like a caption
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        caption:
+                          type: string
+                          example: "woman walking on a bridge in the jungle"
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+
   /{visual_id}/person/info:
     get:
       tags:
@@ -1009,382 +1386,6 @@ paths:
           description: File hasn’t finished onboarding. Please call /info again until you get 200.
         '400':
           description: One of the details does not meet specification. Please call person/info again.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/objects/info:
-    get:
-      tags:
-        - Object Removal
-      summary: Get info and available actions for the objects in the image
-      description: >-
-
-
-
-        **Description**
-
-
-        The *Objects/Info Route* is used to retrieve useful information on the objects in a specific
-        visual that was previously uploaded to the database.
-
-        
-        Additionally, it provides a description of each object within the scene 
-        along with its available changes, which are supported by the Bria API. 
-        
-        This route should be used instead of the main /info route when you are only interested in 
-        information and available actions for the objects in the image. 
-        With this route, you will save time by only obtaining information that is relevant to your needs.
-
-      operationId: objects/info
-      parameters:
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          example: "f49943971e3039c7"
-          description: visual id of the image, received after using the /upload or register route.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: The id of the object
-                    type:
-                      type: string
-                      description: In this route it will be the type of the object
-                    labels:
-                      type: array
-                      description: In this route it will allways be 'object'
-                    rect:
-                      type: object
-                      description: The location of the object inside the image. x and y represent the upper left corner of the object, and by using the w (width) and h (height) you can create a rectangle around the object.
-                    actions:
-                      type: object
-                      description: The available API actions for this specific object.
-                    oracle:
-                      type: object
-                      description: The predicted quality of the available actions for this specific object
-                    bg_overlap:
-                      type: number
-                      description: The percentage of the object's surface that is mutual with the background.
-                      
-              examples:
-                example:
-                  value:
-                    [
-                      {
-                          "id": "d34ef7cf0b4e1ea2e414cdff7ae9ded80162f1f93bb94df709fe29d9df3dbfb5",
-                          "type": "dining table",
-                          "labels": [
-                              "object"
-                          ],
-                          "rect": {
-                              "x": 1294.921875,
-                              "y": 4143.75,
-                              "w": 2253.1640625,
-                              "h": 2071.875
-                          },
-                          "actions": {
-                              "remove": [
-                                  true
-                              ],
-                              "replace": [
-                                  true
-                              ]
-                          },
-                          "oracle": {
-                              "remove": true
-                          },
-                          "bg_overlap": 0.4
-                      },
-                      {
-                          "id": "d1b004a7b3b065aa8b98b321b67806cb3e6ca09e596ad6d3f31c625e46e168e2",
-                          "type": "potted plant",
-                          "labels": [
-                              "object"
-                          ],
-                          "rect": {
-                              "x": 4558.125,
-                              "y": 2667.5390625,
-                              "w": 517.96875,
-                              "h": 725.15625
-                          },
-                          "actions": {
-                              "remove": [
-                                  true
-                              ],
-                              "replace": [
-                                  true
-                              ]
-                          },
-                          "oracle": {
-                              "remove": true
-                          },
-                          "bg_overlap": 0.67
-                      },
-                      {
-                          "id": "f173a0ad62749dbeb97f8055f51d3d125d4c9c968ee3ae46754e911f3fd12000",
-                          "type": "vase",
-                          "labels": [
-                              "object"
-                          ],
-                          "rect": {
-                              "x": 3366.796875,
-                              "y": 2123.671875,
-                              "w": 595.6640625,
-                              "h": 284.8828125
-                          },
-                          "actions": {
-                              "remove": [
-                                  true
-                              ],
-                              "replace": [
-                                  true
-                              ]
-                          },
-                          "oracle": {
-                              "remove": true
-                          },
-                          "bg_overlap": 0.89
-                      },
-                      {
-                          "id": "7a3bd30a268840cc3645abf7b512c3b9b8bc2d55d98aa5f7ef8c1e72348a016c",
-                          "type": "potted plant",
-                          "labels": [
-                              "object"
-                          ],
-                          "rect": {
-                              "x": 3263.203125,
-                              "y": 1398.515625,
-                              "w": 854.6484375,
-                              "h": 751.0546875
-                          },
-                          "actions": {
-                              "remove": [
-                                  true
-                              ],
-                              "replace": [
-                                  true
-                              ]
-                          },
-                          "oracle": {
-                              "remove": true
-                          },
-                          "bg_overlap": 1.0
-                      },
-                      {
-                          "id": "0289aaf067a6d7d812738a8d42d17e54ffd2fa79e0decbca46a873018a6d791a",
-                          "type": "chair",
-                          "labels": [
-                              "object"
-                          ],
-                          "rect": {
-                              "x": 2900.625,
-                              "y": 3858.8671875,
-                              "w": 1502.109375,
-                              "h": 2486.25
-                          },
-                          "actions": {
-                              "remove": [
-                                  true
-                              ],
-                              "replace": [
-                                  true
-                              ]
-                          },
-                          "oracle": {
-                              "remove": true
-                          },
-                          "bg_overlap": 0.0
-                      },
-                      {
-                          "id": "0a349cbe603a786570d4eec7dd9cf64e568ef72767a5847251b32988a2b99dff",
-                          "type": "chair",
-                          "labels": [
-                              "object"
-                          ],
-                          "rect": {
-                              "x": 647.4609375,
-                              "y": 3910.6640625,
-                              "w": 1139.53125,
-                              "h": 2071.875
-                          },
-                          "actions": {
-                              "remove": [
-                                  true
-                              ],
-                              "replace": [
-                                  true
-                              ]
-                          },
-                          "oracle": {
-                              "remove": true
-                          },
-                          "bg_overlap": 0.4
-                      }
-                  ]
-        '205':
-          description: File hasn’t finished onboarding. Please call /info again until you get 200.
-        '400':
-          description: One of the details does not meet specification. Please call person/info again.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/background/info:
-    get:
-      tags:
-        - Background Generation
-      summary: Get info and available actions for the background of the image
-      description: >-
-
-
-
-        **Description**
-
-
-        The *Background/Info Route* is used to retrieve useful information on the background of a specific
-        visual that was previously uploaded to the database.
-
-        
-        Additionally, it provides the available changes for the background, which are supported by the Bria API. 
-        
-        This route should be used instead of the main /info route when you are only interested in 
-        the available actions for the background of the image. 
-        With this route, you will save time by only obtaining information that is relevant to your needs.
-
-      operationId: background/info
-      parameters:
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          example: "f49943971e3039c7"
-          description: visual id of the image, received after using the /upload or register route.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: string
-                      description: The id of the background
-                    type:
-                      type: string
-                      description: In this route it will always be 'background'
-                    labels:
-                      type: array
-                      description: In this route currently it's null
-                    rect:
-                      type: object
-                      description: In this route currently it's null
-                    actions:
-                      type: object
-                      description: The available API actions for the background
-                    oracle:
-                      type: object
-                      description: The predicted quality of the available actions for the background
-              examples:
-                example:
-                  value:
-                    {
-                      "id": "67a9746d4c7939e2753869cdb4330852b6e2472b8110ae1fb59f8c033fc7fe1f",
-                      "type": "background",
-                      "labels": null,
-                      "rect": null,
-                      "actions": {
-                          "remove": [
-                              true
-                          ],
-                          "blur": [
-                              true
-                          ],
-                          "replace": [
-                              true
-                          ]
-                      },
-                      "oracle": {
-                          "remove": true,
-                          "blur": true,
-                          "replace": true
-                      }
-                  }
-        '205':
-          description: File hasn’t finished onboarding. Please call /info again until you get 200.
-        '400':
-          description: One of the details does not meet specification. Please call person/info again.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/caption:
-    get:
-      tags:
-        - AI Search
-      summary: Get a caption that describes the image
-      description: >-
-
-
-        **Description**
-
-
-
-        The *Caption Route* is used to get a caption that describes the given image.
-        
-
-      operationId: caption
-      parameters:
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "8487fb411f3c6716"
-          description: visual id of the image for which you'd like a caption
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        caption:
-                          type: string
-                          example: "woman walking on a bridge in the jungle"
-        '400':
-          description: Bad request.
         '404':
           description: Specified Image does not exist.
         '405':

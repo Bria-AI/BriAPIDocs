@@ -76,7 +76,7 @@ paths:
   /upload:
     post:
       tags:
-        - Image
+        - Image Onboarding
       summary: Upload an image
       description: >-
 
@@ -197,7 +197,7 @@ paths:
   /register:
     post:
       tags:
-        - Image
+        - Image Onboarding
       summary: Register an image
       description: >-
 
@@ -309,7 +309,7 @@ paths:
   /{visual_id}/info:
     get:
       tags:
-        - Image
+        - Image Onboarding
       summary: Get image info and available actions
       description: >-
 
@@ -562,7 +562,7 @@ paths:
   /{visual_id}/person/info:
     get:
       tags:
-        - Presenter
+        - Customize AI-Presenter
       summary: Get info and available actions for the presenters in the image
       description: >-
 
@@ -885,7 +885,7 @@ paths:
   /{visual_id}/objects/info:
     get:
       tags:
-        - Object
+        - Object Removal
       summary: Get info and available actions for the objects in the image
       description: >-
 
@@ -1116,7 +1116,7 @@ paths:
   /{visual_id}/background/info:
     get:
       tags:
-        - Background
+        - Background Generation
       summary: Get info and available actions for the background of the image
       description: >-
 
@@ -1211,7 +1211,7 @@ paths:
   /{visual_id}/caption:
     get:
       tags:
-        - Image
+        - AI Search
       summary: Get a caption that describes the image
       description: >-
 
@@ -1261,7 +1261,7 @@ paths:
   /image/generate:
     get:
       tags:
-        - Image
+        - Image Generation
       summary: Generate images using a prompt
       description: >-
 
@@ -1395,7 +1395,7 @@ paths:
   /{visual_id}/create:
     post:
       tags:
-        - Presenter
+        - Customize AI-Presenter
       summary: Modify the presenters in the image
       description: >-
 
@@ -1542,7 +1542,7 @@ paths:
   /{visual_id}/recast_model:
     post:
       tags:
-        - Presenter
+        - Customize AI-Presenter
       summary: Customize a portrait of a presenter to any profession/theme
       description: >-
 
@@ -1616,7 +1616,7 @@ paths:
   /{visual_id}/remove_object:
     post:
       tags:
-        - Object
+        - Object Removal
       summary: Remove objects from an image
       description: >-
         **Description**
@@ -1719,7 +1719,7 @@ paths:
   /{visual_id}/remove_bg:
     get:
       tags:
-        - Background
+        - Background Generation
       summary: Remove the background of an image
       description: >-
 
@@ -1788,7 +1788,7 @@ paths:
   /{visual_id}/background/blur:
     get:
       tags:
-        - Background
+        - Background Generation
       summary: Creates a blur effect on the background of an image
       description: >-
 
@@ -1859,7 +1859,7 @@ paths:
   /{visual_id}/replace_bg:
     post:
       tags:
-        - Background
+        - Background Generation
       summary: Generate a new background for an image
       description: >-
 
@@ -2037,8 +2037,7 @@ paths:
   /{visual_id}/image_expansion:
     post:
       tags:
-        - Image
-        - Background
+        - Image Generation
       summary: Expand an image, using generative AI
       description: >-
 
@@ -2184,7 +2183,7 @@ paths:
   /{visual_id}/increase_resolution:
     get:
       tags:
-        - Image
+        - Image Generation
       summary: Increase image resolution
       description: >-
 
@@ -2248,7 +2247,7 @@ paths:
   /{visual_id}/image_to_psd:
     post:
       tags:
-        - Image
+        - Image Generation
       summary: Create a layered PSD file from any image
       description: >-
 
@@ -2306,7 +2305,7 @@ paths:
   /{visual_id}/crop:
     post:
       tags:
-        - Image
+        - Image Generation
       summary: Crop an image around the remaining region of interest
       description: >-
 
@@ -2383,7 +2382,7 @@ paths:
   /search:
     get:
       tags:
-        - Search
+        - AI Search
       summary: Search for images matching the given text query
       description: >-
 
@@ -2496,7 +2495,7 @@ paths:
   /search_similar_images:
     get:
       tags:
-        - Search
+        - AI Search
       summary: Search for images matching the given image
       description: >-
 

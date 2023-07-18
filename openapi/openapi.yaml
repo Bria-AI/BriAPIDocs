@@ -73,6 +73,141 @@ externalDocs:
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
+  /image/generate:
+    get:
+      tags:
+        - Image Generation
+      summary: Generate images using a prompt
+      description: >-
+
+
+        **Description**
+        
+
+        The *Image Generation Route* allows you to generate images based on any given text prompt. 
+        
+        
+        2048 x 2048 pixels will be the size of the generated images.
+        
+        
+        
+        Here are some examples:
+        
+        
+        **prompt:** alien world
+        
+        
+        **style:** photo realistic
+           
+           
+        **atmosphere:** dramatic
+           
+           
+        **camera:** portrait
+           
+           
+        **medium:** photography
+           
+           
+        **results:**
+           
+        <img src="https://images.bria.ai/images_resized/c7700f41fe4f2171.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/a5be5a25a41e6b25.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/b31d95e14cf36f00.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d9db8c0f605352ce.jpg" width="200" height="200"/>
+        
+        
+        **prompt:** owl wearing a hat
+        
+        
+        **style:** fashion
+           
+           
+        **atmosphere:** vivid
+           
+           
+        **camera:** close up
+           
+           
+        **medium:** art
+           
+           
+        **results:**
+        
+        
+        <img src="https://images.bria.ai/images_resized/b59b21373eaf2103.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/af5b3e8c81d1c4cc.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg" width="200" height="200"/>
+           
+           
+      operationId: image/generate
+      parameters:
+        - name: prompt
+          in: query
+          schema:
+            type: string
+            example: "woman traveling in the world"
+          description: the prompt you would like to use to generate images
+        - name: num_results
+          in: query
+          schema:
+            type: integer
+            example: 1
+          description: how many images you would like to generate. The default and maximum value is 4. 
+        - name: style
+          in: query
+          schema:
+            type: string
+            example: "photo realistic"
+            enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
+          description: Which style you would like to see in your generated images.
+        - name: atmosphere
+          in: query
+          schema: 
+            type: string
+            enum: ['dramatic','vivid','warm','cool']
+            example: "dramatic"
+          description: Which atmosphere you would like to get in your generated images.
+        - name: camera
+          in: query
+          schema: 
+            type: string
+            enum: ['portrait','close up','aerial','landscape']
+            example: "portrait"
+          description: Which camera angle you would like to see in your generated images.
+        - name: medium
+          in: query
+          schema: 
+            type: string
+            enum: ['photography','art']
+            example: "photography"
+          description: Which medium should be included in your generated images.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        synthetic_url:
+                          type: string
+                          description: the URL where you can find the generated image.
+                          example: "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+        '512':
+          description: Insufficient resources to process the request.
+
   /upload:
     post:
       tags:
@@ -1258,140 +1393,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-  /image/generate:
-    get:
-      tags:
-        - Image Generation
-      summary: Generate images using a prompt
-      description: >-
-
-
-        **Description**
-        
-
-        The *Image Generation Route* allows you to generate images based on any given text prompt. 
-        
-        
-        2048 x 2048 pixels will be the size of the generated images.
-        
-        
-        
-        Here are some examples:
-        
-        
-        **prompt:** alien world
-        
-        
-        **style:** photo realistic
-           
-           
-        **atmosphere:** dramatic
-           
-           
-        **camera:** portrait
-           
-           
-        **medium:** photography
-           
-           
-        **results:**
-           
-        <img src="https://images.bria.ai/images_resized/c7700f41fe4f2171.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/a5be5a25a41e6b25.jpg" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/b31d95e14cf36f00.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d9db8c0f605352ce.jpg" width="200" height="200"/>
-        
-        
-        **prompt:** owl wearing a hat
-        
-        
-        **style:** fashion
-           
-           
-        **atmosphere:** vivid
-           
-           
-        **camera:** close up
-           
-           
-        **medium:** art
-           
-           
-        **results:**
-        
-        
-        <img src="https://images.bria.ai/images_resized/b59b21373eaf2103.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/af5b3e8c81d1c4cc.jpg" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg" width="200" height="200"/>
-           
-           
-      operationId: image/generate
-      parameters:
-        - name: prompt
-          in: query
-          schema:
-            type: string
-            example: "woman traveling in the world"
-          description: the prompt you would like to use to generate images
-        - name: num_results
-          in: query
-          schema:
-            type: integer
-            example: 1
-          description: how many images you would like to generate. The default and maximum value is 4. 
-        - name: style
-          in: query
-          schema:
-            type: string
-            example: "photo realistic"
-            enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
-          description: Which style you would like to see in your generated images.
-        - name: atmosphere
-          in: query
-          schema: 
-            type: string
-            enum: ['dramatic','vivid','warm','cool']
-            example: "dramatic"
-          description: Which atmosphere you would like to get in your generated images.
-        - name: camera
-          in: query
-          schema: 
-            type: string
-            enum: ['portrait','close up','aerial','landscape']
-            example: "portrait"
-          description: Which camera angle you would like to see in your generated images.
-        - name: medium
-          in: query
-          schema: 
-            type: string
-            enum: ['photography','art']
-            example: "photography"
-          description: Which medium should be included in your generated images.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
-                    items:
-                      type: object
-                      properties:
-                        synthetic_url:
-                          type: string
-                          description: the URL where you can find the generated image.
-                          example: "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /{visual_id}/create:
     post:
       tags:

@@ -247,7 +247,7 @@ paths:
 
 
         To do so, the user can access the following url:
-        ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}*
+        ```https://labs.bria.ai/gallery/{visual_id}```, where the *{visual_id}*
         comes from the response of the */upload route*.
 
 
@@ -370,7 +370,7 @@ paths:
 
 
         To do so, the user can access the following url:
-        ```https://labs.bria.ai/tools/{visual_id}```, where the *{visual_id}*
+        ```https://labs.bria.ai/gallery/{visual_id}```, where the *{visual_id}*
         comes from the response of the */register route*.
 
 

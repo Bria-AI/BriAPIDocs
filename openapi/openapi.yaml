@@ -33,7 +33,6 @@ info:
       - /crop - The *Crop Route* is used to crop an image without a background, tightly around the remaining region of interest.
       - /increase_resolution - The *Increase Resolution route* is used to upsacle any image. 
       - /image_to_psd - The *Image To Psd route* is used to create a layered psd file out of any image.
-      - /video - (Coming Soon) Using the *Video Route* to create a short video based on a single still image.
 
       
     With the response from the *Info Routes*, the following routes can be used without any particular order:

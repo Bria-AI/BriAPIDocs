@@ -1424,24 +1424,27 @@ paths:
             type: string
           example: "8487fb411f3c6716"
           description: visual id of the image the user wants to create a new visual from.
-        - in: query
-          name: sid
-          schema:
-            type: string
-            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
-          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+                desired_resolution:
+                  type: string
+                  description: The desired resolution of the updated image. This parameter is optional.
+                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
+                  example: "nhd"
                 changes:
                   type: array
                   description: The requested changes to the original visual.
                   items:
                     type: object
-                    properties:
+                    properties: 
                       id:
                         type: string
                         description: Id of the selected object in the image, to which the user would like to make changes.
@@ -1642,19 +1645,21 @@ paths:
             type: string
             example: "86f9986390596e8f"
           description: visual id of the image the user wants to remove objects from.
-        - in: query
-          name: desired_resolution
-          schema:
-            type: string
-            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
-            example: 'original'
-          description: The desired resolution of the updated image. This parameter is optional.
       requestBody:
         content:
           application/json:
             schema:
               type: object
               properties:
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+                desired_resolution:
+                  type: string
+                  description: The desired resolution of the updated image. This parameter is optional.
+                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
+                  example: "nhd"
                 changes:
                   type: array
                   description: The requested changes to the image. In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time.  
@@ -1832,7 +1837,13 @@ paths:
             type: string
             example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-      responses:
+        - in: query
+          name: desired_resolution
+          schema:
+            type: string
+            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
+            example: "nhd"
+          description: The desired resolution of the updated image. This parameter is optional.      responses:
         '200':
           description: Successful operation.
           content:
@@ -1962,6 +1973,15 @@ paths:
             schema:
               type: object
               properties:
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+                desired_resolution:
+                  type: string
+                  description: The desired resolution of the updated image. This parameter is optional.
+                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
+                  example: "nhd"
                 bg_prompt:
                   type: string
                   description: Text from which you wish to generate the new background

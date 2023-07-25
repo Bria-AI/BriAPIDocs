@@ -1034,7 +1034,7 @@ paths:
         The *Objects/Mask Generator Route* is used to generate all possible masks for an image. 
 
         
-        You can display those masks to the user, let him pick one or more masks, and use /remove_object to remove the masked area.
+        You can display those masks to the user, let them pick one or more masks, and use /remove_object to remove the masked area.
         
 
         The response contains a zip file named as the visual_id of the provided image.

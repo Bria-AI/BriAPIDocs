@@ -1010,7 +1010,79 @@ paths:
         '205':
           description: File hasn’t finished onboarding. Please call /info again until you get 200.
         '400':
-          description: One of the details does not meet specification. Please call person/info again.
+          description: One of the details does not meet specification. Please call objects/info again.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/objects/mask_generator:
+    get:
+      tags:
+        - Object Removal
+      summary: Generate all possible masks for an Image
+      description: >-
+
+
+
+        **Description**
+
+
+        The *Objects/Mask Generator Route* is used to generate all possible masks for an image. 
+
+        
+        You can display those masks to the user, let him pick one or more masks, and use /remove_object to remove the masked area.
+
+        The response contains a zip file named as the visual_id of the provided image.
+        
+        There are k mask files in the zip, each named with the visual_id and mask_id.
+
+        The zip file contains an additional file whose name ends with "panoptic". It's not an image, it's a panoptic map. It can be transformed into a regular matrix.
+        
+        Each point in the image (x,y) is mapped to the mask that applies to that point. Each pixel's grayscale value includes the mask id. 
+
+        
+        You can see below an example of the content of the zip:
+        
+        92bf8ce17584de82_panoptic.png
+        92bf8ce17584de82_1.png
+        92bf8ce17584de82_2.png
+        92bf8ce17584de82_3.png
+        92bf8ce17584de82_4.png
+        92bf8ce17584de82_5.png
+        92bf8ce17584de82_6.png
+        92bf8ce17584de82_7.png
+        92bf8ce17584de82_8.png
+        92bf8ce17584de82_9.png
+        92bf8ce17584de82_10.png
+        ...
+        92bf8ce17584de82_86.png
+
+      operationId: objects/mask_generator
+      parameters:
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "92bf8ce17584de82"
+          description: visual id of the image, received after using the /upload or register route.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects_masks:
+                    type: string
+                    example: "https://bria-image-repository.s3.amazonaws.com/mask2click/masks/92bf8ce17584de82.zip?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=vCX%2BHEAnGmUolwLxKfPBBKPUZaM%3D&Expires=1690732111"
+        '400':
+          description: Bad request.
         '404':
           description: Specified Image does not exist.
         '405':

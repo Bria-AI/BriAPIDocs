@@ -1031,10 +1031,7 @@ paths:
         **Description**
 
 
-        The *Objects/Mask Generator Route* is used to generate all possible masks for an image. 
-
-        
-        You can display those masks to the user, let them pick one or more masks, and use /remove_object to remove the masked area.
+        The *Objects/Mask Generator Route* is used to generate all possible masks for an image.
         
 
         The response contains a zip file named as the visual_id of the provided image.
@@ -1047,6 +1044,12 @@ paths:
         
         
         Each point in the image (x,y) is mapped to the mask that applies to that point. Each pixel's grayscale value includes the mask id. 
+        
+
+        You can display those masks to the user, let them pick one or more masks, and use /remove_object route to remove the masked area.
+
+
+        In order to use the /remove_object route on the mask the user selected, you should provide a public URL that leads to this mask, and use the paramter mask_source=generated.
 
         
         You can see below an example of the content of the zip:
@@ -1753,17 +1756,22 @@ paths:
                         type: string
                         description: A public URL that includes a mask in the following format - PNG file, a binary image in which the area that should be removed should get the value 255 (white) and the rest should get the value 0 (black). If you include an id or a point, there is no need to use this parameter.
                         example: 'url'
+                      mask_source:
+                        type: string
+                        enum: ["manual","generated"]
+                        description: This parameter is only relevant, is a mask_url was used. If the mask was created using a brush (free-hand) then use the option 'manual'. If the mask was the output from the route /objects/mask_generator, use the option 'generated'.
+                        example: 'generated'  
                       positive_points:
                         type: array
                         items:
                           type: integer
-                        example: [313,478]
+                        example: []
                         description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.
                       size:
                         type: array
                         items:
                           type: integer
-                        example: [1537,1025]
+                        example: []
                         description: This parameter is only relevant if this object in the array includes the parameter positive_points. Please specify the size in px of the provided image.
                       actions:
                         type: object

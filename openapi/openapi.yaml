@@ -24,7 +24,7 @@ info:
          - /objects/info
          - /background/info
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
-      - /image/generate - By using the *Image Generate* route, you can generate any image you would like, based on the provided prompt.
+      - /text-to-image - By using the *Image Generate* route, you can generate any image you would like, based on the provided prompt.
 
     
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
@@ -72,7 +72,7 @@ externalDocs:
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
-  /image/generate:
+  /generation/gaia-v1-2/text-to-image:
     get:
       tags:
         - Image Generation
@@ -136,48 +136,50 @@ paths:
         <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg" width="200" height="200"/>
            
            
-      operationId: image/generate
-      parameters:
-        - name: prompt
-          in: query
-          schema:
-            type: string
-            example: "woman traveling in the world"
-          description: the prompt you would like to use to generate images
-        - name: num_results
-          in: query
-          schema:
-            type: integer
-            example: 1
-          description: how many images you would like to generate. The default and maximum value is 4. 
-        - name: style
-          in: query
-          schema:
-            type: string
-            example: "photo realistic"
-            enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
-          description: Which style you would like to see in your generated images.
-        - name: atmosphere
-          in: query
-          schema: 
-            type: string
-            enum: ['dramatic','vivid','warm','cool']
-            example: "dramatic"
-          description: Which atmosphere you would like to get in your generated images.
-        - name: camera
-          in: query
-          schema: 
-            type: string
-            enum: ['portrait','close up','aerial','landscape']
-            example: "portrait"
-          description: Which camera angle you would like to see in your generated images.
-        - name: medium
-          in: query
-          schema: 
-            type: string
-            enum: ['photography','art']
-            example: "photography"
-          description: Which medium should be included in your generated images.
+      operationId: /generation/gaia-v1-2/text-to-image
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images
+                  example: "woman traveling in the world"
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. The default and maximum value is 4. 
+                  example: 1
+                style:   
+                  type: string
+                  example: "photo realistic"
+                  enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
+                  description: Which style you would like to see in your generated images.
+                atmosphere:
+                  type: string
+                  enum: ['dramatic','vivid','warm','cool']
+                  example: "dramatic"
+                  description: Which atmosphere you would like to get in your generated images.
+                camera:
+                  type: string
+                  enum: ['portrait','close up','aerial','landscape']
+                  example: "portrait"
+                  description: Which camera angle you would like to see in your generated images.
+                medium:
+                  type: string
+                  enum: ['photography','art']
+                  example: "photography"
+                  description: Which medium should be included in your generated images.
+                sync:
+                  type: boolean
+                  example: true
+                  description: Please use the value true. 
+                seed:
+                  type: integer
+                  example: 
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
       responses:
         '200':
           description: Successful operation.
@@ -192,9 +194,13 @@ paths:
                     items:
                       type: object
                       properties:
-                        synthetic_url:
+                        seed:
+                          type: integer
+                          example: 1525972691
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
                           type: string
-                          description: the URL where you can find the generated image.
+                          description: the URL where you can find the generated image. If sync=false, it will take a few seconds until the image will be available via this URL.
                           example: "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
         '400':
           description: Bad request.

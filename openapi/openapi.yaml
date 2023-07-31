@@ -39,7 +39,7 @@ info:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
       - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
       - /remove_object - Using the *Remove Object Route* to remove the objects from an image.
-      - /remove_bg - Using the *Remove BG Route* to remove the background of a an image.
+      - background/remove - Using the *Remove BG Route* to remove the background of a an image.
       - background/blur - Using the *Blur BG Route* to create a blur effect on the background of an image.
       - /replace_bg - Using the *Replace BG Route* to generate new backgrounds for an image.
       
@@ -1813,7 +1813,7 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.     
-  /{visual_id}/remove_bg:
+  /{visual_id}/background/remove:
     get:
       tags:
         - Background Generation
@@ -1834,7 +1834,7 @@ paths:
         This route returns both the URL and the sid associated with the updated image.
         
 
-      operationId: remove_bg
+      operationId: background/remove
       parameters:
         - in: path
           name: visual_id

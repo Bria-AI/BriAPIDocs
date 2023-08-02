@@ -739,7 +739,7 @@ paths:
     get:
       tags:
         - Background Generation
-      summary: Get info and available actions for the background of the image
+      summary: Get info, available actions and oracle predictions for the background of the image
       description: >-
 
 
@@ -751,11 +751,21 @@ paths:
         visual that was previously uploaded to the database.
 
         
-        Additionally, it provides the available changes for the background, which are supported by the Bria API. 
+        Additionally, it provides the following:
+
+        
+        1) The available background actions, which are supported by the Bria API.
+
+
+        1) The Oracle value for each available action. The orcale value predicts the quality of the result, for each possible action. 
+        
+        
+        The possible oracle values for background actions are true and false. 
+               
         
         This route should be used instead of the main /info route when you are only interested in 
         the available actions for the background of the image. 
-        With this route, you will save time by only obtaining information that is relevant to your needs.
+        With this route, you will save runtime by only obtaining information that is relevant to your needs.
 
       operationId: background/info
       parameters:
@@ -839,7 +849,7 @@ paths:
     get:
       tags:
         - Object Removal
-      summary: Get info and available actions for the objects in the image
+      summary: Get info, available actions, and oracle predictions for the predefined objects in the image
       description: >-
 
 
@@ -851,12 +861,21 @@ paths:
         visual that was previously uploaded to the database.
 
         
-        Additionally, it provides a description of each object within the scene 
-        along with its available changes, which are supported by the Bria API. 
+        Additionally, it provides the following:
+
+        
+        1) The available object actions, which are supported by the Bria API.
+
+
+        1) The Oracle value for each available action. The orcale value predicts the quality of the result, for each possible action. 
+        
+        
+        The possible oracle values for object actions are true and false. 
+               
         
         This route should be used instead of the main /info route when you are only interested in 
         information and available actions for the objects in the image. 
-        With this route, you will save time by only obtaining information that is relevant to your needs.
+        With this route, you will save runtime by only obtaining information that is relevant to your needs.
 
       operationId: objects/info
       parameters:
@@ -1564,6 +1583,8 @@ paths:
 
         This route returns both the URL and the sid associated with the updated image.
 
+        Before making any modifications, please call the /info or person/info route to obtain information on the available presenters in the image, the available modifications, and their oracle values.
+
       operationId: create
       parameters:
         - in: header
@@ -1794,6 +1815,8 @@ paths:
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
 
         This route returns both the URL and the sid associated with the updated image.
+
+        Before making any modifications, please call the /info or objects/info route to obtain information on the available predefined objects in the image, the available modifications, and their Oracle values. If you are using mask_url or positive_points there is no need to call the info routes.
         
       operationId: remove_object
       parameters:
@@ -1908,6 +1931,8 @@ paths:
         
         
         This route returns both the URL and the sid associated with the updated image.
+
+        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
         
 
       operationId: background/remove
@@ -1982,6 +2007,8 @@ paths:
         
         
         This route returns both the URL and the sid associated with the updated image.
+
+        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
          
 
       operationId: blur_bg
@@ -2065,6 +2092,8 @@ paths:
         
         
         This will enable you to create new and unique variations of your original image.
+
+        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
         
         
         Here are some examples:

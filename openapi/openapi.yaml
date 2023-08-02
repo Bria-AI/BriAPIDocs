@@ -1260,6 +1260,7 @@ paths:
         
         Additionally, it provides a description of each person within the scene 
         along with its available changes, which are supported by the Bria API. 
+
         
         This route should be used instead of the main /info route when you are only interested in 
         information and available actions for the people in the image. 

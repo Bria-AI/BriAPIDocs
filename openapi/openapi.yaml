@@ -759,7 +759,6 @@ paths:
 
         1) The Oracle value for each available action. The orcale value predicts the quality of the result, for each possible action. 
         
-        
         The possible oracle values for background actions are true and false. 
                
         
@@ -868,7 +867,6 @@ paths:
 
 
         1) The Oracle value for each available action. The orcale value predicts the quality of the result, for each possible action. 
-        
         
         The possible oracle values for object actions are true and false. 
                
@@ -1583,6 +1581,7 @@ paths:
 
         This route returns both the URL and the sid associated with the updated image.
 
+
         Before making any modifications, please call the /info or person/info route to obtain information on the available presenters in the image, the available modifications, and their oracle values.
 
       operationId: create
@@ -1808,13 +1807,18 @@ paths:
 
         The *Remove Object Route* is used to remove objects, using the object id returned in the /info or objects/info request.
 
+
         You can also remove a part of the image by providing a mask or a single point. That way you can create a brush interface (using the mask) or a click2remove interface (using the point). 
+
 
         In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time. 
 
+
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
 
+
         This route returns both the URL and the sid associated with the updated image.
+
 
         Before making any modifications, please call the /info or objects/info route to obtain information on the available predefined objects in the image, the available modifications, and their Oracle values. If you are using mask_url or positive_points there is no need to call the info routes.
         
@@ -1932,6 +1936,7 @@ paths:
         
         This route returns both the URL and the sid associated with the updated image.
 
+
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
         
 
@@ -2007,6 +2012,7 @@ paths:
         
         
         This route returns both the URL and the sid associated with the updated image.
+
 
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
          
@@ -2092,6 +2098,7 @@ paths:
         
         
         This will enable you to create new and unique variations of your original image.
+
 
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
         

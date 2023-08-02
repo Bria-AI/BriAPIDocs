@@ -139,6 +139,12 @@ paths:
            
            
       operationId: /generation/gaia-v1-2/text-to-image
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -280,6 +286,12 @@ paths:
         Bria API currently only supports JPEG and PNG files. The status code 415 will be returned if the file is of a different type.
         
       operationId: upload
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -399,6 +411,12 @@ paths:
         Bria API currently only supports JPEG and PNG files, which are not larger than 12MB. 
         
       operationId: register
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -482,6 +500,11 @@ paths:
 
       operationId: info
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -736,6 +759,11 @@ paths:
 
       operationId: background/info
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -832,6 +860,11 @@ paths:
 
       operationId: objects/info
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1093,6 +1126,11 @@ paths:
 
       operationId: objects/mask_generator
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1138,6 +1176,11 @@ paths:
 
       operationId: caption
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1197,6 +1240,11 @@ paths:
 
       operationId: person/info
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1677,6 +1725,11 @@ paths:
         This route returns both the URL and the sid associated with the updated image.
       operationId: recast_model
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1744,6 +1797,11 @@ paths:
         
       operationId: remove_object
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1854,6 +1912,11 @@ paths:
 
       operationId: background/remove
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -1923,6 +1986,11 @@ paths:
 
       operationId: blur_bg
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -2069,6 +2137,11 @@ paths:
       
       operationId: replace_bg
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -2218,6 +2291,11 @@ paths:
       
       operationId: image_expansion
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -2330,6 +2408,11 @@ paths:
 
       operationId: increase_resolution
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -2394,6 +2477,11 @@ paths:
 
       operationId: image_to_psd
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -2455,6 +2543,11 @@ paths:
 
       operationId: crop
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true
@@ -2531,6 +2624,11 @@ paths:
 
       operationId: search
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - name: query
           in: query
           schema:
@@ -2642,6 +2740,11 @@ paths:
 
       operationId: search_similar_images
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - name: vhash
           in: query
           schema:

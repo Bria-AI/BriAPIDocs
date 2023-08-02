@@ -49,10 +49,20 @@ info:
 
     
     The "Oracle" capability within the API can significantly elevate the user experience by offering quality prediction functionalities. 
+
+    
     With the Oracle integrated into your product, you can ensure optimal outcomes for your end users. 
+
+    
     This feature covers various endpoints, including /create, /remove_object, and background operations, providing you with a range of quality prediction options to enhance your product's capabilities.
+
+    
     The orcale value predicts the quality of the result, for each possible action.
+
+    
     By using the "info" for all endpoints, "person/info" endpoint for face modifications, "objects/info" for object removal, and "background/info" for background actions, you can access the Oracle's predictions, and help your users to make informed decisions. 
+    
+    
     Incorporating Oracle predictions into the API workflow enhances efficiency, minimizes errors, and fosters an optimized API experience.   
 
 

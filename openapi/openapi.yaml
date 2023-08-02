@@ -1518,6 +1518,11 @@ paths:
 
       operationId: create
       parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: path
           name: visual_id
           required: true

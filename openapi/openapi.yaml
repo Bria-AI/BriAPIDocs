@@ -452,7 +452,7 @@ paths:
     get:
       tags:
         - Image Onboarding
-      summary: Get image info and available actions
+      summary: Get image info, available actions and oracle predictions
       description: >-
 
 
@@ -474,9 +474,7 @@ paths:
 
         3) The Oracle value for each available change. The orcale value predicts the quality of the result, for each possible action. 
         
-        
         The possible oracle values for object removal or background actions are true and false. 
-        
         
         The possible values for person modification are high, medium, and low. 
        

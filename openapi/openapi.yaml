@@ -84,7 +84,7 @@ externalDocs:
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
-  /generation/gaia-v1-2/text-to-image:
+  generation/gaia-v1/text-to-image:
     get:
       tags:
         - Image Generation

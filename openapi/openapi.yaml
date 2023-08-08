@@ -1099,7 +1099,7 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   /{visual_id}/objects/mask_generator:
-    get:
+    post:
       tags:
         - Object Removal
       summary: Generate all possible masks for an Image

@@ -87,7 +87,7 @@ paths:
   generation/gaia-v1/text-to-image:
     get:
       tags:
-        - Image Generation
+        - Image
       summary: Generate images using a prompt
       description: >-
 
@@ -148,7 +148,7 @@ paths:
         <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg" width="200" height="200"/>
            
            
-      operationId: /generation/gaia-v1-2/text-to-image
+      operationId: /generation/gaia-v1/text-to-image
       parameters:
         - in: header
           name: api_token
@@ -748,7 +748,7 @@ paths:
   /{visual_id}/background/info:
     get:
       tags:
-        - Background Generation
+        - Background
       summary: Get info, available actions and oracle predictions for the background of the image
       description: >-
 
@@ -857,7 +857,7 @@ paths:
   /{visual_id}/objects/info:
     get:
       tags:
-        - Object Removal
+        - Object
       summary: Get info, available actions, and oracle predictions for the predefined objects in the image
       description: >-
 
@@ -1101,7 +1101,8 @@ paths:
   /{visual_id}/objects/mask_generator:
     post:
       tags:
-        - Object Removal
+        - Object
+        - Image
       summary: Generate all possible masks for an Image
       description: >-
 
@@ -1245,7 +1246,7 @@ paths:
   /{visual_id}/person/info:
     get:
       tags:
-        - Customize AI-Presenter
+        - AI-Presenter
       summary: Get info and available actions for the presenters in the image
       description: >-
 
@@ -1574,7 +1575,7 @@ paths:
   /{visual_id}/create:
     post:
       tags:
-        - Customize AI-Presenter
+        - AI-Presenter
       summary: Modify the presenters in the image
       description: >-
 
@@ -1732,7 +1733,7 @@ paths:
   /{visual_id}/recast_model:
     post:
       tags:
-        - Customize AI-Presenter
+        - AI-Presenter
       summary: Customize a portrait of a presenter to any profession/theme
       description: >-
 
@@ -1811,7 +1812,7 @@ paths:
   /{visual_id}/remove_object:
     post:
       tags:
-        - Object Removal
+        - Object
       summary: Remove objects from an image
       description: >-
         **Description**
@@ -1930,7 +1931,7 @@ paths:
   /{visual_id}/background/remove:
     get:
       tags:
-        - Background Generation
+        - Background
       summary: Remove the background of an image
       description: >-
 
@@ -2007,7 +2008,7 @@ paths:
   /{visual_id}/background/blur:
     get:
       tags:
-        - Background Generation
+        - Background
       summary: Creates a blur effect on the background of an image
       description: >-
 
@@ -2093,7 +2094,7 @@ paths:
   /{visual_id}/replace_bg:
     post:
       tags:
-        - Background Generation
+        - Background
       summary: Generate a new background for an image
       description: >-
 
@@ -2284,7 +2285,7 @@ paths:
   /{visual_id}/image_expansion:
     post:
       tags:
-        - Image Generation
+        - Image
       summary: Expand an image, using generative AI
       description: >-
 
@@ -2435,7 +2436,7 @@ paths:
   /{visual_id}/increase_resolution:
     get:
       tags:
-        - Image Generation
+        - Image
       summary: Increase image resolution
       description: >-
 
@@ -2504,7 +2505,7 @@ paths:
   /{visual_id}/image_to_psd:
     post:
       tags:
-        - Image Generation
+        - Image
       summary: Create a layered PSD file from any image
       description: >-
 
@@ -2567,7 +2568,7 @@ paths:
   /{visual_id}/crop:
     post:
       tags:
-        - Image Generation
+        - Image
       summary: Crop an image around the remaining region of interest
       description: >-
 

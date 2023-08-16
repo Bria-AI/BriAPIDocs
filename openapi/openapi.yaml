@@ -2357,36 +2357,34 @@ paths:
             schema:
               type: object
               properties:
+              example: 
+                canvas_size: [1200,674]
+                original_image_size: [610,855]
+                original_image_location: [301,-66]
                 canvas_size:
                   type: array
                   items:
                     type: integer
-                  example: [1200,674]
                   default: [1000,1000]
                   description: The desired size of the final image, after the expansion.
                 original_image_size:
                   type: array
                   items:
                     type: integer
-                  example: [610,855]
                   description: The desired size of the original image, inside the full canvas.
                 original_image_location:
                   type: array
                   items:
                     type: integer
-                  example: [301,-66]
                   description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
                 prompt:
                   type: string
                   description: Text on which you wish to base the image expansion. This parameter is optional.
-                  example: ""
                 seed:
                   type: integer
-                  example: 
                   description: You can choose whether you want your generated expension to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 sid:
                   type: string
-                  example: ""
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       responses:
         '200':

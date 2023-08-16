@@ -2357,10 +2357,6 @@ paths:
             schema:
               type: object
               properties:
-              example: 
-                canvas_size: [1200,674]
-                original_image_size: [610,855]
-                original_image_location: [301,-66]
                 canvas_size:
                   type: array
                   items:
@@ -2386,6 +2382,10 @@ paths:
                 sid:
                   type: string
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+              example: 
+                canvas_size: [1200,674]
+                original_image_size: [610,855]
+                original_image_location: [301,-66]
       responses:
         '200':
           description: Successful operation.

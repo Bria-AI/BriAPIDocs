@@ -2603,7 +2603,6 @@ paths:
           name: sid
           schema:
             type: string
-            example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       requestBody:
         required: false

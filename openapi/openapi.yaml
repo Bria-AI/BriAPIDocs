@@ -85,7 +85,7 @@ servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
   /generation/gaia-v1/text-to-image:
-    get:
+    post:
       tags:
         - Image
       summary: Generate images using a prompt
@@ -165,39 +165,39 @@ paths:
                 prompt:
                   type: string
                   description: The prompt you would like to use to generate images
-                  example: "woman traveling in the world"
                 num_results:
                   type: integer
                   description: How many images you would like to generate. The default and maximum value is 4. 
-                  example: 1
                 style:   
                   type: string
-                  example: "photo realistic"
                   enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
                   description: Which style you would like to see in your generated images.
                 atmosphere:
                   type: string
                   enum: ['dramatic','vivid','warm','cool']
-                  example: "dramatic"
                   description: Which atmosphere you would like to get in your generated images.
                 camera:
                   type: string
                   enum: ['portrait','close up','aerial','landscape']
-                  example: "portrait"
                   description: Which camera angle you would like to see in your generated images.
                 medium:
                   type: string
                   enum: ['photography','art']
-                  example: "photography"
                   description: Which medium should be included in your generated images.
                 sync:
                   type: boolean
-                  example: true
                   description: Please use the value true. 
                 seed:
                   type: integer
-                  example: 
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+            example: 
+                prompt: "alien world"
+                num_results: 1
+                style: "photo realistic"
+                atmosphere: "dramatic"
+                camera: "portrait"
+                medium: "photography"
+                sync: true
       responses:
         '200':
           description: Successful operation.

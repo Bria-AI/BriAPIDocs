@@ -1817,13 +1817,27 @@ paths:
       description: >-
         **Description**
 
-        The *Remove Object Route* is used to remove objects, using the object id returned in the /info or objects/info request.
+        The *Remove Object Route* is used to remove objects or areas. 
 
 
-        You can also remove a part of the image by providing a mask or a single point. That way you can create a brush interface (using the mask) or a click2remove interface (using the point). 
+        You can provide the area for removal in the following methods:
+        
+
+        
+        1) Call the /mask_generator endpoint, display the masks to the user, allow them to select a mask, and then send the mask_id to the /remove_object endpoint. Under the example named generated mask, you can see an example of this type of request.
 
 
-        In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time. 
+
+        2) Allow the user to create a mask manually (by using a brush, for example), and then send the mask_url to the /remove_object endpoint. Under the example named manual mask, you can see an example of this type of request.
+
+
+
+        3) Get the possible objects for removal using the /info or objects/info endpoint, present them to the user, and allow them to select objects for removal using the object name. Send the id of the selected object to the /remove_object endpoint. Under the example named object, you can see an example of this type of request.
+
+        
+
+
+        In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask_id at the same time. 
 
 
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
@@ -1907,7 +1921,7 @@ paths:
                             type: boolean
                             description: Use the value true if you would like to remove the object
             examples:
-                mask from /mask_generator:
+                generated mask:
                   value:
                     enhance: True
                     changes: 
@@ -1915,7 +1929,7 @@ paths:
                       mask_source: "generated"
                       actions:
                         remove: True
-                using a brush:
+                manual mask:
                   value:
                     enhance: True
                     changes: 
@@ -1923,7 +1937,7 @@ paths:
                       mask_source: "manual"
                       actions:
                         remove: True
-                predefined object:
+                object:
                   value:
                     enhance: True
                     changes: 

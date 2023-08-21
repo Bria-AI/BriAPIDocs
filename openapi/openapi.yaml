@@ -1859,9 +1859,7 @@ paths:
       requestBody:
         content:
           application/json:
-            schema:
-              type: object
-              example:
+            example:
                 remove predefined object:
                   enhance: True
                   changes: 
@@ -1882,6 +1880,8 @@ paths:
                     mask_source: "generated"
                     actions:
                       remove: True
+            schema:
+              type: object
               properties:
                 sid:
                   type: string

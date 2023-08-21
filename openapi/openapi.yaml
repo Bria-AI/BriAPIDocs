@@ -1907,14 +1907,15 @@ paths:
                             type: boolean
                             description: Use the value true if you would like to remove the object
             examples:
-                remove predefined object:
+                mask from /mask_generator:
                   value:
                     enhance: True
                     changes: 
-                      id: "630cf6f9c206e3ec414f0c3006221b7b9252243707cfabf59e65490c6dfe5d56"
+                      mask_id: 30
+                      mask_source: "generated"
                       actions:
                         remove: True
-                remove an area based on a mask provided by the user (using a brush for example):
+                using a brush:
                   value:
                     enhance: True
                     changes: 
@@ -1922,12 +1923,11 @@ paths:
                       mask_source: "manual"
                       actions:
                         remove: True
-                remove an area based on a mask obtained from the /mask_generator endpoint:
+                predefined object:
                   value:
                     enhance: True
                     changes: 
-                      mask_id: 30
-                      mask_source: "generated"
+                      id: "630cf6f9c206e3ec414f0c3006221b7b9252243707cfabf59e65490c6dfe5d56"
                       actions:
                         remove: True
       responses:

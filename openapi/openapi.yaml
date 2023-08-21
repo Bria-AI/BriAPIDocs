@@ -1123,13 +1123,13 @@ paths:
         The zip file contains an additional file whose name ends with "panoptic". It's not an image, it's a panoptic map. It can be transformed into a regular matrix.
         
         
-        Each point in the image (x,y) is mapped to the mask that applies to that point. Each pixel's grayscale value includes the mask id. 
+        Each point in the image (x,y) is mapped to the mask that applies to that point. In the panoptic map, each pixel's grayscale value includes the mask_id. 
         
 
         You can display those masks to the user, let them pick one or more masks, and use /remove_object route to remove the masked area.
 
 
-        In order to use the /remove_object route on the mask the user selected, you should provide a public URL that leads to this mask, and use the paramter mask_source=generated.
+        In order to use the /remove_object route on the mask the user selected, you should provide the mask_id, and use the paramter mask_source=generated.
 
         
         You can see below an example of the content of the zip:
@@ -1816,6 +1816,9 @@ paths:
       summary: Remove objects from an image
       description: >-
         **Description**
+
+
+
 
         The *Remove Object Route* is used to remove objects or areas. 
 

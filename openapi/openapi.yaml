@@ -300,7 +300,7 @@ paths:
       
               payload = {}
               files=[
-                ('file',('seed_1289515149_0.jpeg',open('/path_to_local_file/foo.jpeg','rb'),'image/jpeg'))
+                ('file',('image_name.jpeg',open('/path_to_local_file/image_name.jpeg','rb'),'image/jpeg'))
               ]
               headers = {
                 'api_token': 'xxxx'

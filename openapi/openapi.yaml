@@ -294,7 +294,13 @@ paths:
         
         
         The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
-        
+
+        If you would like to upload an image from a file, you should follow the example below:
+
+          curl --location --request POST 'https://engine.prod.bria-api.com/v1' \
+          --header: 'api_token: <...>' \
+          ...
+
       operationId: upload
       parameters:
         - in: header
@@ -324,9 +330,6 @@ paths:
                 image url:
                   value:
                     image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                file:
-                  value:
-                    file: "'image_name.jpeg',open('/path_to_local_file/foo.jpeg','rb'),'image/jpeg'"
                 
       responses:
         '200':

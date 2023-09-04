@@ -88,7 +88,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Generate images using a prompt
+      summary: Text to Image
       description: >-
 
 
@@ -235,7 +235,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: Upload an image
+      summary: Upload Image
       description: >-
 
         **Description**
@@ -362,7 +362,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: Register an image
+      summary: Register Image
       description: >-
 
         **Description**
@@ -484,7 +484,7 @@ paths:
     get:
       tags:
         - Image Onboarding
-      summary: Get image info, available actions and oracle predictions
+      summary: General Info
       description: >-
 
 
@@ -753,7 +753,7 @@ paths:
     get:
       tags:
         - Background
-      summary: Get info, available actions and oracle predictions for the background of the image
+      summary: Background Info
       description: >-
 
 
@@ -862,7 +862,7 @@ paths:
     get:
       tags:
         - Object
-      summary: Get info, available actions, and oracle predictions for the predefined objects in the image
+      summary: Objects Info
       description: >-
 
 
@@ -1107,7 +1107,7 @@ paths:
       tags:
         - Object
         - Image
-      summary: Generate all possible masks for an Image
+      summary: Masks Generator
       description: >-
 
 
@@ -1195,7 +1195,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Get a caption that describes the image
+      summary: Get Caption
       description: >-
 
 
@@ -1251,7 +1251,7 @@ paths:
     get:
       tags:
         - AI-Presenter
-      summary: Get info and available actions for the presenters in the image
+      summary: Presenter Info
       description: >-
 
 
@@ -1580,7 +1580,7 @@ paths:
     post:
       tags:
         - AI-Presenter
-      summary: Modify the presenters in the image
+      summary: Modify Presenter
       description: >-
 
 
@@ -1738,7 +1738,7 @@ paths:
     post:
       tags:
         - AI-Presenter
-      summary: Customize a portrait of a presenter to any profession/theme
+      summary: Recast Presenter
       description: >-
 
 
@@ -1817,7 +1817,7 @@ paths:
     post:
       tags:
         - Object
-      summary: Remove objects from an image
+      summary: Object Removal
       description: >-
         **Description**
 
@@ -1981,7 +1981,7 @@ paths:
     get:
       tags:
         - Background
-      summary: Remove the background of an image
+      summary: Background Removal
       description: >-
 
 
@@ -2058,7 +2058,7 @@ paths:
     get:
       tags:
         - Background
-      summary: Creates a blur effect on the background of an image
+      summary: Background Blur
       description: >-
 
 
@@ -2144,7 +2144,7 @@ paths:
     post:
       tags:
         - Background
-      summary: Generate a new background for an image
+      summary: Background Generation
       description: >-
 
 
@@ -2335,7 +2335,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Expand an image, using generative AI
+      summary: Image Expansion
       description: >-
 
 
@@ -2484,7 +2484,7 @@ paths:
     get:
       tags:
         - Image
-      summary: Increase image resolution
+      summary: Increase Resolution
       description: >-
 
 
@@ -2552,7 +2552,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Create a layered PSD file from any image
+      summary: Image to PSD
       description: >-
 
 
@@ -2614,7 +2614,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Crop an image around the remaining region of interest
+      summary: Crop on Foreground 
       description: >-
 
 
@@ -2695,7 +2695,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Search for images matching the given text query
+      summary: Search
       description: >-
 
 
@@ -2813,7 +2813,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Search for images matching the given image
+      summary: Similar Images search
       description: >-
 
 

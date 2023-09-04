@@ -297,23 +297,23 @@ paths:
 
         If you would like to upload an image from a file, you should follow the example below:
 
-        ```python
-        import requests
-
-        url = "https://engine.prod.bria-api.com/v1/upload"
-
-        payload = {}
-        files=[
-          ('file',('seed_1289515149_0.jpeg',open('/path_to_local_file/foo.jpeg','rb'),'image/jpeg'))
-        ]
-        headers = {
-          'api_token': 'xxxx'
-        }
-
-        response = requests.request("POST", url, headers=headers, data=payload, files=files)
-
-        print(response.text)
-        ```
+      
+              import requests
+      
+              url = "https://engine.prod.bria-api.com/v1/upload"
+      
+              payload = {}
+              files=[
+                ('file',('seed_1289515149_0.jpeg',open('/path_to_local_file/foo.jpeg','rb'),'image/jpeg'))
+              ]
+              headers = {
+                'api_token': 'xxxx'
+              }
+      
+              response = requests.request("POST", url, headers=headers, data=payload, files=files)
+      
+              print(response.text)
+       
 
       operationId: upload
       parameters:

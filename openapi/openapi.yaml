@@ -274,17 +274,6 @@ paths:
         comes from the response of the */upload route*.
 
 
-        In Bria's web tool, the user has the ability to make many changes to the
-        visual and also generate live videos, using an intuitive interactive
-        platform.
-
-
-        Bria's web tool can also be embedded in other websites, with the use of
-        an iframe HTML element:
-            
-            
-        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool_29_03_2022.png" />
-
 
         **Constraints**
 
@@ -296,8 +285,13 @@ paths:
         The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
 
         
+        **Upload using a file**
+
         
-          If you would like to upload an image from a file, you should follow the example below:
+          In our documentation request example, we demonstrate how to upload an image using a URL.
+          
+          
+          If you want to upload an image from a file, follow the example below:
 
       
               import requests

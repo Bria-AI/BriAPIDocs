@@ -293,7 +293,7 @@ paths:
         maximum size.
         
         
-        Bria API currently only supports JPEG and PNG files. The status code 415 will be returned if the file is of a different type.
+        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
         
       operationId: upload
       parameters:
@@ -418,7 +418,11 @@ paths:
         **Constraints**
 
 
-        Bria API currently only supports JPEG and PNG files, which are not larger than 12MB. 
+        Files should not be larger than 12MB. The status code 413 will be returned if the file exceeds its
+        maximum size.
+        
+        
+        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
         
       operationId: register
       parameters:

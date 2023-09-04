@@ -305,7 +305,7 @@ paths:
       requestBody:
         required: true
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               properties:
@@ -320,6 +320,13 @@ paths:
                   description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
                   type: string
                   default: true
+            examples:
+                image url:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                file:
+                  value:
+                    file: "'image_name.jpeg',open('/path_to_local_file/foo.jpeg','rb'),'image/jpeg'"
                 
       responses:
         '200':

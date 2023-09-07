@@ -549,7 +549,7 @@ paths:
           name: lean
           schema:
             type: boolean
-            example: false
+            default: false
           description: Set the value 'true' for this parameter if you wish to receive only the high-level information (currently, this means only the description, org_height, and org_width) from the info route. This parameter is optional and as default the value is 'false'. 
       responses:
         '200':

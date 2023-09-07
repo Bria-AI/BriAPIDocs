@@ -2910,7 +2910,7 @@ paths:
           in: query
           schema:
             type: string
-            example: "123abc"
+            example: "425"
           description: Bria will provide you with this parameter which represents your account's image gallery. You must include this parameter.
         - name: url
           in: query

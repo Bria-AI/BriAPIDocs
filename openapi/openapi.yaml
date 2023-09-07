@@ -2269,31 +2269,6 @@ paths:
         content:
           application/json:
             schema:
-            examples:
-              Original placement:
-                value:
-                  bg_prompt: "environment living room interior kitchen counter"
-                  placement_type: "original"
-                  num_results: 4
-              Automatically adjust the foreground placement:
-                value:
-                  bg_prompt: "environment living room interior kitchen counter"
-                  placement_type: "automatic"
-                  canvas_size: [900,550]
-                  num_results: 1
-              Select foreground placement from a list: 
-                value:
-                  bg_prompt: "environment living room interior kitchen counter"
-                  placement_type: "manual_placement"
-                  canvas_size: [900,550]
-                  manual_placement_selection: ["upper_center","bottom_center"]
-                  num_results: 1
-              Only foreground, add padding:
-                value:
-                  bg_prompt: "environment living room interior kitchen counter"
-                  placement_type: "manual_padding"
-                  padding_values: [20,30,20,30]
-                  num_results: 1
               type: object
               properties:
                 sid:
@@ -2337,6 +2312,31 @@ paths:
                   type: integer
                   example: 
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+            examples:
+              Original placement:
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "original"
+                  num_results: 4
+              Automatically adjust the foreground placement:
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "automatic"
+                  canvas_size: [900,550]
+                  num_results: 1
+              Select foreground placement from a list: 
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "manual_placement"
+                  canvas_size: [900,550]
+                  manual_placement_selection: ["upper_center","bottom_center"]
+                  num_results: 1
+              Only foreground, add padding:
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "manual_padding"
+                  padding_values: [20,30,20,30]
+                  num_results: 1
       responses:
         '200':
           description: Successful operation.

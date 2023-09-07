@@ -1189,8 +1189,8 @@ paths:
           schema:
             type: string
           description: visual id of the image, received after using the /upload or register route.
-      example:
-        visual_id: "92bf8ce17584de82"
+        example:
+          visual_id: "92bf8ce17584de82"
       responses:
         '200':
           description: Successful operation.

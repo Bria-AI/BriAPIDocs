@@ -1640,13 +1640,6 @@ paths:
         content:
           application/json:
             schema:
-            example:
-              changes:
-                id: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
-                actions: 
-                  age: "mid-60"
-                  diversity: "france"
-                  expression: "happy"
               type: object
               properties:
                 sid:
@@ -1725,6 +1718,13 @@ paths:
                             type: string
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected object.
+            example:
+              changes:
+                id: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
+                actions: 
+                  age: "mid-60"
+                  diversity: "france"
+                  expression: "happy"
       responses:
         '200':
           description: Successful operation.

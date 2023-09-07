@@ -1640,17 +1640,22 @@ paths:
         content:
           application/json:
             schema:
+            example:
+              changes:
+                id: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
+                actions: 
+                  age: "mid-60"
+                  diversity: "france"
+                  expression: "happy"
               type: object
               properties:
                 sid:
                   type: string
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
                 desired_resolution:
                   type: string
                   description: The desired resolution of the updated image. This parameter is optional.
                   enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
-                  example: "nhd"
                 changes:
                   type: array
                   description: The requested changes to the original visual.
@@ -1660,7 +1665,6 @@ paths:
                       id:
                         type: string
                         description: Id of the selected object in the image, to which the user would like to make changes.
-                        example: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
@@ -1669,7 +1673,6 @@ paths:
                             type: string
                             enum: ["mid-20", "mid-40", "mid-60"]
                             description: Changing the age of a selected object.
-                            example: "mid-60"
                           diversity:
                             type: string
                             enum:
@@ -1686,7 +1689,6 @@ paths:
                               - spain
                               - france
                             description: Changing the diversity of a selected object.
-                            example: "france"
                           expression:
                             type: string
                             enum:
@@ -1699,37 +1701,30 @@ paths:
                               - disgusted
                               - sad
                             description: Changing the expression of a selected object.
-                            example: "happy"
                           glasses:
                             type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the glasses of a selected object.
-                            example: "light"
                           haircolor:
                             type: string
                             enum: ["black", "brown", "red", "blond", "gray"]
                             description: Changing the hair color of a selected object.
-                            example: "brown"
                           gender:
                             type: string
                             enum: ["femininity","masculinity"]
                             description: Changing the gender of a selected object.
-                            example: "masculinity"
                           makeup:
                             type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the makeup of a selected object.
-                            example: "none"
                           hair_line:
                             type: string
                             enum: ["high", "low"]
                             description: Changing the hair line of a selected object.
-                            example: "high"
                           Beard:
                             type: string
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected object.
-                            example: "medium"
       responses:
         '200':
           description: Successful operation.

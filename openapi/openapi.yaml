@@ -321,7 +321,7 @@ paths:
       requestBody:
         required: true
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
@@ -2539,7 +2539,7 @@ paths:
           name: sid
           schema:
             type: string
-            example: N/A
+            example: "Remove this parameter if the image has not been modified using Bria."
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to apply on the result of that route, please provide this information. This parameter is optional.
         - in: query
           name: desired_increase
@@ -2608,6 +2608,7 @@ paths:
           name: sid
           schema:
             type: string
+            example: "Remove this parameter if the image has not been modified using Bria."
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to apply on the result of that route, please provide this information. This parameter is optional.
       responses:
         '200':
@@ -2673,6 +2674,7 @@ paths:
           name: sid
           schema:
             type: string
+            example: "Remove this parameter if the image has not been modified using Bria."
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
       requestBody:
         required: false

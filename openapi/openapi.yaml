@@ -2353,12 +2353,16 @@ paths:
               examples:
                 Original placement:
                   value:
+                    result: [""]
                 Automatically adjust the foreground placement:
                   value:
+                    result: [""]
                 Select foreground placement from a list: 
                   value:
+                    result: [""]
                 Only foreground, add padding:
                   value:
+                    result: [""]
         '400':
           description: Bad request.
         '404':

@@ -1158,22 +1158,25 @@ paths:
         You can see below an example of the content of the zip:
 
         
-        92bf8ce17584de82_panoptic.png
+              92bf8ce17584de82_panoptic.png
+      
+              
+              92bf8ce17584de82_1.png
+      
+              
+              92bf8ce17584de82_2.png
+      
+              
+              92bf8ce17584de82_3.png
+      
+              
+              ...
+      
+              
+              92bf8ce17584de82_86.png
 
-        
-        92bf8ce17584de82_1.png
 
-        
-        92bf8ce17584de82_2.png
-
-        
-        92bf8ce17584de82_3.png
-
-        
-        ...
-
-        
-        92bf8ce17584de82_86.png
+        You can access the SDK that demonstrates how to use this endpoint in a UI in the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/50a062867092788aaa9612f2cc69f7692567115a/mask_hover_ui/template.html" target="_blank">link</a>.
 
       operationId: objects/mask_generator
       parameters:

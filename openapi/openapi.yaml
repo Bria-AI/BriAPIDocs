@@ -1188,7 +1188,7 @@ paths:
           required: true
           schema:
             type: string
-            example:"92bf8ce17584de82"
+            example: "92bf8ce17584de82"
           description: visual id of the image, received after using the /upload or register route.
       responses:
         '200':

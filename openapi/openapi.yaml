@@ -321,7 +321,7 @@ paths:
       requestBody:
         required: true
         content:
-          text/plain:
+          application/x-www-form-urlencoded:
             schema:
               type: object
               properties:

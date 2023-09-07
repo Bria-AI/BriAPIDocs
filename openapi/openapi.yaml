@@ -414,25 +414,14 @@ paths:
         **Bria generative Web tool**
 
 
-        The registered visual can be seen and used in the Bria generative web tool
+        The uploaded visual can be seen and used in the Bria generative web tool
         in cases where the tool is licensed as part of the project.
 
 
         To do so, the user can access the following url:
         ```https://labs.bria.ai/gallery/{visual_id}```, where the *{visual_id}*
-        comes from the response of the */register route*.
+        comes from the response of the */upload route*.
 
-
-        In Bria's web tool, the user has the ability to make many changes to the
-        visual and also generate live videos, using an intuitive interactive
-        platform.
-
-
-        Bria's web tool can also be embedded in other websites, with the use of
-        an iframe HTML element:
-            
-            
-        <img src="https://bria-web-serving.s3.amazonaws.com/new_tool_29_03_2022.png" />
 
 
         **Constraints**
@@ -460,15 +449,25 @@ paths:
               properties:
                 org_image_key:
                   type: string
-                  description: The internal image id in your API, of the image you would like to register to Bria (without uploading it). If your images require authentication, you will need to register them using org_image_key after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
-                  example: "12345acbd"
+                  description: The internal image id in your API, of the image you would like to register to Bria. If accessing your images requires authentication, you will be able to register them using org_image_key only after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
                 image_url:
-                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url. Images can only be registered using image_urls if they do not require authentication.
+                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url and org_image_key will be saved but not used. Images can only be registered using an image_url if they do not require authentication.
                   type: string
                 is_private:   
                   description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
                   type: string
                   default: true
+            examples:
+                only image_url:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                only org_image_key:
+                  value:
+                    org_image_key: "12345acbd"
+                image_url & org_image_key:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                    org_image_key: "12345acbd"
       responses:
         '200':
           description: Successful operation.

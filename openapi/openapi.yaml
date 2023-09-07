@@ -2540,6 +2540,7 @@ paths:
           schema:
             type: string
           description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to apply on the result of that route, please provide this information. This parameter is optional.
+          x-redocly-ignore: true
         - in: query
           name: desired_increase
           schema:

@@ -1719,12 +1719,13 @@ paths:
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected object.
             example:
-              changes:
+              changes: [
                 id: "a48284e4832c809e4475ad5de7bdd333658e363b417a28991022a6fa79488a6b"
                 actions: 
                   age: "mid-60"
                   diversity: "france"
-                  expression: "happy"    
+                  expression: "happy"
+                ]
       responses:
         '200':
           description: Successful operation.

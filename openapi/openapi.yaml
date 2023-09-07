@@ -2269,36 +2269,55 @@ paths:
         content:
           application/json:
             schema:
+            examples:
+              Original placement:
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "original"
+                  num_results: 4
+              Automatically adjust the foreground placement:
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "automatic"
+                  canvas_size: [900,550]
+                  num_results: 1
+              Select foreground placement from a list: 
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "manual_placement"
+                  canvas_size: [900,550]
+                  manual_placement_selection: ["upper_center","bottom_center"]
+                  num_results: 1
+              Only foreground, add padding:
+                value:
+                  bg_prompt: "environment living room interior kitchen counter"
+                  placement_type: "manual_padding"
+                  padding_values: [20,30,20,30]
+                  num_results: 1
               type: object
               properties:
                 sid:
                   type: string
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
                 desired_resolution:
                   type: string
                   description: The desired resolution of the updated image. This parameter is optional.
                   enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
-                  example: "nhd"
                 bg_prompt:
                   type: string
                   description: Text from which you wish to generate the new background
-                  example: a high quality professional photo on a concrete table in front of a city skyline, product photography, shallow depth of field, realistic, front view, close up, product image, bokeh. octane render, symmetrical artwork. cinematic, high detail, 8k, realistic lighting
                 placement_type:
                   type: string
                   description: This parameter allows you to control the positioning of the product/foreground in the image. Choosing 'original' will preserve the original position of the product/foreground in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product/foreground. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product/foreground.
-                  example: automatic
                   enum: ["original","automatic","manual_placement","manual_padding"]
                 num_results:
                   type: integer
                   default: 4
-                  example: 1
                   description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
                 canvas_size:
                   type: array
                   items:
                     type: integer
-                  example: [900,550]
                   default: [1000,1000]
                   description: The desired size of the final image, after the replacement of the background. This parameter is only relevant when placement_type=automatic or placement_type=manual placement.
                 manual_placement_selection:
@@ -2306,14 +2325,12 @@ paths:
                   items:
                     type: string
                     enum: ["upper_left","upper_right","bottom_left","bottom_right","right_center","left_center","upper_center","bottom_center","center_vertical","center_horizontal"]
-                  example: []
                   default: [upper_left]
                   description: If you've selected placement_type=manual placement, you should use this parameter in order to specify which placements/positions you would like to use from the list. You can select more then one placement in one request.
                 padding_values:
                   type: array
                   items:
                     type: integer
-                  example: []
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product/foreground, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right].
                 seed:
@@ -2334,10 +2351,14 @@ paths:
                       type: array
                     description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed and the third value represents the sid of the result. As this endpoint is asynchronous, the images are not saved to the URLs once the URLs are received in the response. Use API polling on those URLs with a 60-second timeout until you receive the image. Getting a file of size 0 MB indicates that this result is offensive or violates copyrights. You can recreate the same result in the future by using the seed as part of the request. This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
               examples:
-                example:
+                Original placement:
                   value:
-                    result: [["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_1.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=shkYBjQZcAGXdlluZrPD%2BpHlQ7k%3D&Expires=1671622039",1,"26b54-9812-11ed-884d-56304cc7efc8.JPEG"],["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_2.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=MEg7syN2yWhiQov04ewdBDRmuXI%3D&Expires=1671622039",2,"26bab854-9812-11ed-884d-56304cc7efc8.JPEG"],["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_3.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=uFHD148AfYZDSWRRWhuUBbNVJQI%3D&Expires=1671622039",3,"26bab854-9812-11ed-884d-563c8.JPEG"],["https://bria-temp.s3.amazonaws.com/api/replace_bg_results/a59a1c6973999a33_a_man_at_the_office_photorealistic_high_res_detailed_c5b01aca-7946-11ed-9c32-0242ac120002/seed_4.jpg?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=0Ml%2BJw3PSaow7ZEQpDKPu63ej08%3D&Expires=1671622039",4,"26bab854-9812-884d-56304cc7efc8.JPEG"]]
-        
+                Automatically adjust the foreground placement:
+                  value:
+                Select foreground placement from a list: 
+                  value:
+                Only foreground, add padding:
+                  value:
         '400':
           description: Bad request.
         '404':

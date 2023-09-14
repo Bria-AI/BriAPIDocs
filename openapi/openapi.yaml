@@ -1764,6 +1764,26 @@ paths:
                         }
                       }
                     ]
+              Multiple People:
+                value:
+                  changes:
+                    [
+                      {
+                        "id": "person_1",
+                        "actions": {
+                          "age": {"key":"age","value":6.2},
+                          "diversity": "france",
+                          "expression": {"key":"happy","value":0.6}
+                        }
+                      },
+                      {
+                        "id": "person_2",
+                        "actions": {
+                          "age": {"key":"age","value":6.2},
+                          "diversity": "france",
+                          "expression": {"key":"happy","value":0.6}
+                        }
+                    ]
       responses:
         '200':
           description: Successful operation.

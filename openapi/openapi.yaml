@@ -1777,12 +1777,13 @@ paths:
                         }
                       },
                       {
-                        "id": "person_2",
+                        "id": "person_1",
                         "actions": {
                           "age": {"key":"age","value":6.2},
                           "diversity": "france",
                           "expression": {"key":"happy","value":0.6}
                         }
+                      }
                     ]
       responses:
         '200':

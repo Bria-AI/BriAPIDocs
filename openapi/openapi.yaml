@@ -1660,14 +1660,13 @@ paths:
                         description: Id of the selected object in the image, to which the user would like to make changes.
                       actions:
                         type: object
-                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
-                        properties:
+                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful. 
                           age:
-                            type: string
+                            type: object
                             enum: ["mid-20", "mid-40", "mid-60"]
-                            description: Changing the age of a selected object.
+                            description: Changing the age of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
                           diversity:
-                            type: string
+                            type: object
                             enum:
                               - africa
                               - korea
@@ -1681,9 +1680,9 @@ paths:
                               - england
                               - spain
                               - france
-                            description: Changing the diversity of a selected object.
+                            description: Changing the diversity of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1. 
                           expression:
-                            type: string
+                            type: object
                             enum:
                               - happy
                               - surprised
@@ -1693,44 +1692,64 @@ paths:
                               - contempt
                               - disgusted
                               - sad
-                            description: Changing the expression of a selected object.
+                            description: Changing the expression of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1.5. 
                           glasses:
-                            type: string
+                            type: object
                             enum: ["light", "heavy", "none"]
-                            description: Changing the glasses of a selected object.
+                            description: Changing the glasses of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 6. Only integer values are acceptable.
                           haircolor:
-                            type: string
+                            type: object
                             enum: ["black", "brown", "red", "blond", "gray"]
-                            description: Changing the hair color of a selected object.
+                            description: Changing the hair color of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 4. Only integer values are acceptable.
                           gender:
-                            type: string
+                            type: object
                             enum: ["femininity","masculinity"]
-                            description: Changing the gender of a selected object.
+                            description: Changing the gender of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
                           makeup:
-                            type: string
+                            type: object
                             enum: ["light", "heavy", "none"]
-                            description: Changing the makeup of a selected object.
+                            description: Changing the makeup of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
                           hair_line:
-                            type: string
+                            type: object
                             enum: ["high", "low"]
-                            description: Changing the hair line of a selected object.
+                            description: Changing the hair line of a selected person. It is possible to use one of the enum values or to provide a value between -20 and 20. Decimal values are acceptable.
                           Beard:
-                            type: string
+                            type: object
                             enum: ["shaved", "medium", "full"]
-                            description: Changing the facial hair of a selected object.
-            example:
-              {
-                "changes": [
-                  {
-                    "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
-                    "actions": {
-                      "age": "mid-60",
-                      "diversity": "france",
-                      "expression": "happy"
-                    }
-                  }
-                ]
-              }
+                            description: Changing the facial hair of a selected person. It is possible to use one of the enum values or to provide a value between -2 and 2. Decimal values are acceptable.
+            examples:
+              value:
+                Using enum values:
+                  changes:
+                    id: "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0"
+                    actions:
+                      age: "mid-60"
+                      diversity: "france"
+                      expression: "happy"
+                Using continuous numeric values:
+                  changes:
+                    id: "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0"
+                    actions:
+                      age: 
+                        key: "age"
+                        value: 6.2
+                      diversity: 
+                        key: "france"
+                        value: 0.8
+                      expression: 
+                        key: "Happy"
+                        value: 0.6
+                Using enum values and continuous numeric values:
+                  changes:
+                    id: "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0"
+                    actions:
+                      age: 
+                        key: "age"
+                        value: 6.2
+                      diversity: "france"
+                      expression: 
+                        key: "Happy"
+                        value: 0.6
       responses:
         '200':
           description: Successful operation.

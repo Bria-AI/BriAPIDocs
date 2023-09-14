@@ -1660,7 +1660,7 @@ paths:
                         description: Id of the selected object in the image, to which the user would like to make changes.
                       actions:
                         type: object
-                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful. 
+                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
                           age:
                             type: object
                             enum: ["mid-20", "mid-40", "mid-60"]

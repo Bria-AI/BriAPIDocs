@@ -1718,15 +1718,16 @@ paths:
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected person. It is possible to use one of the enum values or to provide a value between -2 and 2. Decimal values are acceptable.
             examples:
-              value:
-                Using enum values:
+              Using enum values:
+                value:
                   changes:
                     id: "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0"
                     actions:
                       age: "mid-60"
                       diversity: "france"
                       expression: "happy"
-                Using continuous numeric values:
+              Using continuous numeric values:
+                value:
                   changes:
                     id: "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0"
                     actions:
@@ -1739,7 +1740,8 @@ paths:
                       expression: 
                         key: "Happy"
                         value: 0.6
-                Using enum values and continuous numeric values:
+              Using enum values and continuous numeric values:
+                value:
                   changes:
                     id: "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0"
                     actions:

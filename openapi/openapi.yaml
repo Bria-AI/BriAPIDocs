@@ -1741,7 +1741,7 @@ paths:
                         "actions": {
                           "age": {"key":"age","value":6.2},
                           "diversity": {"key":"france","value":0.8},
-                          "expression": {"key":"Happy","value":0.6}
+                          "expression": {"key":"happy","value":0.6}
                         }
                       }
                     ]
@@ -1754,7 +1754,7 @@ paths:
                         "actions": {
                           "age": {"key":"age","value":6.2},
                           "diversity": "france",
-                          "expression": {"key":"Happy","value":0.6}
+                          "expression": {"key":"happy","value":0.6}
                         }
                       }
                     ]

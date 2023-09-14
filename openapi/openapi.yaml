@@ -1663,11 +1663,11 @@ paths:
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
                         properties: 
                           age:
-                            type: object
+                            type: string
                             enum: ["mid-20", "mid-40", "mid-60"]
                             description: Changing the age of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
                           diversity:
-                            type: object
+                            type: string
                             enum:
                               - africa
                               - korea
@@ -1683,7 +1683,7 @@ paths:
                               - france
                             description: Changing the diversity of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1. 
                           expression:
-                            type: object
+                            type: string
                             enum:
                               - happy
                               - surprised
@@ -1695,27 +1695,27 @@ paths:
                               - sad
                             description: Changing the expression of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1.5. 
                           glasses:
-                            type: object
+                            type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the glasses of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 6. Only integer values are acceptable.
                           haircolor:
-                            type: object
+                            type: string
                             enum: ["black", "brown", "red", "blond", "gray"]
                             description: Changing the hair color of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 4. Only integer values are acceptable.
                           gender:
-                            type: object
+                            type: string
                             enum: ["femininity","masculinity"]
                             description: Changing the gender of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
                           makeup:
-                            type: object
+                            type: string
                             enum: ["light", "heavy", "none"]
                             description: Changing the makeup of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
                           hair_line:
-                            type: object
+                            type: string
                             enum: ["high", "low"]
                             description: Changing the hair line of a selected person. It is possible to use one of the enum values or to provide a value between -20 and 20. Decimal values are acceptable.
                           Beard:
-                            type: object
+                            type: string
                             enum: ["shaved", "medium", "full"]
                             description: Changing the facial hair of a selected person. It is possible to use one of the enum values or to provide a value between -2 and 2. Decimal values are acceptable.
             examples:

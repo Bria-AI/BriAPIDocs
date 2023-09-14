@@ -1626,7 +1626,7 @@ paths:
         You should always include all the required changes in the request if you want to use multiple changes on a single person. It is not supported to make one request on a person with one change, take the SId from the result, and then use it in another request with a different change.
 
 
-        When you want to make changes on multiple people, you should make a request with all the desired changes on one person and then use the sid from the response in the request on the other person.
+        When you want to make changes on multiple people, you can make one request with all the desired changes on all the relevant people or make one request with all the desired changes on one person and then use the sid from the response in the request on the other person. 
 
       operationId: create
       parameters:

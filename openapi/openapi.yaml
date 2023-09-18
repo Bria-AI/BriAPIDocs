@@ -2238,6 +2238,12 @@ paths:
         This will enable you to create new and unique variations of your original image.
 
 
+        When writing the prompt, make sure that you include a short description of the foreground (see examples below). 
+
+
+        This endpoint also supports solid colors - you can take a color code and use it in the prompt.
+
+
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
         
         
@@ -2250,7 +2256,7 @@ paths:
         <img src="https://images.bria.ai/images_resized/e69b992499669933.png" width="200"/>
         
         
-        **bg_prompt**: environment living room interior kitchen counter
+        **bg_prompt**: a bottle in an environment living room interior, on a kitchen counter
         
         
         **placement_type**: original
@@ -2285,7 +2291,7 @@ paths:
         <img src="https://images.bria.ai/images_resized/fae8d0dcb20d9e21.jpg" width="200"/> <img src="" width="200"/>
         
         
-        **bg_prompt**: environment living room interior kitchen counter
+        **bg_prompt**: a bottle in an environment living room interior, on a kitchen counter
         
         
         **placement_type**: manual_padding
@@ -2373,20 +2379,20 @@ paths:
             examples:
               Original placement:
                 value:
-                  bg_prompt: "environment living room interior kitchen counter"
+                  bg_prompt: "a bottle in an environment living room interior, on a kitchen counter"
                   placement_type: "original"
                   num_results: 4
                   sync: True
               Automatically adjust the foreground placement:
                 value:
-                  bg_prompt: "environment living room interior kitchen counter"
+                  bg_prompt: "a bottle in an environment living room interior, on a kitchen counter"
                   placement_type: "automatic"
                   canvas_size: [900,550]
                   num_results: 1
                   sync: True
               Select foreground placement from a list: 
                 value:
-                  bg_prompt: "environment living room interior kitchen counter"
+                  bg_prompt: "a bottle in an environment living room interior, on a kitchen counter"
                   placement_type: "manual_placement"
                   canvas_size: [900,550]
                   manual_placement_selection: ["upper_center","bottom_center"]
@@ -2394,7 +2400,7 @@ paths:
                   sync: True
               Only foreground, add padding:
                 value:
-                  bg_prompt: "environment living room interior kitchen counter"
+                  bg_prompt: "a bottle in an environment living room interior, on a kitchen counter"
                   placement_type: "manual_padding"
                   padding_values: [20,30,20,30]
                   num_results: 1

@@ -2007,27 +2007,45 @@ paths:
             examples:
                 generated mask:
                   value:
-                    enhance: True
-                    changes: 
-                      mask_id: 30
-                      mask_source: "generated"
-                      actions:
-                        remove: True
+                    {
+                      "enhance": true,
+                      "changes": [ 
+                        {
+                          "mask_id": 30,
+                          "mask_source": "generated",
+                          "actions": {
+                            "remove": true
+                            }
+                          }
+                        ]
+                      }
                 manual mask:
                   value:
-                    enhance: True
-                    changes: 
-                      mask_url: "https://i.ibb.co/JRcgVq7/f2093906b0f041d4b2acb438a8d72084.png"
-                      mask_source: "manual"
-                      actions:
-                        remove: True
+                    {
+                      "enhance": true,
+                      "changes": [ 
+                        {
+                          "mask_url": "https://i.ibb.co/JRcgVq7/f2093906b0f041d4b2acb438a8d72084.png",
+                          "mask_source": "manual",
+                          "actions": {
+                            "remove": true
+                            }
+                          }
+                        ]
+                      }
                 object:
                   value:
-                    enhance: True
-                    changes: 
-                      id: "630cf6f9c206e3ec414f0c3006221b7b9252243707cfabf59e65490c6dfe5d56"
-                      actions:
-                        remove: True
+                    {
+                      "enhance": true,
+                      "changes": [ 
+                        {
+                          "id": "630cf6f9c206e3ec414f0c3006221b7b9252243707cfabf59e65490c6dfe5d56",
+                          "actions": {
+                            "remove": true
+                            }
+                          }
+                        ]
+                      }
       responses:
         '200':
           description: Successful operation.

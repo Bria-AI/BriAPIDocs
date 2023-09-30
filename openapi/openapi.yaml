@@ -190,6 +190,9 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                negative_prompt:
+                  type: string
+                  description: This parameter is optional.
             example: 
                 prompt: "alien world"
                 num_results: 1

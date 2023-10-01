@@ -501,7 +501,46 @@ paths:
         '500':
           description: Internal server error.
         '506':
-          description: Insufficient data. The given input is not supported by the Bria API.           
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /remove_image:
+    post:
+      tags:
+        - Image Onboarding
+      summary: Remove Image
+      description: >-
+
+        **Description**
+
+
+        With this route, you can remove an image from the gallery of your organization. The image won't be removed from Bria.
+
+        
+      operationId: remove_image
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          schema:
+            type: string
+          required: true
+          example: "b3cecc33cc31cc31"
+      responses:
+        '200':
+          description: Successful operation.
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '460':
+          description: Failed to download image.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
   /{visual_id}/info:
     get:
       tags:

@@ -193,14 +193,25 @@ paths:
                 negative_prompt:
                   type: string
                   description: This parameter is optional.
-            example: 
-                prompt: "alien world"
-                num_results: 1
-                style: "photo realistic"
-                atmosphere: "dramatic"
-                camera: "portrait"
-                medium: "photography"
-                sync: true
+            examples:
+              valid prompt:
+                value:
+                  prompt: "alien world"
+                  num_results: 1
+                  style: "photo realistic"
+                  atmosphere: "dramatic"
+                  camera: "portrait"
+                  medium: "photography"
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  style: "photo realistic"
+                  atmosphere: "dramatic"
+                  camera: "portrait"
+                  medium: "photography"
+                  sync: true
       responses:
         '200':
           description: Successful operation.
@@ -217,12 +228,27 @@ paths:
                       properties:
                         seed:
                           type: integer
-                          example: 1525972691
                           description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
                         urls:
                           type: string
                           description: the URL where you can find the generated image. If sync=false, it will take a few seconds until the image will be available via this URL.
-                          example: "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
         '400':
           description: Bad request.
         '405':

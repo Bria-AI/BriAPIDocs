@@ -2016,12 +2016,17 @@ paths:
           description: visual id of the image the user wants to remove objects from.
         - in: query
           name: desired_resolution
-          required: true
           schema:
             type: string
             example: "original"
             enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
           description: The desired resolution of the updated image. This parameter is optional.
+        - in: query
+          name: original_quality
+          schema:
+            type: boolean
+            example: true
+          description: If you would like to retain the quality of the original image, please set this parameter to true. This parameter is optional. This parameter can also be used as a body parameter.
       requestBody:
         content:
           application/json:
@@ -2191,6 +2196,12 @@ paths:
             enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
             example: "original"
           description: The desired resolution of the updated image. This parameter is optional.
+        - in: query
+          name: original_quality
+          schema:
+            type: boolean
+            example: true
+          description: If you would like to retain the quality of the original image, please set this parameter to true. Enabling this parameter during background removal may cause longer response times, depending on the quality and size of the original image. This parameter is optional. 
       responses:
         '200':
           description: Successful operation.

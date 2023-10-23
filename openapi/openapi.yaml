@@ -2059,7 +2059,7 @@ paths:
                       mask_source:
                         type: string
                         enum: ["manual","generated"]
-                        description: This parameter is only relevant, is a mask_url was used. If the mask was created using a brush (free-hand) then use the option 'manual'. If the mask was the output from the route /objects/mask_generator, use the option 'generated'.
+                        description: This parameter is only relevant, if a mask_url or mask_id were used. If the mask was created using a brush (free-hand) then use the option 'manual'. If the mask was the output from the route /objects/mask_generator, use the option 'generated'.
                       positive_points:
                         type: array
                         items:

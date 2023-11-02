@@ -2473,6 +2473,9 @@ paths:
                   type: integer
                   example: 
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                negative_prompt:
+                  type: string
+                  description: This parameter is optional.
             examples:
               Original placement:
                 value:
@@ -2640,6 +2643,9 @@ paths:
                 sid:
                   type: string
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                negative_prompt:
+                  type: string
+                  description: This parameter is optional.
               example: 
                 canvas_size: [1200,674]
                 original_image_size: [610,855]

@@ -2149,7 +2149,7 @@ paths:
     post:
       tags:
         - Background
-      summary: Lean Background Removal
+      summary: Isolated Background Removal
       description: >-
 
         **Description**
@@ -2158,7 +2158,7 @@ paths:
         The *Remove BG* Route can be used to remove the background of an image.
 
 
-        The main difference between the regular and this lean background removal endpoint is that you can use this endpoint without uploading or registering the image to Bria.
+        **The main difference between the regular and this lean background removal endpoint is that you can use this endpoint without uploading or registering the image to Bria.**
 
 
 

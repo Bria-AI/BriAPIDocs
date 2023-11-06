@@ -2172,13 +2172,13 @@ paths:
         The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
 
         
-        **Upload using a file**
+        **Remove the background from an image using the image file**
 
         
-          In our documentation request example, we demonstrate how to upload an image using a URL.
+          In our documentation request example, we demonstrate how to remove the background from an image using the image URL.
           
           
-          If you want to upload an image from a file, follow the example below:
+          If you want to use an image from a file, follow the example below:
 
       
               import requests

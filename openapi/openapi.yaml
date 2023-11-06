@@ -2198,7 +2198,7 @@ paths:
               print(response.text)
        
 
-      operationId: background/remove
+      operationId: lean_background/remove
       parameters:
         - in: header
           name: api_token
@@ -2275,7 +2275,7 @@ paths:
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
         
 
-      operationId: background_remove
+      operationId: background/remove
       parameters:
         - in: header
           name: api_token

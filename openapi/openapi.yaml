@@ -2231,9 +2231,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  visual_id:
+                  result_url:
                     type: string
-                    description: Unique visual identification
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire.
         '206':
           description: File value was not provided.
         '400':

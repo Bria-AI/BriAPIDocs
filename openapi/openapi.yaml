@@ -84,7 +84,7 @@ externalDocs:
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
-    /generation/bria-v2/text-to-image:
+  /generation/bria-v2/text-to-image:
     post:
       tags:
         - Image
@@ -215,7 +215,6 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-
   /generation/gaia-v1/text-to-image:
     post:
       tags:

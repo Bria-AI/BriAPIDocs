@@ -154,19 +154,11 @@ paths:
                 value:
                   prompt: "a baby riding a bicycle in a field of flowers"
                   num_results: 1
-                  style: "photo realistic"
-                  atmosphere: "dramatic"
-                  camera: "portrait"
-                  medium: "photography"
                   sync: true
               inappropriate prompt:
                 value:
                   prompt: "sensual"
                   num_results: 1
-                  style: "photo realistic"
-                  atmosphere: "dramatic"
-                  camera: "portrait"
-                  medium: "photography"
                   sync: true
       responses:
         '200':

@@ -120,7 +120,7 @@ paths:
         
         
         <img src="https://images.bria.ai/images_resized/a3e93a2adac76194.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/cd143cbca39f482e.jpg" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d4873b309d193adc.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/c10f3b933d738934.jpg" width="200" height="200"/>
            
       operationId: /generation/bria-v2/text-to-image
       parameters:

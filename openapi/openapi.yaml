@@ -98,8 +98,7 @@ paths:
         The *Image Generation Route* allows you to generate images based on any given text prompt. 
         
         
-        This model supports a high resolution of 1024x1024 max.
-
+        Our most capable model that can generate high-quality 1024x1024px images.
 
         Here are some examples:
         
@@ -244,7 +243,9 @@ paths:
         The *Image Generation Route* allows you to generate images based on any given text prompt. 
         
         
-        This model supports a resolution of 512x512 max. Results are larger by 4 due to a resolution increase.
+        A faster model that can generate 512x512px images quickly.        
+        
+        Results are larger by 4 due to a resolution increase.
         
         
         

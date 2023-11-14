@@ -99,6 +99,28 @@ paths:
         
         
         This model supports a high resolution of 1024x1024 max.
+
+        Here are some examples:
+        
+        
+        **prompt:** A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+           
+           
+        **results:**
+
+           
+        <img src="https://images.bria.ai/images_resized/c90a5ad279297dc3.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/8d6dc1724287717e.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/ca8ee9c197260d6e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/9c0db2334996eccd.jpg" width="200" height="200"/>
+        
+        
+        **prompt:** Nature photography, a majestic photo, closeup of a blue and yellow Cameleon on a tropical blue flower with due, drops of water on the flower, outdoors, vegetation, jungle, polarizing photo filter
+        
+        
+        **results:**
+        
+        
+        <img src="https://images.bria.ai/images_resized/a3e93a2adac76194.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/cd143cbca39f482e.jpg" width="200" height="200"/>
+        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d4873b309d193adc.jpg" width="200" height="200"/>
            
       operationId: /generation/bria-v2/text-to-image
       parameters:

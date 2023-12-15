@@ -247,7 +247,7 @@ paths:
         The *Image Generation Route* allows you to generate images based on any given text prompt. 
 
 
-        *This model is not available via API anymore, but direct access to the model itself can be granted upon request.*
+        **This model is not available via API anymore, but direct access to the model itself can be granted upon request.**
 
         
         A faster model that can generate 512x512px images quickly.        

@@ -165,11 +165,12 @@ paths:
                   minimum: 20
                   maximum: 50
                   default: 30
-                guidance_scale:
-                  type: integer
+                text_guidance_scale:
+                  type: number
+                  format: float
                   description: Determines how closely the generated image should adhere to the input text description. 
-                  minimum: 0
-                  maximum: 15
+                  minimum: 1
+                  maximum: 10
                   default: 5
                 style:   
                   type: string

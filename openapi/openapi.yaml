@@ -102,7 +102,7 @@ paths:
         The *Image Generation Route* allows you to generate images based on any given text prompt. 
         
         
-        Our most capable model that can generate high-quality 1024x1024px images.
+        Our most capable model that can generate high-quality 1024x1024px images. **The model supports natively multiple aspect ratios.**
 
         Here are some examples:
         
@@ -148,7 +148,7 @@ paths:
                   description: How many images you would like to generate. The default and maximum value is 4. 
                 size:
                   type: array
-                  description: The size of the image in pixels. The first value is the width and the second value is the height. The maximum value is 1024. Any value greater than that will result in an error. Each value must be a multiple of 64.
+                  description: The size of the image in pixels. The first value is the width and the second value is the height. The maximum value is 1024. Each value must be a multiple of 64. Here is the recommended list of sizes to use: [1024,1024],[1344,768],[768,1344],[1088,896],[896,1088],[1152,896],[896,1152],[1216,832],[832,1216].
                   default: [1024,1024]
                 sync:
                   type: boolean
@@ -159,6 +159,18 @@ paths:
                 negative_prompt:
                   type: string
                   description: This parameter is optional.
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image.
+                  minimum: 20
+                  maximum: 50
+                  default: 30
+                guidance_scale:
+                  type: integer
+                  description: Determines how closely the generated image should adhere to the input text description. 
+                  minimum: 0
+                  maximum: 15
+                  default: 5
                 style:   
                   type: string
                   enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']

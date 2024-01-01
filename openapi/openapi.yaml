@@ -161,14 +161,14 @@ paths:
                   description: This parameter is optional.
                 steps_num:
                   type: integer
-                  description: The number of iterations the model goes through to refine the generated image.
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
                   minimum: 20
                   maximum: 50
                   default: 30
                 text_guidance_scale:
                   type: number
                   format: float
-                  description: Determines how closely the generated image should adhere to the input text description. 
+                  description: Determines how closely the generated image should adhere to the input text description. This parameter is optional.
                   minimum: 1.0
                   maximum: 10.0
                   default: 5.0

@@ -26,6 +26,7 @@ info:
 
     
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
+      - /campaign_generator - The *Campaign Generator Route* enables the creation of customized campaigns. It allows for the generation of visual ads, including various elements like text, images, and layout, based on specific parameters provided by the user.
       - /info - By using the *Info Route*, you can understand the possible changes for each object in the image. 
         The following routes can be used if you do not require information for people, objects, and background, but rather only one of them:
          - /person/info
@@ -88,7 +89,136 @@ externalDocs:
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
-  /generation/bria-v2/text-to-image:
+  /{visual_id}/campaign_generator:
+  post:
+    tags:
+        - Tailored Gen AI
+    summary: "Campaign Generation"
+    description: >
+      This endpoint allows for the generation of campaign visuals. Users can specify various parameters 
+      such as brand id, template id, target audience, and visual elements like logo, call to action (CTA), 
+      and font properties. If certain optional parameters are not provided, the system will automatically 
+      choose defaults.
+    operationId: /campaign_generator
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+              properties:
+                sid:
+                  type: string
+                  description: Session ID obtained from a previous route response. Optional.
+                brand_id:
+                  type: string
+                  description: Brand ID. Optional.
+                template_id:
+                  type: string
+                  description: Template ID. Optional.
+                targets:
+                  type: array
+                  items:
+                    type: string
+                  description: Target marketing channels where the final banner will be shared. Optional.
+                logo:
+                  type: string
+                  description: Logo URL. Optional. Supported inputs include public image URL or a URL inside Bria s3.
+                cta:
+                  type: string
+                  description: CTA image URL. Optional. Supported inputs include public image URL or a URL inside Bria s3.
+                header1_text:
+                  type: string
+                  description: Header1 text. Optional.
+                header1_font:
+                  type: string
+                  description: Header1 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3.
+                header1_size:
+                  type: integer
+                  description: Header1 size. Optional.
+                header1_color:
+                  type: array
+                  items:
+                    type: integer
+                  description: Header1 color in RGB format. Optional.
+                header2_text:
+                  type: string
+                  description: Header2 text. Optional.
+                header2_font:
+                  type: string
+                  description: Header2 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3.
+                header2_size:
+                  type: integer
+                  description: Header2 size. Optional.
+                header2_color:
+                  type: array
+                  items:
+                    type: integer
+                  description: Header2 color in RGB format. Optional.
+                seed:
+                  type: integer
+                  description: Seed used for image expansion. Optional. Use this to recreate the same ad.
+                background_type:
+                  type: string
+                  enum: ["original", "generated", "solid"]
+                  default: "original"
+                  description: Background type. Optional.
+                bg_prompt:
+                  type: string
+                  description: Background generation prompt. Mandatory when background_type is generated.
+                bg_seed:
+                  type: integer
+                  description: Background seed. Optional. Relevant when background_type is generated.
+                bg_color:
+                  type: string
+                  description: Background color in hex code. Mandatory when background_type is solid.
+    responses:
+      '200':
+        description: "Successful response with generated campaign visuals."
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                template_id:
+                  type: string
+                  description: "Template ID used for generating ads."
+                ads:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      expansion_seed:
+                        type: integer
+                        description: "Seed used for the image expansion."
+                      jpeg_file:
+                        type: string
+                        format: uri
+                        description: "URL of the JPEG version of the ad."
+                      layout_id:
+                        type: string
+                        description: "Layout ID of the ad."
+                      psd_file:
+                        type: string
+                        format: uri
+                        description: "URL of the PSD version of the ad."
+                      target:
+                        type: string
+                        description: "Target marketing channel for the ad."
+                      bg_seed:
+                        type: integer
+                        description: "Background seed used in generation."
+      '400':
+        description: Bad request.
+      '404':
+        description: Specified Image does not exist.
+      '405':
+        description: Method not allowed.
+      '500':
+        description: Internal server error.
+      '506':
+        description: Insufficient data. The given input is not supported by the Bria API.
+            /generation/bria-v2/text-to-image:
     post:
       tags:
         - Image

@@ -106,72 +106,72 @@ paths:
         application/json:
           schema:
             type: object
-              properties:
-                sid:
+            properties:
+              sid:
+                type: string
+                description: "Session ID obtained from a previous route response. Optional."
+              brand_id:
+                type: string
+                description: "Brand ID. Optional."
+              template_id:
+                type: string
+                description: "Template ID. Optional."
+              targets:
+                type: array
+                items:
                   type: string
-                  description: Session ID obtained from a previous route response. Optional.
-                brand_id:
-                  type: string
-                  description: Brand ID. Optional.
-                template_id:
-                  type: string
-                  description: Template ID. Optional.
-                targets:
-                  type: array
-                  items:
-                    type: string
-                  description: Target marketing channels where the final banner will be shared. Optional.
-                logo:
-                  type: string
-                  description: Logo URL. Optional. Supported inputs include public image URL or a URL inside Bria s3.
-                cta:
-                  type: string
-                  description: CTA image URL. Optional. Supported inputs include public image URL or a URL inside Bria s3.
-                header1_text:
-                  type: string
-                  description: Header1 text. Optional.
-                header1_font:
-                  type: string
-                  description: Header1 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3.
-                header1_size:
+                description: "Target marketing channels where the final banner will be shared. Optional."
+              logo:
+                type: string
+                description: "Logo URL. Optional. Supported inputs include public image URL or a URL inside Bria s3."
+              cta:
+                type: string
+                description: "CTA image URL. Optional. Supported inputs include public image URL or a URL inside Bria s3."
+              header1_text:
+                type: string
+                description: "Header1 text. Optional."
+              header1_font:
+                type: string
+                description: "Header1 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3."
+              header1_size:
+                type: integer
+                description: "Header1 size. Optional."
+              header1_color:
+                type: array
+                items:
                   type: integer
-                  description: Header1 size. Optional.
-                header1_color:
-                  type: array
-                  items:
-                    type: integer
-                  description: Header1 color in RGB format. Optional.
-                header2_text:
-                  type: string
-                  description: Header2 text. Optional.
-                header2_font:
-                  type: string
-                  description: Header2 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3.
-                header2_size:
+                description: "Header1 color in RGB format. Optional."
+              header2_text:
+                type: string
+                description: "Header2 text. Optional."
+              header2_font:
+                type: string
+                description: "Header2 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3."
+              header2_size:
+                type: integer
+                description: "Header2 size. Optional."
+              header2_color:
+                type: array
+                items:
                   type: integer
-                  description: Header2 size. Optional.
-                header2_color:
-                  type: array
-                  items:
-                    type: integer
-                  description: Header2 color in RGB format. Optional.
-                seed:
-                  type: integer
-                  description: Seed used for image expansion. Optional. Use this to recreate the same ad.
-                background_type:
-                  type: string
-                  enum: ["original", "generated", "solid"]
-                  default: "original"
-                  description: Background type. Optional.
-                bg_prompt:
-                  type: string
-                  description: Background generation prompt. Mandatory when background_type is generated.
-                bg_seed:
-                  type: integer
-                  description: Background seed. Optional. Relevant when background_type is generated.
-                bg_color:
-                  type: string
-                  description: Background color in hex code. Mandatory when background_type is solid.
+                description: "Header2 color in RGB format. Optional."
+              seed:
+                type: integer
+                description: "Seed used for image expansion. Optional. Use this to recreate the same ad."
+              background_type:
+                type: string
+                enum: ["original", "generated", "solid"]
+                default: "original"
+                description: "Background type. Optional."
+              bg_prompt:
+                type: string
+                description: "Background generation prompt. Mandatory when background_type is generated."
+              bg_seed:
+                type: integer
+                description: "Background seed. Optional. Relevant when background_type is generated."
+              bg_color:
+                type: string
+                description: "Background color in hex code. Mandatory when background_type is solid."
     responses:
       '200':
         description: "Successful response with generated campaign visuals."

@@ -218,7 +218,7 @@ paths:
         description: Internal server error.
       '506':
         description: Insufficient data. The given input is not supported by the Bria API.
-            /generation/bria-v2/text-to-image:
+  /generation/bria-v2/text-to-image:
     post:
       tags:
         - Image

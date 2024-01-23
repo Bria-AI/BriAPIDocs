@@ -233,7 +233,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Text to Image v2.0
+      summary: Text to Image v2
       description: >-
 
 

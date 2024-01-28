@@ -3496,7 +3496,7 @@ paths:
           schema:
             type: string
             example: "If you are using the vhash paramater, there is no need to use this parameter"
-          description: URL of an image, for which you would like to find similar images. When you want to search based on modified images, or images that have not been uploaded or registered to Bria, you can use this parameter. When this parameter is provided, the visual_id parameter can be None.
+          description: URL of an image, for which you would like to find similar images. When you want to search based on modified images, or images that have not been uploaded or registered to Bria, you can use this parameter. When this parameter is provided, the visual_id parameter can be None. The supported file types are jpg, jpeg and png, up to 12 mb.
       responses:
         '200':
           description: Successful operation.

@@ -293,7 +293,11 @@ paths:
                   default: [1024,1024]
                 sync:
                   type: boolean
-                  description: Please use the value true. 
+                  description: If you are using the Bria 2.2 model, use the value true. If you are using the Bria 2.2 Fast model, therefore fast:true, then sync:false is the supported method.  Bria 2.2 Fast is currently only available when using our asynchronous text-to-image generation endpoint. Therefore, when making a request, it is also necessary to include the body parameter 'sync':false. As soon as you call this endpoint asynchronously, you will get a response with URLs that will store the generated images, but it will take 2-3 seconds before the images are available. The best approach would be to use polling logic to check (every 100/200 ms for example) if the generated image was saved in the provided URL. 
+                fast:
+                  type: boolean
+                  default: false
+                  description: If you would like to use the Bria 2.2 Fast model, which provides the best balance between speed and quality, use the value true. 
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.

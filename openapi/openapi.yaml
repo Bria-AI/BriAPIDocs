@@ -121,17 +121,17 @@ paths:
                 sid:
                   type: string
                   description: "Session ID obtained from a previous route response. Optional."
-                brand_id:
+                preset_id:
                   type: string
-                  description: "Brand ID. Optional."
+                  description: "The brand preset that defines which logo, colors and typography should be used. Optional."
                 template_id:
                   type: string
-                  description: "Template ID. Optional."
-                targets:
+                  description: "Template ID. template_id or layout_ids must be provided. You can contact Bria to get your own templates and layouts."
+                layout_ids:
                   type: array
-                  items:
-                    type: string
-                  description: "Target marketing channels where the final banner will be shared. Optional."
+                    items:
+                      type: string
+                  description: "Template ID. template_id or layout_ids must be provided. You can contact Bria to get your own templates and layouts."
                 logo:
                   type: string
                   description: "Logo URL. Optional. Supported inputs include public image URL or a URL inside Bria s3."
@@ -143,7 +143,7 @@ paths:
                   description: "Header1 text. Optional."
                 header1_font:
                   type: string
-                  description: "Header1 font. Optional. Supported inputs include public tiff URL or a URL inside Bria s3."
+                  description: "Header1 font. Optional. Supported inputs include public ttf URL or a URL inside Bria s3."
                 header1_size:
                   type: integer
                   description: "Header1 size. Optional."
@@ -151,7 +151,7 @@ paths:
                   type: array
                   items:
                     type: integer
-                  description: "Header1 color in RGB format. Optional."
+                  description: "Header1 color in hex format. Optional."
                 header2_text:
                   type: string
                   description: "Header2 text. Optional."
@@ -165,7 +165,7 @@ paths:
                   type: array
                   items:
                     type: integer
-                  description: "Header2 color in RGB format. Optional."
+                  description: "Header2 color in hex format. Optional."
                 seed:
                   type: integer
                   description: "Seed used for image expansion. Optional. Use this to recreate the same ad."

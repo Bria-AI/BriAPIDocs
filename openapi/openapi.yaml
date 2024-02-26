@@ -129,8 +129,8 @@ paths:
                   description: "Template ID. template_id or layout_ids must be provided. You can contact Bria to get your own templates and layouts."
                 layout_ids:
                   type: array
-                    items:
-                      type: string
+                  items:
+                    type: string
                   description: "Template ID. template_id or layout_ids must be provided. You can contact Bria to get your own templates and layouts."
                 logo:
                   type: string

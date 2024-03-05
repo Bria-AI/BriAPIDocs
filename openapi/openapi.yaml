@@ -391,191 +391,6 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-  /generation/gaia-v1/text-to-image:
-    post:
-      tags:
-        - Image
-      summary: Text to Image v1.4 (Deprecated)
-      description: >-
-
-
-        **Description**
-        
-
-        The *Image Generation Route* allows you to generate images based on any given text prompt. 
-
-
-        **This model is not available via API anymore, but direct access to the model itself can be granted upon request.**
-
-        
-        A faster model that can generate 512x512px images quickly.        
-        
-        Results are larger by 4 due to a resolution increase.
-        
-        
-        
-        Here are some examples:
-        
-        
-        **prompt:** alien world
-        
-        
-        **style:** photo realistic
-           
-           
-        **atmosphere:** dramatic
-           
-           
-        **camera:** portrait
-           
-           
-        **medium:** photography
-           
-           
-        **results:**
-           
-        <img src="https://images.bria.ai/images_resized/c7700f41fe4f2171.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/a5be5a25a41e6b25.jpg" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/b31d95e14cf36f00.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/d9db8c0f605352ce.jpg" width="200" height="200"/>
-        
-        
-        **prompt:** owl wearing a hat
-        
-        
-        **style:** fashion
-           
-           
-        **atmosphere:** vivid
-           
-           
-        **camera:** close up
-           
-           
-        **medium:** art
-           
-           
-        **results:**
-        
-        
-        <img src="https://images.bria.ai/images_resized/b59b21373eaf2103.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/af5b3e8c81d1c4cc.jpg" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/e59a19cd1a36616e.jpg" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/e0f12375d0b4b1ae.jpg" width="200" height="200"/>
-           
-           
-      operationId: /generation/gaia-v1/text-to-image
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                prompt:
-                  type: string
-                  description: The prompt you would like to use to generate images
-                num_results:
-                  type: integer
-                  description: How many images you would like to generate. The default and maximum value is 4. 
-                size:
-                  type: array
-                  description: The size of the image in pixels. The first value is the width and the second value is the height. The maximum value is 512. Any value greater than that will result in an error. Each value must be a multiple of 64.
-                  default: [512,512]
-                sync:
-                  type: boolean
-                  description: Please use the value true. 
-                seed:
-                  type: integer
-                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                negative_prompt:
-                  type: string
-                  description: This parameter is optional.
-                style:   
-                  type: string
-                  enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
-                  description: Which style you would like to see in your generated images.
-                atmosphere:
-                  type: string
-                  enum: ['dramatic','vivid','warm','cool']
-                  description: Which atmosphere you would like to get in your generated images.
-                camera:
-                  type: string
-                  enum: ['portrait','close up','aerial','landscape']
-                  description: Which camera angle you would like to see in your generated images.
-                medium:
-                  type: string
-                  enum: ['photography','art']
-                  description: Which medium should be included in your generated images.
-            examples:
-              valid prompt:
-                value:
-                  prompt: "alien world"
-                  num_results: 1
-                  style: "photo realistic"
-                  atmosphere: "dramatic"
-                  camera: "portrait"
-                  medium: "photography"
-                  sync: true
-              inappropriate prompt:
-                value:
-                  prompt: "sensual"
-                  num_results: 1
-                  style: "photo realistic"
-                  atmosphere: "dramatic"
-                  camera: "portrait"
-                  medium: "photography"
-                  sync: true
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
-                    items:
-                      type: object
-                      properties:
-                        seed:
-                          type: integer
-                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
-                        urls:
-                          type: string
-                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
-              examples:
-                valid prompt:
-                  value:
-                    results:  [
-                                {
-                                  "seed": 1525972691,
-                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
-                                }
-                              ]
-                inappropriate prompt:
-                  value:
-                    results:  [
-                                {
-                                  "description": "Query doesn't stand with Bria's ethic rules",
-                                  "error_code": "408"
-                                }
-                              ]
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
-
   /upload:
     post:
       tags:
@@ -1560,7 +1375,7 @@ paths:
               92bf8ce17584de82_86.png
 
 
-        You can access the SDK that demonstrates how to use this endpoint in a UI in the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/50a062867092788aaa9612f2cc69f7692567115a/mask_hover_ui/template.html" target="_blank">link</a>.
+        You can access the SDK that demonstrates how to use this endpoint in a UI in the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/50a062867092788aaa9612f2cc69f7692567115a/mask_hover_ui" target="_blank">link</a>.
 
       operationId: objects/mask_generator
       parameters:
@@ -2296,7 +2111,7 @@ paths:
 
 
 
-        2) Allow the user to create a mask manually (by using a brush, for example), and then send the mask_url to the objects/remove endpoint. Under the example named manual mask, you can see an example of this type of request.
+        2) Allow the user to create a mask manually (by using a brush, for example), and then send the mask_url to the objects/remove endpoint. Under the example named manual mask, you can see an example of this type of request. You can access the SDK that demonstrates how to implement a brush feature in your Interface via the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
 
 
 

@@ -92,8 +92,8 @@ paths:
   /{visual_id}/campaign_generator:
     post:
       tags:
-          - Tailored Gen AI
-      summary: "Campaign Generation"
+          - Image
+      summary: /{visual_id}/campaign_generator
       description: >
         This endpoint allows for the generation of campaign visuals. Users can specify various parameters 
         such as brand id, template id, target audience, and visual elements like logo, call to action (CTA), 
@@ -233,7 +233,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Text to Image BRIA 2.2
+      summary: /generation/bria-v2/text-to-image
       description: >-
 
 
@@ -395,7 +395,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: Upload Image
+      summary: /upload
       description: >-
 
         **Description**
@@ -542,7 +542,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: Register Image
+      summary: /register
       description: >-
 
         **Description**
@@ -663,7 +663,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: Remove Image
+      summary: /{visual_id}/remove_image
       description: >-
 
         **Description**
@@ -702,7 +702,7 @@ paths:
     get:
       tags:
         - Image Onboarding
-      summary: General Info
+      summary: /{visual_id}/info
       description: >-
 
 
@@ -971,7 +971,7 @@ paths:
     get:
       tags:
         - Background
-      summary: Background Info
+      summary: /{visual_id}/background/info
       description: >-
 
 
@@ -1080,7 +1080,7 @@ paths:
     get:
       tags:
         - Object
-      summary: Objects Info
+      summary: /{visual_id}/objects/info
       description: >-
 
 
@@ -1324,8 +1324,7 @@ paths:
     post:
       tags:
         - Object
-        - Image
-      summary: Masks Generator
+      summary: /{visual_id}/objects/mask_generator
       description: >-
 
 
@@ -1416,7 +1415,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Get Caption
+      summary: /{visual_id}/caption
       description: >-
 
 
@@ -1472,7 +1471,7 @@ paths:
     get:
       tags:
         - AI-Presenter
-      summary: Presenter Info
+      summary: /{visual_id}/person/info
       description: >-
 
 
@@ -1801,7 +1800,7 @@ paths:
     post:
       tags:
         - AI-Presenter
-      summary: Modify Presenter
+      summary: /{visual_id}/create
       description: >-
 
 
@@ -2014,7 +2013,7 @@ paths:
     post:
       tags:
         - AI-Presenter
-      summary: Recast Presenter
+      summary: /{visual_id}/recast_model
       description: >-
 
 
@@ -2093,7 +2092,7 @@ paths:
     post:
       tags:
         - Object
-      summary: Object Removal
+      summary: /{visual_id}/objects/remove
       description: >-
         **Description**
 
@@ -2280,7 +2279,7 @@ paths:
     post:
       tags:
         - Background
-      summary: Isolated Background Removal
+      summary: /background/remove
       description: >-
 
         **Description**
@@ -2380,7 +2379,7 @@ paths:
     get:
       tags:
         - Background
-      summary: Background Removal
+      summary: /{visual_id}/background/remove
       description: >-
 
 
@@ -2463,7 +2462,7 @@ paths:
     get:
       tags:
         - Background
-      summary: Background Blur
+      summary: /{visual_id}/background/blur
       description: >-
 
 
@@ -2549,7 +2548,7 @@ paths:
     post:
       tags:
         - Background
-      summary: Background Generation
+      summary: /{visual_id}/replace_bg
       description: >-
 
 
@@ -2778,7 +2777,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Image Expansion
+      summary: /{visual_id}/image_expansion
       description: >-
 
 
@@ -2930,7 +2929,7 @@ paths:
     get:
       tags:
         - Image
-      summary: Increase Resolution
+      summary: /{visual_id}/increase_resolution
       description: >-
 
 
@@ -2999,7 +2998,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Image to PSD
+      summary: /{visual_id}/image_to_psd
       description: >-
 
 
@@ -3062,7 +3061,7 @@ paths:
     post:
       tags:
         - Image
-      summary: Crop on Foreground 
+      summary: /{visual_id}/crop
       description: >-
 
 
@@ -3144,7 +3143,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Search
+      summary: /search
       description: >-
 
 
@@ -3262,7 +3261,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Similar Images search
+      summary: /search_similar_images
       description: >-
 
 

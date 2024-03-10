@@ -177,7 +177,7 @@ paths:
                   type: integer
                   description: How many images you would like to generate. The default and maximum value is 4. 
                 aspect_ratio:
-                  type: array
+                  type: string
                   description: The aspect ratio of the image. 
                   default: "1:1"
                   enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]

@@ -572,8 +572,9 @@ paths:
 
 
         **Description**
+
         
-        WARNING: Deprecated and scheduled for removal on 01/06/2024. For continued support, use <a href="https://bria-ai-api-docs.redoc.ly/#operation//text-to-image" target="_blank">/text-to-image</a>.
+        WARNING: Deprecated and scheduled for removal on 01/05/2024. For continued support, use <a href="https://bria-ai-api-docs.redoc.ly/#operation//text-to-image" target="_blank">/text-to-image</a>.
 
 
       

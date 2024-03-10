@@ -127,29 +127,29 @@ paths:
         **BRIA BASE model 2.2:**
         
         
-        <img src="https://images.bria.ai/images_resized/a3e93a2adac76194.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/cd143cbca39f482e.png" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/c10f3b933d738934.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(42).png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(43).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(44).png" width="200" height="200"/>
 
 
         **BRIA BASE model 2.3:**
         
         
-        <img src="https://briaai-bria-2-3.hf.space/--replicas/gy16l/file=/tmp/gradio/e6f1728ab96788f8d5ed59c8490502f5cc55046f/image.png" width="200" height="200"/> <img src="https://briaai-bria-2-3.hf.space/--replicas/gy16l/file=/tmp/gradio/476559d29122c1128ef0f630470ecda24e535d9d/image.png" width="200" height="200"/>
-        <img src="https://briaai-bria-2-3.hf.space/--replicas/gy16l/file=/tmp/gradio/9806c47ef402ceb39be74fcc0e6b8d350c81fd5d/image.png" width="200" height="200"/> <img src="https://briaai-bria-2-3.hf.space/--replicas/gy16l/file=/tmp/gradio/b663d43c833387ab459e9f4358d67aeb6346b6f2/image.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(43).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(44).png" width="200" height="200"/>
 
 
         **BRIA FAST model 2.2:**
         
         
-        <img src="https://images.bria.ai/images_resized/a3e93a2adac76194.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/cd143cbca39f482e.png" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/c10f3b933d738934.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(44).png" width="200" height="200"/>
 
 
         **BRIA HD model 2.2:**
         
         
-        <img src="https://images.bria.ai/images_resized/a3e93a2adac76194.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/cd143cbca39f482e.png" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/c10f3b933d738934.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(41).png" width="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(42).png" width="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(43).png" width="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(44).png" width="200"/>
            
       operationId: /text-to-image
       parameters:

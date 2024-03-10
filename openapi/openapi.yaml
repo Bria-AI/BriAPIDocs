@@ -217,8 +217,6 @@ paths:
             examples:
               valid prompt:
                 value:
-                  model_type: "base"
-                  model_version: "2.2"
                   prompt: "a baby riding a bicycle in a field of flowers"
                   num_results: 1
                   sync: true

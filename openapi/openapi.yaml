@@ -118,7 +118,7 @@ paths:
         Beyond the API, developers interested in deeper customization can access BRIA's models directly through <a href="https://huggingface.co/briaai" target="_blank">Hugging Face</a>. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: Canny, Depth, and Coloring. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
 
 
-        Examples:
+        **Examples:**
 
 
         prompt: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
@@ -278,7 +278,7 @@ paths:
         Beyond the API, users interested in deeper customization can access BRIA's models directly through <a href="https://huggingface.co/briaai" target="_blank">Hugging Face</a>. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: CannyEdges, Depth, and Coloring. This option is ideal for users seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
 
 
-        An example:
+        **An example:**
 
 
         prompt: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
@@ -431,7 +431,7 @@ paths:
         Beyond the API, developers interested in deeper customization can access BRIA's models directly through <a href="https://huggingface.co/briaai" target="_blank">Hugging Face</a>. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: Canny, Depth, and Coloring. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
 
 
-        Examples:
+        **An example:**
 
 
         prompt: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades

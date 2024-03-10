@@ -180,7 +180,7 @@ paths:
                   type: array
                   description: The aspect ratio of the image. 
                   default: "1:1"
-                  enums: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
                 sync:
                   type: boolean
                   description: Determines the response mode. When true, responses are synchronous, and applicable to the fast model or single-image requests. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.

@@ -93,7 +93,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /text-to-image
+      summary: /text-to-image (Coming Soon)
       description: >-
 
 
@@ -180,7 +180,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images
+                  description: The prompt you would like to use to generate images.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. The default and maximum value is 4. 
@@ -198,7 +198,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 negative_prompt:
                   type: string
-                  description: This parameter is optional.
+                  description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. The default for the 'base' and 'hd' models is 30 steps, while the minimum value is 20 steps. The default for the 'fast' model is 8 steps, while the minimum value is 4 steps. This parameter is optional.

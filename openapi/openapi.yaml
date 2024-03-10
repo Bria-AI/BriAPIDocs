@@ -299,7 +299,7 @@ paths:
             type: string
             enum: ["2.2"]
           required: true
-          description: The model version you would like to use in the request. Currently, 2.2 is available for all model types, and 2.3 is only available for the base model.
+          description: The model version you would like to use in the request. 
         - in: header
           name: api_token
           schema:

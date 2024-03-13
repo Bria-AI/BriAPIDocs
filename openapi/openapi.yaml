@@ -472,7 +472,7 @@ paths:
         **BRIA HD model 2.2:**
         
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(42).png" width="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(50).png" width="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(42).png" width="400"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(50).png" width="400"/>
            
       operationId: /text-to-image/hd
       parameters:

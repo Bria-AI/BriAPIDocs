@@ -291,20 +291,20 @@ paths:
         **Description**
         
 
-        The */text-to-image/fast* Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
-        Ideal for applications requiring quick turnaround without sacrificing image fidelity. 
+        The /text-to-image/fast Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs. 
+        Ideal for applications requiring quick turnaround without sacrificing image fidelity.
 
 
         **Advanced Customization and Access:**
 
 
-        Beyond the API, users interested in deeper customization can access BRIA's models directly through <a href="https://huggingface.co/briaai" target="_blank">Hugging Face</a>. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: CannyEdges, Depth, and Coloring. This option is ideal for users seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
+        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
 
 
         **An example:**
 
 
-        prompt: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
 
 
         **BRIA FAST model 2.2:**
@@ -445,26 +445,34 @@ paths:
         **Description**
         
 
-        The */text-to-image/hd* Route is tailored for projects demanding the utmost in image detail and clarity. It offers an unparalleled resolution of 1536x1536 pixels, along with native support for various aspect ratios, meeting the highest creative standards.
+        The /text-to-image/hd Route is tailored for projects demanding the utmost in image detail and clarity. This model allows for generating high-quality, photorealistic and artistic, images with unparalleled resolution of 1920x1080 (1:1 1536x1536) pixel, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
 
 
         **Advanced Customization and Access:**
 
 
-        Beyond the API, developers interested in deeper customization can access BRIA's models directly through <a href="https://huggingface.co/briaai" target="_blank">Hugging Face</a>. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: Canny, Depth, and Coloring. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
+        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
 
 
         **An example:**
 
 
-        prompt: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+        **prompt**: A close-up overhead photo of a smear of purple, transparent gel on a smooth, black surface, with a few air bubbles trapped within
 
 
         **BRIA HD model 2.2:**
         
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(41).png" width="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(42).png" width="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(43).png" width="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(44).png" width="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(450).png" width="400"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(451).png" width="400"/>
+
+
+        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+
+
+        **BRIA HD model 2.2:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(42).png" width="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(50).png" width="200"/>
            
       operationId: /text-to-image/hd
       parameters:

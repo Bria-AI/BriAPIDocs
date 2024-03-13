@@ -454,7 +454,7 @@ paths:
         Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/spaces/briaai/BRIA-2.2-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
 
 
-        **An example:**
+        **Examples:**
 
 
         **prompt**: A close-up overhead photo of a smear of purple, transparent gel on a smooth, black surface, with a few air bubbles trapped within

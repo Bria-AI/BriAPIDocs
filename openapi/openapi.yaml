@@ -121,22 +121,17 @@ paths:
         **Examples:**
 
 
-        prompt: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
-
-
-        **BRIA BASE model 2.2:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(42).png" width="200" height="200"/>
+        **prompt**: A professional headshot of a CEO
 
 
         **BRIA BASE model 2.3:**
         
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/>
 
 
-        prompt: A vaporwave detailed illustration of a street in London in pastel hues, under a Union Jack sky
+        **prompt**: A vaporwave detailed illustration of a street in London in pastel hues, under a Union Jack sky
 
 
         **BRIA BASE model 2.2:**
@@ -151,15 +146,19 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(478).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(479).png" width="200" height="200"/>
 
 
-        prompt: A professional headshot of a CEO
+        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+
+
+        **BRIA BASE model 2.2:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.2/image+(42).png" width="200" height="200"/>
 
 
         **BRIA BASE model 2.3:**
         
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/>
-
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
            
       operationId: /text-to-image/base
       parameters:

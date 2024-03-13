@@ -457,13 +457,13 @@ paths:
         **Examples:**
 
 
-        **prompt**: A close-up overhead photo of a smear of purple, transparent gel on a smooth, black surface, with a few air bubbles trapped within
+        **prompt**: A photo of detailed short female blond hair viewed from behind, with rich texture and clearly visible individual strands that give depth and realism, and featuring subtle waves reflect light
 
 
         **BRIA HD model 2.2:**
         
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(450).png" width="400"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/image+(451).png" width="400"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/seed_459779534.png" width="400"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/hd/seed_939823113.pngg" width="400"/>
 
 
         **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades

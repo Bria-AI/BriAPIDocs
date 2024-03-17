@@ -766,10 +766,16 @@ paths:
           - Image
       summary: /{visual_id}/campaign_generator
       description: >
-        This endpoint allows for the generation of campaign visuals. Users can specify various parameters 
-        such as brand id, template id, target audience, and visual elements like logo, call to action (CTA), 
-        and font properties. If certain optional parameters are not provided, the system will automatically 
-        choose defaults.
+                    **Description:**
+
+                    The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
+                    This route facilitates the generation of templates featuring diverse layouts that incorporate elements like text, 
+                    logos, and calls to action (CTA), tailored to various resolutions (placements) and target demographics. Ad backgrounds are adjusted to fit the necessary layout specifications. 
+                    When specific optional parameters are omitted, the system will default to preset choices automatically.
+
+                    **Advanced Customization and Access:**
+                    Brands, templates, and layouts can be defined and edited on the campaign page of the Bria platform.
+          
       operationId: /campaign_generator
       parameters:
         - in: header

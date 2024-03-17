@@ -948,13 +948,10 @@ paths:
                             name:
                               type: string
                         canvas_size:
-                          type: object
+                          type: array
+                          items:
+                              type: integer
                           description: "The size of the returned campaign image"
-                          properties:
-                            id:
-                              type: integer
-                            name:
-                              type: integer
                         bg_seed:
                           type: integer
                           description: "Background seed used in generation."

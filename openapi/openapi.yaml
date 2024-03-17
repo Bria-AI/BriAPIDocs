@@ -777,46 +777,15 @@ paths:
         When specific optional parameters are omitted, the system will default to preset choices automatically.
 
 
-        **Advanced Customization and Access:**
+        **Advanced Customization and Access**
 
 
         Brands, templates, and layouts can be defined and edited on the campaign page of the Bria platform.
 
+   
+        **Example**
 
-        **An example:**
-
-
-        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
-
-
-        **BRIA FAST model 2.2:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(45).png" width="200" height="200"/>
-
-           
       operationId: /campaign_generator
-      #-
-
-       # **Description**
-
-        
-        #The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
-        #This route facilitates the generation of templates featuring diverse layouts that incorporate elements like text, 
-        #logos, and calls to action (CTA), tailored to various resolutions (placements) and target demographics. Ad backgrounds are adjusted to fit the necessary layout specifications. 
-        #When specific optional parameters are omitted, the system will default to preset choices automatically.
-
-
-        #**Advanced Customization and Access:**
-
-
-        #Brands, templates, and layouts can be defined and edited on the campaign page of the Bria platform.
-        
-        #**Examples:**
-        #Place holder
-          
-      #operationId: /campaign_generator
       parameters:
         - in: header
           name: api_token

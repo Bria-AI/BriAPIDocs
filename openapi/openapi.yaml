@@ -767,8 +767,8 @@ paths:
       summary: /{visual_id}/campaign_generator
       description: >-
 
-
         **Description**
+
         
         The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
         This route facilitates the generation of templates featuring diverse layouts that incorporate elements like text, 
@@ -777,6 +777,7 @@ paths:
 
 
         **Advanced Customization and Access:**
+
 
         Brands, templates, and layouts can be defined and edited on the campaign page of the Bria platform.
         

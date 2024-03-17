@@ -919,6 +919,10 @@ paths:
                           type: string
                           format: uri
                           description: "URL of the JPEG version of the ad."
+                        png_file:
+                          type: string
+                          format: uri
+                          description: "URL of the PNG version of the ad."
                         layout_id:
                           type: string
                           description: "Layout ID of the ad."
@@ -926,12 +930,36 @@ paths:
                           type: string
                           format: uri
                           description: "URL of the PSD version of the ad."
-                        target:
-                          type: string
+                        channel:
+                          type: object
                           description: "Target marketing channel for the ad."
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                        placement:
+                          type: object
+                          description: "The placement used for the ad."
+                          properties:
+                            id:
+                              type: string
+                            name:
+                              type: string
+                        canvas_size:
+                          type: object
+                          description: "The size of the returned campaign image"
+                          properties:
+                            id:
+                              type: integer
+                            name:
+                              type: integer
                         bg_seed:
                           type: integer
                           description: "Background seed used in generation."
+                        template_id:
+                          type: string
+                          description: "Template ID of the ad."
         '400':
           description: Bad request.
         '404':

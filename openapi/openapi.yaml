@@ -765,7 +765,7 @@ paths:
       tags:
           - Image
       summary: /{visual_id}/campaign_generator
-      description: >
+      description: >-
                     **Description:**
 
                     The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 

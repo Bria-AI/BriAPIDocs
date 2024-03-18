@@ -792,8 +792,7 @@ paths:
         Results:
         
         
-        <img src="https://i.ibb.co/7zkMg98/Sample-1.png" width="400"/>
-        <img src="https://i.ibb.co/V2zNdP0/Sample-2.jpg" width="400"/>
+        <img src="https://i.ibb.co/gDTVP8r/Sample-3-fixed.png" width="400"/>
 
       operationId: /campaign_generator
       parameters:
@@ -903,25 +902,25 @@ paths:
             examples:
               generation by template_id:
                 value:
-                  template_id: "32"
+                  template_id: "71"
                   "header1_text": "Discover a world where innovation meets elegance. "
                   "header1_size": 66
                   "header1_font": "s3://bria-brands/Fonts/Poppins-Regular.ttf"
                   "header1_color": "#211469"
                   "header2_text": "Elevate your experience, because with us, the future is now."
-                  "header2_size": 22
+                  "header2_size": 33
                   "header2_font": "s3://bria-brands/Fonts/Poppins-Regular.ttf"
                   "header2_color": "#261d54"
                   "logo": "https://labs.bria.ai/static/media/bria_logo.9ee1e12b.png"
               generation by layout_ids:
                 value:
-                  layout_ids: ["32"]
+                  layout_ids: ["294"]
                   "header1_text": "Discover a world where innovation meets elegance. "
                   "header1_size": 66
                   "header1_font": "s3://bria-brands/Fonts/Poppins-Regular.ttf"
                   "header1_color": "#211469"
                   "header2_text": "Elevate your experience, because with us, the future is now."
-                  "header2_size": 22
+                  "header2_size": 33
                   "header2_font": "s3://bria-brands/Fonts/Poppins-Regular.ttf"
                   "header2_color": "#261d54"
                   "logo": "https://labs.bria.ai/static/media/bria_logo.9ee1e12b.png"

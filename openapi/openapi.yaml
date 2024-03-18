@@ -276,10 +276,6 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /text-to-image/fast/{model_version}:
     post:
       tags:
@@ -430,10 +426,6 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /text-to-image/hd/{model_version}:
     post:
       tags:
@@ -590,10 +582,6 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /generation/bria-v2/text-to-image:
     post:
       tags:

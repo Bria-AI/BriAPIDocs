@@ -986,6 +986,35 @@ paths:
                         template_id:
                           type: string
                           description: "Template ID of the ad."
+              examples:
+                example:
+                  value:
+                    {
+                      "ads": [
+                        {
+                          "bg_seed": null,
+                          "canvas_size": [
+                            1200,
+                            627
+                          ],
+                          "channel": {
+                            "id": 7,
+                            "name": "Amazon"
+                          },
+                          "expansion_seed": 4046260470,
+                          "jpeg_file": "jpg_file_url",
+                          "layout_id": "120",
+                          "placement": {
+                            "id": 54,
+                            "name": "Amazon 1200x627"
+                          },
+                          "png_file": "png_file_url",
+                          "psd_file": "psd_file_url",
+                          "template_id": null
+                        }
+                      ]
+                    }
+
         '400':
           description: Bad request.
         '404':

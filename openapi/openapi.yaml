@@ -3283,6 +3283,10 @@ paths:
             schema:
               type: object
               properties:
+                sync:
+                  type: boolean
+                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
                 sid:
                   type: string
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
@@ -3293,6 +3297,10 @@ paths:
                 bg_prompt:
                   type: string
                   description: Text from which you wish to generate the new background
+                refine_prompt:
+                  type: boolean
+                  default: false
+                  description: It is recommended to set this parameter to 'True'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. 
                 placement_type:
                   type: string
                   description: This parameter allows you to control the positioning of the product/foreground in the image. Choosing 'original' will preserve the original position of the product/foreground in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product/foreground. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product/foreground.
@@ -3333,6 +3341,7 @@ paths:
                   bg_prompt: "a bottle in a living room interior, on a kitchen counter"
                   placement_type: "original"
                   num_results: 4
+                  refine_prompt: True
                   sync: True
               Automatically adjust the foreground placement:
                 value:
@@ -3340,6 +3349,7 @@ paths:
                   placement_type: "automatic"
                   canvas_size: [900,550]
                   num_results: 1
+                  refine_prompt: True
                   sync: True
               Select foreground placement from a list: 
                 value:
@@ -3348,6 +3358,7 @@ paths:
                   canvas_size: [900,550]
                   manual_placement_selection: ["upper_center","bottom_center"]
                   num_results: 1
+                  refine_prompt: True
                   sync: True
               Only foreground, add padding:
                 value:
@@ -3355,6 +3366,7 @@ paths:
                   placement_type: "manual_padding"
                   padding_values: [20,30,20,30]
                   num_results: 1
+                  refine_prompt: True
                   sync: True
       responses:
         '200':

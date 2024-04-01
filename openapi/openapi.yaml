@@ -3559,7 +3559,7 @@ paths:
           description: Insufficient resources to process the request.
 
   /image/increase_resolution:
-    get:
+    post:
       tags:
         - Image
       summary: /image/increase_resolution

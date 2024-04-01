@@ -2945,7 +2945,7 @@ paths:
               print(response.text)
        
 
-      operationId: lean_background/remove
+      operationId: isolated_background/remove
       parameters:
         - in: header
           name: api_token
@@ -3557,7 +3557,114 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
+
+  /image/increase_resolution:
+    get:
+      tags:
+        - Image
+      summary: /image/increase_resolution
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Isolated Increase Resolution Route* is used to upsacle the resolution of any image.
+
+
+        **The main difference between the regular and this isolated Increase Resolution endpoint is that you can use this endpoint without uploading or registering the image to Bria.**
+
+
+        **Constraints**
         
+        
+        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned. 
+        
+        
+        It's possible to increase the resolution of an image up to a total area of 8192x8192 pixels.
+
+        
+        **Increase the Resolution of an image using the image file**
+
+        
+          In our documentation request example, we demonstrate how to Increase the Resolutio of an image using the image URL.
+          
+          
+          If you want to use an image from a file, follow the example below:
+
+      
+              import requests
+      
+              url = "https://engine.prod.bria-api.com/v1/image/increase_resolution?desired_increase=2"
+      
+              payload = {}
+              files=[
+                ('file',('image_name.jpeg',open('/path_to_local_file/image_name.jpeg','rb'),'image/jpeg'))
+              ]
+              headers = {
+                'api_token': 'xxxx'
+              }
+      
+              response = requests.request("POST", url, headers=headers, data=payload, files=files)
+      
+              print(response.text)
+                        
+
+      operationId: isolated_increase_resolution
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: desired_increase
+          schema:
+            type: integer
+            example: 2
+          description: The resolution multiplier. The possible value are 2,4. It's possible to increase the resolution of an image up to a total area of 8,192x8,192 pixels.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                file:
+                  description: The image file you would like to increase the resolution for.
+                  type: string
+                  format: binary
+                image_url:
+                  description: The URL of the image file you would like to increase the resolution for. The URL should lead to an image publicly available online. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
+                  type: string
+            examples:
+                image url:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.jpeg?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
+        '400':
+          description: Bad request
+        '405':
+          description: Method not allowed.
+        '460':
+          description: Failed to download image.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+
   /{visual_id}/increase_resolution:
     get:
       tags:
@@ -3574,10 +3681,7 @@ paths:
         
         
         You can also use this route on a modified image by providing the sid from the response of the previously used route.
-        
-        
-        PNG files with transparency are not supported by this feature at the moment.
-                
+                        
 
       operationId: increase_resolution
       parameters:

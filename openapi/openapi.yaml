@@ -359,7 +359,7 @@ paths:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
                   minimum: 4
-                  maximum: 50
+                  maximum: 10
                   default: 8
                 text_guidance_scale:
                   type: number

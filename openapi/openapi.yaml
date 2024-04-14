@@ -222,6 +222,10 @@ paths:
                   type: string
                   enum: ['photography','art']
                   description: Which medium should be included in your generated images. This parameter is optional.
+                prompt_enhancement:
+                  type: boolean
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
+                  default: false
             examples:
               valid prompt:
                 value:
@@ -380,6 +384,10 @@ paths:
                   type: string
                   enum: ['photography','art']
                   description: Which medium should be included in your generated images. This parameter is optional.
+                prompt_enhancement:
+                  type: boolean
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
+                  default: false
             examples:
               valid prompt:
                 value:
@@ -536,6 +544,10 @@ paths:
                   type: string
                   enum: ['photography','art']
                   description: Which medium should be included in your generated images. This parameter is optional.
+                prompt_enhancement:
+                  type: boolean
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
+                  default: false
             examples:
               valid prompt:
                 value:

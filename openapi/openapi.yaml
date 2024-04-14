@@ -290,6 +290,14 @@ paths:
         The /text-to-image/fast Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs. 
         Ideal for applications requiring quick turnaround without sacrificing image fidelity.
 
+        **Versions:**
+
+        
+        **Version 2.2:** Scheduled for deprecation on May 15th, 2024. Requests with this version will automatically be transitioned to version 2.3 to ensure continuous improvement and access to the latest features.
+
+
+        **Version 2.3:** Offers a slight improvement over version 2.2, particularly in illustrations and art, enhancing the aesthetic appeal and creative potential of generated images. While it elevates artistic visuals, it maintains parity with version 2.2 in delivering photorealistic visuals. Version 2.3 is the recommended option to use.
+
 
         **Advanced Customization and Access:**
 
@@ -303,7 +311,7 @@ paths:
         **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
 
 
-        **BRIA FAST model 2.2:**
+        **BRIA FAST model 2.3:**
         
         
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/>
@@ -316,7 +324,7 @@ paths:
           name: model_version
           schema:
             type: string
-            enum: ["2.2"]
+            enum: ["2.2","2.3"]
           required: true
           description: The model version you would like to use in the request. 
         - in: header

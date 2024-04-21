@@ -3289,8 +3289,7 @@ paths:
                 negative_prompt:
                   type: string
                   description: This parameter is optional.
-            examples:
-              value:
+            example:
                 bg_prompt: "a bottle in a living room interior, on a kitchen counter"
                 placement_type: "original"
                 num_results: 4
@@ -3309,8 +3308,7 @@ paths:
                     items:
                       type: array
                     description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-              examples:
-                value:
+              example:
                   result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
         '400':
           description: Bad request.

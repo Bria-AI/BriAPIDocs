@@ -3197,7 +3197,7 @@ paths:
 
 
 
-        The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model. This new version offers higher-quality backgrounds and more precise control compared to the previous BRIA 1.4-based model.
+        The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). This new version offers higher-quality backgrounds and more precise control compared to the previous BRIA 1.4-based model.
         
         
         Additionally, you can change the image size of the final result as well as the positioning of the product or foreground of the image. This will enable you to create new and unique variations of your original image.
@@ -3234,6 +3234,7 @@ paths:
         
         
         **bg_prompt**: in a living room interior, on a kitchen counter
+
         
         You can use this route on a modified image by providing the sid from the response of the previously used route.
         

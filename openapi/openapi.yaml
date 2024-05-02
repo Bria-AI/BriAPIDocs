@@ -21,8 +21,9 @@ info:
 
 
     **The common use of the Bria API is according to the following order:**
+      - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database. This is the recommended method to onboard images to Bria, when needed.
       - /upload - By using the *Upload Route*, you can upload a new image to the Bria database.
-      - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database.
+
 
     
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
@@ -1039,6 +1040,127 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  /register:
+    post:
+      tags:
+        - Image Onboarding
+      summary: /register
+      description: >-
+
+        **Description**
+
+
+        A new visual can be registered to Bria without being uploaded to the database using the *Register Route*.
+        
+        This route returns a visual identification to the user. This is the recommended method to onboard images to Bria, when needed.
+        
+        
+        It's the first step for consuming the Bria API for new visuals (instead of using the /upload route).
+
+
+        **Response**
+
+          
+          The visual id in the response of the *Register Route* must be kept by the
+        user in order to query image info, modify the image and use the search routes.
+
+
+        ```{ "visual_id": "9ea9a4d2d19977a7c" }```
+
+
+        The *visual_id* in the response of the /upload route will be used for all
+        other routes.
+        Store the visual_id in your database and map it to your image identification method for easy reference
+
+
+        **Bria generative Web tool**
+
+
+        The registered visual can be seen and used in the Bria generative web tool
+        in cases where the tool is licensed as part of the project.
+
+
+        To do so, the user can access the following url:
+        ```https://labs.bria.ai/gallery/{visual_id}```, where the *{visual_id}*
+        comes from the response of the */upload route*.
+
+
+
+        **Constraints**
+
+
+        Files should not be larger than 12MB. The status code 413 will be returned if the file exceeds its
+        maximum size.
+        
+        
+        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
+        
+      operationId: register
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                org_image_key:
+                  type: string
+                  description: The internal image id in your API, of the image you would like to register to Bria. If accessing your images requires authentication, you will be able to register them using org_image_key only after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
+                image_url:
+                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url and org_image_key will be saved but not used. Images can only be registered using an image_url if they do not require authentication.
+                  type: string
+                is_private:   
+                  description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
+                  type: string
+                  default: true
+            examples:
+                only image_url:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                only org_image_key:
+                  value:
+                    org_image_key: "12345acbd"
+                image_url & org_image_key:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                    org_image_key: "12345acbd"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  visual_id:
+                    type: string
+                    description: Unique visual identification
+        '208':
+          description: Image already registered.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  visual_id:
+                    type: string
+                    description: Unique visual identification
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '460':
+          description: Failed to download image.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
   /upload:
     post:
       tags:
@@ -1051,8 +1173,9 @@ paths:
 
         The *Upload Route* is used to upload visuals to the database. 
 
-        This route returns a visual identification to the user. It's
-        the first step for consuming the Bria API for new visuals.
+        This route returns a visual identification to the user. 
+        
+        The /register route is the recommended method to onboard images to Bria, when needed. 
 
 
         **Response**
@@ -1186,127 +1309,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.   
-  /register:
-    post:
-      tags:
-        - Image Onboarding
-      summary: /register
-      description: >-
-
-        **Description**
-
-
-        A new visual can be registered to Bria without being uploaded to the database using the *Register Route*.
-        
-        This route returns a visual identification to the user. 
-        
-        
-        It's the first step for consuming the Bria API for new visuals (instead of using the /upload route).
-
-
-        **Response**
-
-          
-          The visual id in the response of the *Register Route* must be kept by the
-        user in order to query image info, modify the image and use the search routes.
-
-
-        ```{ "visual_id": "9ea9a4d2d19977a7c" }```
-
-
-        The *visual_id* in the response of the /upload route will be used for all
-        other routes.
-        Store the visual_id in your database and map it to your image identification method for easy reference
-
-
-        **Bria generative Web tool**
-
-
-        The registered visual can be seen and used in the Bria generative web tool
-        in cases where the tool is licensed as part of the project.
-
-
-        To do so, the user can access the following url:
-        ```https://labs.bria.ai/gallery/{visual_id}```, where the *{visual_id}*
-        comes from the response of the */upload route*.
-
-
-
-        **Constraints**
-
-
-        Files should not be larger than 12MB. The status code 413 will be returned if the file exceeds its
-        maximum size.
-        
-        
-        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
-        
-      operationId: register
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                org_image_key:
-                  type: string
-                  description: The internal image id in your API, of the image you would like to register to Bria. If accessing your images requires authentication, you will be able to register them using org_image_key only after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
-                image_url:
-                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url and org_image_key will be saved but not used. Images can only be registered using an image_url if they do not require authentication.
-                  type: string
-                is_private:   
-                  description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
-                  type: string
-                  default: true
-            examples:
-                only image_url:
-                  value:
-                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                only org_image_key:
-                  value:
-                    org_image_key: "12345acbd"
-                image_url & org_image_key:
-                  value:
-                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                    org_image_key: "12345acbd"
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  visual_id:
-                    type: string
-                    description: Unique visual identification
-        '208':
-          description: Image already registered.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  visual_id:
-                    type: string
-                    description: Unique visual identification
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '460':
-          description: Failed to download image.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
   /{visual_id}/remove_image:
     post:
       tags:

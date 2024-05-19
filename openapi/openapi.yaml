@@ -2811,8 +2811,8 @@ paths:
                   example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
                 enhance:
                   type: boolean
-                  description: Please use the value True in order to get the best result possible. 
-                  example: True
+                  description: Please use the value true in order to get the best result possible. 
+                  example: true
                 changes:
                   type: array
                   description: The requested changes to the image. In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time.  
@@ -3279,7 +3279,7 @@ paths:
                 refine_prompt:
                   type: boolean
                   default: false
-                  description: It is recommended to set this parameter to 'True'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. 
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. 
                 num_results:
                   type: integer
                   default: 4
@@ -3295,8 +3295,8 @@ paths:
                 bg_prompt: "a bottle in a living room interior, on a kitchen counter"
                 placement_type: "original"
                 num_results: 4
-                refine_prompt: True
-                sync: True
+                refine_prompt: true
+                sync: true
       responses:
         '200':
           description: Successful operation.

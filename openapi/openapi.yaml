@@ -318,8 +318,8 @@ paths:
         **BRIA FAST model 2.3:**
         
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/92730ec4713ec56d.png" width="200" height="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/9363a4ce61cc9a9d.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
            
       operationId: /text-to-image/fast

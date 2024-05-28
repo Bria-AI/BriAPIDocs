@@ -1778,7 +1778,7 @@ paths:
                       description: In this route it will be the type of the object
                     labels:
                       type: array
-                      description: In this route it will allways be 'object'
+                      description: In this route it will always be 'object'
                     rect:
                       type: object
                       description: The location of the object inside the image. x and y represent the upper left corner of the object, and by using the w (width) and h (height) you can create a rectangle around the object.
@@ -1791,7 +1791,9 @@ paths:
                     bg_overlap:
                       type: number
                       description: The percentage of the object's surface that is mutual with the background.
-                      
+                    mask_id:
+                      type: number
+                      description: This parameter should be currently ignored and doesn't have any function. 
               examples:
                 example:
                   value:
@@ -1819,7 +1821,8 @@ paths:
                           "oracle": {
                               "remove": true
                           },
-                          "bg_overlap": 0.4
+                          "bg_overlap": 0.4,
+                          "mask_id": 1
                       },
                       {
                           "id": "d1b004a7b3b065aa8b98b321b67806cb3e6ca09e596ad6d3f31c625e46e168e2",
@@ -1844,7 +1847,8 @@ paths:
                           "oracle": {
                               "remove": true
                           },
-                          "bg_overlap": 0.67
+                          "bg_overlap": 0.67,
+                          "mask_id": 2
                       },
                       {
                           "id": "f173a0ad62749dbeb97f8055f51d3d125d4c9c968ee3ae46754e911f3fd12000",
@@ -1869,7 +1873,8 @@ paths:
                           "oracle": {
                               "remove": true
                           },
-                          "bg_overlap": 0.89
+                          "bg_overlap": 0.89,
+                          "mask_id": 3
                       },
                       {
                           "id": "7a3bd30a268840cc3645abf7b512c3b9b8bc2d55d98aa5f7ef8c1e72348a016c",
@@ -1894,7 +1899,8 @@ paths:
                           "oracle": {
                               "remove": true
                           },
-                          "bg_overlap": 1.0
+                          "bg_overlap": 1.0,
+                          "mask_id": 4
                       },
                       {
                           "id": "0289aaf067a6d7d812738a8d42d17e54ffd2fa79e0decbca46a873018a6d791a",
@@ -1919,7 +1925,8 @@ paths:
                           "oracle": {
                               "remove": true
                           },
-                          "bg_overlap": 0.0
+                          "bg_overlap": 0.0,
+                          "mask_id": 5
                       },
                       {
                           "id": "0a349cbe603a786570d4eec7dd9cf64e568ef72767a5847251b32988a2b99dff",
@@ -1944,7 +1951,8 @@ paths:
                           "oracle": {
                               "remove": true
                           },
-                          "bg_overlap": 0.4
+                          "bg_overlap": 0.4,
+                          "mask_id": 6
                       }
                   ]
         '205':

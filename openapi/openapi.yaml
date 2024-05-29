@@ -976,27 +976,6 @@ paths:
                   status:
                     type: string
                     description: Status of the dataset.
-                  images:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          description: Unique identifier for the image.
-                        name:
-                          type: string
-                          description: Name of the image.
-                        caption:
-                          type: string
-                          description: Caption for the image describing the illustration.
-                        file_url:
-                          type: string
-                          description: URL of the image file.
-                        created_at:
-                          type: string
-                          format: date-time
-                          description: Timestamp when the image was created.
                   created_at:
                     type: string
                     format: date-time
@@ -1004,7 +983,7 @@ paths:
                   updated_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the dataset was last updated.
+                    description: Timestamp when the dataset was last updated.         
         '401':
           description: Unauthorized.
         '404':

@@ -954,7 +954,7 @@ paths:
             required: true
           description: The ID of the dataset to retrieve.
       responses:
-        "200":
+        '200':
           description: Successful operation.
           content:
             application/json:
@@ -1024,11 +1024,11 @@ paths:
                     created_at: "2024-05-26T12:00:00Z"
                 created_at: "2024-05-26T12:00:00Z"
                 updated_at: "2024-05-26T12:00:00Z"
-        "401":
+        '401':
           description: Unauthorized.
-        "404":
+        '404':
           description: Dataset with the specified ID does not exist.
-        "500":
+        '500':
           description: Internal server error.
   /datasets/update/{id}:
     put:
@@ -1077,7 +1077,7 @@ paths:
                   description: Status of the dataset.
                   example: "completed"
       responses:
-        "200":
+        '200':
           description: Dataset successfully updated.
           content:
             application/json:
@@ -1115,13 +1115,13 @@ paths:
                 status: "completed"
                 created_at: "2024-05-26T12:00:00Z"
                 updated_at: "2024-05-26T12:00:00Z"
-        "400":
+        '400':
           description: Bad request.
-        "401":
+        '401':
           description: Unauthorized.
-        "404":
+        '404':
           description: Dataset with the specified ID does not exist.
-        "409":
+        '409':
           description: Conflict.
           content:
             application/json:
@@ -1141,7 +1141,7 @@ paths:
                 style_description_conflict:
                   value:
                     error: "The style_description cannot be updated for a completed dataset."
-        "500":
+        '500':
           description: Internal server error.
   /{visual_id}/campaign_generator:
     post:

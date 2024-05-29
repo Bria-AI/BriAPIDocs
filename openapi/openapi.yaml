@@ -1005,25 +1005,6 @@ paths:
                     type: string
                     format: date-time
                     description: Timestamp when the dataset was last updated.
-              example:
-                id: "dataset123"
-                use_case: "illustrative_style"
-                style_description: "A 2d vibrant and colorful flat illustration."
-                name: "My Illustrations"
-                status: "draft"
-                images:
-                  - id: "image123"
-                    name: "Illustration1"
-                    caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                    file_url: "https://example.com/image1.png"
-                    created_at: "2024-05-26T12:00:00Z"
-                  - id: "image124"
-                    name: "Illustration2"
-                    caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
-                    file_url: "https://example.com/image2.png"
-                    created_at: "2024-05-26T12:00:00Z"
-                created_at: "2024-05-26T12:00:00Z"
-                updated_at: "2024-05-26T12:00:00Z"
         '401':
           description: Unauthorized.
         '404':

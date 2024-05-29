@@ -768,8 +768,8 @@ paths:
   /datasets/create:
     post:
       tags:
-        - Tailored Generation
-      summary: /datasets/create (Coming Soon)
+        - Tailored Generation - Coming Soon
+      summary: /datasets/create 
       description: >-
         **Description**
   
@@ -853,8 +853,8 @@ paths:
   /datasets:
     get:
       tags:
-        - Tailored Generation
-      summary: /datasets (Coming Soon)
+        - Tailored Generation - Coming Soon
+      summary: /datasets
       description: >-
         **Description**
   
@@ -933,8 +933,8 @@ paths:
   /datasets/{id}:
     get:
       tags:
-        - Tailored Generation
-      summary: /datasets/{id} (Coming Soon)
+        - Tailored Generation - Coming Soon
+      summary: /datasets/{id} 
       description: >-
         **Description**
   
@@ -1033,8 +1033,8 @@ paths:
   /datasets/update/{id}:
     put:
       tags:
-        - Tailored Generation
-      summary: /datasets/update/{id} (Coming Soon)
+        - Tailored Generation - Coming Soon
+      summary: /datasets/update/{id} 
       description: >-
         **Description**
   

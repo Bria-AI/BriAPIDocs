@@ -930,6 +930,219 @@ paths:
           description: Unauthorized.
         '500':
           description: Internal server error.
+  /datasets/{id}:
+    get:
+      tags:
+        - Tailored Generation
+      summary: /datasets/{id} (Coming Soon)
+      description: >-
+        **Description**
+  
+        Retrieve a specific dataset by its ID. The response includes all the details of the dataset and an array of associated images.
+      operationId: getDatasetById
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset to retrieve.
+      responses:
+        "200":
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the dataset.
+                  use_case:
+                    type: string
+                    description: Specifies the use case of the dataset.
+                  style_description:
+                    type: string
+                    description: Description of the visual style.
+                  name:
+                    type: string
+                    description: Name of the dataset.
+                  status:
+                    type: string
+                    description: Status of the dataset.
+                  images:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          description: Unique identifier for the image.
+                        name:
+                          type: string
+                          description: Name of the image.
+                        caption:
+                          type: string
+                          description: Caption for the image describing the illustration.
+                        file_url:
+                          type: string
+                          description: URL of the image file.
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the image was created.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was created.
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was last updated.
+              example:
+                id: "dataset123"
+                use_case: "illustrative_style"
+                style_description: "A 2d vibrant and colorful flat illustration."
+                name: "My Illustrations"
+                status: "draft"
+                images:
+                  - id: "image123"
+                    name: "Illustration1"
+                    caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
+                    file_url: "https://example.com/image1.png"
+                    created_at: "2024-05-26T12:00:00Z"
+                  - id: "image124"
+                    name: "Illustration2"
+                    caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
+                    file_url: "https://example.com/image2.png"
+                    created_at: "2024-05-26T12:00:00Z"
+                created_at: "2024-05-26T12:00:00Z"
+                updated_at: "2024-05-26T12:00:00Z"
+        "401":
+          description: Unauthorized.
+        "404":
+          description: Dataset with the specified ID does not exist.
+        "500":
+          description: Internal server error.
+  /datasets/update/{id}:
+    put:
+      tags:
+        - Tailored Generation
+      summary: /datasets/update/{id} (Coming Soon)
+      description: >-
+        **Description**
+  
+        Update the details of a specific dataset by its ID. If the status of the dataset is `completed`, the `style_description` and `use_case` cannot be updated. Additionally, if the status is `completed`, it cannot be returned to `draft` if a model has already been trained based on it.
+      operationId: updateDataset
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset to update.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                use_case:
+                  type: string
+                  description: Specifies the use case of the dataset. Accepted values are "illustrative_style" and "illustrative_character".
+                  example: "illustrative_style"
+                style_description:
+                  type: string
+                  description: Description of the visual style.
+                  example: "A 2d vibrant and colorful flat illustration."
+                name:
+                  type: string
+                  description: Name of the dataset.
+                  example: "Updated Illustrations"
+                status:
+                  type: string
+                  enum: [completed, draft]
+                  description: Status of the dataset.
+                  example: "completed"
+      responses:
+        "200":
+          description: Dataset successfully updated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the dataset.
+                  use_case:
+                    type: string
+                    description: Specifies the use case of the dataset.
+                  style_description:
+                    type: string
+                    description: Description of the visual style.
+                  name:
+                    type: string
+                    description: Name of the dataset.
+                  status:
+                    type: string
+                    description: Status of the dataset.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was created.
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was last updated.
+              example:
+                id: "dataset123"
+                use_case: "illustrative_style"
+                style_description: "A 2d vibrant and colorful flat illustration."
+                name: "Updated Illustrations"
+                status: "completed"
+                created_at: "2024-05-26T12:00:00Z"
+                updated_at: "2024-05-26T12:00:00Z"
+        "400":
+          description: Bad request.
+        "401":
+          description: Unauthorized.
+        "404":
+          description: Dataset with the specified ID does not exist.
+        "409":
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                status_conflict:
+                  value:
+                    error: "The status of a completed dataset cannot be changed to draft if a model has already been trained based on it."
+                use_case_conflict:
+                  value:
+                    error: "The use_case cannot be updated for a completed dataset."
+                style_description_conflict:
+                  value:
+                    error: "The style_description cannot be updated for a completed dataset."
+        "500":
+          description: Internal server error.
   /{visual_id}/campaign_generator:
     post:
       tags:

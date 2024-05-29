@@ -930,66 +930,6 @@ paths:
           description: Unauthorized.
         '500':
           description: Internal server error.
-  /datasets/{id}:
-    get:
-      tags:
-        - Tailored Generation
-      summary: /datasets/{id} (Coming Soon)
-      description: >-
-        **Description**
-  
-        Retrieve a specific dataset by its ID. The response includes all the details of the dataset and an array of associated images.
-      operationId: getDatasetById
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
-        - in: path
-          name: id
-          schema:
-            type: string
-            required: true
-          description: The ID of the dataset to retrieve.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: Unique identifier for the dataset.
-                  use_case:
-                    type: string
-                    description: Specifies the use case of the dataset.
-                  style_description:
-                    type: string
-                    description: Description of the visual style.
-                  name:
-                    type: string
-                    description: Name of the dataset.
-                  status:
-                    type: string
-                    description: Status of the dataset.
-                  created_at:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the dataset was created.
-                  updated_at:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the dataset was last updated.         
-        '401':
-          description: Unauthorized.
-        '404':
-          description: Dataset with the specified ID does not exist.
-        '500':
-          description: Internal server error.
   /datasets/update/{id}:
     put:
       tags:
@@ -1011,7 +951,7 @@ paths:
           name: id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the dataset to update.
       requestBody:
         content:

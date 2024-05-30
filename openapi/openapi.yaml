@@ -57,8 +57,14 @@ info:
     ### Uploading and Modifying Images
 
     **Uploading and Registering Images**:
+
+    
     - Use the `/register` endpoint to send a new image to Bria without being uploaded to the database. This is the recommended method to onboard images to Bria when needed.
+
+    
     - Use the `/upload` endpoint to upload a new image to the Bria database.
+
+
 
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
       - /campaign_generator - The *Campaign Generator Route* enables the creation of customized campaigns. It allows for the generation of visual ads, including various elements like text, images, and layout, based on specific parameters provided by the user.

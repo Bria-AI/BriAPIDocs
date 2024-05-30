@@ -2062,7 +2062,7 @@ paths:
           required: true
           schema:
             type: string
-            example: "b3cecc33cc31cc31"
+            example: "d66969969696684b"
           description: The visual id of the product image 
       requestBody:
         content:
@@ -4537,7 +4537,7 @@ paths:
           required: true
           schema:
             type: string
-            example: "b3cecc33cc31cc31"
+            example: "fa8f8572986ccb03"
           description: The visual id of the image for which the user wishes to replace the background
       requestBody:
         content:
@@ -4575,7 +4575,7 @@ paths:
                   type: string
                   description: This parameter is optional.
             example:
-                bg_prompt: "a bottle in a living room interior, on a kitchen counter"
+                bg_prompt: "in a parking lot"
                 num_results: 1
                 refine_prompt: true
                 sync: true

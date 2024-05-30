@@ -790,8 +790,8 @@ paths:
               properties:
                 use_case:
                   type: string
-                  enum: [illustrative_style, illustrative_character]
-                  description: Specifies the use case of the dataset. Accepted values are "illustrative_style" and "illustrative_character".
+                  enum: [illustrative_style, illustrative_character, icons]
+                  description: Specifies the use case of the dataset. 
                   example: "illustrative_style"
                 style_description:
                   type: string
@@ -1155,7 +1155,7 @@ paths:
                     error: "The style_description cannot be updated for a completed dataset."
                 image_count_conflict:
                   value:
-                    error: "A dataset with the use case 'illustrative_style' must have between 20 and 200 images to be marked as 'completed'. A dataset with the use case 'illustrative_character' must have between 10 and 20 images to be marked as 'completed'."
+                    error: "A dataset with the use case 'illustrative_style' must have between 20 and 200 images to be marked as 'completed'. A dataset with the use case 'illustrative_character' must have between 10 and 20 images to be marked as 'completed'. A dataset with the use case 'icons' must have between 20 and 50 images to be marked as 'completed'."
         '500':
           description: Internal server error.
     delete:
@@ -1304,7 +1304,7 @@ paths:
                     error: "Cannot upload an image to a completed dataset."
                 upper_limit_exceeded:
                   value:
-                    error: "Cannot upload more images. A dataset with the use case 'illustrative_style' can have a maximum of 200 images. A dataset with the use case 'illustrative_character' can have a maximum of 20 images."
+                    error: "Cannot upload more images. A dataset with the use case 'illustrative_style' can have a maximum of 200 images. A dataset with the use case 'illustrative_character' can have a maximum of 20 images. A dataset with the use case 'icons' can have a maximum of 50 images."
         '410':
           description: Gone.
           content:

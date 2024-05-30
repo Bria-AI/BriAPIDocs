@@ -2560,7 +2560,7 @@ paths:
     get:
       tags:
         - Image Onboarding
-      summary: /{visual_id}/info
+      summary: Get Image info
       description: >-
 
 

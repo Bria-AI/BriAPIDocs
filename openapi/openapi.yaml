@@ -1141,6 +1141,395 @@ paths:
                     error: "The style_description cannot be updated for a completed dataset."
         '500':
           description: Internal server error.
+    delete:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /datasets/{id}
+      description: >-
+        **Description**
+  
+        Delete a specific dataset. Changes status to deleted.
+      operationId: deleteDataset
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset to delete.
+      responses:
+        '204':
+          description: Dataset successfully deleted. No content is returned.
+        '404':
+          description: Dataset with the specified ID does not exist.
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                conflict_example:
+                  value:
+                    error: "Cannot delete a dataset that is used by a model that is in training or has the status 'ready'."
+        '500':
+          description: Internal server error.
+  /datasets/{dataset_id}/images:
+    post:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /datasets/{dataset_id}/images
+      description: >-
+        **Description**
+  
+        Upload a new image to a specific dataset. One of the following parameters, `file` or `image_url`, must be provided.
+      operationId: uploadImage
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: dataset_id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset to which the image will be uploaded.
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Image file to upload. Either `file` or `image_url` must be provided.
+                image_url:
+                  type: string
+                  description: URL of the image to upload. Either `file` or `image_url` must be provided.
+                image_name:
+                  type: string
+                  description: Name of the image. If not provided, the file name will be used. If neither is available, a default name will be set.
+      responses:
+        '201':
+          description: Image successfully uploaded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the image.
+                  dataset_id:
+                    type: string
+                    description: ID of the dataset to which the image belongs.
+                  caption:
+                    type: string
+                    description: Caption for the image.
+                  file_name:
+                    type: string
+                    description: Name of the image file.
+                  file_url:
+                    type: string
+                    description: URL of the image file.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was created.
+              example:
+                id: "image123"
+                dataset_id: "dataset123"
+                caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
+                file_name: "Illustration1.png"
+                file_url: "https://example.com/image1.png"
+                created_at: "2024-05-26T12:00:00Z"
+        '400':
+          description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Either file or image_url must be provided."
+        '404':
+          description: Dataset with the specified ID does not exist.
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Cannot upload an image to a completed dataset."
+        '410':
+          description: Gone.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Cannot upload an image to a deleted dataset."
+        '412':
+          description: Precondition Failed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "The image height and width must be at least 1024x1024 pixels."
+        '415':
+          description: Unsupported Media Type.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "The image format must be one of the following: jpg, jpeg, png, webp."
+        '422':
+          description: Unprocessable Entity.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "The provided image_url does not lead to an accessible image."
+        '500':
+          description: Internal server error.
+    get:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /datasets/{dataset_id}/images
+      description: >-
+        **Description**
+
+        Retrieve a list of images in a specific dataset.
+      operationId: getImages
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: dataset_id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset for which to retrieve images.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Unique identifier for the image.
+                    caption:
+                      type: string
+                      description: Caption for the image.
+                    file_name:
+                      type: string
+                      description: Name of the image file.
+                    file_url:
+                      type: string
+                      description: URL of the image file.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the image was created.
+              examples:
+                multiple_images:
+                  summary: Example with multiple images
+                  value:
+                    - id: "image123"
+                      caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
+                      file_name: "Illustration1.png"
+                      file_url: "https://example.com/image1.png"
+                      created_at: "2024-05-26T12:00:00Z"
+                    - id: "image124"
+                      caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
+                      file_name: "Illustration2.png"
+                      file_url: "https://example.com/image2.png"
+                      created_at: "2024-05-26T12:00:00Z"
+                no_images:
+                  summary: Example with no images
+                  value: []
+        '404':
+          description: Dataset with the specified ID does not exist.
+        '500':
+          description: Internal server error.
+  /datasets/{dataset_id}/images/{image_id}:
+    get:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /datasets/{dataset_id}/images/{image_id}
+      description: >-
+        **Description**
+
+        Retrieve a specific image by its ID.
+      operationId: getImageById
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: dataset_id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset to which the image belongs.
+        - in: path
+          name: image_id
+          schema:
+            type: string
+            required: true
+          description: The ID of the image to retrieve.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the image.
+                  caption:
+                    type: string
+                    description: Caption for the image.
+                  file_name:
+                    type: string
+                    description: Name of the image file.
+                  file_url:
+                    type: string
+                    description: URL of the image file.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was created.
+              example:
+                id: "image123"
+                caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
+                file_name: "Illustration1.png"
+                file_url: "https://example.com/image1.png"
+                created_at: "2024-05-26T12:00:00Z"
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                image_not_found:
+                  value:
+                    error: "Image with the specified ID does not exist."
+                dataset_not_found:
+                  value:
+                    error: "Dataset with the specified ID does not exist."
+        '500':
+          description: Internal server error.
+    delete:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /datasets/{dataset_id}/images/{image_id}
+      description: >-
+        **Description**
+
+        Delete a specific image.
+      operationId: deleteImage
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: dataset_id
+          schema:
+            type: string
+            required: true
+          description: The ID of the dataset to which the image belongs.
+        - in: path
+          name: image_id
+          schema:
+            type: string
+            required: true
+          description: The ID of the image to delete.
+      responses:
+        '204':
+          description: Image successfully deleted. No content is returned.
+        '404':
+          description: Not Found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                image_not_found:
+                  value:
+                    error: "Image with the specified ID does not exist."
+                dataset_not_found:
+                  value:
+                    error: "Dataset with the specified ID does not exist."
+        '500':
+          description: Internal server error.
   /{visual_id}/campaign_generator:
     post:
       tags:

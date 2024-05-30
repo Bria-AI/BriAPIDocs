@@ -2001,40 +2001,59 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Generate Product Placement Background
+      summary: Generate Placement
       description: >-
         **Description**
   
         The *Product Placement Route* is used to replace the background of a previously uploaded product image with a generated background. This endpoint is specifically tailored for product images, such as those used in consumer packaged goods (CPGs) and e-commerce.
+
   
         This route leverages the state-of-the-art BRIA 2.3 ControlNet BG-Gen model to place products in various contextual backgrounds, enhancing their appeal and relevance. It supports several use cases:
+
   
         1. **Catalog Enhancement/Contextual Backgrounds**: Place products in realistic or lifestyle settings that showcase how they can be used or worn. This helps customers visualize the product in real-life situations, increasing their desire to purchase.
+
+        
         2. **Seasonal or Themed Backgrounds**: Change the background of product images to match seasonal promotions, holidays, or specific themes.
+
+        
         3. **Artistic or Creative Backgrounds**: Use illustrations, patterns, or abstract designs that complement the product and appeal to your target audience.
+
   
         The key is to choose backgrounds that enhance the product's appearance, provide relevant context, and align with the brand's aesthetic. Ensure the backgrounds don't distract from the product itself, which should always remain the main focus of the image.
+
     
         This endpoint also supports solid colors - you can take a color code and use it in the prompt.
+
   
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications and their oracle values.
+
   
         Here are some examples:
+
   
         **original image**: 
+
+        
         <img src="https://images.bria.ai/images_resized/e69b992499669933.png" width="200"/>
+
   
         **bg_prompt**: a bottle in a living room interior, on a kitchen counter
-        **placement_type**: original
+
+        
         **num_results**: 
+
         
         **results**:
         <img src="https://i.ibb.co/tK6XLS4/bria-e69b992499669933-2.jpg" width="200"/> <img src="https://i.ibb.co/f2cndL3/bria-e69b992499669933-1.jpg" width="200"/>
         <img src="https://i.ibb.co/ZHNQt6x/bria-e69b992499669933.jpg" width="200"/> 
+
   
         **bg_prompt**: in a living room interior, on a kitchen counter
+
   
         You can use this route on a modified image by providing the sid from the response of the previously used route.
+
   
         This route returns both the URL and the sid associated with the updated image.
       operationId: productPlacement

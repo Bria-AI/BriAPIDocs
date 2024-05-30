@@ -2037,18 +2037,12 @@ paths:
         
         <img src="https://i.ibb.co/V3NBMVJ/bria-d66969969696684b-4.jpg" width="200"/>
 
-  
-        **bg_prompt**: studio shot, a perfect setting for a product placement on a rock with moss, surrounded by tropical vegetation, ferns and flowers, with visible moisture in the air, water drops, over a blurry jungle background, drama, high contrast image, cooling photo filter
-
-        
-        **num_results**: 3
-
         
         **results**:
 
         
-        <img src="https://i.ibb.co/XYRstLv/bria-d66969969696684b-10.jpg" width="200"/> <img src="https://i.ibb.co/c8NfM9z/bria-d66969969696684b-9.jpg" width="200"/>
-        <img src="https://i.ibb.co/xXqrnHG/bria-d66969969696684b-8.jpg" width="200"/> 
+        <img src="https://i.ibb.co/XYRstLv/bria-d66969969696684b-10.jpg" width="200"/> <img src="https://i.ibb.co/WGGrc7H/bria-d66969969696684b-11.jpg" width="200"/>
+        <img src="https://i.ibb.co/gFkL5BH/bria-d66969969696684b-12.jpg" width="200"/> 
 
   
         You can use this route on a modified image by providing the sid from the response of the previously used route.

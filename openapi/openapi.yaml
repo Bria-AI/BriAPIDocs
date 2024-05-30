@@ -2063,7 +2063,7 @@ paths:
           schema:
             type: string
             example: "b3cecc33cc31cc31"
-          description: The visual id of the image for which the user wishes to replace the background
+          description: The visual id of the product image 
       requestBody:
         content:
           application/json:

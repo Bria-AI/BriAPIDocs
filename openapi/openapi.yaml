@@ -16,6 +16,7 @@ info:
 
     This document provides an overview of the API's capabilities and guides users on how to effectively implement them.
 
+
     ### Using Bria for Image Generation
 
     **Image Generation**:
@@ -23,6 +24,7 @@ info:
 
     **Tailored Generation**:
     The Tailored Generation API allows you to create and manage custom-tailored models for generating unique visual content based on your datasets. Tailored models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
+
 
     **Using the Tailored Generation API**:
       - **Dataset Management**: 

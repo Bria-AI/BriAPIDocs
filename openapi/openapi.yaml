@@ -10,9 +10,16 @@ info:
 
     The Bria API is designed to provide a comprehensive suite of tools for generating and customizing images. With Bria, you can:
 
+
     - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
+
+    
     - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
+
+    
     - **Upload or Register Images**: Bring your own images into Bria and modify them using various routes to suit your needs.
+
+    
 
     This document provides an overview of the API's capabilities and guides users on how to effectively implement them.
 

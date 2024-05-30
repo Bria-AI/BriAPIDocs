@@ -765,7 +765,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-  /datasets/create:
+  /datasets:
     post:
       tags:
         - Tailored Generation - Coming Soon
@@ -850,7 +850,6 @@ paths:
           description: Unauthorized.
         '500':
           description: Internal server error.
-  /datasets:
     get:
       tags:
         - Tailored Generation - Coming Soon

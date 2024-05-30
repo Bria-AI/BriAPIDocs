@@ -119,7 +119,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /text-to-image/base
+      summary: Generate Image - Base model
       description: >-
 
 
@@ -317,7 +317,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /text-to-image/fast
+      summary: Generate Image - fast model 
       description: >-
 
 
@@ -461,7 +461,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /text-to-image/hd
+      summary: Generate Image - HD model
       description: >-
 
 
@@ -621,7 +621,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /text-to-image/tailored/{model_id}
+      summary: Generate Image - Tailored model
       description: |-
         **Description**
 
@@ -761,7 +761,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets
+      summary: Create Dataset
       description: >-
         **Description**
   
@@ -845,7 +845,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets
+      summary: Get Datasets
       description: >-
         **Description**
   
@@ -925,7 +925,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{id} 
+      summary: Get Dataset by ID
       description: >-
         **Description**
   
@@ -1038,7 +1038,7 @@ paths:
     put:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{id} 
+      summary: Update Dataset
       description: >-
         **Description**
   
@@ -1153,7 +1153,7 @@ paths:
     delete:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{id}
+      summary: Delete Dataset
       description: >-
         **Description**
   
@@ -1197,7 +1197,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{dataset_id}/images
+      summary: Upload Image to Dataset
       description: >-
         **Description**
   
@@ -1350,7 +1350,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{dataset_id}/images
+      summary: Get Images
       description: >-
         **Description**
 
@@ -1420,7 +1420,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{dataset_id}/images/{image_id}
+      summary: Get Image by ID
       description: >-
         **Description**
 
@@ -1497,7 +1497,7 @@ paths:
     delete:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/datasets/{dataset_id}/images/{image_id}
+      summary: Delete Image
       description: >-
         **Description**
 
@@ -1548,7 +1548,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/models
+      summary: Create Model
       description: >-
         **Description**
 
@@ -1631,7 +1631,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/models
+      summary: Get Models
       description: >-
         **Description**
 
@@ -1706,7 +1706,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/models/{id}
+      summary: Get model by ID
       description: >-
         **Description**
 
@@ -1776,7 +1776,7 @@ paths:
     delete:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/models/{id}
+      summary: Delete model
       description: >-
         **Description**
 
@@ -1825,7 +1825,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/models/{id}/start_training
+      summary: Start Training
       description: >-
         **Description**
 
@@ -1916,7 +1916,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /tailored-gen/models/{id}/stop_training
+      summary: Stop Training
       description: >-
         **Description**
 
@@ -1988,7 +1988,7 @@ paths:
     post:
       tags:
           - Image
-      summary: /{visual_id}/campaign_generator
+      summary: Generate Campaign
       description: >-
 
 
@@ -2252,7 +2252,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: /register
+      summary: Register Image
       description: >-
 
         **Description**
@@ -2373,7 +2373,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: /upload
+      summary: Upload Image
       description: >-
 
         **Description**
@@ -2521,7 +2521,7 @@ paths:
     post:
       tags:
         - Image Onboarding
-      summary: /{visual_id}/remove_image
+      summary: Remove Image
       description: >-
 
         **Description**
@@ -2829,7 +2829,7 @@ paths:
     get:
       tags:
         - Background
-      summary: /{visual_id}/background/info
+      summary: Get Background info
       description: >-
 
 
@@ -2938,7 +2938,7 @@ paths:
     get:
       tags:
         - Object
-      summary: /{visual_id}/objects/info
+      summary: Get Objects info
       description: >-
 
 
@@ -3190,7 +3190,7 @@ paths:
     post:
       tags:
         - Object
-      summary: /{visual_id}/objects/mask_generator
+      summary: Get Masks
       description: >-
 
 
@@ -3281,7 +3281,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: /{visual_id}/caption
+      summary: Get Caption
       description: >-
 
 
@@ -3337,7 +3337,7 @@ paths:
     get:
       tags:
         - AI-Presenter
-      summary: /{visual_id}/person/info
+      summary: Get Presentor info
       description: >-
 
 
@@ -3666,7 +3666,7 @@ paths:
     post:
       tags:
         - AI-Presenter
-      summary: /{visual_id}/create
+      summary: Modify Presenter
       description: >-
 
 
@@ -3879,7 +3879,7 @@ paths:
     post:
       tags:
         - Object
-      summary: /{visual_id}/objects/remove
+      summary: Remove Objects
       description: >-
         **Description**
 
@@ -4066,7 +4066,7 @@ paths:
     post:
       tags:
         - Background
-      summary: /background/remove
+      summary: Remove Background - Isolated
       description: >-
 
         **Description**
@@ -4166,7 +4166,7 @@ paths:
     get:
       tags:
         - Background
-      summary: /{visual_id}/background/remove
+      summary: Remove Background
       description: >-
 
 
@@ -4249,7 +4249,7 @@ paths:
     get:
       tags:
         - Background
-      summary: /{visual_id}/background/blur
+      summary: Blur Background
       description: >-
 
 
@@ -4335,7 +4335,7 @@ paths:
     post:
       tags:
         - Background
-      summary: /{visual_id}/replace_bg
+      summary: Generate Background
       description: >-
 
 
@@ -4473,7 +4473,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /{visual_id}/image_expansion
+      summary: Expand Image
       description: >-
 
 
@@ -4625,7 +4625,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /image/increase_resolution
+      summary: Increase Resolution - Isolated
       description: >-
 
 
@@ -4732,7 +4732,7 @@ paths:
     get:
       tags:
         - Image
-      summary: /{visual_id}/increase_resolution
+      summary: Increase Resolution
       description: >-
 
 
@@ -4798,7 +4798,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /{visual_id}/image_to_psd
+      summary: Delayer Image
       description: >-
 
 
@@ -4861,7 +4861,7 @@ paths:
     post:
       tags:
         - Image
-      summary: /{visual_id}/crop
+      summary: Crop out foreground
       description: >-
 
 
@@ -4943,7 +4943,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: /search
+      summary: Search by test
       description: >-
         **Description**
       
@@ -5056,7 +5056,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: /search_similar_images
+      summary: Search by Image
       description: >-
         **Description**
       

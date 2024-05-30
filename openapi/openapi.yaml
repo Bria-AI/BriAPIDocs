@@ -769,7 +769,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets
+      summary: /tailored-gen/datasets
       description: >-
         **Description**
   
@@ -853,7 +853,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets
+      summary: /tailored-gen/datasets
       description: >-
         **Description**
   
@@ -933,7 +933,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{id} 
+      summary: /tailored-gen/datasets/{id} 
       description: >-
         **Description**
   
@@ -1046,7 +1046,7 @@ paths:
     put:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{id} 
+      summary: /tailored-gen/datasets/{id} 
       description: >-
         **Description**
   
@@ -1161,7 +1161,7 @@ paths:
     delete:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{id}
+      summary: /tailored-gen/datasets/{id}
       description: >-
         **Description**
   
@@ -1205,7 +1205,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{dataset_id}/images
+      summary: /tailored-gen/datasets/{dataset_id}/images
       description: >-
         **Description**
   
@@ -1358,7 +1358,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{dataset_id}/images
+      summary: /tailored-gen/datasets/{dataset_id}/images
       description: >-
         **Description**
 
@@ -1428,7 +1428,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{dataset_id}/images/{image_id}
+      summary: /tailored-gen/datasets/{dataset_id}/images/{image_id}
       description: >-
         **Description**
 
@@ -1505,7 +1505,7 @@ paths:
     delete:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/{dataset_id}/images/{image_id}
+      summary: /tailored-gen/datasets/{dataset_id}/images/{image_id}
       description: >-
         **Description**
 
@@ -1556,7 +1556,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /models
+      summary: /tailored-gen/models
       description: >-
         **Description**
 
@@ -1639,7 +1639,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /models
+      summary: /tailored-gen/models
       description: >-
         **Description**
 
@@ -1714,7 +1714,7 @@ paths:
     get:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /models/{id}
+      summary: /tailored-gen/models/{id}
       description: >-
         **Description**
 
@@ -1784,7 +1784,7 @@ paths:
     delete:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /models/{id}
+      summary: /tailored-gen/models/{id}
       description: >-
         **Description**
 
@@ -1833,7 +1833,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /models/{id}/start_training
+      summary: /tailored-gen/models/{id}/start_training
       description: >-
         **Description**
 
@@ -1924,7 +1924,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /models/{id}/stop_training
+      summary: /tailored-gen/models/{id}/stop_training
       description: >-
         **Description**
 

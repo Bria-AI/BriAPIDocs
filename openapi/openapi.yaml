@@ -2041,15 +2041,14 @@ paths:
         **bg_prompt**: a bottle in a living room interior, on a kitchen counter
 
         
-        **num_results**: 
+        **num_results**: 3
 
         
         **results**:
+
+        
         <img src="https://i.ibb.co/tK6XLS4/bria-e69b992499669933-2.jpg" width="200"/> <img src="https://i.ibb.co/f2cndL3/bria-e69b992499669933-1.jpg" width="200"/>
         <img src="https://i.ibb.co/ZHNQt6x/bria-e69b992499669933.jpg" width="200"/> 
-
-  
-        **bg_prompt**: in a living room interior, on a kitchen counter
 
   
         You can use this route on a modified image by providing the sid from the response of the previously used route.
@@ -4515,12 +4514,9 @@ paths:
         
         
         **bg_prompt**: a bottle in a living room interior, on a kitchen counter
+                
         
-        
-        **placement_type**: original
-        
-        
-        **num_results**: 
+        **num_results**: 3
         
         
         **results**:
@@ -4530,8 +4526,6 @@ paths:
         <img src="https://i.ibb.co/ZHNQt6x/bria-e69b992499669933.jpg" width="200"/> 
         
         
-        **bg_prompt**: in a living room interior, on a kitchen counter
-
         
         You can use this route on a modified image by providing the sid from the response of the previously used route.
         

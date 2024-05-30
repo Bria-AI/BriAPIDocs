@@ -592,7 +592,7 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-/text-to-image/tailored/{model_id}:
+  /text-to-image/tailored/{model_id}:
     post:
       tags:
         - Tailored Generation - Coming Soon

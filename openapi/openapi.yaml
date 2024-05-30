@@ -1161,7 +1161,7 @@ paths:
           name: id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the dataset to delete.
       responses:
         '204':
@@ -1205,7 +1205,7 @@ paths:
           name: dataset_id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the dataset to which the image will be uploaded.
       requestBody:
         content:
@@ -1353,7 +1353,7 @@ paths:
           name: dataset_id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the dataset for which to retrieve images.
       responses:
         '200':
@@ -1423,13 +1423,13 @@ paths:
           name: dataset_id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the dataset to which the image belongs.
         - in: path
           name: image_id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the image to retrieve.
       responses:
         '200':
@@ -1500,13 +1500,13 @@ paths:
           name: dataset_id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the dataset to which the image belongs.
         - in: path
           name: image_id
           schema:
             type: string
-            required: true
+          required: true
           description: The ID of the image to delete.
       responses:
         '204':

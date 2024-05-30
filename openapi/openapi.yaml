@@ -4503,10 +4503,10 @@ paths:
         **original image**: 
         
         
-        <img src="https://images.bria.ai/images_resized/e69b992499669933.png" width="200"/>
+        <img src="https://i.ibb.co/n6JtktM/unnamed-13.jpg" width="200"/>
         
         
-        **bg_prompt**: a bottle in a living room interior, on a kitchen counter
+        **bg_prompt**: in a parking lot
                 
         
         **num_results**: 3
@@ -4515,8 +4515,8 @@ paths:
         **results**:
         
         
-        <img src="https://i.ibb.co/tK6XLS4/bria-e69b992499669933-2.jpg" width="200"/> <img src="https://i.ibb.co/f2cndL3/bria-e69b992499669933-1.jpg" width="200"/>
-        <img src="https://i.ibb.co/ZHNQt6x/bria-e69b992499669933.jpg" width="200"/> 
+        <img src="https://i.ibb.co/1zvT5h4/unnamed-14.jpg" width="200"/> <img src="https://i.ibb.co/MkVDxc8/unnamed-15.jpg" width="200"/>
+        <img src="https://i.ibb.co/pfgQ34p/unnamed-16.jpg" width="200"/> 
         
         
         

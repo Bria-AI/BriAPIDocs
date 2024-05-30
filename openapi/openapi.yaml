@@ -1997,6 +1997,129 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
+  /{visual_id}/product_placement:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Generate Product Placement Background
+      description: >-
+        **Description**
+  
+        The *Product Placement Route* is used to replace the background of a previously uploaded product image with a generated background. This endpoint is specifically tailored for product images, such as those used in consumer packaged goods (CPGs) and e-commerce.
+  
+        This route leverages the state-of-the-art BRIA 2.3 ControlNet BG-Gen model to place products in various contextual backgrounds, enhancing their appeal and relevance. It supports several use cases:
+  
+        1. **Catalog Enhancement/Contextual Backgrounds**: Place products in realistic or lifestyle settings that showcase how they can be used or worn. This helps customers visualize the product in real-life situations, increasing their desire to purchase.
+        2. **Seasonal or Themed Backgrounds**: Change the background of product images to match seasonal promotions, holidays, or specific themes.
+        3. **Artistic or Creative Backgrounds**: Use illustrations, patterns, or abstract designs that complement the product and appeal to your target audience.
+  
+        The key is to choose backgrounds that enhance the product's appearance, provide relevant context, and align with the brand's aesthetic. Ensure the backgrounds don't distract from the product itself, which should always remain the main focus of the image.
+    
+        This endpoint also supports solid colors - you can take a color code and use it in the prompt.
+  
+        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications and their oracle values.
+  
+        Here are some examples:
+  
+        **original image**: 
+        <img src="https://images.bria.ai/images_resized/e69b992499669933.png" width="200"/>
+  
+        **bg_prompt**: a bottle in a living room interior, on a kitchen counter
+        **placement_type**: original
+        **num_results**: 
+        
+        **results**:
+        <img src="https://i.ibb.co/tK6XLS4/bria-e69b992499669933-2.jpg" width="200"/> <img src="https://i.ibb.co/f2cndL3/bria-e69b992499669933-1.jpg" width="200"/>
+        <img src="https://i.ibb.co/ZHNQt6x/bria-e69b992499669933.jpg" width="200"/> 
+  
+        **bg_prompt**: in a living room interior, on a kitchen counter
+  
+        You can use this route on a modified image by providing the sid from the response of the previously used route.
+  
+        This route returns both the URL and the sid associated with the updated image.
+      operationId: productPlacement
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "b3cecc33cc31cc31"
+          description: The visual id of the image for which the user wishes to replace the background
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sync:
+                  type: boolean
+                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                desired_resolution:
+                  type: string
+                  description: The desired resolution of the updated image. This parameter is optional.
+                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
+                bg_prompt:
+                  type: string
+                  description: Text description of the new scene or background for the provided product image
+                refine_prompt:
+                  type: boolean
+                  default: false
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. 
+                num_results:
+                  type: integer
+                  default: 4
+                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
+                seed:
+                  type: integer
+                  example: 
+                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                negative_prompt:
+                  type: string
+                  description: This parameter is optional.
+            example:
+                bg_prompt: "a bottle in a living room interior, on a kitchen counter"
+                placement_type: "original"
+                num_results: 4
+                refine_prompt: true
+                sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      type: array
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+              example:
+                  result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+        '512':
+          description: Insufficient resources to process the request.
   /{visual_id}/campaign_generator:
     post:
       tags:
@@ -4358,10 +4481,6 @@ paths:
 
         The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). This new version offers higher-quality backgrounds and more precise control compared to the previous BRIA 1.4-based model.
         
-        
-        Additionally, you can change the image size of the final result as well as the positioning of the product or foreground of the image. This will enable you to create new and unique variations of your original image.
-
-
         This endpoint also supports solid colors - you can take a color code and use it in the prompt.
 
         Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
@@ -4433,7 +4552,7 @@ paths:
                   enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
                 bg_prompt:
                   type: string
-                  description: Text from which you wish to generate the new background
+                  description: Text based on which you wish to generate the new background
                 refine_prompt:
                   type: boolean
                   default: false

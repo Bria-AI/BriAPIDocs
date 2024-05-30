@@ -1004,25 +1004,39 @@ paths:
                     type: string
                     format: date-time
                     description: Timestamp when the dataset was last updated.
-              example:
-                id: "dataset123"
-                use_case: "illustrative_style"
-                style_description: "A 2d vibrant and colorful flat illustration."
-                name: "My Illustrations"
-                status: "draft"
-                images:
-                  - id: "image123"
-                    name: "Illustration1"
-                    caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                    file_url: "https://example.com/image1.png"
+              examples:
+                dataset_with_images:
+                  summary: Example of a dataset with images
+                  value:
+                    id: "dataset123"
+                    use_case: "illustrative_style"
+                    style_description: "A 2d vibrant and colorful flat illustration."
+                    name: "My Illustrations"
+                    status: "draft"
+                    images:
+                      - id: "image123"
+                        name: "Illustration1"
+                        caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
+                        file_url: "https://example.com/image1.png"
+                        created_at: "2024-05-26T12:00:00Z"
+                      - id: "image124"
+                        name: "Illustration2"
+                        caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
+                        file_url: "https://example.com/image2.png"
+                        created_at: "2024-05-26T12:00:00Z"
                     created_at: "2024-05-26T12:00:00Z"
-                  - id: "image124"
-                    name: "Illustration2"
-                    caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
-                    file_url: "https://example.com/image2.png"
+                    updated_at: "2024-05-26T12:00:00Z"
+                dataset_without_images:
+                  summary: Example of a dataset without images
+                  value:
+                    id: "dataset124"
+                    use_case: "illustrative_character"
+                    style_description: "A 2d illustration of a bear."
+                    name: "Character bear"
+                    status: "draft"
+                    images: []
                     created_at: "2024-05-26T12:00:00Z"
-                created_at: "2024-05-26T12:00:00Z"
-                updated_at: "2024-05-26T12:00:00Z"
+                    updated_at: "2024-05-26T12:00:00Z"
         '401':
           description: Unauthorized.
         '404':
@@ -1139,6 +1153,9 @@ paths:
                 style_description_conflict:
                   value:
                     error: "The style_description cannot be updated for a completed dataset."
+                image_count_conflict:
+                  value:
+                    error: "A dataset with the use case 'illustrative_style' must have between 20 and 200 images to be marked as 'completed'. A dataset with the use case 'illustrative_character' must have between 10 and 20 images to be marked as 'completed'."
         '500':
           description: Internal server error.
     delete:
@@ -1281,8 +1298,13 @@ paths:
                   error:
                     type: string
                     description: Error message.
-              example:
-                error: "Cannot upload an image to a completed dataset."
+              examples:
+                dataset_completed:
+                  value:
+                    error: "Cannot upload an image to a completed dataset."
+                upper_limit_exceeded:
+                  value:
+                    error: "Cannot upload more images. A dataset with the use case 'illustrative_style' can have a maximum of 200 images. A dataset with the use case 'illustrative_character' can have a maximum of 20 images."
         '410':
           description: Gone.
           content:
@@ -1528,6 +1550,446 @@ paths:
                 dataset_not_found:
                   value:
                     error: "Dataset with the specified ID does not exist."
+        '500':
+          description: Internal server error.
+  /models:
+    post:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /models
+      description: >-
+        **Description**
+
+        Create a new model.
+      operationId: createModel
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the model.
+                  example: "My Model"
+                description:
+                  type: string
+                  description: Description of the model.
+                  example: "This model is designed for generating illustrative style images."
+                dataset_id:
+                  type: string
+                  description: ID of the dataset to be used for training the model.
+                  example: "dataset123"
+      responses:
+        '201':
+          description: Model successfully created.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the model.
+                  name:
+                    type: string
+                    description: Name of the model.
+                  description:
+                    type: string
+                    description: Description of the model.
+                  status:
+                    type: string
+                    description: Status of the model.
+                    example: "created"
+                  dataset_id:
+                    type: string
+                    description: ID of the dataset used for training the model.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the model was created.
+              example:
+                id: "model123"
+                name: "My Model"
+                description: "This model is designed for generating illustrative style images."
+                status: "created"
+                dataset_id: "dataset123"
+                created_at: "2024-05-26T12:00:00Z"
+        '404':
+          description: Dataset with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Dataset with the specified ID does not exist."
+        '500':
+          description: Internal server error.
+    get:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /models
+      description: >-
+        **Description**
+
+        Retrieve a list of models. If there are no models, an empty array is being returned.
+      operationId: getModels
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: query
+          name: dataset_id
+          schema:
+            type: string
+            description: Filter models by dataset ID.
+            example: "dataset123"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: Unique identifier for the model.
+                    name:
+                      type: string
+                      description: Name of the model.
+                    description:
+                      type: string
+                      description: Description of the model.
+                    status:
+                      type: string
+                      description: Status of the model.
+                    dataset_id:
+                      type: string
+                      description: ID of the dataset used for training the model.
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the model was created.
+              examples:
+                multiple_models:
+                  summary: Example with multiple models
+                  value:
+                    - id: "model123"
+                      name: "My Model"
+                      description: "This model is designed for generating illustrative style images."
+                      status: "created"
+                      dataset_id: "dataset123"
+                      created_at: "2024-05-26T12:00:00Z"
+                    - id: "model124"
+                      name: "Another Model"
+                      description: "This model is designed for generating character style images."
+                      status: "in training"
+                      dataset_id: "dataset124"
+                      created_at: "2024-05-26T12:00:00Z"
+                no_models:
+                  summary: Example with no models
+                  value: []
+        '401':
+          description: Unauthorized.
+        '500':
+          description: Internal server error.
+  /models/{id}:
+    get:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /models/{id}
+      description: >-
+        **Description**
+
+        Retrieve a specific model by its ID.
+      operationId: getModelById
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the model to retrieve.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the model.
+                  name:
+                    type: string
+                    description: Name of the model.
+                  description:
+                    type: string
+                    description: Description of the model.
+                  status:
+                    type: string
+                    description: Status of the model.
+                  dataset_id:
+                    type: string
+                    description: ID of the dataset used for training the model.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the model was created.
+              example:
+                id: "model123"
+                name: "My Model"
+                description: "This model is designed for generating illustrative style images."
+                status: "created"
+                dataset_id: "dataset123"
+                created_at: "2024-05-26T12:00:00Z"
+        '404':
+          description: Model with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Model with the specified ID does not exist."
+        '500':
+          description: Internal server error.
+    delete:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /models/{id}
+      description: >-
+        **Description**
+
+        Delete a specific model.
+      operationId: deleteModel
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the model to delete.
+      responses:
+        '204':
+          description: Model successfully deleted. No content is returned.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    description: Status of the model.
+                    example: "deleted"
+        '404':
+          description: Model with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Model with the specified ID does not exist."
+        '500':
+          description: Internal server error.
+  /models/{id}/start_training:
+    post:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /models/{id}/start_training
+      description: >-
+        **Description**
+
+        Start a new training job for a specific model.
+      operationId: startModelTraining
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the model for which to start the training job.
+      responses:
+        '200':
+          description: Training job successfully started.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the model.
+                  status:
+                    type: string
+                    description: Status of the model.
+                    example: "in training"
+              example:
+                id: "model123"
+                status: "in training"
+        '403':
+          description: Forbidden.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Training job cannot be resumed once stopped."
+        '404':
+          description: Model with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Model with the specified ID does not exist."
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Training already started for the specified model."
+        '412':
+          description: Precondition Failed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "The dataset status is not ‘completed’."
+        '500':
+          description: Internal server error.
+  /models/{id}/stop_training:
+    post:
+      tags:
+        - Tailored Generation - Coming Soon
+      summary: /models/{id}/stop_training
+      description: >-
+        **Description**
+
+        Stop a specific training job for a model.
+      operationId: stopTrainingJob
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+        - in: path
+          name: id
+          schema:
+            type: string
+          required: true
+          description: The ID of the model for which to stop the training job.
+      responses:
+        '200':
+          description: Training job successfully stopped.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique identifier for the model.
+                  status:
+                    type: string
+                    description: Status of the model.
+                    example: "training stopped"
+              example:
+                id: "model123"
+                status: "training stopped"
+        '404':
+          description: Model with the specified ID does not exist.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              example:
+                error: "Model with the specified ID does not exist."
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                job_already_stopped:
+                  value:
+                    error: "Training job already stopped."
+                model_not_in_training:
+                  value:
+                    error: "Model is not currently in training."
         '500':
           description: Internal server error.
   /{visual_id}/campaign_generator:

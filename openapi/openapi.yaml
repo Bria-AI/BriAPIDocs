@@ -765,7 +765,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-  /datasets:
+  /tailored-gen/datasets:
     post:
       tags:
         - Tailored Generation - Coming Soon
@@ -929,7 +929,7 @@ paths:
           description: Unauthorized.
         '500':
           description: Internal server error.
-  /datasets/{id}:
+  /tailored-gen/datasets/{id}:
     get:
       tags:
         - Tailored Generation - Coming Soon
@@ -1201,7 +1201,7 @@ paths:
                     error: "Cannot delete a dataset that is used by a model that is in training or has the status 'ready'."
         '500':
           description: Internal server error.
-  /datasets/{dataset_id}/images:
+  /tailored-gen/datasets/{dataset_id}/images:
     post:
       tags:
         - Tailored Generation - Coming Soon
@@ -1424,7 +1424,7 @@ paths:
           description: Dataset with the specified ID does not exist.
         '500':
           description: Internal server error.
-  /datasets/{dataset_id}/images/{image_id}:
+  /tailored-gen/datasets/{dataset_id}/images/{image_id}:
     get:
       tags:
         - Tailored Generation - Coming Soon
@@ -1552,7 +1552,7 @@ paths:
                     error: "Dataset with the specified ID does not exist."
         '500':
           description: Internal server error.
-  /models:
+  /tailored-gen/models:
     post:
       tags:
         - Tailored Generation - Coming Soon
@@ -1710,7 +1710,7 @@ paths:
           description: Unauthorized.
         '500':
           description: Internal server error.
-  /models/{id}:
+  /tailored-gen/models/{id}:
     get:
       tags:
         - Tailored Generation - Coming Soon
@@ -1829,7 +1829,7 @@ paths:
                 error: "Model with the specified ID does not exist."
         '500':
           description: Internal server error.
-  /models/{id}/start_training:
+  /tailored-gen/models/{id}/start_training:
     post:
       tags:
         - Tailored Generation - Coming Soon
@@ -1920,7 +1920,7 @@ paths:
                 error: "The dataset status is not ‘completed’."
         '500':
           description: Internal server error.
-  /models/{id}/stop_training:
+  /tailored-gen/models/{id}/stop_training:
     post:
       tags:
         - Tailored Generation - Coming Soon

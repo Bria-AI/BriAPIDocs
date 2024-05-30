@@ -7,25 +7,50 @@ info:
     email: support@bria.ai
   description: >
     # Introduction
-    
-    
-    The Bria API is intended for users to interact with BriEngine and perform various operations, 
-    such as generating new images, customizing uploaded images, and searching. 
-    
-    This document will provide an overview of the API's capabilities and guide users on how to effectively implement it.
 
+    The Bria API is designed to provide a comprehensive suite of tools for generating and customizing images. With Bria, you can:
 
-    The following routes can be used without calling first to *Upload/Register Routes*:
-      - background/remove - Using the *Isolated Background Removal* to remove the background of an image.
-      - /text-to-image - By using the *Image Generation* route, you can generate any image you would like, based on the provided prompt.
+    - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
+    - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
+    - **Upload or Register Images**: Bring your own images into Bria and modify them using various routes to suit your needs.
 
+    This document provides an overview of the API's capabilities and guides users on how to effectively implement them.
 
-    **The common use of the Bria API is according to the following order:**
-      - /register - By using the *Register Route*, a new image can be sent to Bria without being uploaded to the database. This is the recommended method to onboard images to Bria, when needed.
-      - /upload - By using the *Upload Route*, you can upload a new image to the Bria database.
+    ### Using Bria for Image Generation
 
+    **Image Generation**:
+    - Use the `/text-to-image` endpoints to generate any image you would like, based on the provided prompt, without needing to upload or register images first.
 
-    
+    **Tailored Generation**:
+    The Tailored Generation API allows you to create and manage custom-tailored models for generating unique visual content based on your datasets. Tailored models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
+
+    **Using the Tailored Generation API**:
+      - **Dataset Management**: 
+        - Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
+        - Use the `/datasets/{dataset_id}/images` endpoint to upload new images to a dataset or retrieve existing images that belong to the dataset.
+        - Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
+      - **Model Management**: 
+        - Use the `/models` endpoint to create a new model or retrieve all models that belong to the client organization.
+        - Use the `/models/{id}` endpoint to retrieve a specific model by its ID or delete a specific model.
+      - **Training Management**: 
+        - Use the `/models/{id}/start_training` endpoint to initiate the training process. Ensure that the dataset includes the minimum required number of images and has a status of 'completed' before starting training.
+        - Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
+
+    **Training a Tailored Model**:
+      1. Create a Dataset: Use the `/datasets` endpoint to create a dataset.
+      2. Upload Images: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
+      3. Create a Model: Use the `/models` endpoint to create a model associated with your dataset.
+      4. Complete the Dataset: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
+      5. Start Training: Initiate the training process using the `/models/{id}/start_training` endpoint.
+      6. Monitor Training: Optionally, you can check the training status to monitor progress.
+      7. Generate Images: Once the model is trained, use the `/text-to-image/tailored/{model_id}` route to generate images.
+
+    ### Uploading and Modifying Images
+
+    **Uploading and Registering Images**:
+    - Use the `/register` endpoint to send a new image to Bria without being uploaded to the database. This is the recommended method to onboard images to Bria when needed.
+    - Use the `/upload` endpoint to upload a new image to the Bria database.
+
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
       - /campaign_generator - The *Campaign Generator Route* enables the creation of customized campaigns. It allows for the generation of visual ads, including various elements like text, images, and layout, based on specific parameters provided by the user.
       - /info - By using the *Info Route*, you can understand the possible changes for each object in the image. 
@@ -33,21 +58,19 @@ info:
          - /person/info
          - /objects/info
          - /background/info
-      - /increase_resolution - The *Increase Resolution route* is used to upsacle any image. 
-      - /image_to_psd - The *Image To Psd route* is used to create a layered psd file out of any image.
+      - /increase_resolution - The *Increase Resolution route* is used to upscale any image. 
+      - /image_to_psd - The *Image To PSD route* is used to create a layered PSD file out of any image.
       - /mask_generator - By using the *Mask Generator*, you can get all the available masks for an image, a segmentation for the image. 
       - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
       - /search_similar_images - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
       - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
       - /crop - The *Crop Route* is used to crop an image without a background, tightly around the remaining region of interest.
 
-      
     With the response from the *Info Routes* or from the *Mask Generator*, the following routes can be used without any particular order:
       - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
-      - /recast_model - Using the *Recast Model Route* to create a new variation of your image, while customizing a portrait to any profession/theme
-      - objects/remove - Using the *Remove Object Route* to remove the objects from an image. You can also use this route with any mask, that is created manually by a user or generated by the /mask_generator endpoint.
-      - background/remove - Using the *Remove BG Route* to remove the background of an image.
-      - background/blur - Using the *Blur BG Route* to create a blur effect on the background of an image.
+      - /objects/remove - Using the *Remove Object Route* to remove the objects from an image. You can also use this route with any mask, that is created manually by a user or generated by the /mask_generator endpoint.
+      - /background/remove - Using the *Remove BG Route* to remove the background of an image.
+      - /background/blur - Using the *Blur BG Route* to create a blur effect on the background of an image.
       - /replace_bg - Using the *Replace BG Route* to generate new backgrounds for an image.
 
         
@@ -4999,22 +5022,17 @@ paths:
         - AI Search
       summary: /search
       description: >-
-
-
         **Description**
-
-
-
+      
         By using the *Search Route*, you can utilize Bria's generative search capabilities, which don't require labels or keywords.
-        
         
         The user can send any text query and receive relevant images that match the query.
         
-        
-        The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
+        The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
         
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
         
+        **Note:** To use this endpoint, please contact us at [support@bria.ai](mailto:support@bria.ai).
 
       operationId: search
       parameters:
@@ -5117,20 +5135,16 @@ paths:
         - AI Search
       summary: /search_similar_images
       description: >-
-
-
         **Description**
-
-
-
+      
         By using the *Search Similar Images Route*, you can send an image as a query and receive relevant images that are similar.
         
-        
-        The *Search Similar Images Route* returns the images, sorted by the similarity score, from the highest to the lowest.
-       
+        The *Search Similar Images Route* returns the images, sorted by the similarity score, from the highest to the lowest.
         
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
         
+        **Note:** To use this endpoint, please contact us at [support@bria.ai](mailto:support@bria.ai).
+      
 
       operationId: search_similar_images
       parameters:

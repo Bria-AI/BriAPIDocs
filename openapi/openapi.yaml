@@ -769,7 +769,7 @@ paths:
     post:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/create 
+      summary: /datasets
       description: >-
         **Description**
   
@@ -1029,11 +1029,10 @@ paths:
           description: Dataset with the specified ID does not exist.
         '500':
           description: Internal server error.
-  /datasets/update/{id}:
     put:
       tags:
         - Tailored Generation - Coming Soon
-      summary: /datasets/update/{id} 
+      summary: /datasets/{id} 
       description: >-
         **Description**
   

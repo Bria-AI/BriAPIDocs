@@ -370,13 +370,6 @@ paths:
                   minimum: 4
                   maximum: 10
                   default: 8
-                text_guidance_scale:
-                  type: number
-                  format: float
-                  description: Determines how closely the generated image should adhere to the input text description. This parameter is optional.
-                  minimum: 1.0
-                  maximum: 10.0
-                  default: 5.0
                 medium:
                   type: string
                   enum: ['photography','art']
@@ -599,50 +592,53 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-  /generation/bria-v2/text-to-image:
+/text-to-image/tailored/{model_id}:
     post:
       tags:
-        - Image
-      summary: /generation/bria-v2/text-to-image (Deprecated)
-      description: >-
-
-
+        - Tailored Generation - Coming Soon
+      summary: /text-to-image/tailored/{model_id}
+      description: |-
         **Description**
 
-        
-        WARNING: Deprecated and scheduled for removal on 01/07/2024. For continued support, use <a href="https://bria-ai-api-docs.redoc.ly/#operation//text-to-image" target="_blank">/text-to-image</a>.
+        This route allows you to generate images using a tailored model. Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons. You can train a tailored model through the API or using the Bria platform.
 
+        ### Overview of Tailored Model API
 
-      
-        The *Image Generation Route* allows you to generate images based on any given text prompt. 
-        
-        
-        Our most capable model that can generate high-quality 1024x1024px images. **The model supports natively multiple aspect ratios.**
+        The Tailored Model API provides a set of endpoints to manage the entire lifecycle of a tailored model:
 
-        Here are some examples:
-        
-        
-        **prompt:** A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
-           
-           
-        **results:**
+        1. **Dataset Management**: Create and manage datasets which will be used to train your tailored models. You can:
+           - **Create and Retrieve Datasets**: Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
+           - **Upload and Retrieve Images**: Use the `/datasets/{dataset_id}/images` endpoint to upload a new image to a dataset or retrieve existing images that belong to the dataset.
+           - **Manage Individual Images**: Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
 
-           
-        <img src="https://images.bria.ai/images_resized/c90a5ad279297dc3.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/8d6dc1724287717e.png" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/ca8ee9c197260d6e.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/9c0db2334996eccd.png" width="200" height="200"/>
-        
-        
-        **prompt:** Nature photography, a majestic photo, closeup of a blue and yellow Cameleon on a tropical blue flower with due, drops of water on the flower, outdoors, vegetation, jungle, polarizing photo filter
-        
-        
-        **results:**
-        
-        
-        <img src="https://images.bria.ai/images_resized/a3e93a2adac76194.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/cd143cbca39f482e.png" width="200" height="200"/>
-        <img src="https://images.bria.ai/images_resized/db242fc93c7ce184.png" width="200" height="200"/> <img src="https://images.bria.ai/images_resized/c10f3b933d738934.png" width="200" height="200"/>
-           
-      operationId: /generation/bria-v2/text-to-image
+        2. **Model Management**: Create and manage models based on your datasets. You can:
+           - **Create and Retrieve Models**: Use the `/models` endpoint to create a new model or retrieve all models that belong to the client organization.
+           - **Get and Delete Specific Models**: Use the `/models/{id}` endpoint to retrieve a specific model by its ID or delete a specific model.
+
+        3. **Training Management**: Start and stop training jobs for your models. You can:
+           - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
+           - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
+
+        ### Training a Tailored Model
+
+        To train a tailored model via the API:
+        1. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset.
+        2. **Upload Images**: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
+        3. **Create a Model**: Use the `/models` endpoint to create a model associated with your dataset.
+        4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
+        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint.
+        6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
+        7. **Generate Images**: Once the model is trained, use this route to generate images.
+
+        Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
+      operationId: /text-to-image/tailored
       parameters:
+        - in: path
+          name: model_id
+          schema:
+            type: string
+          required: true
+          description: The model id of the tailored model you would like to use in the request. 
         - in: header
           name: api_token
           schema:
@@ -657,60 +653,35 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images
+                  description: The prompt you would like to use to generate images.
                 num_results:
                   type: integer
-                  description: How many images you would like to generate. The default and maximum value is 4. 
-                size:
-                  type: array
-                  description: The size of the image in pixels. The first value is the width and the second value is the height. Each value must be a multiple of 64. Here is the recommended list of sizes to use [1024,1024],[1344,768],[768,1344],[1088,896],[896,1088],[1152,896],[896,1152],[1216,832],[832,1216].
-                  default: [1024,1024]
+                  description: How many images you would like to generate. 
+                  minimum: 1
+                  maximum: 4
+                  default: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
                 sync:
                   type: boolean
-                  description: Determines the response mode. When true, responses are synchronous, and applicable to the fast model or single-image requests. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
-                fast:
-                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
                   default: false
-                  description: If you would like to use the Bria 2.2 Fast model, which provides the best balance between speed and quality, use the value true. 
                 seed:
                   type: integer
-                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                negative_prompt:
-                  type: string
-                  description: This parameter is optional.
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
-                  minimum: 20
-                  maximum: 50
-                  default: 30
-                text_guidance_scale:
-                  type: number
-                  format: float
-                  description: Determines how closely the generated image should adhere to the input text description. This parameter is optional.
-                  minimum: 1.0
-                  maximum: 10.0
-                  default: 5.0
-                style:   
-                  type: string
-                  enum: ['photo realistic','fashion','retro','sports','still life','hyper realistic','travel','artistic','3d render','realistic','fantasy','comic book','minimalistic']
-                  description: Which style you would like to see in your generated images.
-                atmosphere:
-                  type: string
-                  enum: ['dramatic','vivid','warm','cool']
-                  description: Which atmosphere you would like to get in your generated images.
-                camera:
-                  type: string
-                  enum: ['portrait','close up','aerial','landscape']
-                  description: Which camera angle you would like to see in your generated images.
-                medium:
-                  type: string
-                  enum: ['photography','art']
-                  description: Which medium should be included in your generated images.
+                  minimum: 4
+                  maximum: 20
+                  default: 8
             examples:
               valid prompt:
                 value:
-                  prompt: "a baby riding a bicycle in a field of flowers"
+                  prompt: "a book"
                   num_results: 1
                   sync: true
               inappropriate prompt:
@@ -761,10 +732,6 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /tailored-gen/datasets:
     post:
       tags:

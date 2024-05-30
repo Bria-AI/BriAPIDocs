@@ -2107,8 +2107,7 @@ paths:
                   description: This parameter is optional.
             example:
                 bg_prompt: "a bottle in a living room interior, on a kitchen counter"
-                placement_type: "original"
-                num_results: 4
+                num_results: 1
                 refine_prompt: true
                 sync: true
       responses:
@@ -4583,8 +4582,7 @@ paths:
                   description: This parameter is optional.
             example:
                 bg_prompt: "a bottle in a living room interior, on a kitchen counter"
-                placement_type: "original"
-                num_results: 4
+                num_results: 1
                 refine_prompt: true
                 sync: true
       responses:

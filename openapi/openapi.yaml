@@ -201,7 +201,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
                 num_results:
                   type: integer
                   description: How many images you would like to generate.
@@ -222,7 +222,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 negative_prompt:
                   type: string
-                  description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional.
+                  description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
@@ -383,7 +383,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -533,7 +533,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -554,7 +554,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 negative_prompt:
                   type: string
-                  description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional.
+                  description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
@@ -691,7 +691,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -2083,7 +2083,7 @@ paths:
                   enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
                 bg_prompt:
                   type: string
-                  description: Text description of the new scene or background for the provided product image
+                  description: Text description of the new scene or background for the provided product image. Bria currently supports prompts in English only.
                 refine_prompt:
                   type: boolean
                   default: false
@@ -2098,7 +2098,7 @@ paths:
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 negative_prompt:
                   type: string
-                  description: This parameter is optional.
+                  description: This parameter is optional. Bria currently supports prompts in English only.
             example:
                 bg_prompt: "a bottle in a living room interior, on a kitchen counter"
                 num_results: 1
@@ -2263,7 +2263,7 @@ paths:
                   description: "Background type. Optional."
                 bg_prompt:
                   type: string
-                  description: "Background generation prompt. Mandatory when background_type is generated."
+                  description: "Background generation prompt. Mandatory when background_type is generated. Bria currently supports prompts in English only."
                 bg_seed:
                   type: integer
                   description: "Background seed. Optional. Relevant when background_type is generated."
@@ -4558,7 +4558,7 @@ paths:
                   enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
                 bg_prompt:
                   type: string
-                  description: Text based on which you wish to generate the new background
+                  description: Text based on which you wish to generate the new background. Bria currently supports prompts in English only.
                 refine_prompt:
                   type: boolean
                   default: false
@@ -4573,7 +4573,7 @@ paths:
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 negative_prompt:
                   type: string
-                  description: This parameter is optional.
+                  description: This parameter is optional. Bria currently supports prompts in English only.
             example:
                 bg_prompt: "in a parking lot"
                 num_results: 1
@@ -4699,7 +4699,7 @@ paths:
                   description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
                 prompt:
                   type: string
-                  description: Text on which you wish to base the image expansion. This parameter is optional.
+                  description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only.
                 seed:
                   type: integer
                   description: You can choose whether you want your generated expension to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
@@ -4708,7 +4708,7 @@ paths:
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
                 negative_prompt:
                   type: string
-                  description: This parameter is optional.
+                  description: This parameter is optional. Bria currently supports prompts in English only.
               example: 
                 canvas_size: [1200,674]
                 original_image_size: [610,855]

@@ -2001,7 +2001,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Generate Placement
+      summary: Product Placement
       description: >-
         **Description**
   

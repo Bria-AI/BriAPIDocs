@@ -1555,6 +1555,20 @@ paths:
                 dataset_not_found:
                   value:
                     error: "Dataset with the specified ID does not exist."
+        '409':
+          description: Conflict.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                dataset_completed:
+                  value:
+                    error: "Cannot delete an image from a completed dataset."
         '500':
           description: Internal server error.
   /tailored-gen/models:
@@ -1875,18 +1889,6 @@ paths:
               example:
                 id: "model123"
                 status: "in training"
-        '403':
-          description: Forbidden.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              example:
-                error: "Training job cannot be resumed once stopped."
         '404':
           description: Model with the specified ID does not exist.
           content:
@@ -1909,8 +1911,13 @@ paths:
                   error:
                     type: string
                     description: Error message.
-              example:
-                error: "Training already started for the specified model."
+              examples:
+                training_already_started:
+                  value:
+                    error: "Training already started for the specified model."
+                training_cannot_be_resumed:
+                  value:
+                    error: "Training job cannot be resumed once stopped."
         '412':
           description: Precondition Failed.
           content:

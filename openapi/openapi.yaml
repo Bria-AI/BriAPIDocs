@@ -4627,6 +4627,14 @@ paths:
         In this way, you can create unique variations of your original image instead of cropping it into different aspect ratios and losing important details.
         
         
+        **Optimal input range**
+        
+        
+        ***Input Image Area:*** Ensure that the input image area is more than 15% of the canvas area to achieve optimal results.
+        
+
+        ***Canvas Size:*** The canvas size should be up to an area of 5000x5000 pixels.
+        
         Here are some examples:
         
         
@@ -4686,12 +4694,12 @@ paths:
                   items:
                     type: integer
                   default: [1000,1000]
-                  description: The desired size of the final image, after the expansion.
+                  description: The desired size of the final image, after the expansion. should have an area of less than 5000x5000 pixels.
                 original_image_size:
                   type: array
                   items:
                     type: integer
-                  description: The desired size of the original image, inside the full canvas.
+                  description: The desired size of the original image, inside the full canvas. Should be over 15% of the canvas area.
                 original_image_location:
                   type: array
                   items:

@@ -674,7 +674,7 @@ paths:
         - in: path
           name: model_id
           schema:
-            type: string
+            type: integer
           required: true
           description: The model id of the tailored model you would like to use in the request. 
         - in: header

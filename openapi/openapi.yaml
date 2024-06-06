@@ -871,7 +871,8 @@ paths:
                 images_count: 0
                 images: []
                 created_at: "2024-05-26T12:00:00Z"
-                updated_at: "2024-05-26T12:00:00Z"
+                updated_at: null
+                deleted_at: null
         '400':
           description: Bad request.
         '401':

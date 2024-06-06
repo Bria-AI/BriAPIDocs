@@ -946,7 +946,8 @@ paths:
                       images_count: 10
                       status: "completed"
                       created_at: "2024-05-26T12:00:00Z"
-                      updated_at: "2024-05-26T12:00:00Z"
+                      updated_at: null
+                      deleted_at: null
                     - id: 124
                       use_case: "illustrative_single_object"
                       style_description: "A 2d illustration of a bear"
@@ -954,7 +955,8 @@ paths:
                       images_count: 5
                       status: "draft"
                       created_at: "2024-05-26T12:00:00Z"
-                      updated_at: "2024-05-26T12:00:00Z"
+                      updated_at: null
+                      deleted_at: null
                 no_datasets:
                   summary: Example with no datasets
                   value: []
@@ -1056,13 +1058,18 @@ paths:
                         caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
                         file_url: "https://example.com/image1.png"
                         created_at: "2024-05-26T12:00:00Z"
+                        updated_at: null
+                        deleted_at: null
                       - id: 124
                         name: "Illustration2"
                         caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
                         file_url: "https://example.com/image2.png"
                         created_at: "2024-05-26T12:00:00Z"
+                        updated_at: null
+                        deleted_at: null
                     created_at: "2024-05-26T12:00:00Z"
-                    updated_at: "2024-05-26T12:00:00Z"
+                    updated_at: null
+                    deleted_at: null
                 dataset_without_images:
                   summary: Example of a dataset without images
                   value:
@@ -1073,7 +1080,8 @@ paths:
                     status: "draft"
                     images: []
                     created_at: "2024-05-26T12:00:00Z"
-                    updated_at: "2024-05-26T12:00:00Z"
+                    updated_at: null
+                    deleted_at: null
         '401':
           description: Unauthorized.
         '404':
@@ -1122,12 +1130,12 @@ paths:
                   example: "Updated Illustrations"
                 status:
                   type: string
-                  enum: [COMPLETED, DRAFT]
+                  enum: [COMPLETED]
                   description: Status of the dataset.
-                  example: "completed"
+                  example: "COMPLETED"
       responses:
         '200':
-          description: Dataset successfully updated.
+          description: Successful operation.
           content:
             application/json:
               schema:
@@ -1148,6 +1156,30 @@ paths:
                   status:
                     type: string
                     description: Status of the dataset.
+                  images:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: Unique identifier for the image.
+                        name:
+                          type: string
+                          description: Name of the image.
+                        caption:
+                          type: string
+                          description: Caption for the image describing the illustration.
+                        image_url:
+                          type: string
+                          description: URL of the image.
+                        thumbnail_url:
+                          type: string
+                          description: URL of the image thumbnail.
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the image was created.
                   created_at:
                     type: string
                     format: date-time
@@ -1156,14 +1188,39 @@ paths:
                     type: string
                     format: date-time
                     description: Timestamp when the dataset was last updated.
-              example:
-                id: 123
-                use_case: "illustrative_style"
-                style_description: "A 2d vibrant and colorful flat illustration."
-                name: "Updated Illustrations"
-                status: "completed"
-                created_at: "2024-05-26T12:00:00Z"
-                updated_at: "2024-05-26T12:00:00Z"
+                  deleted_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was deleted.
+              examples:
+                dataset_with_images:
+                  summary: Example of a dataset with images
+                  value:
+                    id: 123
+                    use_case: "illustrative_style"
+                    style_description: "A 2d vibrant and colorful flat illustration."
+                    name: "My Illustrations"
+                    status: "draft"
+                    images:
+                      - id: 123
+                        name: "Illustration1"
+                        caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
+                        image_url: "https://example.com/image1.png"
+                        thumbnail_url: "https://example.com/image1_thumbnail.png"
+                        created_at: "2024-05-26T12:00:00Z"
+                        updated_at: null
+                        deleted_at: null
+                      - id: 124
+                        name: "Illustration2"
+                        caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
+                        image_url: "https://example.com/image2.png"
+                        thumbnail_url: "https://example.com/image2_thumbnail.png"
+                        created_at: "2024-05-26T12:00:00Z"
+                        updated_at: null
+                        deleted_at: null
+                    created_at: "2024-05-26T12:00:00Z"
+                    updated_at: "2024-05-26T12:00:00Z"
+                    deleted_at: null
         '400':
           description: Bad request.
         '401':
@@ -1297,9 +1354,12 @@ paths:
                   file_name:
                     type: string
                     description: Name of the image file.
-                  file_url:
+                  image_url:
                     type: string
-                    description: URL of the image file.
+                    description: URL of the image.
+                  thumbnail_url:
+                    type: string
+                    description: URL of the image thumbnail.
                   created_at:
                     type: string
                     format: date-time
@@ -1309,7 +1369,8 @@ paths:
                 dataset_id: 123
                 caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
                 file_name: "Illustration1.png"
-                file_url: "https://example.com/image1.png"
+                image_url: "https://example.com/image1.png"
+                thumbnail_url: "https://example.com/image1_thumbnail.png"
                 created_at: "2024-05-26T12:00:00Z"
         '400':
           description: Bad request.
@@ -1427,15 +1488,21 @@ paths:
                     id:
                       type: integer
                       description: Unique identifier for the image.
+                    dataset_id:
+                      type: integer
+                      description: ID of the dataset to which the image belongs.
                     caption:
                       type: string
                       description: Caption for the image.
                     file_name:
                       type: string
                       description: Name of the image file.
-                    file_url:
+                    image_url:
                       type: string
-                      description: URL of the image file.
+                      description: URL of the image.
+                    thumbnail_url:
+                      type: string
+                      description: URL of the image thumbnail.
                     created_at:
                       type: string
                       format: date-time
@@ -1445,14 +1512,18 @@ paths:
                   summary: Example with multiple images
                   value:
                     - id: 123
+                      dataset_id: 123
                       caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
                       file_name: "Illustration1.png"
-                      file_url: "https://example.com/image1.png"
+                      image_url: "https://example.com/image1.png"
+                      thumbnail_url: "https://example.com/image1_thumbnail.png"
                       created_at: "2024-05-26T12:00:00Z"
                     - id: 123
+                      dataset_id: 123
                       caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
                       file_name: "Illustration2.png"
-                      file_url: "https://example.com/image2.png"
+                      image_url: "https://example.com/image2.png"
+                      thumbnail_url: "https://example.com/image2_thumbnail.png"
                       created_at: "2024-05-26T12:00:00Z"
                 no_images:
                   summary: Example with no images
@@ -1501,24 +1572,32 @@ paths:
                   id:
                     type: integer
                     description: Unique identifier for the image.
+                  dataset_id:
+                    type: integer
+                    description: ID of the dataset to which the image belongs.
                   caption:
                     type: string
                     description: Caption for the image.
                   file_name:
                     type: string
                     description: Name of the image file.
-                  file_url:
+                  image_url:
                     type: string
-                    description: URL of the image file.
+                    description: URL of the image.
+                  thumbnail_url:
+                    type: string
+                    description: URL of the image thumbnail.
                   created_at:
                     type: string
                     format: date-time
                     description: Timestamp when the image was created.
               example:
                 id: 123
+                dataset_id: 123
                 caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
                 file_name: "Illustration1.png"
-                file_url: "https://example.com/image1.png"
+                image_url: "https://example.com/image2.png"
+                thumbnail_url: "https://example.com/image2_thumbnail.png"
                 created_at: "2024-05-26T12:00:00Z"
         '404':
           description: Not Found.
@@ -1647,7 +1726,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
+                    type: integer
                     description: Unique identifier for the model.
                   name:
                     type: string
@@ -1658,7 +1737,7 @@ paths:
                   status:
                     type: string
                     description: Status of the model.
-                    example: "created"
+                    example: "Created"
                   dataset_id:
                     type: integer
                     description: ID of the dataset used for training the model.
@@ -1667,10 +1746,10 @@ paths:
                     format: date-time
                     description: Timestamp when the model was created.
               example:
-                id: "model123"
+                id: 123
                 name: "My Model"
                 description: "This model is designed for generating illustrative style images."
-                status: "created"
+                status: "Created"
                 dataset_id: 123
                 created_at: "2024-05-26T12:00:00Z"
         '404':
@@ -1720,7 +1799,7 @@ paths:
                   type: object
                   properties:
                     id:
-                      type: string
+                      type: integer
                       description: Unique identifier for the model.
                     name:
                       type: string
@@ -1742,16 +1821,16 @@ paths:
                 multiple_models:
                   summary: Example with multiple models
                   value:
-                    - id: "model123"
+                    - id: 123
                       name: "My Model"
                       description: "This model is designed for generating illustrative style images."
-                      status: "created"
+                      status: "Created"
                       dataset_id: 123
                       created_at: "2024-05-26T12:00:00Z"
-                    - id: "model124"
+                    - id: 124
                       name: "Another Model"
                       description: "This model is designed for generating character style images."
-                      status: "in training"
+                      status: "Training In Progress"
                       dataset_id: 124
                       created_at: "2024-05-26T12:00:00Z"
                 no_models:
@@ -1781,7 +1860,7 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
           required: true
           description: The ID of the model to retrieve.
       responses:
@@ -1793,7 +1872,7 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
+                    type: integer
                     description: Unique identifier for the model.
                   name:
                     type: string
@@ -1812,10 +1891,10 @@ paths:
                     format: date-time
                     description: Timestamp when the model was created.
               example:
-                id: "model123"
+                id: 123
                 name: "My Model"
                 description: "This model is designed for generating illustrative style images."
-                status: "created"
+                status: "Created"
                 dataset_id: 123
                 created_at: "2024-05-26T12:00:00Z"
         '404':
@@ -1851,7 +1930,7 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
           required: true
           description: The ID of the model to delete.
       responses:
@@ -1865,7 +1944,7 @@ paths:
                   status:
                     type: string
                     description: Status of the model.
-                    example: "deleted"
+                    example: "Deleted"
         '404':
           description: Model with the specified ID does not exist.
           content:
@@ -1900,7 +1979,7 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
           required: true
           description: The ID of the model for which to start the training job.
       responses:
@@ -1912,15 +1991,15 @@ paths:
                 type: object
                 properties:
                   id:
-                    type: string
+                    type: integer
                     description: Unique identifier for the model.
                   status:
                     type: string
                     description: Status of the model.
-                    example: "in training"
+                    example: "Training In Progress"
               example:
-                id: "model123"
-                status: "in training"
+                id: 123
+                status: "Training In Progress"
         '404':
           description: Model with the specified ID does not exist.
           content:
@@ -1984,27 +2063,12 @@ paths:
         - in: path
           name: id
           schema:
-            type: string
+            type: integer
           required: true
           description: The ID of the model for which to stop the training job.
       responses:
         '200':
           description: Training job successfully stopped.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    description: Unique identifier for the model.
-                  status:
-                    type: string
-                    description: Status of the model.
-                    example: "training stopped"
-              example:
-                id: "model123"
-                status: "training stopped"
         '404':
           description: Model with the specified ID does not exist.
           content:

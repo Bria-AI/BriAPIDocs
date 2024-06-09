@@ -4931,11 +4931,11 @@ paths:
               type: object
               properties:
                 file:
-                  description: The image file you would like to increase the resolution for.
+                  description: The image file you would like to increase the resolution for. Minimum resolution supported for width and/or height is 216 pixels.
                   type: string
                   format: binary
                 image_url:
-                  description: The URL of the image file you would like to increase the resolution for. The URL should lead to an image publicly available online. Either a file or an image_url should be provided. If both are provided, then the route will use image_url.
+                  description: The URL of the image file you would like to increase the resolution for. The URL should lead to an image publicly available online. Either a file or an image_url should be provided. If both are provided, then the route will use image_url. Minimum resolution supported for width and/or height is 216 pixels.
                   type: string
             examples:
                 image url:

@@ -1304,6 +1304,34 @@ paths:
         **Description**
   
         Upload a new image to a specific dataset. One of the following parameters, `file` or `image_url`, must be provided.
+
+        
+        **Upload a new image using the image file**
+
+        
+          In our documentation request example, we demonstrate how to upload a new image using the image URL.
+          
+          
+          If you want to use an image from a file, follow the example below:
+
+      
+              import requests
+      
+              url = "/tailored-gen/datasets/{dataset_id}/images"
+      
+              payload = {}
+              files=[
+                ('file',('image_name.jpeg',open('/path_to_local_file/image_name.jpeg','rb'),'image/jpeg'))
+              ]
+              headers = {
+                'api_token': 'xxxx'
+              }
+      
+              response = requests.request("POST", url, headers=headers, data=payload, files=files)
+      
+              print(response.text)
+       
+
       operationId: uploadImage
       parameters:
         - in: header
@@ -1334,11 +1362,15 @@ paths:
                 image_name:
                   type: string
                   description: Name of the image. If not provided, the file name will be used. If neither is available, a default name will be set. This field is only relevant when an image_url is provided.
+            examples:
+                image url:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
       responses:
         '201':
           description: Image successfully uploaded.
           content:
-            application/json:
+            application/x-www-form-urlencoded:
               schema:
                 type: object
                 properties:

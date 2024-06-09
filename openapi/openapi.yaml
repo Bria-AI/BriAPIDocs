@@ -242,7 +242,7 @@ paths:
                   description: Which medium should be included in your generated images. This parameter is optional.
                 prompt_enhancement:
                   type: boolean
-                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time. Built with Meta Llama 3.
                   default: false
             examples:
               valid prompt:
@@ -2178,15 +2178,11 @@ paths:
                 refine_prompt:
                   type: boolean
                   default: false
-                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. 
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3
                 num_results:
                   type: integer
                   default: 4
-                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
-                seed:
-                  type: integer
-                  example: 
-                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter.                        
                 negative_prompt:
                   type: string
                   description: This parameter is optional. Bria currently supports prompts in English only.
@@ -4653,7 +4649,7 @@ paths:
                 refine_prompt:
                   type: boolean
                   default: false
-                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. 
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
                   default: 4

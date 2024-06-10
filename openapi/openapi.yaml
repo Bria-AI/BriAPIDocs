@@ -633,7 +633,7 @@ paths:
   /text-to-image/tailored/{model_id}:
     post:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Generate Image - Tailored model
       description: |-
         **Description**
@@ -674,9 +674,9 @@ paths:
         - in: path
           name: model_id
           schema:
-            type: integer
+            type: string
           required: true
-          description: The model id of the tailored model you would like to use in the request. 
+          description: The model id of the tailored model you would like to use in the request. Currently, the model id from the /models endpoint isn't supported, if you would like to run a tailored model, please contact us support@bria.ai.
         - in: header
           name: api_token
           schema:
@@ -773,7 +773,7 @@ paths:
   /tailored-gen/datasets:
     post:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Create Dataset
       description: >-
         **Description**
@@ -876,7 +876,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Get Datasets
       description: >-
         **Description**
@@ -956,7 +956,7 @@ paths:
   /tailored-gen/datasets/{id}:
     get:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Get Dataset by ID
       description: >-
         **Description**
@@ -1071,7 +1071,7 @@ paths:
           description: Internal server error.
     put:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Update Dataset
       description: >-
         **Description**
@@ -1228,7 +1228,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Delete Dataset
       description: >-
         **Description**
@@ -1272,7 +1272,7 @@ paths:
   /tailored-gen/datasets/{dataset_id}/images:
     post:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Upload Image to Dataset
       description: >-
         **Description**
@@ -1449,7 +1449,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Get Images
       description: >-
         **Description**
@@ -1529,7 +1529,7 @@ paths:
   /tailored-gen/datasets/{dataset_id}/images/{image_id}:
     get:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Get Image by ID
       description: >-
         **Description**
@@ -1611,7 +1611,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Delete Image
       description: >-
         **Description**
@@ -1673,7 +1673,7 @@ paths:
   /tailored-gen/models:
     post:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Create Model
       description: >-
         **Description**
@@ -1756,7 +1756,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Get Models
       description: >-
         **Description**
@@ -1831,7 +1831,7 @@ paths:
   /tailored-gen/models/{id}:
     get:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Get model by ID
       description: >-
         **Description**
@@ -1901,7 +1901,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Delete model
       description: >-
         **Description**
@@ -1950,7 +1950,7 @@ paths:
   /tailored-gen/models/{id}/start_training:
     post:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Start Training
       description: >-
         **Description**
@@ -2034,7 +2034,7 @@ paths:
   /tailored-gen/models/{id}/stop_training:
     post:
       tags:
-        - Tailored Generation - Coming Soon
+        - Tailored Generation
       summary: Stop Training
       description: >-
         **Description**

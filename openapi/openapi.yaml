@@ -3984,7 +3984,7 @@ paths:
 
 
 
-        3) Get the possible objects for removal using the /info or objects/info endpoint, present them to the user, and allow them to select objects for removal using the object name. Send the id of the selected object to the objects/remove endpoint. Under the example named object, you can see an example of this type of request.
+        3) Get the possible objects for removal using the /info or objects/info endpoint, present them to the user, and allow them to select objects for removal using the object name. Send the id of the selected object to the objects/remove endpoint. Under the example named object, you can see an example of this type of request. Since it covers only very specific elements, rather than all the elements in the image, this method is less recomended than the two above.
 
         
 

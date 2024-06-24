@@ -673,7 +673,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the tailored model you would like to use in the request. Currently, the model id from the /models endpoint isn't supported, if you would like to run a tailored model, please contact us support@bria.ai.
+          description: The model id of the tailored model you would like to use in the request. 
         - in: header
           name: api_token
           schema:

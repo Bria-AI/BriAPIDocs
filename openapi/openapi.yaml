@@ -2085,6 +2085,26 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
+  /{visual_id}/product_cutout:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Product Cutout
+      description: >-
+        **Description**
+
+        Coming Soon
+
+  /{visual_id}/product_packshot:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Product Packshot
+      description: >-
+        **Description**
+
+        Coming Soon
+
   /{visual_id}/product_placement:
     post:
       tags:
@@ -2215,6 +2235,46 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
+  /{visual_id}/env_shot_by_text:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Environmental Shot by Text
+      description: >-
+        **Description**
+
+        Coming Soon
+
+  /{visual_id}/env_shot_by_image:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Environmental Shot by Image
+      description: >-
+        **Description**
+
+        Coming Soon
+
+  /{visual_id}/consistent_prodct_shots:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Consistent Product Shots
+      description: >-
+        **Description**
+
+        Coming Soon
+
+  /{visual_id}/contextua_keyword_extraction:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Contextual Keyword Extraction
+      description: >-
+        **Description**
+
+        Coming Soon
+
   /{visual_id}/campaign_generator:
     post:
       tags:

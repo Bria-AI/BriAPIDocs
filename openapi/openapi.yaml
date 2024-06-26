@@ -2085,7 +2085,7 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
-  /{visual_id}/product_cutout:
+  /product_cutout:
     post:
       tags:
         - E-commerce Solutions
@@ -2095,7 +2095,7 @@ paths:
 
         Coming Soon
 
-  /{visual_id}/product_packshot:
+  /product_packshot:
     post:
       tags:
         - E-commerce Solutions
@@ -2235,7 +2235,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-  /{visual_id}/env_shot_by_text:
+  /env_shot_by_text:
     post:
       tags:
         - E-commerce Solutions
@@ -2245,7 +2245,7 @@ paths:
 
         Coming Soon
 
-  /{visual_id}/env_shot_by_image:
+  /env_shot_by_image:
     post:
       tags:
         - E-commerce Solutions
@@ -2255,7 +2255,7 @@ paths:
 
         Coming Soon
 
-  /{visual_id}/consistent_prodct_shots:
+  /consistent_prodct_shots:
     post:
       tags:
         - E-commerce Solutions
@@ -2265,7 +2265,7 @@ paths:
 
         Coming Soon
 
-  /{visual_id}/contextua_keyword_extraction:
+  /contextua_keyword_extraction:
     post:
       tags:
         - E-commerce Solutions

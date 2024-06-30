@@ -2089,7 +2089,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Product Cutout
+      summary: Product Cutout (Coming Soon)
       description: >-
         **Description**
 
@@ -2103,7 +2103,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Product Packshot
+      summary: Product Packshot (Coming Soon)
       description: >-
         **Description**
 
@@ -2247,7 +2247,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Environmental Shot by Text
+      summary: Environmental Shot by Text (Coming Soon)
       description: >-
         **Description**
 
@@ -2261,7 +2261,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Environmental Shot by Image
+      summary: Environmental Shot by Image (Coming Soon)
       description: >-
         **Description**
 
@@ -2275,7 +2275,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Consistent Product Shots
+      summary: Consistent Product Shots (Coming Soon)
       description: >-
         **Description**
 
@@ -2289,7 +2289,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Contextual Keyword Extraction
+      summary: Contextual Keyword Extraction (Coming Soon)
       description: >-
         **Description**
 

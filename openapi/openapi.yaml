@@ -2085,7 +2085,7 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
-  /product_cutout:
+  /product/cutout:
     post:
       tags:
         - E-commerce Solutions
@@ -2094,11 +2094,12 @@ paths:
         **Description**
 
         Coming Soon
+      operationId: productCutout
       responses:
         '200':
           description: Successful operation.
 
-  /product_packshot:
+  /product/packshot:
     post:
       tags:
         - E-commerce Solutions
@@ -2107,6 +2108,7 @@ paths:
         **Description**
 
         Coming Soon
+      operationId: productPackshot
       responses:
         '200':
           description: Successful operation.
@@ -2241,7 +2243,7 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-  /env_shot_by_text:
+  /product/env_shot_by_text:
     post:
       tags:
         - E-commerce Solutions
@@ -2250,11 +2252,12 @@ paths:
         **Description**
 
         Coming Soon
+      operationId: productEnvShotByText
       responses:
         '200':
           description: Successful operation.
           
-  /env_shot_by_image:
+  /product/env_shot_by_image:
     post:
       tags:
         - E-commerce Solutions
@@ -2263,11 +2266,12 @@ paths:
         **Description**
 
         Coming Soon
+      operationId: productEnvShotByImage
       responses:
         '200':
           description: Successful operation.
           
-  /consistent_prodct_shots:
+  /products/consistent_shots:
     post:
       tags:
         - E-commerce Solutions
@@ -2276,11 +2280,12 @@ paths:
         **Description**
 
         Coming Soon
+      operationId: consistentProductShots
       responses:
         '200':
           description: Successful operation.
           
-  /contextua_keyword_extraction:
+  /product/contextual_keyword_extraction:
     post:
       tags:
         - E-commerce Solutions
@@ -2289,6 +2294,7 @@ paths:
         **Description**
 
         Coming Soon
+      operationId: productContextualKeywordExtraction
       responses:
         '200':
           description: Successful operation.

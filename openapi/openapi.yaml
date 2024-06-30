@@ -2094,6 +2094,9 @@ paths:
         **Description**
 
         Coming Soon
+      responses:
+        '200':
+          description: Successful operation.
 
   /product_packshot:
     post:

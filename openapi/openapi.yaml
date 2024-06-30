@@ -2107,6 +2107,9 @@ paths:
         **Description**
 
         Coming Soon
+      responses:
+        '200':
+          description: Successful operation.
 
   /{visual_id}/product_placement:
     post:
@@ -2247,7 +2250,10 @@ paths:
         **Description**
 
         Coming Soon
-
+      responses:
+        '200':
+          description: Successful operation.
+          
   /env_shot_by_image:
     post:
       tags:
@@ -2257,7 +2263,10 @@ paths:
         **Description**
 
         Coming Soon
-
+      responses:
+        '200':
+          description: Successful operation.
+          
   /consistent_prodct_shots:
     post:
       tags:
@@ -2267,7 +2276,10 @@ paths:
         **Description**
 
         Coming Soon
-
+      responses:
+        '200':
+          description: Successful operation.
+          
   /contextua_keyword_extraction:
     post:
       tags:
@@ -2277,7 +2289,10 @@ paths:
         **Description**
 
         Coming Soon
-
+      responses:
+        '200':
+          description: Successful operation.
+          
   /{visual_id}/campaign_generator:
     post:
       tags:

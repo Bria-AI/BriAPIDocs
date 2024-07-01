@@ -2089,7 +2089,7 @@ paths:
     post:
       tags:
         - E-commerce Solutions
-      summary: Product Cutout (Coming Soon)
+      summary: Product Cutout
       description: >-
         This capability allows to create a cutout of a product, given a product image. This feature is ideal for e-commerce products and apps, serving as a fundamental building block for creating an intuitive and comfortable user interface. 
       operationId: productCutout

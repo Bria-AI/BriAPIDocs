@@ -2085,69 +2085,69 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
-/product/cutout:
-  post:
-    tags:
-      - E-commerce Solutions
-    summary: Product Cutout (Coming Soon)
-    description: >-
-      A product cutout creates a clean image of a product with the background removed and the focus tightly cropped around the product. Ideal for e-commerce products and apps, it reduces manual editing efforts and allows users to combine different products on the same canvas/image.
-    operationId: productCutout
-    parameters:
-      - in: header
-        name: api_token
-        schema:
-          type: string
-        required: true
-        description: API token associated with the organization.
-    requestBody:
-      content:
-        multipart/form-data:
+  /product/cutout:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Product Cutout (Coming Soon)
+      description: >-
+        A product cutout creates a clean image of a product with the background removed and the focus tightly cropped around the product. Ideal for e-commerce products and apps, it reduces manual editing efforts and allows users to combine different products on the same canvas/image.
+      operationId: productCutout
+      parameters:
+        - in: header
+          name: api_token
           schema:
-            type: object
-            properties:
-              sku:
-                type: string
-                description: The Stock Keeping Unit identifier for the product. Optional.
-              image_url:
-                type: string
-                description: The URL of the image containing the product to be cut out. If both image_url and image_file are provided, image_url will be used. Accepted formats: jpeg, jpg, png, webp. Maximum file size: 12MB. Optional.
-              image_file:
-                type: string
-                format: binary
-                description: The image file containing the product to be cut out. This parameter is used if image_url is not provided. Accepted formats: jpeg, jpg, png, webp. Maximum file size: 12MB. Optional.
-          example:
-            sku: "12345"
-            image_url: "https://m.media-amazon.com/images/I/61eo0WHaqzL.jpg"
-    responses:
-      '200':
-        description: Successful operation.
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
         content:
-          application/json:
+          multipart/form-data:
             schema:
               type: object
               properties:
-                result_url:
+                sku:
                   type: string
-                  description: The URL of the processed product cutout image. This is a temporary URL that expires after 1 hour.
+                  description: The Stock Keeping Unit identifier for the product. Optional.
+                image_url:
+                  type: string
+                  description: The URL of the image containing the product to be cut out. If both image_url and image_file are provided, image_url will be used. Accepted formats: jpeg, jpg, png, webp. Maximum file size: 12MB. Optional.
+                image_file:
+                  type: string
+                  format: binary
+                  description: The image file containing the product to be cut out. This parameter is used if image_url is not provided. Accepted formats: jpeg, jpg, png, webp. Maximum file size: 12MB. Optional.
             example:
-              result_url: "https://example.com/processed_image.jpg"
-      '400':
-        description: Bad request.
-      '401':
-        description: Unauthorized. Invalid API key or authentication token.
-      '404':
-        description: Not found. Image could not be found at the provided URL.
-      '415':
-        description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
-      '413':
-        description: Payload too large. Image file size exceeds the 12MB limit.
-      '460':
-        description: Failed to download image.
-      '451':
-        description: Unavailable for legal reasons.
-      '500':
-        description: Internal server error. An error occurred on the server.
+              sku: "12345"
+              image_url: "https://m.media-amazon.com/images/I/61eo0WHaqzL.jpg"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: The URL of the processed product cutout image. This is a temporary URL that expires after 1 hour.
+              example:
+                result_url: "https://example.com/processed_image.jpg"
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
 
 
   /product/packshot:

@@ -57,16 +57,19 @@ info:
       6. Monitor Training: Optionally, you can check the training status to monitor progress.
       7. Generate Images: Once the model is trained, use the `/text-to-image/tailored/{model_id}` route to generate images.
 
+    
     ### E-commerce Solutions
 
-    Bria offers a variety of solutions for products and apps in the e-commerce industry, which allow to enhance product imagery for online stores and product catalogs. These solutions include:
-  
+    Bria offers a variety of solutions for products and apps in the e-commerce industry, which allow to enhance product imagery for online stores and product catalogs. 
+    
+    These solutions include:
+
     - **Product Cutout**: Create clean and professional product cutouts.
     - **Product Packshot**: Generate professional-standard packshots with customizable background colors and optimal product placement.
     - **Lifestyle Shot by Text**: Enrich product images by placing them in various environments using textual descriptions, enhancing appeal and providing context.
     - **Lifestyle Shot by Image**: Generate product images in enriched environments using a reference image for inspiration, allowing for creative and unique presentations.
 
-    
+
     ### Uploading and Modifying Images
 
     **Uploading and Registering Images**:

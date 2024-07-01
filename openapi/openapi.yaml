@@ -2154,13 +2154,68 @@ paths:
         - E-commerce Solutions
       summary: Product Packshot (Coming Soon)
       description: >-
-        **Description**
-
-        Coming Soon
+        The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
       operationId: productPackshot
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                sku:
+                  type: string
+                  description: The Stock Keeping Unit identifier for the product. This parameter is optional.
+                image_url:
+                  type: string
+                  description: The URL of the product image or product cutout. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                image_file:
+                  type: string
+                  format: binary
+                  description: The product image or product cutout file. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                background_color:
+                  type: string
+                  description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background.
+                  default: "#FFFFFF"
+            example:
+              sku: "12345"
+              image_url: "URL"
+              background_color: "#FFFFFF"
       responses:
         '200':
           description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: The URL of the processed product pack shot image. This is a temporary URL that expires after 1 hour.
+              example:
+                result_url: "URL"
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
 
   /{visual_id}/product_placement:
     post:

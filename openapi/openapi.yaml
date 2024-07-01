@@ -2111,12 +2111,14 @@ paths:
                   description: The Stock Keeping Unit identifier for the product. This parameter is optional.
                 image_url:
                   type: string
+                  description: The URL of the image containing the product to be cut out. If both image_url and image_file are provided, image_url will be used. Accepted formats: jpeg, jpg, png, webp. Maximum file size: 12MB.
                 image_file:
                   type: string
                   format: binary
+                  description: text
             example:
               sku: "12345"
-              image_url: "https://m.media-amazon.com/images/I/61eo0WHaqzL.jpg"
+              image_url: "URL"
       responses:
         '200':
           description: Successful operation.

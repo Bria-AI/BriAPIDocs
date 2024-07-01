@@ -2217,14 +2217,266 @@ paths:
         '500':
           description: Internal server error. An error occurred on the server.
 
+  /product/lifestyle_shot_by_text:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Lifestyle Shot by Text (Coming Soon)
+      description: >-
+        Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
+      operationId: productLifestyleShotByText
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sync:
+                  type: boolean
+                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
+                fast:
+                  type: boolean
+                  description: Decide if you would like to use the faster version of the feature that provides the best balance between details and speed or the regular version.
+                  default: true
+                image_url:
+                  type: string
+                  description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                image_file:
+                  type: string
+                  format: binary
+                  description: The product shot file to be placed in a lifestyle shot. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                bg_prompt:
+                  type: string
+                  description: Text description of the new scene or background for the provided product shot. Bria currently supports prompts in English only.
+                refine_prompt:
+                  type: boolean
+                  default: false
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                num_results:
+                  type: integer
+                  default: 1
+                  description: The number of lifestyle product shots you would like to generate. When placement_type is automatic or manual_placement, num_results should be 1. You will get 10 results when automatic and according to the number of required placements if manual_placement.
+                negative_prompt:
+                  type: string
+                  description: This parameter is optional. Bria currently supports prompts in English only.
+                placement_type:
+                  type: string
+                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                  enum: ["original", "automatic", "manual_placement", "manual_padding"]
+                canvas_size:
+                  type: array
+                  items:
+                    type: integer
+                  default: [1000,1000]
+                  description: The desired size of the final product shot. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                manual_placement_selection:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["upper_left", "upper_right", "bottom_left", "bottom_right", "right_center", "left_center", "upper_center", "bottom_center", "center_vertical", "center_horizontal"]
+                  default: ["upper_left"]
+                  description: If you've selected placement_type=manual_placement, you should use this parameter to specify which placements/positions you would like to use from the list. You can select more than one placement in one request.
+                padding_values:
+                  type: array
+                  items:
+                    type: integer
+                  default: [0,0,0,0]
+                  description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
+            example:
+              bg_prompt: "in a living room interior, on a kitchen counter"
+              num_results: 1
+              refine_prompt: true
+              sync: false
+              image_url: "URL"
+              fast: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      type: array
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                example:
+                  result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
+         
+  /product/lifestyle_shot_by_image:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Lifestyle Shot by Image (Coming Soon)
+      description: >-
+        Generates product images in enriched environments using a reference image for inspiration. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
+      operationId: productLifestyleShotByImage
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sync:
+                  type: boolean
+                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
+                fast:
+                  type: boolean
+                  description: Decide if you would like to use the faster version of the feature that provides the best balance between details and speed or the regular version.
+                  default: true
+                image_url:
+                  type: string
+                  description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                image_file:
+                  type: string
+                  format: binary
+                  description: The product shot file to be placed in a lifestyle shot. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                reference_image_url:
+                  type: string
+                  description: The URL of the reference image to be used for generating the lifestyle shot. If both reference_image_url and reference_image_file are provided, reference_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                reference_image_file:
+                  type: string
+                  format: binary
+                  description: The reference image file to be used for generating the lifestyle shot. Used if reference_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                num_results:
+                  type: integer
+                  default: 1
+                  description: The number of lifestyle product shots you would like to generate. When placement_type is automatic or manual_placement, num_results should be 1. You will get 10 results when automatic and according to the number of required placements if manual_placement.
+                placement_type:
+                  type: string
+                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                  enum: ["original", "automatic", "manual_placement", "manual_padding"]
+                canvas_size:
+                  type: array
+                  items:
+                    type: integer
+                  default: [1000,1000]
+                  description: The desired size of the final product shot. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                manual_placement_selection:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["upper_left", "upper_right", "bottom_left", "bottom_right", "right_center", "left_center", "upper_center", "bottom_center", "center_vertical", "center_horizontal"]
+                  default: ["upper_left"]
+                  description: If you've selected placement_type=manual_placement, you should use this parameter to specify which placements/positions you would like to use from the list. You can select more than one placement in one request.
+                padding_values:
+                  type: array
+                  items:
+                    type: integer
+                  default: [0,0,0,0]
+                  description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
+            example:
+              num_results: 1
+              sync: false
+              image_url: "URL"
+              reference_image_url: "REFERENCE_URL"
+              fast: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      type: array
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                example:
+                  result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
+          
+  /products/consistent_shots:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Consistent Product Shots (Coming Soon)
+      description: >-
+        **Description**
+
+        This feature allows users to create consistent product shots by providing either a textual description of a scene or an image, along with a group of product images. The resulting consistent product shots are ideal for use on social media, e-commerce websites, product catalogs, and other marketing materials, ensuring a uniform and professional appearance across all platforms.
+
+      operationId: consistentProductShots
+      responses:
+        '200':
+          description: Successful operation.
+          
+  /product/contextual_keyword_extraction:
+    post:
+      tags:
+        - E-commerce Solutions
+      summary: Contextual Keyword Extraction (Coming Soon)
+      description: >-
+        **Description**
+
+        This feature allows users to extract relevant keywords from an image and its context, focusing on the primary product rather than secondary elements. This capability enhances search optimization in e-commerce by ensuring that the keywords accurately represent the product being sold. It can be particularly useful for improving product searchability on e-commerce websites, enhancing SEO for product listings, automating content management, and optimizing social media marketing efforts.
+
+      operationId: productContextualKeywordExtraction
+      responses:
+        '200':
+          description: Successful operation.
   /{visual_id}/product_placement:
     post:
       tags:
         - E-commerce Solutions
-      summary: Product Placement
+      summary: Product Placement (Soon to be Deprecated)
       description: >-
         **Description**
   
+        This route will be deprecated on 25/07/2024.
+        
+        
         The *Product Placement Route* is used to replace the background of a previously uploaded product image with a generated background. This endpoint is specifically tailored for product images, such as those used in consumer packaged goods (CPGs) and e-commerce.
 
   
@@ -2347,61 +2599,6 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-  /product/env_shot_by_text:
-    post:
-      tags:
-        - E-commerce Solutions
-      summary: Environmental Shot by Text (Coming Soon)
-      description: >-
-        **Description**
-
-        Coming Soon
-      operationId: productEnvShotByText
-      responses:
-        '200':
-          description: Successful operation.
-          
-  /product/env_shot_by_image:
-    post:
-      tags:
-        - E-commerce Solutions
-      summary: Environmental Shot by Image (Coming Soon)
-      description: >-
-        **Description**
-
-        Coming Soon
-      operationId: productEnvShotByImage
-      responses:
-        '200':
-          description: Successful operation.
-          
-  /products/consistent_shots:
-    post:
-      tags:
-        - E-commerce Solutions
-      summary: Consistent Product Shots (Coming Soon)
-      description: >-
-        **Description**
-
-        Coming Soon
-      operationId: consistentProductShots
-      responses:
-        '200':
-          description: Successful operation.
-          
-  /product/contextual_keyword_extraction:
-    post:
-      tags:
-        - E-commerce Solutions
-      summary: Contextual Keyword Extraction (Coming Soon)
-      description: >-
-        **Description**
-
-        Coming Soon
-      operationId: productContextualKeywordExtraction
-      responses:
-        '200':
-          description: Successful operation.
           
   /{visual_id}/campaign_generator:
     post:

@@ -2085,7 +2085,6 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
-          
   /product/cutout:
     post:
       tags:

@@ -2100,6 +2100,23 @@ paths:
             type: string
           required: true
           description: API token associated with the organization
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                sku:
+                  type: string
+                  description: The Stock Keeping Unit identifier for the product. This parameter is optional.
+                image_url:
+                  type: string
+                image_file:
+                  type: string
+                  format: binary
+            example:
+              sku: "12345"
+              image_url: "https://m.media-amazon.com/images/I/61eo0WHaqzL.jpg"
       responses:
         '200':
           description: Successful operation.

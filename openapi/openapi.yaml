@@ -2091,7 +2091,7 @@ paths:
         - E-commerce Solutions
       summary: Product Cutout (Coming Soon)
       description: >-
-        A product cutout creates a clean image of a product with the background removed and the focus tightly cropped around the product. Ideal for e-commerce products and apps, it reduces manual editing efforts and allows users to combine different products on the same canvas/image.
+        This capability allows to create a cutout of a product, given a product image. This feature is ideal for e-commerce products and apps, serving as a fundamental building block for creating an intuitive and comfortable user interface. 
       operationId: productCutout
       parameters:
         - in: header

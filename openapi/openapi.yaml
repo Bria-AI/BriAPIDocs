@@ -2262,6 +2262,9 @@ paths:
             schema:
               type: object
               properties:
+                sku:
+                  type: string
+                  description: The Stock Keeping Unit identifier for the product. This parameter is optional.
                 sync:
                   type: boolean
                   default: false
@@ -2370,6 +2373,9 @@ paths:
             schema:
               type: object
               properties:
+                sku:
+                  type: string
+                  description: The Stock Keeping Unit identifier for the product. This parameter is optional.
                 sync:
                   type: boolean
                   default: false

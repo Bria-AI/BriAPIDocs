@@ -2136,7 +2136,7 @@ paths:
                 image_url:
                   type: string
                   description: The URL of the image containing the product to be cut out. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                image_file:
+                file:
                   type: string
                   format: binary
                   description: The image file containing the product to be cut out. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
@@ -2199,7 +2199,7 @@ paths:
                 image_url:
                   type: string
                   description: The URL of the product image or product cutout. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                image_file:
+                file:
                   type: string
                   format: binary
                   description: The product image or product cutout file. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
@@ -2266,41 +2266,37 @@ paths:
                   type: boolean
                   default: false
                   description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
-                fast:
-                  type: boolean
-                  description: Decide if you would like to use the faster version of the feature that provides the best balance between details and speed or the regular version.
-                  default: true
                 image_url:
                   type: string
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                image_file:
+                file:
                   type: string
                   format: binary
                   description: The product shot file to be placed in a lifestyle shot. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                bg_prompt:
+                scene_description:
                   type: string
                   description: Text description of the new scene or background for the provided product shot. Bria currently supports prompts in English only.
-                refine_prompt:
+                optimize_description:
                   type: boolean
                   default: false
-                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the scene_description that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
                   default: 1
                   description: The number of lifestyle product shots you would like to generate. When placement_type is automatic or manual_placement, num_results should be 1. You will get 10 results when automatic and according to the number of required placements if manual_placement.
-                negative_prompt:
+                exclude_elements:
                   type: string
-                  description: This parameter is optional. Bria currently supports prompts in English only.
+                  description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only.
                 placement_type:
                   type: string
                   description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
                   enum: ["original", "automatic", "manual_placement", "manual_padding"]
-                canvas_size:
+                shot_size:
                   type: array
                   items:
                     type: integer
                   default: [1000,1000]
-                  description: The desired size of the final product shot. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                  description: The desired size of the final product shot. For optimal results, the total number of pixels should be around 1,000,000. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
                 manual_placement_selection:
                   type: array
                   items:
@@ -2313,7 +2309,7 @@ paths:
                   items:
                     type: integer
                   default: [0,0,0,0]
-                  description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
+                  description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
             example:
               bg_prompt: "in a living room interior, on a kitchen counter"
               num_results: 1
@@ -2378,14 +2374,10 @@ paths:
                   type: boolean
                   default: false
                   description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
-                fast:
-                  type: boolean
-                  description: Decide if you would like to use the faster version of the feature that provides the best balance between details and speed or the regular version.
-                  default: true
                 image_url:
                   type: string
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                image_file:
+                file:
                   type: string
                   format: binary
                   description: The product shot file to be placed in a lifestyle shot. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
@@ -2404,12 +2396,12 @@ paths:
                   type: string
                   description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
                   enum: ["original", "automatic", "manual_placement", "manual_padding"]
-                canvas_size:
+                shot_size:
                   type: array
                   items:
                     type: integer
                   default: [1000,1000]
-                  description: The desired size of the final product shot. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                  description: The desired size of the final product shot. For optimal results, the total number of pixels should be around 1,000,000. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
                 manual_placement_selection:
                   type: array
                   items:
@@ -2422,7 +2414,7 @@ paths:
                   items:
                     type: integer
                   default: [0,0,0,0]
-                  description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
+                  description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
             example:
               num_results: 1
               sync: false

@@ -1791,12 +1791,6 @@ paths:
             type: string
           required: true
           description: API token associated with the organization.
-        - in: query
-          name: dataset_id
-          schema:
-            type: integer
-            description: Filter models by dataset ID.
-            example: 123
       responses:
         '200':
           description: Successful operation.

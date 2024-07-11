@@ -4461,16 +4461,6 @@ paths:
                         type: string
                         enum: ["manual","generated"]
                         description: This parameter is only relevant, if a mask_url or mask_id were used. If the mask was created using a brush (free-hand) then use the option 'manual'. If the mask was the output from the route /objects/mask_generator, use the option 'generated'.
-                      positive_points:
-                        type: array
-                        items:
-                          type: integer
-                        description: A point in the image, that represents an object that should be removed. Based on this point a mask will be created and used in order to remove the required area. If you include a mask or an id, there is no need to use this parameter.
-                      size:
-                        type: array
-                        items:
-                          type: integer
-                        description: This parameter is only relevant if this object in the array includes the parameter positive_points. Please specify the size in px of the provided image.
                       actions:
                         type: object
                         description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.

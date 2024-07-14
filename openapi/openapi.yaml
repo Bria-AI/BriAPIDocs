@@ -58,7 +58,7 @@ info:
       7. Generate Images: Once the model is trained, use the `/text-to-image/tailored/{model_id}` route to generate images.
 
     
-    ### E-commerce Solutions
+    ### E-commerce Suite
 
     Bria offers a variety of solutions for products and apps in the e-commerce industry, which allow to enhance product imagery for online stores and product catalogs. 
     
@@ -2106,7 +2106,7 @@ paths:
   /product/cutout:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Product Cutout
       description: >-
         This capability allows to create a cutout of a product, given a product image. This feature is ideal for e-commerce products and apps, serving as a fundamental building block for creating an intuitive and comfortable user interface. 
@@ -2169,7 +2169,7 @@ paths:
   /product/packshot:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Product Packshot (Coming Soon)
       description: >-
         The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
@@ -2238,7 +2238,7 @@ paths:
   /product/lifestyle_shot_by_text:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Lifestyle Shot by Text (Coming Soon)
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
@@ -2349,7 +2349,7 @@ paths:
   /product/lifestyle_shot_by_image:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Lifestyle Shot by Image (Coming Soon)
       description: >-
         Generates product images in enriched environments using a reference image for inspiration. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
@@ -2456,7 +2456,7 @@ paths:
   /products/consistent_shots:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Consistent Product Shots (Coming Soon)
       description: >-
         **Description**
@@ -2485,7 +2485,7 @@ paths:
   /{visual_id}/product_placement:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Product Placement (Soon to be Deprecated)
       description: >-
         **Description**

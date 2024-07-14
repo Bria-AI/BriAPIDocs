@@ -2471,7 +2471,7 @@ paths:
   /product/contextual_keyword_extraction:
     post:
       tags:
-        - E-commerce Solutions
+        - E-commerce Suite
       summary: Contextual Keyword Extraction (Coming Soon)
       description: >-
         **Description**

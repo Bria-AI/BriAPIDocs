@@ -2170,7 +2170,7 @@ paths:
     post:
       tags:
         - E-commerce Suite
-      summary: Product Packshot (Coming Soon)
+      summary: Product Packshot
       description: >-
         The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
       operationId: productPackshot

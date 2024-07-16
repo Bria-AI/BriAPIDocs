@@ -70,10 +70,10 @@ info:
     - **Product Packshot**: Generate professional-standard packshots with customizable background colors and optimal product placement.
 
     
-    - **Lifestyle Shot by Text**: Enrich product images by placing them in various environments using textual descriptions, enhancing appeal and providing context.
+    - **Lifestyle Product Shot by Text**: Enrich product images by placing them in various environments using textual descriptions, enhancing appeal and providing context.
 
     
-    - **Lifestyle Shot by Image**: Generate product images in enriched environments using a reference image for inspiration, allowing for creative and unique presentations.
+    - **Lifestyle Product Shot by Image**: Generate product images in enriched environments using a reference image for inspiration, allowing for creative and unique presentations.
 
     
 
@@ -2239,7 +2239,7 @@ paths:
     post:
       tags:
         - E-commerce Suite
-      summary: Lifestyle Shot by Text (Coming Soon)
+      summary: Lifestyle Product Shot by Text (Coming Soon)
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
       operationId: productLifestyleShotByText
@@ -2268,8 +2268,7 @@ paths:
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
                   type: string
-                  format: binary
-                  description: The product shot file to be placed in a lifestyle shot. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The product shot file to be placed in a lifestyle shot, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 scene_description:
                   type: string
                   description: Text description of the new scene or background for the provided product shot. Bria currently supports prompts in English only.
@@ -2350,7 +2349,7 @@ paths:
     post:
       tags:
         - E-commerce Suite
-      summary: Lifestyle Shot by Image (Coming Soon)
+      summary: Lifestyle Product Shot by Image (Coming Soon)
       description: >-
         Generates product images in enriched environments using a reference image for inspiration. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
       operationId: productLifestyleShotByImage
@@ -2380,14 +2379,14 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: The product shot file to be placed in a lifestyle shot. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The product shot file to be placed in a lifestyle shot, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 reference_image_url:
                   type: string
                   description: The URL of the reference image to be used for generating the lifestyle shot. If both reference_image_url and reference_image_file are provided, reference_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 reference_image_file:
                   type: string
                   format: binary
-                  description: The reference image file to be used for generating the lifestyle shot. Used if reference_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The reference image file to be used for generating the lifestyle shot, in base64 format. Used if reference_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 num_results:
                   type: integer
                   default: 1

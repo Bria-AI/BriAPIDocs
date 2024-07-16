@@ -2120,7 +2120,7 @@ paths:
           description: API token associated with the organization
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: object
               properties:
@@ -2133,7 +2133,7 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: The image file containing the product to be cut out. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The image file containing the product to be cut out, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
             example:
               sku: "12345"
               image_url: "URL"
@@ -2183,7 +2183,7 @@ paths:
           description: API token associated with the organization.
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               type: object
               properties:
@@ -2196,7 +2196,7 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: The product image or product cutout file. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 background_color:
                   type: string
                   description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background.

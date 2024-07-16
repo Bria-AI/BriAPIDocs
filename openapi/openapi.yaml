@@ -2263,7 +2263,11 @@ paths:
                   type: boolean
                   default: false
                   description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
-                image_url:
+                fast: 
+                  type: boolean
+                  default: false
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. The false, the regular mode will be utilized, which provides optimal quality. 
+                image_url:   
                   type: string
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
@@ -2307,9 +2311,9 @@ paths:
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [top, bottom, left, right]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
             example:
-              bg_prompt: "in a living room interior, on a kitchen counter"
+              scene_description: "in a living room interior, on a kitchen counter"
               num_results: 1
-              refine_prompt: true
+              optimize_description: true
               sync: false
               image_url: "URL"
               fast: true

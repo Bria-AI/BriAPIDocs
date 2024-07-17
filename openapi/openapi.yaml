@@ -2243,7 +2243,7 @@ paths:
     post:
       tags:
         - E-commerce Suite
-      summary: Lifestyle Product Shot by Text (Coming Soon)
+      summary: Lifestyle Product Shot by Text
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
 

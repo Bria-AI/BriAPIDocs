@@ -2275,7 +2275,7 @@ paths:
                 fast: 
                   type: boolean
                   default: false
-                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. The false, the regular mode will be utilized, which provides optimal quality. 
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. The false, the regular mode will be utilized. 
                 image_url:   
                   type: string
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
@@ -2292,7 +2292,7 @@ paths:
                 num_results:
                   type: integer
                   default: 1
-                  description: The number of lifestyle product shots you would like to generate. When placement_type is automatic or manual_placement, num_results should be 1. You will get 10 results when automatic and according to the number of required placements if manual_placement.
+                  description: The number of lifestyle product shots you would like to generate. You will get num_results*10 results when placement_type=automatic and according to the number of required placements*num_results if placement_type=manual_placement.
                 exclude_elements:
                   type: string
                   description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only.
@@ -4684,6 +4684,129 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.  
+  /background/replace:
+    post:
+      tags:
+        - Background
+      summary: Generate Background - Isolated
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Replace BG Route* is used to replace the background of any image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). 
+
+        We offer a fast version of this feature, powered by Bria 2.3 Fast LoRA (<a href="https://huggingface.co/briaai/BRIA-2.3-FAST-LORA" target="_blank">model card on Hugging Face</a>), which provides an optimal balance between speed and quality.
+        
+        This endpoint also supports solid colors - you can take a color code and use it in the prompt.        
+        
+        Here are some examples:
+        
+        
+        **original image**: 
+        
+        
+        <img src="https://i.ibb.co/n6JtktM/unnamed-13.jpg" width="200"/>
+        
+        
+        **bg_prompt**: in a parking lot
+                
+        
+        **num_results**: 3
+        
+        
+        **results**:
+        
+        
+        <img src="https://i.ibb.co/1zvT5h4/unnamed-14.jpg" width="200"/> <img src="https://i.ibb.co/MkVDxc8/unnamed-15.jpg" width="200"/>
+        <img src="https://i.ibb.co/pfgQ34p/unnamed-16.jpg" width="200"/> 
+        
+      operationId: isolated_background/replace
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sync:
+                  type: boolean
+                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. 
+                fast: 
+                  type: boolean
+                  default: false
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized.
+                image_url:   
+                  type: string
+                  description: The URL of the image to which a new background should be generated. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The product of the image to which a new background should be generated, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                bg_prompt:
+                  type: string
+                  description: Text description of the new scene or background for the provided image. Bria currently supports prompts in English only.
+                refine_prompt:
+                  type: boolean
+                  default: false
+                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                num_results:
+                  type: integer
+                  default: 1
+                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
+                negative_prompt:
+                  type: string
+                  description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only.
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+            example:
+              bg_prompt: "in a living room interior, on a kitchen counter"
+              num_results: 1
+              refine_prompt: true
+              sync: false
+              image_url: "URL"
+              fast: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: array
+                    items:
+                      type: array
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                example:
+                  result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
+        
   /{visual_id}/replace_bg:
     post:
       tags:
@@ -4696,7 +4819,9 @@ paths:
 
 
 
-        The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). This new version offers higher-quality backgrounds and more precise control compared to the previous BRIA 1.4-based model.
+        The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). 
+
+        We offer a fast version of this feature, powered by Bria 2.3 Fast LoRA (<a href="https://huggingface.co/briaai/BRIA-2.3-FAST-LORA" target="_blank">model card on Hugging Face</a>), which provides an optimal balance between speed and quality.
         
         This endpoint also supports solid colors - you can take a color code and use it in the prompt.
 
@@ -4754,7 +4879,11 @@ paths:
                 sync:
                   type: boolean
                   default: false
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. When generating 1-2 results, you can use the value true. When generating 3-4 results, you should use the value false.
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false.
+                fast: 
+                  type: boolean
+                  default: false
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized.
                 sid:
                   type: string
                   description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
@@ -4775,7 +4904,6 @@ paths:
                   description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
                 seed:
                   type: integer
-                  example: 
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 negative_prompt:
                   type: string
@@ -4784,7 +4912,8 @@ paths:
                 bg_prompt: "in a parking lot"
                 num_results: 1
                 refine_prompt: true
-                sync: true
+                sync: false
+                fast: true
       responses:
         '200':
           description: Successful operation.

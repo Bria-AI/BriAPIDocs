@@ -2110,6 +2110,7 @@ paths:
       summary: Product Cutout
       description: >
         This capability allows you to create a precise cutout of a product from any given image. This feature is especially valuable for e-commerce platforms and applications, serving as a fundamental building block for crafting a user-friendly interface. 
+
         
         The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
       operationId: productCutout
@@ -2175,6 +2176,7 @@ paths:
       summary: Product Packshot
       description: >-
         The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
+
 
         The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
       operationId: productPackshot
@@ -2246,6 +2248,7 @@ paths:
       summary: Lifestyle Product Shot by Text
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
+
 
         The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
       operationId: productLifestyleShotByText

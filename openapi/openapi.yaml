@@ -2792,19 +2792,6 @@ paths:
         Store the visual_id in your database and map it to your image identification method for easy reference
 
 
-        **Bria generative Web tool**
-
-
-        The registered visual can be seen and used in the Bria generative web tool
-        in cases where the tool is licensed as part of the project.
-
-
-        To do so, the user can access the following url:
-        ```https://labs.bria.ai/gallery/{visual_id}```, where the *{visual_id}*
-        comes from the response of the */upload route*.
-
-
-
         **Constraints**
 
 

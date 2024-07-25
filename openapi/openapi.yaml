@@ -14,6 +14,9 @@ info:
     - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
 
     
+    - **Generate Vector Illustrations Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
+
+
     - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
 
 

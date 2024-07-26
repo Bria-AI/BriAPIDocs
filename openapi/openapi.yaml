@@ -17,7 +17,7 @@ info:
     - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
 
 
-    - **Generate Vector Illustrations (beta)**: Use the base and tailored text-to-vector features to create versatile, editable vector illustrations from text prompts.
+    - **Generate Vector Illustrations (beta)**: Use the base and tailored text-to-vector API endpoints to create versatile, editable vector illustrations from text prompts.
 
 
     - **Enhance Product Imagery with E-commerce Solutions**: Use specialized features to create professional product shots, packshots, and lifestyle images for e-commerce platforms.
@@ -206,15 +206,15 @@ paths:
         **Text-to-Vector illustration:**
 
 
-        The Text-to-Vector illustration API allows developers to offer users the ability to generate high-quality, editable vector illustration assets from text prompts at scale.
-        To use it, simply send a requrest in this route and set the 'format' into 'svg'.
+        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
 
 
         **Examples:**
-        **prompt**: A beautiful butterfly
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="200" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="200" height="200" title="vector illustration after being re-colored"/>
 
-        **prompt**: A sticker of a cute kitten
+
+        **prompt**: A beautiful butterfly
+         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="200" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="200" height="200" title="the same illustration after being re-colored in a vector editor"/>
+
         **prompt**: A sticker of a cute kitten
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
 
@@ -404,22 +404,21 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
-        **Text-to-Vector illustration (beta):**
+        
+        **Text-to-Vector illustration:**
 
 
-        The Text-to-Vector illustration API allows developers to offer users the ability to generate high-quality, editable vector illustration assets from text prompts at scale.
-        To use it, simply send a requrest in this route and set the 'format' into 'svg'.
+        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
 
 
         **Examples:**
 
 
         **prompt**: A beautiful butterfly
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="200" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="200" height="200" title="vector illustration after being re-colored"/>
+         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="200" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="200" height="200" title="the same illustration after being re-colored in a vector editor"/>
 
         **prompt**: A sticker of a cute kitten
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
-
 
       operationId: /text-to-image/fast
       parameters:
@@ -722,6 +721,9 @@ paths:
            - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
            - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
 
+        4. **Custom Vector Illustrations (beta)**:  Generate high-quality, editable vector illustration assets from text prompts, in your unique model style.
+            - **Generate vector illustrations**: Use the `/text-to-image/tailored/{model_id}` endpoint and set the `format` parameter to 'svg'.
+
         ### Training a Tailored Model
 
         To train a tailored model via the API:
@@ -734,15 +736,6 @@ paths:
         7. **Generate Images**: Once the model is trained, use this route to generate images.
 
         Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
-
-        **Text-to-Vector illustration (beta):**
-
-
-        The Text-to-Vector illustration feature allows developers to offer users the ability to generate high-quality, editable vector illustration assets from text prompts at scale.
-        Combined with a tailored model it allows users to create beautiful vector illustrations in their own unique style.
-
-        
-        To use it, simply send a requrest in this route and set the 'format' into 'svg'.
 
       operationId: /text-to-image/tailored
       parameters:

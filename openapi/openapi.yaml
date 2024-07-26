@@ -203,7 +203,7 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
            
 
-        **Text-to-Vector illustration:**
+        **Text-to-Vector illustration (beta):**
 
 
         The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
@@ -405,7 +405,7 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
         
-        **Text-to-Vector illustration:**
+        **Text-to-Vector illustration (beta):**
 
 
         The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.

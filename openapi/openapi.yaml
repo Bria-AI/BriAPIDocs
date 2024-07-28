@@ -213,9 +213,11 @@ paths:
 
 
         **prompt**: A beautiful butterfly
+
          <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="200" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="200" height="200" title="the same illustration after being re-colored in a vector editor"/>
 
         **prompt**: A sticker of a cute kitten
+
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
 
 
@@ -415,9 +417,11 @@ paths:
 
 
         **prompt**: A beautiful butterfly
+
          <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="200" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="200" height="200" title="the same illustration after being re-colored in a vector editor"/>
 
         **prompt**: A sticker of a cute kitten
+        
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
 
       operationId: /text-to-image/fast

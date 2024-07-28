@@ -268,7 +268,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 format:
                   type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' if you prefer a pixel-based image.
+                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
                   default: 'png'
                 negative_prompt:
                   type: string
@@ -474,7 +474,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 format:
                   type: string
-                  description: Select 'svg' to generate vector illustrations using our text-to-vector engine, ideal for scalable and editable outputs. Choose 'png' if you prefer a pixel-based image.
+                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
                   default: 'png'
                 steps_num:
                   type: integer
@@ -790,7 +790,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 format:
                   type: string
-                  description: Select 'svg' to generate vector illustrations using our text-to-vector engine, ideal for scalable and editable outputs. Choose 'png' if you prefer a pixel-based image.
+                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
                   default: 'png'
                 steps_num:
                   type: integer

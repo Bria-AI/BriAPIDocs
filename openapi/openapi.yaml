@@ -17,7 +17,7 @@ info:
     - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
 
 
-    - **Generate Vector Illustrations (beta)**: Use the base and tailored text-to-vector API endpoints to create versatile, editable vector illustrations from text prompts.
+    - **Generate Vector Illustrations (beta)**: Use the base and tailored models API endpoints to create versatile, editable vector illustrations from text prompts.
 
 
     - **Enhance Product Imagery with E-commerce Solutions**: Use specialized features to create professional product shots, packshots, and lifestyle images for e-commerce platforms.

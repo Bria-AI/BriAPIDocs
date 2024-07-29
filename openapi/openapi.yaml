@@ -5471,7 +5471,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Search by test
+      summary: Search by text
       description: >-
         **Description**
       

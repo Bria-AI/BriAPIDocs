@@ -5051,6 +5051,12 @@ paths:
         
         
         This route returns both the URL and the sid associated with the updated image.
+
+
+        **Additional Guidance on Parameters:**
+
+        
+        To avoid errors, ensure that the combination of original_image_size and original_image_location leaves adequate empty space on the canvas_size for the intended expansion. The empty space is crucial for the generation process, and failing to provide it will result in an error.
       
       operationId: image_expansion
       parameters:
@@ -5077,17 +5083,17 @@ paths:
                   items:
                     type: integer
                   default: [1000,1000]
-                  description: The desired size of the final image, after the expansion. should have an area of less than 5000x5000 pixels.
+                  description: Specifies the dimensions of the final image canvas after expansion. The total area must not exceed 5000x5000 pixels. This canvas size should accommodate both the original image and the necessary empty space for the expansion.
                 original_image_size:
                   type: array
                   items:
                     type: integer
-                  description: The desired size of the original image, inside the full canvas. Should be over 15% of the canvas area.
+                  description: Sets the dimensions of the original image within the canvas. This size must constitute at least 15% of the canvas area. Ensure that the dimensions also allow for adequate empty space around the original image for the expansion.
                 original_image_location:
                   type: array
                   items:
                     type: integer
-                  description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
+                  description: Defines the location of the upper-left corner of the original image within the canvas. This location can extend outside the canvas boundaries, causing the original image to be cropped. Ensure the placement allows sufficient empty space on the canvas for expansion.
                 prompt:
                   type: string
                   description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only.
@@ -5138,6 +5144,18 @@ paths:
                     description: The request status. The options are SUCCESS, NSFW.
         '400':
           description: Bad request.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message.
+              examples:
+                expansion_space_error:
+                  value:
+                    error: "The current request parameters do not leave enough space for expansion. Please adjust the size or location of the original image, or modify the canvas size."
         '404':
           description: Specified Image does not exist.
         '405':

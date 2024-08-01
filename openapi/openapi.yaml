@@ -17,7 +17,7 @@ info:
     - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
 
 
-    - **Generate Vector Illustrations (beta)**: Use the base and tailored models API endpoints to create versatile, editable vector illustrations from text prompts.
+    - **Generate Vector Graphics (beta)**: Use the base and tailored models API endpoints to create versatile, editable vector graphics from text prompts.
 
 
     - **Enhance Product Imagery with E-commerce Solutions**: Use specialized features to create professional product shots, packshots, and lifestyle images for e-commerce platforms.
@@ -203,26 +203,6 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
            
 
-        **Text-to-Vector illustration (beta):**
-
-
-        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
-
-
-        **Examples:**
-
-
-        **prompt**: A beautiful butterfly
-
-
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
-
-
-        **prompt**: A sticker of a cute kitten
-
-
-        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
-
 
       operationId: /text-to-image/base
       parameters:
@@ -266,10 +246,6 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                format:
-                  type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
-                  default: 'png'
                 negative_prompt:
                   type: string
                   description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
@@ -409,26 +385,6 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
-        
-        **Text-to-Vector illustration (beta):**
-
-
-        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
-
-
-        **Examples:**
-
-
-        **prompt**: A beautiful butterfly
-
-
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
-
-
-        **prompt**: A sticker of a cute kitten
-        
-
-        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
 
       operationId: /text-to-image/fast
       parameters:
@@ -472,10 +428,6 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                format:
-                  type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
-                  default: 'png'
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
@@ -731,9 +683,6 @@ paths:
            - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
            - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
 
-        4. **Custom Vector Illustrations (beta)**:  Generate high-quality, editable vector illustration assets from text prompts, in your unique model style.
-            - **Generate vector illustrations**: Use the `/text-to-image/tailored/{model_id}` endpoint and set the `format` parameter to 'svg'.
-
         ### Training a Tailored Model
 
         To train a tailored model via the API:
@@ -788,10 +737,6 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                format:
-                  type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
-                  default: 'png'
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.

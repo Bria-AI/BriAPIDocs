@@ -2164,6 +2164,567 @@ paths:
                     error: "Model is not currently in training."
         '500':
           description: Internal server error.
+  /text-to-vector/base/{model_version}:
+    post:
+      tags:
+        - Vector Graphics
+      summary: Generate Image - Base model
+      description: >-
+
+
+        **Description**
+        
+
+        The /text-to-image/base Route empowers users to create stunning images directly from textual prompts. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
+
+
+        **Advanced Customization and Access:**
+
+
+        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as <a href="https://huggingface.co/briaai/BRIA-2.3-FAST-LORA" target="_blank">Bria 2.3 Fast LoRA</a> and ControlNets: <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
+
+
+        **Examples:**
+
+
+        **prompt**: A professional headshot of a CEO
+
+
+        **BRIA BASE model 2.3:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/>
+
+
+        **prompt**: A vaporwave detailed illustration of a street in London in pastel hues, under a Union Jack sky
+
+
+        **BRIA BASE model 2.3:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(478).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(479).png" width="200" height="200"/>
+
+
+        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+
+
+        **BRIA BASE model 2.3:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
+           
+
+        **Text-to-Vector illustration (beta):**
+
+
+        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
+
+
+        **Examples:**
+
+
+        **prompt**: A beautiful butterfly
+
+
+         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
+
+
+        **prompt**: A sticker of a cute kitten
+
+
+        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
+
+
+      operationId: /text-to-image/base
+      parameters:
+        - in: path
+          name: model_version
+          schema:
+            type: string
+            enum: ["2.3"]
+          required: true
+          description: The model version you would like to use in the request. 
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate.
+                  minimum: 1
+                  default: 4
+                  maximum: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                sync:
+                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  default: false
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                format:
+                  type: string
+                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
+                  default: 'png'
+                negative_prompt:
+                  type: string
+                  description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  minimum: 20
+                  default: 30
+                  maximum: 50
+                text_guidance_scale:
+                  type: number
+                  format: float
+                  description: Determines how closely the generated image should adhere to the input text description. This parameter is optional.
+                  minimum: 1.0
+                  maximum: 10.0
+                  default: 5.0
+                medium:
+                  type: string
+                  enum: ['photography','art']
+                  description: Which medium should be included in your generated images. This parameter is optional.
+                prompt_enhancement:
+                  type: boolean
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time. Built with Meta Llama 3.
+                  default: false
+            examples:
+              valid prompt:
+                value:
+                  prompt: "a baby riding a bicycle in a field of flowers"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
+        '209':
+          description: Successful operation, a model version that is no longer available was requested. The request was redirected to the latest model version. 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+  /text-to-vector/fast/{model_version}:
+    post:
+      tags:
+        - Vector Graphics
+      summary: Generate Image - fast model 
+      description: >-
+
+
+        **Description**
+        
+
+        The /text-to-image/fast Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs. 
+        Ideal for applications requiring quick turnaround without sacrificing image fidelity.
+
+
+        **Advanced Customization and Access:**
+
+
+        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
+
+
+        **An example:**
+
+
+        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+
+
+        **BRIA FAST model 2.3:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
+
+        
+        **Text-to-Vector illustration (beta):**
+
+
+        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
+
+
+        **Examples:**
+
+
+        **prompt**: A beautiful butterfly
+
+
+         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
+
+
+        **prompt**: A sticker of a cute kitten
+        
+
+        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
+
+      operationId: /text-to-image/fast
+      parameters:
+        - in: path
+          name: model_version
+          schema:
+            type: string
+            enum: ["2.3"]
+          required: true
+          description: The model version you would like to use in the request. 
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. 
+                  minimum: 1
+                  maximum: 4
+                  default: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                sync:
+                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  default: false
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                format:
+                  type: string
+                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
+                  default: 'png'
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  minimum: 4
+                  maximum: 10
+                  default: 8
+                medium:
+                  type: string
+                  enum: ['photography','art']
+                  description: Which medium should be included in your generated images. This parameter is optional.
+                prompt_enhancement:
+                  type: boolean
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
+                  default: false
+            examples:
+              valid prompt:
+                value:
+                  prompt: "a baby riding a bicycle in a field of flowers"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+  /text-to-vector/tailored/{model_id}:
+    post:
+      tags:
+        - Vector Graphics
+      summary: Generate Image - fast model 
+      description: >-
+
+
+        **Description**
+        
+
+        The /text-to-image/fast Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs. 
+        Ideal for applications requiring quick turnaround without sacrificing image fidelity.
+
+
+        **Advanced Customization and Access:**
+
+
+        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
+
+
+        **An example:**
+
+
+        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+
+
+        **BRIA FAST model 2.3:**
+        
+        
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
+        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
+
+        
+        **Text-to-Vector illustration (beta):**
+
+
+        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
+
+
+        **Examples:**
+
+
+        **prompt**: A beautiful butterfly
+
+
+         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
+
+
+        **prompt**: A sticker of a cute kitten
+        
+
+        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
+
+      operationId: /text-to-image/fast
+      parameters:
+        - in: path
+          name: model_version
+          schema:
+            type: string
+            enum: ["2.3"]
+          required: true
+          description: The model version you would like to use in the request. 
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. 
+                  minimum: 1
+                  maximum: 4
+                  default: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                sync:
+                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  default: false
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                format:
+                  type: string
+                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
+                  default: 'png'
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  minimum: 4
+                  maximum: 10
+                  default: 8
+                medium:
+                  type: string
+                  enum: ['photography','art']
+                  description: Which medium should be included in your generated images. This parameter is optional.
+                prompt_enhancement:
+                  type: boolean
+                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
+                  default: false
+            examples:
+              valid prompt:
+                value:
+                  prompt: "a baby riding a bicycle in a field of flowers"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+  
   /product/cutout:
     post:
       tags:
@@ -5051,12 +5612,6 @@ paths:
         
         
         This route returns both the URL and the sid associated with the updated image.
-
-
-        **Additional Guidance on Parameters:**
-
-        
-        To avoid errors, ensure that the combination of original_image_size and original_image_location leaves adequate empty space on the canvas_size for the intended expansion. The empty space is crucial for the generation process, and failing to provide it will result in an error.
       
       operationId: image_expansion
       parameters:
@@ -5083,17 +5638,17 @@ paths:
                   items:
                     type: integer
                   default: [1000,1000]
-                  description: Specifies the dimensions of the final image canvas after expansion. The total area must not exceed 5000x5000 pixels. This canvas size should accommodate both the original image and the necessary empty space for the expansion.
+                  description: The desired size of the final image, after the expansion. should have an area of less than 5000x5000 pixels.
                 original_image_size:
                   type: array
                   items:
                     type: integer
-                  description: Sets the dimensions of the original image within the canvas. This size must constitute at least 15% of the canvas area. Ensure that the dimensions also allow for adequate empty space around the original image for the expansion.
+                  description: The desired size of the original image, inside the full canvas. Should be over 15% of the canvas area.
                 original_image_location:
                   type: array
                   items:
                     type: integer
-                  description: Defines the location of the upper-left corner of the original image within the canvas. This location can extend outside the canvas boundaries, causing the original image to be cropped. Ensure the placement allows sufficient empty space on the canvas for expansion.
+                  description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
                 prompt:
                   type: string
                   description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only.
@@ -5144,18 +5699,6 @@ paths:
                     description: The request status. The options are SUCCESS, NSFW.
         '400':
           description: Bad request.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              examples:
-                expansion_space_error:
-                  value:
-                    error: "The current request parameters do not leave enough space for expansion. Please adjust the size or location of the original image, or modify the canvas size."
         '404':
           description: Specified Image does not exist.
         '405':

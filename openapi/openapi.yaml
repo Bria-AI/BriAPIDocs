@@ -2117,8 +2117,8 @@ paths:
   /text-to-vector/base/{model_version}:
     post:
       tags:
-        - Vector Graphics
-      summary: Generate Image - Base model
+        - Vector Graphics (Beta)
+      summary: Generate Vector Graphics - Base
       description: >-
 
 
@@ -2128,22 +2128,24 @@ paths:
         **Text-to-Vector illustration (beta):**
 
 
-        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
-
+        The /text-to-vector/base route offers the ability to generate high-quality, editable vector graphics assets from textual prompts at scale. This endpoint allows for generating quality vector graphics such as icons, logos and other illustrations.
 
         **Examples:**
-
-
-        **prompt**: A beautiful butterfly
-
-
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
 
 
         **prompt**: A sticker of a cute kitten
 
 
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/dcNzBYR/kitten-2.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/WcgDjsx/kitten-4.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/YT66fGv/kitten-5.png" width="200" height="200"/>
+
+        **prompt**: A beautiful butterfly
+
+
+         <img src="https://i.ibb.co/1sRxRvp/butterfly-1.png" width="266" height="200"/><img src="https://i.ibb.co/Gxm7X9J/4-butterflies.png" width="266" height="200"/>
+         On the left, a generated vector illustration. On the right, the same illustration after being re-colored in a vector editor
 
 
       operationId: /text-to-vector/base
@@ -2207,7 +2209,7 @@ paths:
             examples:
               valid prompt:
                 value:
-                  prompt: "a baby riding a bicycle in a field of flowers"
+                  prompt: "A simplistic flat icon of a megaphone"
                   num_results: 1
                   sync: true
               inappropriate prompt:
@@ -2289,8 +2291,8 @@ paths:
   /text-to-vector/fast/{model_version}:
     post:
       tags:
-        - Vector Graphics
-      summary: Generate Image - fast model 
+        - Vector Graphics (Beta)
+      summary: Generate Image - fast 
       description: >-
 
 
@@ -2300,22 +2302,19 @@ paths:
         **Text-to-Vector illustration (beta):**
 
 
-        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
+        The /text-to-vector/fast route is optimized for speed, enabling rapid vector graphics creation without compromising quality. This endpoint allows for generating quality vector graphics such as icons, logos and other illustrations.
 
 
         **Examples:**
 
 
-        **prompt**: A beautiful butterfly
-
-
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
-
-
-        **prompt**: A sticker of a cute kitten
+        **prompt**: An icon of a bird with a blue head and yellow beak against a solid background
         
 
-        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/DG73T97/bird-icon-1.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/WcySnrr/bird-icon-3.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/hsLcs04/bird-icon-2.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/6R99kxp/bird-icon-4.png" width="200" height="200"/>
 
       operationId: /text-to-vector/fast
       parameters:
@@ -2368,7 +2367,7 @@ paths:
             examples:
               valid prompt:
                 value:
-                  prompt: "a baby riding a bicycle in a field of flowers"
+                  prompt: "A simplistic flat icon of a megaphone"
                   num_results: 1
                   sync: true
               inappropriate prompt:
@@ -2422,44 +2421,19 @@ paths:
   /text-to-vector/tailored/{model_id}:
     post:
       tags:
-        - Vector Graphics
-      summary: Generate Image - Tailored model
+        - Vector Graphics (Beta)
+      summary: Generate Image - Tailored
       description: |-
         **Description**
 
-        This route allows you to generate images using a tailored model. Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons. You can train a tailored model through the API or using the Bria platform.
+        This route allows you to generate vector graphics using a tailored model. 
+        
+        Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons.
+        To see a detailed description of the tailored models functionalities, please refer to the text-to-image/tailored/{model_id} route documentation.
+        
+        *This will only work well with tailored models in the illustrative domain.
 
-        ### Overview of Tailored Model API
-
-        The Tailored Model API provides a set of endpoints to manage the entire lifecycle of a tailored model:
-
-        1. **Dataset Management**: Create and manage datasets which will be used to train your tailored models. You can:
-           - **Create and Retrieve Datasets**: Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
-           - **Upload and Retrieve Images**: Use the `/datasets/{dataset_id}/images` endpoint to upload a new image to a dataset or retrieve existing images that belong to the dataset.
-           - **Manage Individual Images**: Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
-
-        2. **Model Management**: Create and manage models based on your datasets. You can:
-           - **Create and Retrieve Models**: Use the `/models` endpoint to create a new model or retrieve all models that belong to the client organization.
-           - **Get and Delete Specific Models**: Use the `/models/{id}` endpoint to retrieve a specific model by its ID or delete a specific model.
-
-        3. **Training Management**: Start and stop training jobs for your models. You can:
-           - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
-           - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
-
-        ### Training a Tailored Model
-
-        To train a tailored model via the API:
-        1. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset.
-        2. **Upload Images**: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
-        3. **Create a Model**: Use the `/models` endpoint to create a model associated with your dataset.
-        4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
-        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a tailored model takes between 1-3 hours.
-        6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
-        7. **Generate Images**: Once the model is trained, use this route to generate images.
-
-        Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
-
-      operationId: /text-to-image/tailored
+      operationId: /text-to-vector/tailored
       parameters:
         - in: path
           name: model_id

@@ -2118,46 +2118,6 @@ paths:
 
 
         **Description**
-        
-
-        The /text-to-image/base Route empowers users to create stunning images directly from textual prompts. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
-
-
-        **Advanced Customization and Access:**
-
-
-        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as <a href="https://huggingface.co/briaai/BRIA-2.3-FAST-LORA" target="_blank">Bria 2.3 Fast LoRA</a> and ControlNets: <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
-
-
-        **Examples:**
-
-
-        **prompt**: A professional headshot of a CEO
-
-
-        **BRIA BASE model 2.3:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/>
-
-
-        **prompt**: A vaporwave detailed illustration of a street in London in pastel hues, under a Union Jack sky
-
-
-        **BRIA BASE model 2.3:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(478).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(479).png" width="200" height="200"/>
-
-
-        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
-
-
-        **BRIA BASE model 2.3:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
            
 
         **Text-to-Vector illustration (beta):**
@@ -2181,7 +2141,7 @@ paths:
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
 
 
-      operationId: /text-to-image/base
+      operationId: /text-to-vector/base
       parameters:
         - in: path
           name: model_version
@@ -2342,29 +2302,6 @@ paths:
 
 
         **Description**
-        
-
-        The /text-to-image/fast Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs. 
-        Ideal for applications requiring quick turnaround without sacrificing image fidelity.
-
-
-        **Advanced Customization and Access:**
-
-
-        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
-
-
-        **An example:**
-
-
-        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
-
-
-        **BRIA FAST model 2.3:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
         
         **Text-to-Vector illustration (beta):**
@@ -2387,7 +2324,7 @@ paths:
 
         <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
 
-      operationId: /text-to-image/fast
+      operationId: /text-to-vector/fast
       parameters:
         - in: path
           name: model_version
@@ -2505,65 +2442,50 @@ paths:
     post:
       tags:
         - Vector Graphics
-      summary: Generate Image - fast model 
-      description: >-
-
-
+      summary: Generate Image - Tailored model
+      description: |-
         **Description**
-        
 
-        The /text-to-image/fast Route is optimized for speed, enabling rapid image creation without compromising quality. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs. 
-        Ideal for applications requiring quick turnaround without sacrificing image fidelity.
+        This route allows you to generate images using a tailored model. Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons. You can train a tailored model through the API or using the Bria platform.
 
+        ### Overview of Tailored Model API
 
-        **Advanced Customization and Access:**
+        The Tailored Model API provides a set of endpoints to manage the entire lifecycle of a tailored model:
 
+        1. **Dataset Management**: Create and manage datasets which will be used to train your tailored models. You can:
+           - **Create and Retrieve Datasets**: Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
+           - **Upload and Retrieve Images**: Use the `/datasets/{dataset_id}/images` endpoint to upload a new image to a dataset or retrieve existing images that belong to the dataset.
+           - **Manage Individual Images**: Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
 
-        Beyond the API, developers interested in deeper customization can access BRIA's models directly through Hugging Face. This alternative provides access to the underlying model source code, offering additional features such as ControlNets: <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Canny" target="_blank">Canny</a> , <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Depth" target="_blank">Depth</a>, and <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Recoloring" target="_blank">ReColoring</a>. This option is ideal for developers seeking advanced control over the image generation process and those who wish to integrate cutting-edge AI directly into their workflows.
+        2. **Model Management**: Create and manage models based on your datasets. You can:
+           - **Create and Retrieve Models**: Use the `/models` endpoint to create a new model or retrieve all models that belong to the client organization.
+           - **Get and Delete Specific Models**: Use the `/models/{id}` endpoint to retrieve a specific model by its ID or delete a specific model.
 
+        3. **Training Management**: Start and stop training jobs for your models. You can:
+           - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
+           - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
 
-        **An example:**
+        ### Training a Tailored Model
 
+        To train a tailored model via the API:
+        1. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset.
+        2. **Upload Images**: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
+        3. **Create a Model**: Use the `/models` endpoint to create a model associated with your dataset.
+        4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
+        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a tailored model takes between 1-3 hours.
+        6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
+        7. **Generate Images**: Once the model is trained, use this route to generate images.
 
-        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
+        Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
-
-        **BRIA FAST model 2.3:**
-        
-        
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(42).png" width="200" height="200"/> <img src="https://images.bria.ai/images/b0788963e23ce367.png" width="200" height="200"/>
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
-
-        
-        **Text-to-Vector illustration (beta):**
-
-
-        The Text-to-Vector illustration API offers the ability to generate high-quality, editable vector illustration assets from text prompts at scale. To use it, simply send a request to this route and set the `format` parameter to 'svg'.
-
-
-        **Examples:**
-
-
-        **prompt**: A beautiful butterfly
-
-
-         <img src="https://i.ibb.co/YjjJHY3/a-beautiful-butterfly-afd0cc3df226832c.png" width="266" height="200" title="generated vector illustration"/><img src="https://i.ibb.co/HGWQmsL/a-beautiful-butterfly2-afd0cc3df226832c.png" width="266" height="200" title="the same illustration after being re-colored in a vector editor"/>
-
-
-        **prompt**: A sticker of a cute kitten
-        
-
-        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
-
-      operationId: /text-to-image/fast
+      operationId: /text-to-image/tailored
       parameters:
         - in: path
-          name: model_version
+          name: model_id
           schema:
             type: string
-            enum: ["2.3"]
           required: true
-          description: The model version you would like to use in the request. 
+          description: The model id of the tailored model you would like to use in the request. 
         - in: header
           name: api_token
           schema:
@@ -2597,28 +2519,16 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                format:
-                  type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
-                  default: 'png'
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
                   minimum: 4
-                  maximum: 10
+                  maximum: 20
                   default: 8
-                medium:
-                  type: string
-                  enum: ['photography','art']
-                  description: Which medium should be included in your generated images. This parameter is optional.
-                prompt_enhancement:
-                  type: boolean
-                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
-                  default: false
             examples:
               valid prompt:
                 value:
-                  prompt: "a baby riding a bicycle in a field of flowers"
+                  prompt: "a book"
                   num_results: 1
                   sync: true
               inappropriate prompt:
@@ -2669,7 +2579,8 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-  
+
+
   /product/cutout:
     post:
       tags:

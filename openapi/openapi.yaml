@@ -683,6 +683,11 @@ paths:
            - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
            - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
 
+        4. **Image Generation**: Generate images using a trained model. You can:
+           - **Generate Images**: Use the `/text-to-image/tailored/{model_id}` endpoint to generate images.
+           - **Generate Vector Graphics**: Use the `/text-to-vector/tailored/{model_id}` endpoint to generate vector graphics. Note: this will only generate good vector graphics on illustrative domains.
+
+
         ### Training a Tailored Model
 
         To train a tailored model via the API:
@@ -692,7 +697,7 @@ paths:
         4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
         5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a tailored model takes between 1-3 hours.
         6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
-        7. **Generate Images**: Once the model is trained, use this route to generate images.
+        7. **Generate Images**: Once the model is trained, use this route to generate images, or use the `/text-to-vector/tailored/{model_id}` route to generate vector graphics.
 
         Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
@@ -2183,10 +2188,6 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                format:
-                  type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
-                  default: 'png'
                 negative_prompt:
                   type: string
                   description: Specisfy here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
@@ -2203,14 +2204,6 @@ paths:
                   minimum: 1.0
                   maximum: 10.0
                   default: 5.0
-                medium:
-                  type: string
-                  enum: ['photography','art']
-                  description: Which medium should be included in your generated images. This parameter is optional.
-                prompt_enhancement:
-                  type: boolean
-                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time. Built with Meta Llama 3.
-                  default: false
             examples:
               valid prompt:
                 value:
@@ -2366,24 +2359,12 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                format:
-                  type: string
-                  description: Set to 'svg' to generate vector illustrations using our text-to-vector engine. Choose 'png' to get a pixel-based image.
-                  default: 'png'
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
                   minimum: 4
                   maximum: 10
                   default: 8
-                medium:
-                  type: string
-                  enum: ['photography','art']
-                  description: Which medium should be included in your generated images. This parameter is optional.
-                prompt_enhancement:
-                  type: boolean
-                  description: When set to true, enhances the provided prompt by generating additional, more descriptive variations, resulting in more diverse and creative output images. Note that turning this flag on may result in a few additional seconds to the inference time.
-                  default: false
             examples:
               valid prompt:
                 value:

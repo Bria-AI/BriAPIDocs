@@ -2123,12 +2123,10 @@ paths:
 
 
         **Description**
-           
-
-        **Text-to-Vector illustration (beta):**
 
 
-        The /text-to-vector/base route offers the ability to generate high-quality, editable vector graphics assets from textual prompts at scale. This endpoint allows for generating quality vector graphics such as icons, logos and other illustrations.
+        The /text-to-vector/base route offers the ability to generate high-quality, editable vector graphic assets from textual prompts at scale. This endpoint allows for generating quality vector graphics such as icons, logos, and other illustrations.
+
 
         **Examples:**
 
@@ -2141,10 +2139,13 @@ paths:
         <img src="https://i.ibb.co/WcgDjsx/kitten-4.png" width="200" height="200"/>
         <img src="https://i.ibb.co/YT66fGv/kitten-5.png" width="200" height="200"/>
 
+
         **prompt**: A beautiful butterfly
 
 
          <img src="https://i.ibb.co/1sRxRvp/butterfly-1.png" width="266" height="200"/><img src="https://i.ibb.co/Gxm7X9J/4-butterflies.png" width="266" height="200"/>
+
+
          On the left, a generated vector illustration. On the right, the same illustration after being re-colored in a vector editor
 
 
@@ -2292,17 +2293,14 @@ paths:
     post:
       tags:
         - Vector Graphics (Beta)
-      summary: Generate Image - fast 
+      summary: Generate Vector Graphics - Fast 
       description: >-
 
 
         **Description**
 
-        
-        **Text-to-Vector illustration (beta):**
 
-
-        The /text-to-vector/fast route is optimized for speed, enabling rapid vector graphics creation without compromising quality. This endpoint allows for generating quality vector graphics such as icons, logos and other illustrations.
+        The /text-to-vector/fast route is optimized for speed, enabling rapid vector graphics creation without compromising quality. This endpoint allows for generating high-quality vector graphics such as icons, logos, and other illustrations.
 
 
         **Examples:**
@@ -2422,15 +2420,17 @@ paths:
     post:
       tags:
         - Vector Graphics (Beta)
-      summary: Generate Image - Tailored
-      description: |-
+      summary: Generate Vector Graphics - Tailored
+      description: >-
+
+
         **Description**
 
-        This route allows you to generate vector graphics using a tailored model. 
-        
-        Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons.
-        To see a detailed description of the tailored models functionalities, please refer to the text-to-image/tailored/{model_id} route documentation.
-        
+
+        This route allows you to generate vector graphics using a tailored model.
+
+        Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons. To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
+
         *This will only work well with tailored models in the illustrative domain.
 
       operationId: /text-to-vector/tailored

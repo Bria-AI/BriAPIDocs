@@ -8,7 +8,7 @@ info:
   description: >
     # Introduction
 
-    The Bria API is designed to provide a comprehensive suite of tools for generating and customizing images. With Bria, you can:
+    The Bria API is designed to provide a comprehensive suite of tools for generating and customizing images. With Bria, you can :
 
 
     - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.

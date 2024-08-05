@@ -2117,6 +2117,7 @@ paths:
   /text-to-vector/base/{model_version}:
     post:
       tags:
+        - Image
         - Vector Graphics (Beta)
       summary: Generate Vector Graphics - Base
       description: >-
@@ -2292,6 +2293,7 @@ paths:
   /text-to-vector/fast/{model_version}:
     post:
       tags:
+        - Image
         - Vector Graphics (Beta)
       summary: Generate Vector Graphics - Fast 
       description: >-
@@ -2419,6 +2421,7 @@ paths:
   /text-to-vector/tailored/{model_id}:
     post:
       tags:
+        - Tailored Generation
         - Vector Graphics (Beta)
       summary: Generate Vector Graphics - Tailored
       description: >-

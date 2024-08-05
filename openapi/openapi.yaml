@@ -664,7 +664,7 @@ paths:
       description: |-
         **Description**
 
-        This route allows you to generate images using a tailored model. Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons. You can train a tailored model through the API or using the Bria platform.
+        This route allows you to generate images using a tailored model. Tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. You can train a tailored model through the API or using the Bria platform.
 
         ### Overview of Tailored Model API
 
@@ -685,7 +685,7 @@ paths:
 
         4. **Image Generation**: Generate images using a trained model. You can:
            - **Generate Images**: Use the `/text-to-image/tailored/{model_id}` endpoint to generate images.
-           - **Generate Vector Graphics**: Use the `/text-to-vector/tailored/{model_id}` endpoint to generate vector graphics. Note: this will only generate good vector graphics on illustrative domains.
+           - **Generate Vector Graphics**: Use the `/text-to-vector/tailored/{model_id}` endpoint to generate vector graphics. 
 
 
         ### Training a Tailored Model
@@ -802,6 +802,127 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
+          
+  /text-to-vector/tailored/{model_id}:
+    post:
+      tags:
+        - Tailored Generation
+        - Vector Graphics (Beta)
+      summary: Generate Vector Graphics - Tailored (Beta)
+      description: >-
+
+
+        **Description**
+
+
+        This route allows you to generate vector graphics using a tailored model.
+
+        Tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
+
+        *Text-to-vector is compatible with tailored models in the illustrative domain.
+
+      operationId: /text-to-vector/tailored
+      parameters:
+        - in: path
+          name: model_id
+          schema:
+            type: string
+          required: true
+          description: The model id of the tailored model you would like to use in the request. 
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. 
+                  minimum: 1
+                  maximum: 4
+                  default: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                sync:
+                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  default: false
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  minimum: 4
+                  maximum: 20
+                  default: 8
+            examples:
+              valid prompt:
+                value:
+                  prompt: "a book"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+
   /tailored-gen/datasets:
     post:
       tags:
@@ -2368,125 +2489,6 @@ paths:
               valid prompt:
                 value:
                   prompt: "A simplistic flat icon of a megaphone"
-                  num_results: 1
-                  sync: true
-              inappropriate prompt:
-                value:
-                  prompt: "sensual"
-                  num_results: 1
-                  sync: true
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
-                    items:
-                      type: object
-                      properties:
-                        seed:
-                          type: integer
-                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
-                        urls:
-                          type: string
-                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
-              examples:
-                valid prompt:
-                  value:
-                    results:  [
-                                {
-                                  "seed": 1525972691,
-                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
-                                }
-                              ]
-                inappropriate prompt:
-                  value:
-                    results:  [
-                                {
-                                  "description": "Query doesn't stand with Bria's ethic rules",
-                                  "error_code": "408"
-                                }
-                              ]
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-  /text-to-vector/tailored/{model_id}:
-    post:
-      tags:
-        - Tailored Generation
-        - Vector Graphics (Beta)
-      summary: Generate Vector Graphics - Tailored (Beta)
-      description: >-
-
-
-        **Description**
-
-
-        This route allows you to generate vector graphics using a tailored model.
-
-        Tailored models are trained using your own datasets to create unique visual styles, character illustrations, or icons. To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
-
-        *This will only work well with tailored models in the illustrative domain.
-
-      operationId: /text-to-vector/tailored
-      parameters:
-        - in: path
-          name: model_id
-          schema:
-            type: string
-          required: true
-          description: The model id of the tailored model you would like to use in the request. 
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                prompt:
-                  type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
-                num_results:
-                  type: integer
-                  description: How many images you would like to generate. 
-                  minimum: 1
-                  maximum: 4
-                  default: 4
-                aspect_ratio:
-                  type: string
-                  description: The aspect ratio of the image. 
-                  default: "1:1"
-                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
-                sync:
-                  type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
-                  default: false
-                seed:
-                  type: integer
-                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                steps_num:
-                  type: integer
-                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
-                  minimum: 4
-                  maximum: 20
-                  default: 8
-            examples:
-              valid prompt:
-                value:
-                  prompt: "a book"
                   num_results: 1
                   sync: true
               inappropriate prompt:

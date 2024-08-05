@@ -2119,7 +2119,7 @@ paths:
       tags:
         - Image
         - Vector Graphics (Beta)
-      summary: Generate Vector Graphics - Base
+      summary: Generate Vector Graphics - Base (Beta)
       description: >-
 
 
@@ -2295,7 +2295,7 @@ paths:
       tags:
         - Image
         - Vector Graphics (Beta)
-      summary: Generate Vector Graphics - Fast 
+      summary: Generate Vector Graphics - Fast (Beta)
       description: >-
 
 
@@ -2423,7 +2423,7 @@ paths:
       tags:
         - Tailored Generation
         - Vector Graphics (Beta)
-      summary: Generate Vector Graphics - Tailored
+      summary: Generate Vector Graphics - Tailored (Beta)
       description: >-
 
 

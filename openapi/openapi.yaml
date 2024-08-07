@@ -2712,7 +2712,7 @@ paths:
                   description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
                 fast: 
                   type: boolean
-                  default: false
+                  default: true
                   description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. The false, the regular mode will be utilized. 
                 image_url:   
                   type: string
@@ -2725,8 +2725,8 @@ paths:
                   description: Text description of the new scene or background for the provided product shot. Bria currently supports prompts in English only.
                 optimize_description:
                   type: boolean
-                  default: false
-                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the scene_description that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                  default: true
+                  description: When true, an additional logic takes the scene_description that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
                   default: 1
@@ -2760,10 +2760,8 @@ paths:
             example:
               scene_description: "in a living room interior, on a kitchen counter"
               num_results: 1
-              optimize_description: true
               sync: false
               image_url: "URL"
-              fast: true
       responses:
         '200':
           description: Successful operation.
@@ -5168,7 +5166,7 @@ paths:
                   description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. 
                 fast: 
                   type: boolean
-                  default: false
+                  default: true
                   description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized.
                 image_url:   
                   type: string
@@ -5181,8 +5179,8 @@ paths:
                   description: Text description of the new scene or background for the provided image. Bria currently supports prompts in English only.
                 refine_prompt:
                   type: boolean
-                  default: false
-                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                  default: true
+                  description: When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
                   default: 1
@@ -5196,10 +5194,8 @@ paths:
             example:
               bg_prompt: "in a living room interior, on a kitchen counter"
               num_results: 1
-              refine_prompt: true
               sync: false
               image_url: "URL"
-              fast: true
       responses:
         '200':
           description: Successful operation.
@@ -5307,7 +5303,7 @@ paths:
                   description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false.
                 fast: 
                   type: boolean
-                  default: false
+                  default: true
                   description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized.
                 sid:
                   type: string
@@ -5321,8 +5317,8 @@ paths:
                   description: Text based on which you wish to generate the new background. Bria currently supports prompts in English only.
                 refine_prompt:
                   type: boolean
-                  default: false
-                  description: It is recommended to set this parameter to 'true'. When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                  default: true
+                  description: When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
                   default: 4
@@ -5336,9 +5332,7 @@ paths:
             example:
                 bg_prompt: "in a parking lot"
                 num_results: 1
-                refine_prompt: true
                 sync: false
-                fast: true
       responses:
         '200':
           description: Successful operation.

@@ -14,13 +14,13 @@ info:
     - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
 
 
-    - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
+    - **Train Your Own Branded Models**: Create and manage custom-branded models to generate images in specific styles or themes using your datasets.
 
 
-    - **Generate Vector Graphics (beta)**: Use the base and tailored models API endpoints to create versatile, editable vector graphics from text prompts.
+    - **Generate Vector Graphics (beta)**: Use the base and branded models API endpoints to create versatile, editable vector graphics from text prompts.
 
 
-    - **Enhance Product Imagery with E-commerce Solutions**: Use specialized features to create professional product shots, packshots, and lifestyle images for e-commerce platforms.
+    - **Enhance Product Imagery with eCommerce Suite**: Use specialized features to create professional product shots, packshots, and lifestyle images for eCommerce platforms.
 
     
     - **Modify and Transform Images**: Bring your own images and modify them using various routes to suit your needs.
@@ -34,11 +34,11 @@ info:
     **Image Generation**:
     - Use the `/text-to-image` endpoints to generate any image you would like, based on the provided prompt, without needing to upload or register images first.
 
-    **Tailored Generation**:
-    The Tailored Generation API allows you to create and manage custom-tailored models for generating unique visual content based on your datasets. Tailored models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
+    **Branded Generation**:
+    The Branded Generation API allows you to create and manage custom-branded models for generating unique visual content based on your datasets. Branded models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
 
 
-    **Using the Tailored Generation API**:
+    **Using the Branded Generation API**:
       - **Dataset Management**: 
         - Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
         - Use the `/datasets/{dataset_id}/images` endpoint to upload new images to a dataset or retrieve existing images that belong to the dataset.
@@ -50,7 +50,7 @@ info:
         - Use the `/models/{id}/start_training` endpoint to initiate the training process. Ensure that the dataset includes the minimum required number of images and has a status of 'completed' before starting training.
         - Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
 
-    **Training a Tailored Model**:
+    **Training a Branded Model**:
       1. Create a Dataset: Use the `/datasets` endpoint to create a dataset.
       2. Upload Images: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
       3. Create a Model: Use the `/models` endpoint to create a model associated with your dataset.
@@ -60,9 +60,9 @@ info:
       7. Generate Images: Once the model is trained, use the `/text-to-image/tailored/{model_id}` route to generate images.
 
     
-    ### E-commerce Suite
+    ### eCommerce Suite
 
-    Bria offers a variety of solutions for products and apps in the e-commerce industry, which allow to enhance product imagery for online stores and product catalogs. 
+    Bria offers a variety of solutions for products and apps in the eCommerce industry, which allow to enhance product imagery for online stores and product catalogs. 
     
     These solutions include:
 
@@ -70,6 +70,9 @@ info:
 
     
     - `/packshot`: Generate professional-standard packshots with customizable background colors and optimal product placement.
+    
+    
+    - `/shadow`: Add consistent and customizable shadow effects, supporting regular and floating shadows for product images with transparent backgrounds.
 
     
     - `/lifestyle_shot_by_text`: Enrich product images by placing them in various environments using textual descriptions, enhancing appeal and providing context.
@@ -152,7 +155,7 @@ paths:
   /text-to-image/base/{model_version}:
     post:
       tags:
-        - Image
+        - Image Generation
       summary: Generate Image - Base model
       description: >-
 
@@ -352,7 +355,7 @@ paths:
   /text-to-image/fast/{model_version}:
     post:
       tags:
-        - Image
+        - Image Generation
       summary: Generate Image - fast model 
       description: >-
 
@@ -496,7 +499,7 @@ paths:
   /text-to-image/hd/{model_version}:
     post:
       tags:
-        - Image
+        - Image Generation
       summary: Generate Image - HD model
       description: >-
 
@@ -504,7 +507,7 @@ paths:
         **Description**
         
 
-        The /text-to-image/hd Route is tailored for projects demanding the utmost in image detail and clarity. This model allows for generating high-quality, photorealistic and artistic, images with unparalleled resolution of 1920x1080 (1:1 1536x1536) pixel, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
+        The /text-to-image/hd Route is branded for projects demanding the utmost in image detail and clarity. This model allows for generating high-quality, photorealistic and artistic, images with unparalleled resolution of 1920x1080 (1:1 1536x1536) pixel, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
 
 
         **Advanced Customization and Access:**
@@ -656,18 +659,18 @@ paths:
   /text-to-image/tailored/{model_id}:
     post:
       tags:
-        - Tailored Generation
-      summary: Generate Image - Tailored model
+        - Branded Generation
+      summary: Generate Image - Branded model
       description: |-
         **Description**
 
-        This route allows you to generate images using a tailored model. Tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. You can train a tailored model through the API or using the Bria platform.
+        This route allows you to generate images using a branded model. Branded models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. You can train a branded model through the API or using the Bria platform.
 
-        ### Overview of Tailored Model API
+        ### Overview of Branded Model API
 
-        The Tailored Model API provides a set of endpoints to manage the entire lifecycle of a tailored model:
+        The Branded Model API provides a set of endpoints to manage the entire lifecycle of a branded model:
 
-        1. **Dataset Management**: Create and manage datasets which will be used to train your tailored models. You can:
+        1. **Dataset Management**: Create and manage datasets which will be used to train your branded models. You can:
            - **Create and Retrieve Datasets**: Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
            - **Upload and Retrieve Images**: Use the `/datasets/{dataset_id}/images` endpoint to upload a new image to a dataset or retrieve existing images that belong to the dataset.
            - **Manage Individual Images**: Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
@@ -685,18 +688,18 @@ paths:
            - **Generate Vector Graphics**: Use the `/text-to-vector/tailored/{model_id}` endpoint to generate vector graphics. 
 
 
-        ### Training a Tailored Model
+        ### Training a Branded Model
 
-        To train a tailored model via the API:
+        To train a branded model via the API:
         1. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset.
         2. **Upload Images**: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
         3. **Create a Model**: Use the `/models` endpoint to create a model associated with your dataset.
         4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
-        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a tailored model takes between 1-3 hours.
+        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a branded model takes between 1-3 hours.
         6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
         7. **Generate Images**: Once the model is trained, use this route to generate images, or use the `/text-to-vector/tailored/{model_id}` route to generate vector graphics.
 
-        Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
+        Alternatively, you can use the Bria platform to manage and train your branded models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
       operationId: /text-to-image/tailored
       parameters:
@@ -705,7 +708,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the tailored model you would like to use in the request. 
+          description: The model id of the branded model you would like to use in the request. 
         - in: header
           name: api_token
           schema:
@@ -803,20 +806,19 @@ paths:
   /text-to-vector/tailored/{model_id}:
     post:
       tags:
-        - Tailored Generation
-        - Vector Graphics (Beta)
-      summary: Generate Vector Graphics - Tailored (Beta)
+        - Branded Generation
+      summary: Generate Vector Graphics - Branded (Beta)
       description: >-
 
 
         **Description**
 
 
-        This route allows you to generate vector graphics using a tailored model.
+        This route allows you to generate vector graphics using a branded model.
 
-        Tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
+        Branded models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. To see a detailed description of the branded models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
 
-        *Text-to-vector is compatible with tailored models in the illustrative domain.
+        *Text-to-vector is compatible with branded models in the illustrative domain.
 
       operationId: /text-to-vector/tailored
       parameters:
@@ -825,7 +827,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the tailored model you would like to use in the request. 
+          description: The model id of the branded model you would like to use in the request. 
         - in: header
           name: api_token
           schema:
@@ -923,7 +925,7 @@ paths:
   /tailored-gen/datasets:
     post:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Create Dataset
       description: >-
         **Description**
@@ -1026,7 +1028,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Get Datasets
       description: >-
         **Description**
@@ -1106,7 +1108,7 @@ paths:
   /tailored-gen/datasets/{id}:
     get:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Get Dataset by ID
       description: >-
         **Description**
@@ -1221,7 +1223,7 @@ paths:
           description: Internal server error.
     put:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Update Dataset
       description: >-
         **Description**
@@ -1378,7 +1380,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Delete Dataset
       description: >-
         **Description**
@@ -1422,7 +1424,7 @@ paths:
   /tailored-gen/datasets/{dataset_id}/images:
     post:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Upload Image to Dataset
       description: >-
         **Description**
@@ -1599,7 +1601,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Get Images
       description: >-
         **Description**
@@ -1679,7 +1681,7 @@ paths:
   /tailored-gen/datasets/{dataset_id}/images/{image_id}:
     get:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Get Image by ID
       description: >-
         **Description**
@@ -1761,7 +1763,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Delete Image
       description: >-
         **Description**
@@ -1823,7 +1825,7 @@ paths:
   /tailored-gen/models:
     post:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Create Model
       description: >-
         **Description**
@@ -1906,7 +1908,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Get Models
       description: >-
         **Description**
@@ -1975,7 +1977,7 @@ paths:
   /tailored-gen/models/{id}:
     get:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Get model by ID
       description: >-
         **Description**
@@ -2045,7 +2047,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Delete model
       description: >-
         **Description**
@@ -2094,12 +2096,12 @@ paths:
   /tailored-gen/models/{id}/start_training:
     post:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Start Training
       description: >-
         **Description**
 
-        Start a new training job for a specific model. Training of a tailored model takes between 1-3 hours.
+        Start a new training job for a specific model. Training of a branded model takes between 1-3 hours.
       operationId: startModelTraining
       parameters:
         - in: header
@@ -2178,7 +2180,7 @@ paths:
   /tailored-gen/models/{id}/stop_training:
     post:
       tags:
-        - Tailored Generation
+        - Branded Generation
       summary: Stop Training
       description: >-
         **Description**
@@ -2235,8 +2237,7 @@ paths:
   /text-to-vector/base/{model_version}:
     post:
       tags:
-        - Image
-        - Vector Graphics (Beta)
+        - Vector Graphics Generation (Beta)
       summary: Generate Vector Graphics - Base (Beta)
       description: >-
 
@@ -2411,8 +2412,7 @@ paths:
   /text-to-vector/fast/{model_version}:
     post:
       tags:
-        - Image
-        - Vector Graphics (Beta)
+        - Vector Graphics Generation (Beta)
       summary: Generate Vector Graphics - Fast (Beta)
       description: >-
 
@@ -2541,10 +2541,10 @@ paths:
   /product/cutout:
     post:
       tags:
-        - E-commerce Suite
+        - eCommerce Suite
       summary: Product Cutout
       description: >
-        This capability allows you to create a precise cutout of a product from any given image. This feature is especially valuable for e-commerce platforms and applications, serving as a fundamental building block for crafting a user-friendly interface. 
+        This capability allows you to create a precise cutout of a product from any given image. This feature is especially valuable for eCommerce platforms and applications, serving as a fundamental building block for crafting a user-friendly interface. 
 
         
         The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
@@ -2607,7 +2607,7 @@ paths:
   /product/packshot:
     post:
       tags:
-        - E-commerce Suite
+        - eCommerce Suite
       summary: Product Packshot
       description: >-
         The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
@@ -2640,7 +2640,7 @@ paths:
                   description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 background_color:
                   type: string
-                  description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background.
+                  description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background. This paramter is optional.
                   default: "#FFFFFF"
             example:
               sku: "12345"
@@ -2675,11 +2675,111 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
+  /product/shadow:
+    post:
+      tags:
+        - eCommerce Suite
+      summary: Product Shadow (Coming Soon)
+      description: >-
+        The Product Shadow API allows you to add consistent and customizable shadows to product images with transparent backgrounds. This feature is designed to work in combination with other capabilities like background removal, product cutout, and product lifestyle shots, enhancing the visual appeal of e-commerce and product imagery.
+
+
+        The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
+      operationId: productShadow
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sku:
+                  type: string
+                  description: The Stock Keeping Unit identifier for the product. This parameter is optional.
+                image_url:
+                  type: string
+                  description: The URL of the product image or product cutout. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. The input image must have a transparent background, could be obtained by using our background removal or cutout features.
+                file:
+                  type: string
+                  format: binary
+                  description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. The input image must have a transparent background, could be obtained by using our background removal or cutout features.
+                shadow_type:
+                  type: string
+                  description: Specifies the type of shadow. Can be 'regular' or 'float'. This paramter is optional.
+                  default: "regular"
+                background_color:
+                  type: string
+                  description: The background hex color code for the resulting image. Optionally, use 'transparent' for a transparent background. This paramter is optional.
+                  default: "transparent"
+                shadow_color:
+                  type: string
+                  description: The shadow color hex code. This paramter is optional.
+                  default: "#000000"
+                shadow_offset:
+                  type: array
+                  description: Controls the position of the shadow relative to the object, in pixels. Accepts a tuple-like list `[x, y]` where x and y can be positive or negative values. This parameter is optional.
+                  items:
+                    type: integer
+                  default: [0, 15]
+                shadow_intensity:
+                  type: integer
+                  description: Adjusts the intensity of the shadow. This paramter is optional.
+                  minimum: 0
+                  maximum: 100
+                  default: 60
+                shadow_blur:
+                  type: integer
+                  description: Controls the blur level of the shadow's edges. This paramter is optional. Default for 'shadow_type'=regular is 15, while for 'shadow_type'=float is 20.
+                shadow_width:
+                  type: integer
+                  description: (For floating shadows) Controls the width of the elliptical shadow, in pixels that could be positive and negative. As defoult the value is according to the width of the product. This paramter is optional.
+                shadow_height:
+                  type: integer
+                  description: (For floating shadows) Controls the height of the elliptical shadow, in pixels that could be positive and negative. This paramter is optional.
+                  default: 70
+            example:
+              sku: "12345"
+              image_url: "URL"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: The URL of the processed product pack shot image. This is a temporary URL that expires after 1 hour.
+              example:
+                result_url: "URL"
+        '400':
+          description: Bad request.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
 
   /product/lifestyle_shot_by_text:
     post:
       tags:
-        - E-commerce Suite
+        - eCommerce Suite
       summary: Lifestyle Product Shot by Text
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
@@ -2794,7 +2894,7 @@ paths:
   /product/lifestyle_shot_by_image:
     post:
       tags:
-        - E-commerce Suite
+        - eCommerce Suite
       summary: Lifestyle Product Shot by Image (Coming Soon)
       description: >-
         Generates product images in enriched environments using a reference image for inspiration. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
@@ -2901,12 +3001,12 @@ paths:
   /products/consistent_shots:
     post:
       tags:
-        - E-commerce Suite
+        - eCommerce Suite
       summary: Consistent Product Shots (Coming Soon)
       description: >-
         **Description**
 
-        This feature allows users to create consistent product shots by providing either a textual description of a scene or an image, along with a group of product images. The resulting consistent product shots are ideal for use on social media, e-commerce websites, product catalogs, and other marketing materials, ensuring a uniform and professional appearance across all platforms.
+        This feature allows users to create consistent product shots by providing either a textual description of a scene or an image, along with a group of product images. The resulting consistent product shots are ideal for use on social media, eCommerce websites, product catalogs, and other marketing materials, ensuring a uniform and professional appearance across all platforms.
 
       operationId: consistentProductShots
       responses:
@@ -2916,12 +3016,12 @@ paths:
   /product/contextual_keyword_extraction:
     post:
       tags:
-        - E-commerce Suite
+        - eCommerce Suite
       summary: Contextual Keyword Extraction (Coming Soon)
       description: >-
         **Description**
 
-        This feature allows users to extract relevant keywords from an image and its context, focusing on the primary product rather than secondary elements. This capability enhances search optimization in e-commerce by ensuring that the keywords accurately represent the product being sold. It can be particularly useful for improving product searchability on e-commerce websites, enhancing SEO for product listings, automating content management, and optimizing social media marketing efforts.
+        This feature allows users to extract relevant keywords from an image and its context, focusing on the primary product rather than secondary elements. This capability enhances search optimization in eCommerce by ensuring that the keywords accurately represent the product being sold. It can be particularly useful for improving product searchability on eCommerce websites, enhancing SEO for product listings, automating content management, and optimizing social media marketing efforts.
 
       operationId: productContextualKeywordExtraction
       responses:
@@ -2931,7 +3031,7 @@ paths:
   /{visual_id}/campaign_generator:
     post:
       tags:
-          - Image
+          - Image Modifications
       summary: Generate Campaign
       description: >-
 
@@ -2941,7 +3041,7 @@ paths:
 
         The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
         This route facilitates the generation of templates featuring diverse layouts that incorporate elements like text, 
-        logos, and calls to action (CTA), tailored to various resolutions (placements) and target audiences. 
+        logos, and calls to action (CTA), branded to various resolutions (placements) and target audiences. 
         
         
         Ad backgrounds are expanded to fit the necessary layout specifications. 
@@ -3349,6 +3449,9 @@ paths:
 
 
         **Description**
+        
+        
+        **This route will be deprecated soon**
 
 
         The *Info Route* is used to retrieve useful information on a specific
@@ -3611,7 +3714,7 @@ paths:
   /{visual_id}/background/info:
     get:
       tags:
-        - Background
+        - Deprecated Soon
       summary: Get Background info
       description: >-
 
@@ -3724,7 +3827,7 @@ paths:
   /{visual_id}/objects/info:
     get:
       tags:
-        - Object
+        - Deprecated Soon
       summary: Get Objects info
       description: >-
 
@@ -3979,7 +4082,7 @@ paths:
   /{visual_id}/objects/mask_generator:
     post:
       tags:
-        - Object
+        - Image Modifications
       summary: Get Masks
       description: >-
 
@@ -4071,7 +4174,7 @@ paths:
     get:
       tags:
         - AI Search
-      summary: Get Caption - Isolated
+      summary: Get Caption
       description: >-
 
 
@@ -4082,7 +4185,7 @@ paths:
         The *Caption Route* is used to get a caption that describes the given image.
         
 
-      operationId: isolated_caption
+      operationId: caption
       parameters:
         - in: header
           name: api_token
@@ -4737,8 +4840,8 @@ paths:
   /{visual_id}/objects/remove:
     post:
       tags:
-        - Object
-      summary: Remove Objects
+        - Image Modifications
+      summary: Erase Elements 
       description: >-
         **Description**
 
@@ -4746,6 +4849,11 @@ paths:
 
 
         The *Remove Object Route* is used to remove objects or areas. 
+
+
+
+        **This route will be replaced soon with isolated version, that doesn't require image registration.**
+
 
 
         You can provide the area for removal in the following methods:
@@ -4758,10 +4866,6 @@ paths:
 
         2) Allow the user to create a mask manually (by using a brush, for example), and then send the mask_url to the objects/remove endpoint. Under the example named manual mask, you can see an example of this type of request. You can access the SDK that demonstrates how to implement a brush feature in your Interface via the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
 
-
-
-        3) Get the possible objects for removal using the /info or objects/info endpoint, present them to the user, and allow them to select objects for removal using the object name. Send the id of the selected object to the objects/remove endpoint. Under the example named object, you can see an example of this type of request. Since it covers only very specific elements, rather than all the elements in the image, this method is less recomended than the two above.
-
         
 
 
@@ -4773,10 +4877,8 @@ paths:
 
         This route returns both the URL and the sid associated with the updated image.
 
-
-        Before making any modifications, please call the /info or objects/info route to obtain information on the available predefined objects in the image, the available modifications, and their Oracle values. If you are using mask_url or positive_points there is no need to call the info routes.
         
-      operationId: objects/remove
+      operationId: erase
       parameters:
         - in: header
           name: api_token
@@ -4872,19 +4974,6 @@ paths:
                           }
                         ]
                       }
-                object:
-                  value:
-                    {
-                      "enhance": true,
-                      "changes": [ 
-                        {
-                          "id": "630cf6f9c206e3ec414f0c3006221b7b9252243707cfabf59e65490c6dfe5d56",
-                          "actions": {
-                            "remove": true
-                            }
-                          }
-                        ]
-                      }
       responses:
         '200':
           description: Successful operation.
@@ -4911,11 +5000,73 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.     
+  /erase_foreground:
+    post:
+      tags:
+        - Image Modifications
+      summary: Erase Foreground (Coming Soon)
+      description: >-
+
+
+        **Description**
+
+
+
+        This route is used to erase the foregound from a provided image, while generating the area behind it. 
+      operationId: erase_foreground
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+              example:
+                image_url: 'URL'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /background/remove:
     post:
       tags:
-        - Background
-      summary: Remove Background - Isolated
+        - Image Modifications
+      summary: Remove Background
       description: >-
 
         **Description**
@@ -4960,7 +5111,7 @@ paths:
               print(response.text)
        
 
-      operationId: isolated_background/remove
+      operationId: background/remove
       parameters:
         - in: header
           name: api_token
@@ -5010,97 +5161,11 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.   
-
-  /{visual_id}/background/remove:
-    get:
-      tags:
-        - Background
-      summary: Remove Background
-      description: >-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-        
-
-        The *Remove BG Route* is used to remove the background of a previously uploaded image. 
-        
-        
-        You can also use this route on a modified image by providing the sid from the response of the previously used route.
-        
-        
-        This route returns both the URL and the sid associated with the updated image.
-
-
-        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
-        
-
-      operationId: background/remove
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "8487fb411f3c6716"
-          description: visual id of the image from which the user wishes to remove the background
-        - in: query
-          name: sid
-          schema:
-            type: string
-            example: "Remove this parameter if the image has not been modified using Bria."
-          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-        - in: query
-          name: desired_resolution
-          schema:
-            type: string
-            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
-            example: "original"
-          description: The desired resolution of the updated image. This parameter is optional.
-        - in: query
-          name: original_quality
-          schema:
-            type: boolean
-            example: true
-          description: If you would like to retain the quality of the original image, please set this parameter to true. Enabling this parameter during background removal may cause longer response times, depending on the quality and size of the original image. This parameter is optional. 
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  image_res:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
-                  sid:
-                    type: string
-                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
-                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
   /background/blur:
     post:
       tags:
-        - Background
-      summary: Blur Background - Isolated
+        - Image Modifications
+      summary: Blur Background
       description: >-
 
 
@@ -5109,7 +5174,7 @@ paths:
 
 
         The *background/blur Route* is used to create a blur effect on the background of an image. 
-      operationId: isolated_blur_bg
+      operationId: blur_bg
       parameters:
         - in: header
           name: api_token
@@ -5164,99 +5229,11 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-  /{visual_id}/background/blur:
-    get:
-      tags:
-        - Background
-      summary: Blur Background
-      description: >-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-
-
-        The *background/blur Route* is used to create a blur effect on the background of a previously uploaded image. 
-        
-        
-        You can also use this route on a modified image by providing the sid from the response of the previously used route.
-        
-        
-        This route returns both the URL and the sid associated with the updated image.
-
-
-        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
-         
-
-      operationId: blur_bg
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "8487fb411f3c6716"
-          description: visual id of the image for which the background should be blurred.
-        - in: query
-          name: scale
-          schema:
-            type: integer
-            example: 4
-            minimum: 1
-            maximum: 5
-            default: 5
-          description: A scale for determining how blurry the background of the image should be. The options are 1, 2, 3, 4, 5. This parameter is optional.
-        - in: query
-          name: sid
-          schema:
-            type: string
-            example: "Remove this parameter if the image has not been modified using Bria."
-          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-        - in: query
-          name: desired_resolution
-          schema:
-            type: string
-            enum: ['original','nhd','svga','xga','hd','wuxga','uwfhd','wqxga','uwqhd','uhd']
-            example: "original"
-          description: The desired resolution of the updated image. This parameter is optional.      
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  image_res:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
-                  sid:
-                    type: string
-                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
-                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.  
   /background/replace:
     post:
       tags:
-        - Background
-      summary: Generate Background - Isolated
+        - Image Modifications
+      summary: Generate Background
       description: >-
 
 
@@ -5291,7 +5268,7 @@ paths:
         <img src="https://i.ibb.co/1zvT5h4/unnamed-14.jpg" width="200"/> <img src="https://i.ibb.co/MkVDxc8/unnamed-15.jpg" width="200"/>
         <img src="https://i.ibb.co/pfgQ34p/unnamed-16.jpg" width="200"/> 
         
-      operationId: isolated_background/replace
+      operationId: background/replace
       parameters:
         - in: header
           name: api_token
@@ -5372,147 +5349,11 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-        
-  /{visual_id}/replace_bg:
-    post:
-      tags:
-        - Background
-      summary: Generate Background
-      description: >-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-        
-        
-
-        The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). 
-
-        We offer a fast version of this feature, powered by Bria 2.3 Fast LoRA (<a href="https://huggingface.co/briaai/BRIA-2.3-FAST-LORA" target="_blank">model card on Hugging Face</a>), which provides an optimal balance between speed and quality.
-        
-        This endpoint also supports solid colors - you can take a color code and use it in the prompt.
-
-        Before making any modifications, please call the /info or background/info route to obtain information on the available modifications, and their oracle values.
-        
-        
-        Here are some examples:
-        
-        
-        **original image**: 
-        
-        
-        <img src="https://i.ibb.co/n6JtktM/unnamed-13.jpg" width="200"/>
-        
-        
-        **bg_prompt**: in a parking lot
-                
-        
-        **num_results**: 3
-        
-        
-        **results**:
-        
-        
-        <img src="https://i.ibb.co/1zvT5h4/unnamed-14.jpg" width="200"/> <img src="https://i.ibb.co/MkVDxc8/unnamed-15.jpg" width="200"/>
-        <img src="https://i.ibb.co/pfgQ34p/unnamed-16.jpg" width="200"/> 
-        
-        
-        
-        You can use this route on a modified image by providing the sid from the response of the previously used route.
-        
-        
-        This route returns both the URL and the sid associated with the updated image.
-      
-      operationId: replace_bg
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "fa8f8572986ccb03"
-          description: The visual id of the image for which the user wishes to replace the background
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                sync:
-                  type: boolean
-                  default: false
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false.
-                fast: 
-                  type: boolean
-                  default: true
-                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized.
-                sid:
-                  type: string
-                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-                desired_resolution:
-                  type: string
-                  description: The desired resolution of the updated image. This parameter is optional.
-                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
-                bg_prompt:
-                  type: string
-                  description: Text based on which you wish to generate the new background. Bria currently supports prompts in English only.
-                refine_prompt:
-                  type: boolean
-                  default: true
-                  description: When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
-                num_results:
-                  type: integer
-                  default: 4
-                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
-                seed:
-                  type: integer
-                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                negative_prompt:
-                  type: string
-                  description: This parameter is optional. Bria currently supports prompts in English only.
-            example:
-                bg_prompt: "in a parking lot"
-                num_results: 1
-                sync: false
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  result:
-                    type: array
-                    items:
-                      type: array
-                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-              example:
-                  result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /image_expansion:
     post:
       tags:
-        - Image
-      summary: Expand Image - Isolated
+        - Image Modifications
+      summary: Expand Image
       description: >-
 
 
@@ -5564,7 +5405,7 @@ paths:
         
         <img src="https://bria-image-repository.s3.amazonaws.com/images/d35530e95ab7c509.jpg" width="400"/> <img src="https://bria-image-repository.s3.amazonaws.com/images/84752d2fca8a6ae3.jpg" width="200"/>
         <img src="https://bria-image-repository.s3.amazonaws.com/images/904f62b0dce4fb8c.jpg" width="600"/> 
-      operationId: isolated_image_expansion
+      operationId: image_expansion
       parameters:
         - in: header
           name: api_token
@@ -5663,179 +5504,11 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-  /{visual_id}/image_expansion:
-    post:
-      tags:
-        - Image
-      summary: Expand Image
-      description: >-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-
-
-        The *Image Expension Route* can be used to expand an image, by utilizing generative AI.
-        
-        
-        You can decide on the image size of the final result as well as the position and size of the original image compared to the final result.
-        
-        
-        In this way, you can create unique variations of your original image instead of cropping it into different aspect ratios and losing important details.
-        
-        
-        **Optimal input range**
-        
-        
-        ***Input Image Area:*** Ensure that the input image area is more than 15% of the canvas area to achieve optimal results.
-        
-
-        ***Canvas Size:*** The canvas size should be up to an area of 5000x5000 pixels.
-        
-        Here are some examples:
-        
-        
-        **original image (Generated by Bria)**: 
-        
-        
-        <img src="https://bria-image-repository.s3.amazonaws.com/images/caeaa19524d69ad6.jpg" width="200"/>
-        
-        
-        **results**:
-        
-        
-        <img src="https://bria-image-repository.s3.amazonaws.com/images/d4d49719b5a54e49.jpg" width="400"/> <img src="https://bria-image-repository.s3.amazonaws.com/images/cbf61f2b859662c0.jpg" width="200"/>
-        <img src="https://bria-image-repository.s3.amazonaws.com/images/aa9b3036e5c6d43a.jpg" width="600"/> 
-        
-        
-         **original image (Stock Image)**: 
-        
-        
-        <img src="https://bria-image-repository.s3.amazonaws.com/images/c64220ebda5ce787.jpg" width="200"/>
-        
-        
-        **results**:
-        
-        
-        <img src="https://bria-image-repository.s3.amazonaws.com/images/d35530e95ab7c509.jpg" width="400"/> <img src="https://bria-image-repository.s3.amazonaws.com/images/84752d2fca8a6ae3.jpg" width="200"/>
-        <img src="https://bria-image-repository.s3.amazonaws.com/images/904f62b0dce4fb8c.jpg" width="600"/> 
-                
-        
-        You can use this route on a modified image by providing the sid from the response of the previously used route.
-        
-        
-        This route returns both the URL and the sid associated with the updated image.
-      
-      operationId: image_expansion
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "8487fb411f3c6716"
-          description: The visual id of the image which the user wishes to expand
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                canvas_size:
-                  type: array
-                  items:
-                    type: integer
-                  default: [1000,1000]
-                  description: The desired size of the final image, after the expansion. should have an area of less than 5000x5000 pixels.
-                original_image_size:
-                  type: array
-                  items:
-                    type: integer
-                  description: The desired size of the original image, inside the full canvas. Should be over 15% of the canvas area.
-                original_image_location:
-                  type: array
-                  items:
-                    type: integer
-                  description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
-                prompt:
-                  type: string
-                  description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only.
-                seed:
-                  type: integer
-                  description: You can choose whether you want your generated expension to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                sid:
-                  type: string
-                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-                negative_prompt:
-                  type: string
-                  description: This parameter is optional. Bria currently supports prompts in English only.
-              example: 
-                canvas_size: [1200,674]
-                original_image_size: [610,855]
-                original_image_location: [301,-66]
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code:
-                    type: integer
-                    example: 200
-                  description:
-                    type: string
-                    example: "SUCCESS"
-
-                  message:
-                    type: string
-                    example: "Finished sucessfully"
-                    description: A message that describes the request status. The options are Finished sucessfully, Content might not be safe for work.
-                  prompt:
-                    type: string
-                    example: "a man in a shirt sitting down in front of a brick wall looking off to the side"
-                    description: The prompt used to generate the expansion. If you want to recreate the result again, you should use in the request the prompt and the seed of the response.
-                  image_res:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "URL"
-                  seed:
-                    type: integer
-                    example: 1525972691
-                    description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response.
-                  sid:
-                    type: string
-                    example: "3b5b6858-0a9a-11ee-a0d6-565ee9a92763.JPEG"
-                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-                  status:
-                    type: string
-                    example: "SUCCESS"
-                    description: The request status. The options are SUCCESS, NSFW.
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-        '512':
-          description: Insufficient resources to process the request.
   /image/increase_resolution:
     post:
       tags:
-        - Image
-      summary: Increase Resolution - Isolated
+        - Image Modifications
+      summary: Increase Resolution
       description: >-
 
 
@@ -5884,7 +5557,7 @@ paths:
               print(response.text)
                         
 
-      operationId: isolated_increase_resolution
+      operationId: increase_resolution
       parameters:
         - in: header
           name: api_token
@@ -5937,86 +5610,17 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
-
-  /{visual_id}/increase_resolution:
-    get:
-      tags:
-        - Image
-      summary: Increase Resolution
-      description: >-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-        
-
-        The *Increase Resolution Route* is used to upsacle the resolution of any image.
-        
-        
-        You can also use this route on a modified image by providing the sid from the response of the previously used route.
-                        
-
-      operationId: increase_resolution
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "8487fb411f3c6716"
-          description: visual id of the image the user would like to upscale
-        - in: query
-          name: sid
-          schema:
-            type: string
-            example: "Remove this parameter if the image has not been modified using Bria."
-          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to apply on the result of that route, please provide this information. This parameter is optional.
-        - in: query
-          name: desired_increase
-          schema:
-            type: integer
-            example: 2
-          description: The resolution multiplier. The possible value are 2,4.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  image_res:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.jpeg?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
   /{visual_id}/image_to_psd:
     post:
       tags:
-        - Image
+        - Image Modifications
       summary: Delayer Image
       description: >-
 
 
         **Description**
 
-
+        **This route will be replaced soon with isolated version, that doesn't require image registration.**
 
         The *Image to PSD Route* is used to create a layered PSD file from any image.
         
@@ -6072,8 +5676,8 @@ paths:
   /crop:
     post:
       tags:
-        - Image
-      summary: Crop out foreground - Isolated
+        - Image Modifications
+      summary: Crop out foreground
       description: >-
 
 
@@ -6085,7 +5689,7 @@ paths:
         
         
         You can utilize Bria's /background/remove endpoint and then use the result of that route in the/crop route.
-      operationId: isolated_crop
+      operationId: crop
       parameters:
         - in: header
           name: api_token
@@ -6139,90 +5743,6 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-  /{visual_id}/crop:
-    post:
-      tags:
-        - Image
-      summary: Crop out foreground
-      description: >-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-        
-
-        The *Crop Route* is used to crop an image without a background tightly around the remaining region of interest.
-        
-        
-        You can also use this route on a modified image by providing the sid from the response of the previously used route. You can utilize Bria's /background/remove endpoint and then use the result of that route in the /crop route.
-        
-        
-        This route returns both the URL and the sid associated with the updated image.
-        
-        
-        On images without transparent backgrounds, the response will be the provided image at the selected resolution.
-        
-
-      operationId: crop
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "8487fb411f3c6716"
-          description: visual id of the image the user would like to crop
-        - in: query
-          name: sid
-          schema:
-            type: string
-            example: "Remove this parameter if the image has not been modified using Bria."
-          description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                padding:
-                  type: integer
-                  description: Cropping the object with padding around it. Currently, padding is applied to all four borders of the remaining region. This parameter is optional.
-                  default: 0
-                  example: 1
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  image_res:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "https://bria-temp.s3.amazonaws.com/engine_no_bg/727b73c6-b723-11ec-947a-c28fc8b4a55b.png?AWSAccessKeyId=ASIAUL5JH7ABNOAGDDHM&Signature=IIZp7MtiAoY32wIq%2BAVoUd7U3XY%3D&x-amz-security-token=FwoGZXIvYXdzEEwaDJNBqgbCH8ZLEjbtwCKYBByHo1V0nSnkoDy3kvaujvGHcNdmw0pYIwWYuvYdnKYv5zmzE4k%2FcgcB8YfY8DXKBOZR9DB%2FpzwoMPYf%2FxDMy4NenzSXw4VymF3j97bTEy6M00j%2BVO3K5fJOpN7iWlrxTaFHQICUW7%2FHE4CvaQ%2FB%2BWoCakNiEESUQxGglIygfJpviyexXNsxNGpeq7BPSSrTdsuD6R27pKmdFgdkL3xzUgMQMKzSeTJL4hUVGVldOp5sI4Qlvwnb8L%2FW7ciHHjUCf8WuHtDjDSdBIAqNci6wtXL6SQwLG%2Fo3oryPr0tNOMsbnrIIoFP5ZnH3VQISPCITBkWuUu9bdXkBm2R7rJyfPPOusFLuom2GDyVEHJfA%2FUtwGELxtv7Co29Tujd2N%2BHRhcdyrNsngwYwU2AiLyopMglYIDNQpv9%2FIKnH9ikuki%2F%2FWQ2PnzepcttQuXzlsqlUJRg%2Fcqhqis%2BxwJXZL1vpPJb%2BJz22oMp%2FJqZw%2BOIBWdxiL0pRq%2FF6EmyQz8iuhVBkr%2BnN5eWWxOrizMLFoVRTP34NPOWvWLwZJlrHzryCY8wZ01u2OLu3jxMcBhwypIp4pCzwx%2BAo39AXU1iMHJq36S6Bl5uptEr1NONKQvvz%2BpndF5t1dnoK7lfD9XExjk16shJXIImqiN7kxP2RTIrKsvm8wJY6iPxE35%2Bn0Cw8BS1eRmXFIOdEcfzbJVq80SQRIMko4CePyoOiKPCRwJIGMipiGM2hMspLQDThPJdlIiCOIh670Q2pu95y27iI3i87WQB55KJ9JNTL39I%3D&Expires=1650276342"
-                  sid:
-                    type: string
-                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
-                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
   /search:
     get:
       tags:

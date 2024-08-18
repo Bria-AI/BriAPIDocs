@@ -23,10 +23,9 @@ info:
     - **Enhance Product Imagery with E-commerce Solutions**: Use specialized features to create professional product shots, packshots, and lifestyle images for e-commerce platforms.
 
     
-    - **Upload or Register Images**: Bring your own images into Bria and modify them using various routes to suit your needs.
-
+    - **Modify and Transform Images**: Bring your own images and modify them using various routes to suit your needs.
     
-
+    
     This document provides an overview of the API's capabilities and guides users on how to effectively implement them.
 
 
@@ -67,21 +66,50 @@ info:
     
     These solutions include:
 
-    - **Product Cutout**: Create clean and professional product cutouts.
+    - `/cutout`: Create clean and professional product cutouts.
 
     
-    - **Product Packshot**: Generate professional-standard packshots with customizable background colors and optimal product placement.
+    - `/packshot`: Generate professional-standard packshots with customizable background colors and optimal product placement.
 
     
-    - **Lifestyle Product Shot by Text**: Enrich product images by placing them in various environments using textual descriptions, enhancing appeal and providing context.
+    - `/lifestyle_shot_by_text`: Enrich product images by placing them in various environments using textual descriptions, enhancing appeal and providing context.
 
     
-    - **Lifestyle Product Shot by Image**: Generate product images in enriched environments using a reference image for inspiration, allowing for creative and unique presentations.
+    - `/lifestyle_shot_by_image`: Generate product images in enriched environments using a reference image for inspiration, allowing for creative and unique presentations.
 
     
 
 
-    ### Uploading and Modifying Images
+    ### Modifying Images
+    
+    Bria supports both isolated and registration-required routes for modifying images:
+
+
+    **Isolated Routes** (no registration required):
+    
+    - `/increase_resolution` - Upscale any image.
+    
+    - `/image_expansion` - Expand the image beyond its original borders.
+    
+    - `/crop` - Crop an image tightly around the region of interest without a background.
+    
+    - `/background/remove` - Remove the background of an image.
+    
+    - `/background/blur` - Create a blur effect on the background.
+    
+    - `/background/replace` - Generate new backgrounds for an image.
+    
+    - `/caption` - Generate a caption describing the given image.
+
+
+    **Soon to be Isolated:**
+    
+    - `/mask_generator` - Retrieve all available masks for an image.
+    
+    - `/eraser` - Remove objects from an image using manually created or auto-generated masks. You can provide any mask, created manually by a user or automaticly. This route is currently named `/objects/remove`, and soon the current route will be deprecated and a new version will be available via the new route.
+    
+    - `/image_to_psd` - Create a layered PSD file from any image.
+    
 
     **Uploading and Registering Images**:
 
@@ -91,47 +119,16 @@ info:
 
 
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
-      - /campaign_generator - The *Campaign Generator Route* enables the creation of customized campaigns. It allows for the generation of visual ads, including various elements like text, images, and layout, based on specific parameters provided by the user.
-      - /info - By using the *Info Route*, you can understand the possible changes for each object in the image. 
+      - `/campaign_generator` - The *Campaign Generator Route* enables the creation of customized campaigns. It allows for the generation of visual ads, including various elements like text, images, and layout, based on specific parameters provided by the user.
+      - `/info` (soon to be deprecated) - By using the *Info Route*, you can understand the possible changes for each object in the image. 
         The following routes can be used if you do not require information for people, objects, and background, but rather only one of them:
-         - /person/info
-         - /objects/info
-         - /background/info
-      - /increase_resolution - The *Increase Resolution route* is used to upscale any image. 
-      - /image_to_psd - The *Image To PSD route* is used to create a layered PSD file out of any image.
-      - /mask_generator - By using the *Mask Generator*, you can get all the available masks for an image, a segmentation for the image. 
-      - /search - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
-      - /search_similar_images - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
-      - /caption - By using the *Caption Route*, you can get a caption that describes the given image.
-      - /crop - The *Crop Route* is used to crop an image without a background, tightly around the remaining region of interest.
+         - `/person/info`
+         - `/objects/info` - soon to be deprecated
+         - `/background/info`- soon to be deprecated
+      - `/person/modify` - Modify person-related elements in the image. In order to use this route you shuold first use the route /person/info.
+      - `/search` - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
+      - `/search_similar_images` - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.
 
-    With the response from the *Info Routes* or from the *Mask Generator*, the following routes can be used without any particular order:
-      - /create - Using the *Create Route* to create a new visual with requested changes of elements according to the /info route possibilities. 
-      - /objects/remove - Using the *Remove Object Route* to remove the objects from an image. You can also use this route with any mask, that is created manually by a user or generated by the /mask_generator endpoint.
-      - /background/remove - Using the *Remove BG Route* to remove the background of an image.
-      - /background/blur - Using the *Blur BG Route* to create a blur effect on the background of an image.
-      - /replace_bg - Using the *Replace BG Route* to generate new backgrounds for an image.
-
-        
-    # Quality Predictions
-
-    
-    The "Oracle" capability within the API can significantly elevate the user experience by offering quality prediction functionalities. 
-
-    
-    With the Oracle integrated into your product, you can ensure optimal outcomes for your end users. 
-
-    
-    This feature covers various endpoints, including /create, objects/remove, and background operations, providing you with a range of quality prediction options to enhance your product's capabilities.
-
-    
-    The orcale value predicts the quality of the result, for each possible action.
-
-    
-    By using the "info" for all endpoints, "person/info" endpoint for face modifications, "objects/info" for object removal, and "background/info" for background actions, you can access the Oracle's predictions, and help your users to make informed decisions. 
-    
-    
-    Incorporating Oracle predictions into the API workflow enhances efficiency, minimizes errors, and fosters an optimized API experience.   
 
 
     # Authentication
@@ -3623,6 +3620,10 @@ paths:
         **Description**
 
 
+        **This route will be deprecated soon**
+        
+        
+
         The *Background/Info Route* is used to retrieve useful information on the background of a specific
         visual that was previously uploaded to the database.
 
@@ -3730,6 +3731,9 @@ paths:
 
 
         **Description**
+
+
+        **This route will be deprecated soon**
 
 
         The *Objects/Info Route* is used to retrieve useful information on the objects in a specific
@@ -4063,6 +4067,73 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  /caption:
+    get:
+      tags:
+        - AI Search
+      summary: Get Caption - Isolated
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Caption Route* is used to get a caption that describes the given image.
+        
+
+      operationId: isolated_caption
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        caption:
+                          type: string
+                          example: "woman walking on a bridge in the jungle"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /{visual_id}/caption:
     get:
       tags:
@@ -4073,6 +4144,8 @@ paths:
 
         **Description**
 
+
+        **This route will be deprecated soon**
 
 
         The *Caption Route* is used to get a caption that describes the given image.
@@ -4949,6 +5022,8 @@ paths:
         **Description**
 
 
+        **This route will be deprecated soon**
+        
 
         The *Remove BG Route* is used to remove the background of a previously uploaded image. 
         
@@ -5021,6 +5096,72 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  /background/blur:
+    post:
+      tags:
+        - Background
+      summary: Blur Background - Isolated
+      description: >-
+
+
+        **Description**
+
+
+
+        The *background/blur Route* is used to create a blur effect on the background of an image. 
+      operationId: isolated_blur_bg
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                scale:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                  default: 5
+                  description: A scale for determining how blurry the background of the image should be. The options are 1, 2, 3, 4, 5. This parameter is optional.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /{visual_id}/background/blur:
     get:
       tags:
@@ -5031,6 +5172,8 @@ paths:
 
         **Description**
 
+
+        **This route will be deprecated soon**
 
 
         The *background/blur Route* is used to create a blur effect on the background of a previously uploaded image. 
@@ -5239,6 +5382,9 @@ paths:
         **Description**
 
 
+        **This route will be deprecated soon**
+        
+        
 
         The *Replace BG Route* is used to replace the background of a previously uploaded image with a generated background using the state-of-the-art BRIA 2.3 ControlNet BG-Gen model (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">available on Hugging Face</a>). 
 
@@ -5360,6 +5506,160 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
+  /image_expansion:
+    post:
+      tags:
+        - Image
+      summary: Expand Image - Isolated
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Image Expension Route* can be used to expand an image, by utilizing generative AI.
+        
+        
+        You can decide on the image size of the final result as well as the position and size of the original image compared to the final result.
+        
+        
+        In this way, you can create unique variations of your original image instead of cropping it into different aspect ratios and losing important details.
+        
+        
+        **Optimal input range**
+        
+        
+        ***Input Image Area:*** Ensure that the input image area is more than 15% of the canvas area to achieve optimal results.
+        
+
+        ***Canvas Size:*** The canvas size should be up to an area of 5000x5000 pixels.
+        
+        Here are some examples:
+        
+        
+        **original image (Generated by Bria)**: 
+        
+        
+        <img src="https://bria-image-repository.s3.amazonaws.com/images/caeaa19524d69ad6.jpg" width="200"/>
+        
+        
+        **results**:
+        
+        
+        <img src="https://bria-image-repository.s3.amazonaws.com/images/d4d49719b5a54e49.jpg" width="400"/> <img src="https://bria-image-repository.s3.amazonaws.com/images/cbf61f2b859662c0.jpg" width="200"/>
+        <img src="https://bria-image-repository.s3.amazonaws.com/images/aa9b3036e5c6d43a.jpg" width="600"/> 
+        
+        
+         **original image (Stock Image)**: 
+        
+        
+        <img src="https://bria-image-repository.s3.amazonaws.com/images/c64220ebda5ce787.jpg" width="200"/>
+        
+        
+        **results**:
+        
+        
+        <img src="https://bria-image-repository.s3.amazonaws.com/images/d35530e95ab7c509.jpg" width="400"/> <img src="https://bria-image-repository.s3.amazonaws.com/images/84752d2fca8a6ae3.jpg" width="200"/>
+        <img src="https://bria-image-repository.s3.amazonaws.com/images/904f62b0dce4fb8c.jpg" width="600"/> 
+      operationId: isolated_image_expansion
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                canvas_size:
+                  type: array
+                  items:
+                    type: integer
+                  default: [1000,1000]
+                  description: The desired size of the final image, after the expansion. should have an area of less than 5000x5000 pixels.
+                original_image_size:
+                  type: array
+                  items:
+                    type: integer
+                  description: The desired size of the original image, inside the full canvas. Should be over 15% of the canvas area.
+                original_image_location:
+                  type: array
+                  items:
+                    type: integer
+                  description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
+                prompt:
+                  type: string
+                  description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only.
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated expension to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                negative_prompt:
+                  type: string
+                  description: This parameter is optional. Bria currently supports prompts in English only.
+              example: 
+                canvas_size: [1200,674]
+                original_image_size: [610,855]
+                original_image_location: [301,-66]
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: integer
+                    example: 200
+                  description:
+                    type: string
+                    example: "SUCCESS"
+                  message:
+                    type: string
+                    example: "Finished sucessfully"
+                    description: A message that describes the request status. The options are Finished sucessfully, Content might not be safe for work.
+                  prompt:
+                    type: string
+                    example: "a man in a shirt sitting down in front of a brick wall looking off to the side"
+                    description: The prompt used to generate the expansion. If you want to recreate the result again, you should use in the request the prompt and the seed of the response.
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+                  seed:
+                    type: integer
+                    example: 1525972691
+                    description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response.
+                  status:
+                    type: string
+                    example: "SUCCESS"
+                    description: The request status. The options are SUCCESS, NSFW.
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /{visual_id}/image_expansion:
     post:
       tags:
@@ -5371,8 +5671,10 @@ paths:
         **Description**
 
 
+        **This route will be deprecated soon**
 
-        The *Image Expension Route* can be used to expand an image and its background, by utilizing generative AI.
+
+        The *Image Expension Route* can be used to expand an image, by utilizing generative AI.
         
         
         You can decide on the image size of the final result as well as the position and size of the original image compared to the final result.
@@ -5483,10 +5785,13 @@ paths:
               schema:
                 type: object
                 properties:
-                  image_res:
+                  code:
+                    type: integer
+                    example: 200
+                  description:
                     type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "https://d1uzvjowrxhw13.cloudfront.net/api/res/8487fb411f3c6716/3b890600-0a9a-11ee-a0d6-565ee9a92763.JPEG?AWSAccessKeyId=ASIAUL5JH7ABOLVAC5ZD&Signature=OG99zCeOrmhZmcbs2GqnSurA4rU%3D&x-amz-security-token=FwoGZXIvYXdzEMv%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDD3WDwL%2BmvmCdZsBySKYBF54jsyE%2Fwwy5R8eFojz2FRGia6H6nGTaqFL7VXu3DG%2BidiqIqsIX0yUeegtNiaTEJV8smLwIN4ZHLLyw1lNl5XmPBIQA7jcGKwipo8QJK1o8YWI9gXRJGl8gjjCXC1FbkUOfDQzW2jpMms8zc8jZqX85rz0ZjfcHx1bt3V2CS7Y7mLRkQ7lOh1qBoYtvq%2BqxqZIemCLtC7H2%2FWzon7zuUPaSI%2B8C0sE6dLO3srjBsNV%2BqN%2BKiXIn4Jel0pJtJOjL5lSDz6e3faN4oXBH%2FKBbs2fhJrulJQwEctxt2vqW7UdNDy4YIGykC7diGvCSiE0d2qoWmm%2BGBKiPVBOyDS8EPwUO%2BxUtQQCWfsLogAB4GULTZJAh9DsA%2FgSIe9UtXNp59joPlqx9dN0NaN%2BSRsI2p65b9%2F8pZk1XbKKM5D6DqY01S%2FiomWmQirphuoZq2G%2F%2Fg7ZSKxY8IXTG8332hJgt3JyyqfiHO%2Fp5l4NHkrb0%2BmLl%2FO7OOu3%2BtZAQoYjWmuOqUPULFUAohMzzTLtgOFOXthbmzRj1j48V%2Fsish1OSYRdd6E0BzfJhNH%2BNIfOFlvJOF7Ysgs%2FBGrQtKsbhR7ZQiKK%2B1qRBTnXmxUClc6W9%2BT95EBploe%2B7Vi0pXApVIKy4Y00rgdGPQUnst3oiF8EpwyhBcoCyTKgeboUtUu09zO7Wj6miC%2BMqu20J2iT%2FOnC9l2bvLPa3UicKKeYpqQGMirzoGKqbdAANhJI71KyKOW0bjgbkjtdFS324biy8YLLVhbFnzj4jKu0mNc%3D&Expires=1687341603"
+                    example: "SUCCESS"
+
                   message:
                     type: string
                     example: "Finished sucessfully"
@@ -5495,6 +5800,10 @@ paths:
                     type: string
                     example: "a man in a shirt sitting down in front of a brick wall looking off to the side"
                     description: The prompt used to generate the expansion. If you want to recreate the result again, you should use in the request the prompt and the seed of the response.
+                  image_res:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
                   seed:
                     type: integer
                     example: 1525972691
@@ -5519,7 +5828,6 @@ paths:
           description: Insufficient data. The given input is not supported by the Bria API.
         '512':
           description: Insufficient resources to process the request.
-
   /image/increase_resolution:
     post:
       tags:
@@ -5638,6 +5946,8 @@ paths:
         **Description**
 
 
+        **This route will be deprecated soon**
+        
 
         The *Increase Resolution Route* is used to upsacle the resolution of any image.
         
@@ -5756,6 +6066,74 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  /crop:
+    post:
+      tags:
+        - Image
+      summary: Crop out foreground - Isolated
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Crop Route* is used to crop an image without a background tightly around the remaining region of interest.
+        
+        
+        You can utilize Bria's /background/remove endpoint and then use the result of that route in the/crop route.
+      operationId: isolated_crop
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                padding:
+                  type: integer
+                  description: Cropping the object with padding around it. Currently, padding is applied to all four borders of the remaining region. This parameter is optional.
+                  default: 0
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /{visual_id}/crop:
     post:
       tags:
@@ -5767,6 +6145,8 @@ paths:
         **Description**
 
 
+        **This route will be deprecated soon**
+        
 
         The *Crop Route* is used to crop an image without a background tightly around the remaining region of interest.
         

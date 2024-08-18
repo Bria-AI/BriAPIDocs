@@ -104,9 +104,9 @@ info:
 
     **Soon to be Isolated:**
     
-    - `/mask_generator` - Retrieve all available masks for an image.
+    - `/mask_generator` - Retrieve all available masks for an image, creating a full segmenration of the image.
     
-    - `/eraser` - Remove objects from an image using manually created or auto-generated masks. You can provide any mask, created manually by a user or automaticly. This route is currently named `/objects/remove`, and soon the current route will be deprecated and a new version will be available via the new route.
+    - `/eraser` - Remove objects from an image using manually created or auto-generated masks. This route is currently named `/objects/remove`, and soon the current route will be deprecated and a new version will be available via the new route.
     
     - `/image_to_psd` - Create a layered PSD file from any image.
     
@@ -3988,7 +3988,7 @@ paths:
         **Description**
 
 
-        The *Objects/Mask Generator Route* is used to generate all possible masks for an image.
+        The *Objects/Mask Generator Route* is used to generate all possible masks for an image, creating a full segmenration of the image.
         
 
         The response contains a zip file named as the visual_id of the provided image.
@@ -5134,6 +5134,8 @@ paths:
                   maximum: 5
                   default: 5
                   description: A scale for determining how blurry the background of the image should be. The options are 1, 2, 3, 4, 5. This parameter is optional.
+              example:
+                image_url: 'URL'
       responses:
         '200':
           description: Successful operation.
@@ -5607,6 +5609,7 @@ paths:
                   type: string
                   description: This parameter is optional. Bria currently supports prompts in English only.
               example: 
+                image_url: "URL"
                 canvas_size: [1200,674]
                 original_image_size: [610,855]
                 original_image_location: [301,-66]
@@ -6106,6 +6109,8 @@ paths:
                   type: integer
                   description: Cropping the object with padding around it. Currently, padding is applied to all four borders of the remaining region. This parameter is optional.
                   default: 0
+            example:
+              image_url: 'URL'
       responses:
         '200':
           description: Successful operation.

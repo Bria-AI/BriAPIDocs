@@ -101,6 +101,8 @@ info:
     - `/background/blur` - Create a blur effect on the background.
     
     - `/background/replace` - Generate new backgrounds for an image.
+
+    - `erase_foreground` - Erase the foreground from a provided image
     
     - `/caption` - Generate a caption describing the given image.
 
@@ -2679,7 +2681,7 @@ paths:
     post:
       tags:
         - eCommerce Suite
-      summary: Product Shadow (Coming Soon)
+      summary: Product Shadow
       description: >-
         The Product Shadow API allows you to add consistent and customizable shadows to product images with transparent backgrounds. This feature is designed to work in combination with other capabilities like background removal, product cutout, and product lifestyle shots, enhancing the visual appeal of e-commerce and product imagery.
 
@@ -4946,7 +4948,7 @@ paths:
     post:
       tags:
         - Image Modifications
-      summary: Erase Foreground (Coming Soon)
+      summary: Erase Foreground 
       description: >-
 
 
@@ -4954,7 +4956,7 @@ paths:
 
 
 
-        This route is used to erase the foregound from a provided image, while generating the area behind it. 
+        This route is used to erase the foreground from a provided image, while generating the area behind it. 
       operationId: erase_foreground
       parameters:
         - in: header

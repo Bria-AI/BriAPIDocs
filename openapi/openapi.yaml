@@ -4171,7 +4171,7 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   /caption:
-    get:
+    post:
       tags:
         - AI Search
       summary: Get Caption

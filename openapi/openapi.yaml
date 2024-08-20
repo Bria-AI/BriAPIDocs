@@ -2711,7 +2711,7 @@ paths:
                   type: string
                   format: binary
                   description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. The input image must have a transparent background, could be obtained by using our background removal or cutout features.
-                shadow_type:
+                type:
                   type: string
                   description: Specifies the type of shadow. Can be 'regular' or 'float'. This paramter is optional.
                   default: "regular"

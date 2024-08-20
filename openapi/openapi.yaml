@@ -2642,7 +2642,7 @@ paths:
                   description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 background_color:
                   type: string
-                  description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background. This paramter is optional.
+                  description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background. This parameter is optional.
                   default: "#FFFFFF"
             example:
               sku: "12345"
@@ -2713,14 +2713,14 @@ paths:
                   description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. The input image must have a transparent background, could be obtained by using our background removal or cutout features.
                 type:
                   type: string
-                  description: Specifies the type of shadow. Can be 'regular' or 'float'. This paramter is optional.
+                  description: Specifies the type of shadow. It can be 'regular' or 'float'. This parameter is optional.
                   default: "regular"
                 background_color:
                   type: string
                   description: The background hex color code for the resulting image. If you would like to get a transparent background, don't include this parameter in the request. This parameter is optional.
                 shadow_color:
                   type: string
-                  description: The shadow color hex code. This paramter is optional.
+                  description: The shadow color hex code. This parameter is optional.
                   default: "#000000"
                 shadow_offset:
                   type: array
@@ -2730,19 +2730,19 @@ paths:
                   default: [0, 15]
                 shadow_intensity:
                   type: integer
-                  description: Adjusts the intensity of the shadow. This paramter is optional.
+                  description: Adjusts the intensity of the shadow. This parameter is optional.
                   minimum: 0
                   maximum: 100
                   default: 60
                 shadow_blur:
                   type: integer
-                  description: Controls the blur level of the shadow's edges. This paramter is optional. Default for 'shadow_type'=regular is 15, while for 'shadow_type'=float is 20.
+                  description: Controls the blur level of the shadow's edges. This parameter is optional. Default for 'shadow_type'=regular is 15, while for 'shadow_type'=float is 20.
                 shadow_width:
                   type: integer
-                  description: (For floating shadows) Controls the width of the elliptical shadow, in pixels that could be positive and negative. As defoult the value is according to the width of the product. This paramter is optional.
+                  description: (For floating shadows) Controls the width of the elliptical shadow, in pixels that could be positive and negative. As default the value is according to the width of the product. This parameter is optional.
                 shadow_height:
                   type: integer
-                  description: (For floating shadows) Controls the height of the elliptical shadow, in pixels that could be positive and negative. This paramter is optional.
+                  description: (For floating shadows) Controls the height of the elliptical shadow, in pixels that could be positive and negative. This parameter is optional.
                   default: 70
             example:
               sku: "12345"
@@ -4110,7 +4110,7 @@ paths:
         You can display those masks to the user, let them pick one or more masks, and use objects/remove route to remove the masked area.
 
 
-        In order to use the objects/remove route on the mask the user selected, you should provide the mask_id, and use the paramter mask_source=generated.
+        In order to use the objects/remove route on the mask the user selected, you should provide the mask_id, and use the parameter mask_source=generated.
 
         
         You can see below an example of the content of the zip:

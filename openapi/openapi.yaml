@@ -2717,8 +2717,7 @@ paths:
                   default: "regular"
                 background_color:
                   type: string
-                  description: The background hex color code for the resulting image. Optionally, use 'transparent' for a transparent background. This paramter is optional.
-                  default: "transparent"
+                  description: The background hex color code for the resulting image. If you would like to get a transparent background, don't include this parameter in the request. This parameter is optional.
                 shadow_color:
                   type: string
                   description: The shadow color hex code. This paramter is optional.

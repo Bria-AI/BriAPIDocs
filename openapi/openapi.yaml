@@ -4170,7 +4170,7 @@ paths:
         **Description**
 
 
-        The *Objects/Mask Generator Route* is used to generate all possible masks for an image, creating a full segmenration of the image.
+        The *Objects/Mask Generator Route* is used to generate all possible masks for an image, creating a full segmentation of the image.
         
 
         The response contains a zip file named as the visual_id of the provided image.

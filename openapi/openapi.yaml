@@ -2650,7 +2650,6 @@ paths:
                   description: The URL of the image containing the product to be cut out. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
                   type: string
-                  format: binary
                   description: The image file containing the product to be cut out, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
             example:
               sku: "12345"
@@ -2716,7 +2715,6 @@ paths:
                   description: The URL of the product image or product cutout. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
                   type: string
-                  format: binary
                   description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 background_color:
                   type: string
@@ -2787,7 +2785,6 @@ paths:
                   description: The URL of the product image or product cutout. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. The input image must have a transparent background, could be obtained by using our background removal or cutout features.
                 file:
                   type: string
-                  format: binary
                   description: The product image or product cutout file, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. The input image must have a transparent background, could be obtained by using our background removal or cutout features.
                 type:
                   type: string
@@ -3003,14 +3000,12 @@ paths:
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
                   type: string
-                  format: binary
                   description: The product shot file to be placed in a lifestyle shot, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 reference_image_url:
                   type: string
                   description: The URL of the reference image to be used for generating the lifestyle shot. If both reference_image_url and reference_image_file are provided, reference_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 reference_image_file:
                   type: string
-                  format: binary
                   description: The reference image file to be used for generating the lifestyle shot, in base64 format. Used if reference_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 num_results:
                   type: integer

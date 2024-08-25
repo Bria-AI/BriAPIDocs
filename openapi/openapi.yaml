@@ -229,7 +229,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate.
@@ -411,7 +411,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -561,7 +561,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -803,7 +803,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -922,7 +922,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -2372,7 +2372,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate.
@@ -2537,7 +2537,7 @@ paths:
               properties:
                 prompt:
                   type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only.
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
                   description: How many images you would like to generate. 
@@ -2895,7 +2895,7 @@ paths:
                   description: The product shot file to be placed in a lifestyle shot, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 scene_description:
                   type: string
-                  description: Text description of the new scene or background for the provided product shot. Bria currently supports prompts in English only.
+                  description: Text description of the new scene or background for the provided product shot. Bria currently supports prompts in English only, excluding special characters.
                 optimize_description:
                   type: boolean
                   default: true
@@ -2906,7 +2906,7 @@ paths:
                   description: The number of lifestyle product shots you would like to generate. You will get num_results*10 results when placement_type=automatic and according to the number of required placements*num_results if placement_type=manual_placement.
                 exclude_elements:
                   type: string
-                  description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only.
+                  description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only, excluding special characters.
                 placement_type:
                   type: string
                   description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
@@ -5314,7 +5314,7 @@ paths:
                   description: The product of the image to which a new background should be generated, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 bg_prompt:
                   type: string
-                  description: Text description of the new scene or background for the provided image. Bria currently supports prompts in English only.
+                  description: Text description of the new scene or background for the provided image. Bria currently supports prompts in English only, excluding special characters.
                 refine_prompt:
                   type: boolean
                   default: true
@@ -5458,7 +5458,7 @@ paths:
                   description: The desired location of the original image, inside the full canvas. Provide the location of the upper left corner of the original image. The location can also be outside the canvas (the original image will be cropped).
                 prompt:
                   type: string
-                  description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only.
+                  description: Text on which you wish to base the image expansion. This parameter is optional. Bria currently supports prompts in English only, excluding special characters.
                 seed:
                   type: integer
                   description: You can choose whether you want your generated expension to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.

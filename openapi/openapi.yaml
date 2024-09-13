@@ -2902,8 +2902,8 @@ paths:
                   description: When true, an additional logic takes the scene_description that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
-                  default: 1
-                  description: The number of lifestyle product shots you would like to generate. You will get num_results*10 results when placement_type=automatic and according to the number of required placements*num_results if placement_type=manual_placement.
+                  default: 4
+                  description: The number of lifestyle product shots you would like to generate. You will get num_results x 10 results when placement_type=automatic and according to the number of required placements x num_results if placement_type=manual_placement.
                 exclude_elements:
                   type: string
                   description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only, excluding special characters.
@@ -5321,8 +5321,8 @@ paths:
                   description: When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
                 num_results:
                   type: integer
-                  default: 1
-                  description: The number of backgrounds you would like to generate for the image. If placement_type!=original, then for each selected placement you will get results in the amount specified in this parameter. 
+                  default: 4
+                  description: The number of results you would like to generate.
                 negative_prompt:
                   type: string
                   description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only.

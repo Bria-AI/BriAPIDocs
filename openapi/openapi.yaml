@@ -33,6 +33,8 @@ info:
 
     **Image Generation**:
     - Use the `/text-to-image` endpoints to generate any image you would like, based on the provided prompt, without needing to upload or register images first.
+    - Utilize the /reimagen endpoint to generate new images based on reference images, incorporating elements such as structure, composition, or style from existing visuals.
+    - Enhance your prompts with the /prompt_enhancer route or use the built-in prompt enhancement feature in /text-to-image routes to create more detailed and vivid descriptions, resulting in richer and more diverse image outputs.
 
     **Branded Generation**:
     The Branded Generation API allows you to create and manage custom-branded models for generating unique visual content based on your datasets. Branded models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
@@ -800,12 +802,11 @@ paths:
           description: Method not allowed.
         '500':
           description: Internal server error.
-  paths:
   /reimagen:
     post:
       tags:
         - Image Generation
-      summary: Generate Image with Reference
+      summary: Generate Image with Reference (Coming Soon)
       description: >
         The /reimagen endpoint enables to generate new images based on various types of reference images, guided by a text prompt. This powerful feature allows for the creation of images that incorporate elements from existing visuals, such as structure, style, or specific attributes.
 

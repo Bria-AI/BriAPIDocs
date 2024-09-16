@@ -858,7 +858,7 @@ paths:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
                   minimum: 4
-                  default: 8
+                  default: 12
                   maximum: 20
             examples:
               valid prompt:

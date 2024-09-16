@@ -33,7 +33,11 @@ info:
 
     **Image Generation**:
     - Use the `/text-to-image` endpoints to generate any image you would like, based on the provided prompt, without needing to upload or register images first.
+    
+    
     - Utilize the /reimagen endpoint to generate new images based on reference images, incorporating elements such as structure, composition, or style from existing visuals.
+    
+    
     - Enhance your prompts with the /prompt_enhancer route or use the built-in prompt enhancement feature in /text-to-image routes to create more detailed and vivid descriptions, resulting in richer and more diverse image outputs.
 
     **Branded Generation**:
@@ -810,7 +814,11 @@ paths:
       description: >
         The /reimagen endpoint enables to generate new images based on various types of reference images, guided by a text prompt. This powerful feature allows for the creation of images that incorporate elements from existing visuals, such as structure, style, or specific attributes.
 
+
+
         Currently, the endpoint focuses on using the structure of a reference image to guide the generation process. This is particularly useful for creating gaming visuals, illustrations, and other artistic content that builds upon existing artwork or designs.
+
+
 
         Future updates may expand the capabilities to include different types of references and combinations, enhancing the versatility and creative potential of the image generation process.
 
@@ -830,11 +838,11 @@ paths:
               properties:
                 structure_image_url:
                   type: string
-                  description: The URL of the structure reference image. If both structure_image_url and structure_image_file are provided, structure_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: A publicly available URL of the structure reference image. If both structure_image_url and structure_image_file are provided, structure_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 structure_image_file:
                   type: string
                   format: binary
-                  description: The image file containing the structure reference. This parameter is used if structure_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The image file containing the structure reference, in base64 format. This parameter is used if structure_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 structure_ref_influence:
                   type: number
                   format: float
@@ -874,9 +882,19 @@ paths:
                   minimum: 4
                   default: 8
                   maximum: 20
-              required:
-                - prompt
-                - structure_image_url
+            examples:
+              valid prompt:
+                value:
+                  prompt: "a baby riding a bicycle in a field of flowers"
+                  structure_image_url: "URL"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  structure_image_url: "URL"
+                  num_results: 1
+                  sync: true
       responses:
         '200':
           description: Successful operation.

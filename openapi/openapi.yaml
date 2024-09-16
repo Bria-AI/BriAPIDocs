@@ -349,7 +349,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  results:
+                  result:
                     type: array
                     description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
                     items:
@@ -583,7 +583,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  results:
+                  result:
                     type: array
                     description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
                     items:
@@ -749,7 +749,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  results:
+                  result:
                     type: array
                     description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
                     items:
@@ -881,7 +881,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  results:
+                  result:
                     type: array
                     description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
                     items:

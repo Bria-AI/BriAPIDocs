@@ -5937,7 +5937,7 @@ paths:
           description: Bad request
         '405':
           description: Method not allowed.
-        '405':
+        '406':
           description: The input image's resolution is too low.
         '460':
           description: Failed to download image.
@@ -6094,6 +6094,8 @@ paths:
         
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
         
+        Search will only work on images that have been onboarded using the `register` endpoint.
+        
         **Note:** To use this endpoint, please contact us at [support@bria.ai](mailto:support@bria.ai).
 
       operationId: search
@@ -6198,12 +6200,18 @@ paths:
       summary: Search by Image
       description: >-
         **Description**
+        
       
-        By using the *Search Similar Images Route*, you can send an image as a query and receive relevant images that are similar.
+        By using the *Search Route*, you can utilize Bria's generative search capabilities, which don't require labels or keywords.
+        The user can send any text query and receive relevant images that match the query.
         
-        The *Search Similar Images Route* returns the images, sorted by the similarity score, from the highest to the lowest.
         
+        The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
+        
+        
+        Search will only work on images that have been onboarded using the `register` endpoint.
+        
         
         **Note:** To use this endpoint, please contact us at [support@bria.ai](mailto:support@bria.ai).
       

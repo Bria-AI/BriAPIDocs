@@ -5937,6 +5937,8 @@ paths:
           description: Bad request
         '405':
           description: Method not allowed.
+        '405':
+          description: The input image's resolution is too low.
         '460':
           description: Failed to download image.
         '500':

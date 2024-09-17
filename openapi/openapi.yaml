@@ -819,7 +819,6 @@ paths:
                   description: A publicly available URL of the structure reference image. If both structure_image_url and structure_image_file are provided, structure_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 structure_image_file:
                   type: string
-                  format: binary
                   description: The image file containing the structure reference, in base64 format. This parameter is used if structure_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 structure_ref_influence:
                   type: number

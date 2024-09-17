@@ -6090,8 +6090,10 @@ paths:
         By using the *Search Route*, you can utilize Bria's generative search capabilities, which don't require labels or keywords.
         The user can send any text query and receive relevant images that match the query.
         
+
         The *Search Route* returns the images, sorted by the match score, from highest match to lowest match.
         The images are returned in batches, and you can specify how many images to receive in one batch, and which batch to receive in each call.
+        
         
         Search will only work on images that have been onboarded using the `register` endpoint.
         

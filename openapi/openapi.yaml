@@ -1083,6 +1083,13 @@ paths:
                   minimum: 4
                   maximum: 20
                   default: 8
+                model_influence(Coming Soon): 
+                  type: number
+                  format: float
+                  minimum: 0.00
+                  maximum: 1.00
+                  default: 1.00
+                  description: The influence of the tailored model on the generation. This parameter is optional.
                 guidance_method_1(Coming Soon):
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']

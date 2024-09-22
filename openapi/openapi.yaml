@@ -217,7 +217,7 @@ paths:
           </tr>
           <tr>
             <td>ControlNet Canny</td>
-            <td>An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues</td>
+            <td>An exotic colorful shell on the beach</td>
             <td>1.0</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
@@ -241,7 +241,7 @@ paths:
           </tr>
           <tr>
             <td>ControlNet Color Grid</td>
-            <td>A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above</td>
+            <td>A dynamic fantasy illustration of an erupting volcano</td>
             <td>0.7</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
@@ -544,7 +544,7 @@ paths:
           </tr>
           <tr>
             <td>ControlNet Canny</td>
-            <td>An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues</td>
+            <td>An exotic colorful shell on the beach</td>
             <td>1.0</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
@@ -568,7 +568,7 @@ paths:
           </tr>
           <tr>
             <td>ControlNet Color Grid</td>
-            <td>A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above</td>
+            <td>A dynamic fantasy illustration of an erupting volcano</td>
             <td>0.7</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
@@ -1212,7 +1212,7 @@ paths:
           </tr>
           <tr>
             <td>ControlNet Canny</td>
-            <td>An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues</td>
+            <td>An exotic colorful shell on the beach</td>
             <td>1.0</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
@@ -1236,7 +1236,7 @@ paths:
           </tr>
           <tr>
             <td>ControlNet Color Grid</td>
-            <td>A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above</td>
+            <td>A dynamic fantasy illustration of an erupting volcano</td>
             <td>0.7</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>

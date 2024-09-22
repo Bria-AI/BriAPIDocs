@@ -222,38 +222,39 @@ paths:
             <td>Edge-based guidance for structural control</td>
             <td>"An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues"</td>
             <td>1.0</td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>controlnet_depth</td>
             <td>Depth-based guidance for spatial arrangement</td>
             <td>"A dog, exploring an alien planet"</td>
             <td>0.8</td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_input.jpg" alt="Input Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_map.webp" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_input.jpg" alt="Input Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_map.webp" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>controlnet_recoloring</td>
             <td>Recoloring while preserving geometry</td>
             <td>"A vibrant photo of a woman"</td>
             <td>1.00</td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_input.png" alt="Input Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_map.webp" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_input.png" alt="Input Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_map.webp" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>controlnet_color_grid</td>
             <td>Color scheme guidance using 16x16 grid</td>
             <td>"A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above"</td>
             <td>0.7</td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: cover;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_output.png" alt="Output Image" style="width: 200px; height: 200px; object-fit: contain;"></td>
           </tr>
         </table>
+
 
 
       

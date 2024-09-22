@@ -202,19 +202,20 @@ paths:
         4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
       
         **Using Guidance Methods**
+        
       
         You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. The table below provides detailed information about each guidance method, with an example os use:
       
         
-        <table style="border-collapse: collapse; width: 100%; border: 2px solid #ddd;">
+        <table style="border-collapse: collapse; width: 100%; border: 2px solid #ddd; table-layout: auto;">
           <tr>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Guidance Method</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Description</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 20%;">Description</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Prompt</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Scale</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 200px;">Input Image</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 200px;">Guidance Image</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 200px;">Output Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 150px;">Input Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 150px;">Guidance Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 150px;">Output Image</th>
           </tr>
           <tr>
             <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">controlnet_canny</td>
@@ -253,6 +254,7 @@ paths:
             <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
           </tr>
         </table>
+
 
         
       

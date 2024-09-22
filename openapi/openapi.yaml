@@ -510,6 +510,89 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
 
+        ### Guidance Methods
+      
+        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
+      
+      
+        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
+      
+      
+        Currently, we support the following guidance methods:
+      
+        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
+        
+        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
+        
+        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
+        
+        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
+      
+        **Using Guidance Methods**
+        
+      
+        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. The table below provides detailed information about each guidance method, with an example os use:
+
+        <table>
+          <tr>
+            <th>Guidance Method</th>
+            <th>Prompt</th>
+            <th>Scale</th>
+            <th style="width: 150px;">Input Image</th>
+            <th style="width: 150px;">Guidance Image</th>
+            <th style="width: 150px;">Output Image</th>
+          </tr>
+          <tr>
+            <td>ControlNet Canny</td>
+            <td>An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues</td>
+            <td>1.0</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+          <tr>
+            <td>ControlNet Depth</td>
+            <td>A dog, exploring an alien planet</td>
+            <td>0.8</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_map.webp" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+          <tr>
+            <td>ControlNet Recoloring</td>
+            <td>A vibrant photo of a woman</td>
+            <td>1.00</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_map.webp" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+          <tr>
+            <td>ControlNet Color Grid</td>
+            <td>A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above</td>
+            <td>0.7</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+        </table>
+
+
+
+
+      
+        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
+      
+        To use a guidance method, include the following parameters in your request:
+      
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        
+        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
+        
+        - `guidance_method_X_image_file`: Provide the base64-encoded input image
+      
+      
+        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
+              
       operationId: /text-to-image/fast
       parameters:
         - in: path
@@ -1094,6 +1177,90 @@ paths:
 
         Alternatively, you can use the Bria platform to manage and train your branded models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
+
+        ### Guidance Methods
+      
+        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
+      
+      
+        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
+      
+      
+        Currently, we support the following guidance methods:
+      
+        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
+        
+        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
+        
+        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
+        
+        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
+      
+        **Using Guidance Methods**
+        
+      
+        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. The table below provides detailed information about each guidance method, with an example os use:
+
+        <table>
+          <tr>
+            <th>Guidance Method</th>
+            <th>Prompt</th>
+            <th>Scale</th>
+            <th style="width: 150px;">Input Image</th>
+            <th style="width: 150px;">Guidance Image</th>
+            <th style="width: 150px;">Output Image</th>
+          </tr>
+          <tr>
+            <td>ControlNet Canny</td>
+            <td>An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues</td>
+            <td>1.0</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+          <tr>
+            <td>ControlNet Depth</td>
+            <td>A dog, exploring an alien planet</td>
+            <td>0.8</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_map.webp" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+          <tr>
+            <td>ControlNet Recoloring</td>
+            <td>A vibrant photo of a woman</td>
+            <td>1.00</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_map.webp" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+          <tr>
+            <td>ControlNet Color Grid</td>
+            <td>A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above</td>
+            <td>0.7</td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="Guidance Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+            <td style="width: 150px;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
+          </tr>
+        </table>
+
+
+
+
+      
+        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
+      
+        To use a guidance method, include the following parameters in your request:
+      
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        
+        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
+        
+        - `guidance_method_X_image_file`: Provide the base64-encoded input image
+      
+      
+        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
+              
       operationId: /text-to-image/tailored
       parameters:
         - in: path

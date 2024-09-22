@@ -212,9 +212,9 @@ paths:
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Description</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Prompt</th>
             <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Scale</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Input Image</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Guidance Image</th>
-            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Output Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 200px;">Input Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 200px;">Guidance Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold; width: 200px;">Output Image</th>
           </tr>
           <tr>
             <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">controlnet_canny</td>

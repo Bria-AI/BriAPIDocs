@@ -183,7 +183,7 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/>
       
-        ## Guidance Methods
+        ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
@@ -201,7 +201,7 @@ paths:
         
         4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
       
-        ### Using Guidance Methods
+        **Using Guidance Methods**
       
         You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. The table below provides detailed information about each guidance method, with an example os use:
       

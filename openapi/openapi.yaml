@@ -168,46 +168,107 @@ paths:
         - Image Generation
       summary: Generate Image - Base model
       description: >-
-
-
         **Description**
-        
-
-        The /text-to-image/base Route empowers users to create stunning images directly from textual prompts. This model allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
-
-
+      
+        The /text-to-image/base Route empowers users to create stunning images directly from textual prompts. This pipeline allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
+      
+      
         **Examples:**
-
-
+      
+      
         **prompt**: A professional headshot of a CEO
+      
+      
 
-
-        **BRIA BASE model 2.3:**
-        
-        
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/>
-
-
-        **prompt**: A vaporwave detailed illustration of a street in London in pastel hues, under a Union Jack sky
-
-
-        **BRIA BASE model 2.3:**
+      
+        ## Guidance Methods
+      
+        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
+      
+      
+        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
+      
+      
+        Currently, we support the following guidance methods:
+      
+        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
         
+        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(478).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(479).png" width="200" height="200"/>
-
-
-        **prompt**: A portrait of a Beautiful and playful ethereal singer, art deco, fantasy, intricate art deco golden designs, elegant, highly detailed, sharp focus, blurry background, teal and orange shades
-
-
-        **BRIA BASE model 2.3:**
+        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
         
+        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
+      
+        ### Using Guidance Methods
+      
+        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. The table below provides detailed information about each guidance method, with an example os use:
+      
         
-        <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(41).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(42).png" width="200" height="200"/>
-           
+        <table style="border-collapse: collapse; width: 100%; border: 2px solid #ddd;">
+          <tr>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Guidance Method</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Description</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Prompt</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Scale</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Input Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Guidance Image</th>
+            <th style="border: 1px solid #ddd; padding: 10px; text-align: left; background-color: #f2f2f2; font-weight: bold;">Output Image</th>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">controlnet_canny</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">Edge-based guidance for structural control</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">"An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues"</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">1.0</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Canny Edge Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">controlnet_depth</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">Depth-based guidance for spatial arrangement</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">"A dog, exploring an alien planet"</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">0.8</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_input.jpg" alt="Input Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_map.webp" alt="Depth Map" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/depth_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">controlnet_recoloring</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">Recoloring while preserving geometry</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">"A vibrant photo of a woman"</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">1.00</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_map.webp" alt="Grayscale Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/recoloring_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+          </tr>
+          <tr>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">controlnet_color_grid</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">Color scheme guidance using 16x16 grid</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">"A dynamic fantasy illustration of an erupting volcano with bright, molten lava flowing down its sides. The volcano towers over a calm, blue lake at its base, while the sun shines brightly above"</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;">0.7</td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_input.png" alt="Input Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_map.png" alt="16x16 Color Grid" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+            <td style="border: 1px solid #ddd; padding: 10px; vertical-align: top;"><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/colorgrid_output.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: cover;"/></td>
+          </tr>
+        </table>
 
-
+        
+      
+        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
+      
+        To use a guidance method, include the following parameters in your request:
+      
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        
+        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
+        
+        - `guidance_method_X_image_file`: Provide the base64-encoded input image
+      
+      
+        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
+              
       operationId: /text-to-image/base
       parameters:
         - in: path

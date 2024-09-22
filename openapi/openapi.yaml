@@ -222,9 +222,9 @@ paths:
             <td>Edge-based guidance for structural control</td>
             <td>"An exotic colorfill shell, conch, on the beach, majestic image, beautiful photo, golden hour, teal and orange hues"</td>
             <td>1.0</td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" style="width: 150px; height: 150px;"/></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" style="width: 150px; height: 150px;"/></td>
-            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" style="width: 150px; height: 150px;"/></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_input.jpg" alt="Input Image" width="200" height="200"/></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_map.png" alt="Guidance Image" width="200" height="200"/></td>
+            <td><img src="https://bria-datasets.s3.amazonaws.com/api_doc/cns/canny_output.png" alt="Output Image" width="200" height="200""/></td>
           </tr>
           <tr>
             <td>controlnet_depth</td>

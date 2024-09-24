@@ -183,7 +183,7 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(50).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(51).png" width="200" height="200"/>
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(53).png" width="200" height="200"/> <img src="https://bria-datasets.s3.amazonaws.com/api_doc/2.3/image+(52).png" width="200" height="200"/>
       
-        ### Guidance Methods (Coming Soon)
+        ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
@@ -292,7 +292,7 @@ paths:
                   description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
-                  description: How many images you would like to generate.
+                  description: How many images you would like to generate. When using any Guidance Method, please use the value 1. 
                   minimum: 1
                   default: 4
                   maximum: 4
@@ -510,7 +510,7 @@ paths:
         <img src="https://bria-datasets.s3.amazonaws.com/api_doc/fast/image+(43).png" width="200" height="200"/> <img src="https://images.bria.ai/images/cdee459b344d1a31.png" width="200" height="200"/>
 
 
-        ### Guidance Methods (Coming Soon)
+        ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
@@ -1178,7 +1178,7 @@ paths:
         Alternatively, you can use the Bria platform to manage and train your branded models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
 
-        ### Guidance Methods (Coming Soon)
+        ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
@@ -1444,7 +1444,7 @@ paths:
         *Text-to-vector is compatible with branded models in the illustrative domain.
 
 
-        ### Guidance Methods (Coming Soon)
+        ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
@@ -2991,7 +2991,7 @@ paths:
 
 
 
-         ### Guidance Methods (Coming Soon)
+         ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
@@ -3249,7 +3249,7 @@ paths:
         <img src="https://i.ibb.co/6R99kxp/bird-icon-4.png" width="200" height="200"/>
 
 
-        ### Guidance Methods (Coming Soon)
+        ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       

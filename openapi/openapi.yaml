@@ -3053,7 +3053,7 @@ paths:
                   description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
-                  description: How many images you would like to generate.
+                  description: How many images you would like to generate. When using any Guidance Method, please use the value 1. 
                   minimum: 1
                   default: 4
                   maximum: 4

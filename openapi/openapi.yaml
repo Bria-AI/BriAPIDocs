@@ -6297,7 +6297,7 @@ paths:
         **Optimal input range**
         
         
-        ***Input Image Area:*** Ensure that the input image area is more than 15% of the canvas area to achieve optimal results.
+        ***Input Image Area:*** Ensure that the ratio of the input image area to the canvas area is greater than 15% to achieve optimal results.
         
 
         ***Canvas Size:*** The canvas size should be up to an area of 5000x5000 pixels.
@@ -6358,7 +6358,7 @@ paths:
                   type: array
                   items:
                     type: integer
-                  description: The desired size of the original image, inside the full canvas. Should be over 15% of the canvas area.
+                  description: The desired size of the original image, inside the full canvas. Ensure that the ratio of original image area to the canvas area is greater than 15% to achieve optimal results.
                 original_image_location:
                   type: array
                   items:

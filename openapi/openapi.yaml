@@ -3588,6 +3588,9 @@ paths:
       description: >-
         The Product Shadow API allows you to add consistent and customizable shadow to a product cutout. This feature is designed to work in combination with other capabilities like product cutout,  product packshot and product lifestyle shots, enhancing the visual appeal of e-commerce and product imagery.
 
+        
+        If the product image isn't a product cutout, you should use the product cutout API first. The product shadow API accepts a product cutout as input. Once you have a product cutout with a shadow, you can use it in product packshot or product lifestyle shot APIs, where needed.
+
 
         The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
       operationId: productShadow

@@ -5928,13 +5928,10 @@ paths:
         2. By using the `/objects/mask_generator` route, which will generate all the possible masks for an image.
 
 
-        This capability is powered by our fast ControlNet inpainting model: 
+        This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>, and the HF demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-2.3-ControlNet-Eraser-API" target="_blank">here</a>
+
         
-        * The Hugging Face model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>
-
-        * The Hugging Face demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-2.3-ControlNet-Eraser-API" target="_blank">here</a>
-
-        * ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
+        Additionaly, ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
         
 
       operationId: eraser

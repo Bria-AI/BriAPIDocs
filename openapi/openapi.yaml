@@ -3943,7 +3943,7 @@ paths:
         **Description**
         
 
-        ***Note: This API route requires the image to be registered to our server via the `/register` route.***
+        ***Note: This API route requires the image to be registered via the `/register` route.***
 
 
         The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
@@ -4998,7 +4998,7 @@ paths:
         **Description**
 
 
-        ***Note: This API route requires the image to be registered to our server via the `/register` route.***
+        ***Note: This API route requires the image to be registered via the `/register` route.***
 
 
         The *Objects/Mask Generator Route* is used to generate all possible masks for an image, creating a full segmentation of the image.
@@ -5159,7 +5159,7 @@ paths:
         **Description**
 
 
-        ***Note: This API route requires the image to be registered to our server via the `/register` route.***
+        ***Note: This API route requires the image to be registered via the `/register` route.***
 
 
         The *Person/Info Route* is used to retrieve useful information on the people in a specific
@@ -5490,7 +5490,7 @@ paths:
         **Description**
 
 
-        ***Note: This API route requires the image to be registered to our server via the `/register` route.***
+        ***Note: This API route requires the image to be registered via the `/register` route.***
 
 
         The *Create Route* is used to create a new visual, based on the changes
@@ -6564,7 +6564,7 @@ paths:
         **Description**
 
 
-        ***Note: This API route requires the image to be registered to our server via the `/register` route.***
+        ***Note: This API route requires the image to be registered via the `/register` route.***
 
         **It will be replaced soon with isolated version, that doesn't require image registration.**
 

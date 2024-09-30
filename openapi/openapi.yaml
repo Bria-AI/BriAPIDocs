@@ -5921,11 +5921,20 @@ paths:
         The *Eraser Route* enables the removal of objects or specific areas from a given image. This route will replace the `/objects/remove` route which will soon be deprecated.
 
 
-        You can define the area for removal by providing a mask that outlines the region to be erased. This mask can be created by allowing users to draw directly on the image with a brush, for example.
-        To access the SDK demonstrating how to implement a brush feature in your interface, please refer to the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
+        You can define the area to be removed by providing a mask that outlines the region to be erased. There are two main ways recommended to generate these masks:
+        
+        1. Masks can be created by allowing users to draw directly on the image with a brush, for example. To access the SDK that demonstrates how to implement a brush feature in your interface, please refer to the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
+        
+        2. By using the `/objects/mask_generator` route, which will generate all the possible masks for an image.
 
 
-        This capability is powered by our fast ControlNet inpainting model. The Hugging Face model card is available at this <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">link</a>
+        This capability is powered by our fast ControlNet inpainting model: 
+        
+        * The Hugging Face model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>
+
+        * The Hugging Face demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-2.3-ControlNet-Eraser-API" target="_blank">here</a>
+
+        * ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
         
 
       operationId: eraser

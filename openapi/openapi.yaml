@@ -111,6 +111,8 @@ info:
     - `/background/replace` - Generate new backgrounds for an image.
 
     - `/erase_foreground` - Erase the foreground from a provided image.
+
+    - `/eraser` - Erase elements from an image using manually created or auto-generated masks. 
         
     - `/caption` - Generate a caption describing the given image.
 
@@ -118,8 +120,6 @@ info:
     **Soon to be Isolated:**
     
     - `/mask_generator` - Retrieve all available masks for an image, creating a full segmenration of the image.
-    
-    - `/eraser` - Remove objects from an image using manually created or auto-generated masks. This route is currently named `/objects/remove`, and soon the current route will be deprecated and a new version will be available via the new route.
     
     - `/image_to_psd` - Create a layered PSD file from any image.
     
@@ -5923,13 +5923,13 @@ paths:
     post:
       tags:
         - Image Modifications
-      summary: Eraser (Coming soon)
+      summary: Eraser 
       description: >-
 
         **Description**
 
 
-        The *Eraser Route* enables the removal of objects or specific areas from a given image. This route will replace the `/objects/remove` route which will soon be deprecated.
+        The *Eraser Route* enables the removal of elements or specific areas from a given image.
 
 
         You can define the area to be removed by providing a mask that outlines the region to be erased. There are two main ways recommended to generate these masks:
@@ -5942,7 +5942,7 @@ paths:
         This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>, and the HF demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-2.3-ControlNet-Eraser-API" target="_blank">here</a>
 
         
-        Additionaly, ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
+        Additionally, ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
         
 
       operationId: eraser

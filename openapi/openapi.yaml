@@ -6457,7 +6457,7 @@ paths:
 
 
 
-        The *Isolated Increase Resolution Route* is used to upsacle the resolution of any image.
+        The *Isolated Increase Resolution Route* is used to upscale the resolution of any image.
 
 
         **The main difference between the regular and this isolated Increase Resolution endpoint is that you can use this endpoint without uploading or registering the image to Bria.**

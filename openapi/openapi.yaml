@@ -3765,10 +3765,43 @@ paths:
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [left, right, top, bottom]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
             example:
-              scene_description: "in a living room interior, on a kitchen counter"
-              num_results: 1
-              sync: false
-              image_url: "URL"
+              Original placement:
+                value:
+                  image_url: IMAGE_URL
+                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  placement_type: "original"
+                  num_results: 4
+                  original_quality: true
+                  optimize_description: true
+                  sync: true
+              Automatically adjust the foreground placement:
+                value:
+                  image_url: IMAGE_URL
+                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  placement_type: "automatic"
+                  shot_size: [900,550]
+                  num_results: 1
+                  optimize_description: true
+                  sync: true
+              Select foreground placement from a list: 
+                value:
+                  image_url: IMAGE_URL
+                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  placement_type: "manual_placement"
+                  shot_size: [900,550]
+                  manual_placement_selection: ["upper_center","bottom_center"]
+                  num_results: 1
+                  optimize_description: true
+                  sync: true
+              Only foreground, add padding:
+                value:
+                  image_url: IMAGE_URL
+                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  placement_type: "manual_padding"
+                  padding_values: [20,30,20,30]
+                  num_results: 1
+                  optimize_description: true
+                  sync: true
       responses:
         '200':
           description: Successful operation.

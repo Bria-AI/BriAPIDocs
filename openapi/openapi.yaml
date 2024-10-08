@@ -3774,7 +3774,7 @@ paths:
                   original_quality: true
                   optimize_description: true
                   sync: true
-              Automatically adjust the foreground placement:
+              Automatic placements:
                 value:
                   image_url: IMAGE_URL
                   scene_description: "in a living room interior, on a kitchen counter"
@@ -3783,7 +3783,7 @@ paths:
                   num_results: 1
                   optimize_description: true
                   sync: false
-              Select foreground placement from a list: 
+              Manual placement from a list: 
                 value:
                   image_url: IMAGE_URL
                   scene_description: "in a living room interior, on a kitchen counter"
@@ -3792,8 +3792,8 @@ paths:
                   manual_placement_selection: ["upper_center","bottom_center"]
                   num_results: 1
                   optimize_description: true
-                  sync: true
-              Only foreground, add padding:
+                  sync: false
+              Manual padding:
                 value:
                   image_url: IMAGE_URL
                   scene_description: "in a living room interior, on a kitchen counter"

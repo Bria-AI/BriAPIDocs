@@ -3768,7 +3768,7 @@ paths:
               Original placement:
                 value:
                   image_url: IMAGE_URL
-                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  scene_description: "In a living room interior, on a kitchen counter"
                   placement_type: "original"
                   num_results: 4
                   original_quality: true
@@ -3777,7 +3777,7 @@ paths:
               Automatically adjust the foreground placement:
                 value:
                   image_url: IMAGE_URL
-                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  scene_description: "in a living room interior, on a kitchen counter"
                   placement_type: "automatic"
                   shot_size: [900,550]
                   num_results: 1
@@ -3786,7 +3786,7 @@ paths:
               Select foreground placement from a list: 
                 value:
                   image_url: IMAGE_URL
-                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  scene_description: "in a living room interior, on a kitchen counter"
                   placement_type: "manual_placement"
                   shot_size: [900,550]
                   manual_placement_selection: ["upper_center","bottom_center"]
@@ -3796,7 +3796,7 @@ paths:
               Only foreground, add padding:
                 value:
                   image_url: IMAGE_URL
-                  scene_description: "a bottle in a living room interior, on a kitchen counter"
+                  scene_description: "in a living room interior, on a kitchen counter"
                   placement_type: "manual_padding"
                   padding_values: [20,30,20,30]
                   num_results: 1

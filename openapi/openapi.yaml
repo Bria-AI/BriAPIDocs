@@ -3782,7 +3782,7 @@ paths:
                   shot_size: [900,550]
                   num_results: 1
                   optimize_description: true
-                  sync: true
+                  sync: false
               Select foreground placement from a list: 
                 value:
                   image_url: IMAGE_URL

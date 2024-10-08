@@ -3764,7 +3764,7 @@ paths:
                     type: integer
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [left, right, top, bottom]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
-            example:
+            examples:
               Original placement:
                 value:
                   image_url: IMAGE_URL

@@ -3741,6 +3741,10 @@ paths:
                   type: string
                   description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
                   enum: ["original", "automatic", "manual_placement", "manual_padding"]
+                original_quality:
+                  type: boolean
+                  default: false
+                  description:  When `placement` is set to `original`, this flag determines if the output image should retain the original input image's size.
                 shot_size:
                   type: array
                   items:
@@ -6244,6 +6248,10 @@ paths:
                   type: boolean
                   default: true
                   description: When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                original_quality:
+                  type: boolean
+                  default: false
+                  description:  This flag determines if the output image should retain the original input image's size.
                 num_results:
                   type: integer
                   default: 4

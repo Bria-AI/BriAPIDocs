@@ -3744,7 +3744,7 @@ paths:
                 original_quality:
                   type: boolean
                   default: false
-                  description:  When placement_type is set to original, this flag determines if the output image should retain the original input image's size. If set to false, the output image will be scaled to 1 megapixel (1MP) while preserving the original image's aspect ratio.
+                  description:  This flag is only relevant when placement_type=original. If true, the output image retains the original input image's size; otherwise, the image is scaled to 1 megapixel (1MP) while preserving its aspect ratio.
                 shot_size:
                   type: array
                   items:
@@ -3773,7 +3773,6 @@ paths:
                   num_results: 4
                   original_quality: true
                   optimize_description: true
-                  sync: true
               Automatic placements:
                 value:
                   image_url: IMAGE_URL
@@ -3782,7 +3781,6 @@ paths:
                   shot_size: [900,550]
                   num_results: 1
                   optimize_description: true
-                  sync: false
               Manual placement from a list: 
                 value:
                   image_url: IMAGE_URL
@@ -3792,7 +3790,6 @@ paths:
                   manual_placement_selection: ["upper_center","bottom_center"]
                   num_results: 1
                   optimize_description: true
-                  sync: false
               Manual padding:
                 value:
                   image_url: IMAGE_URL
@@ -3801,7 +3798,6 @@ paths:
                   padding_values: [20,30,20,30]
                   num_results: 1
                   optimize_description: true
-                  sync: true
       responses:
         '200':
           description: Successful operation.
@@ -6284,7 +6280,7 @@ paths:
                 original_quality:
                   type: boolean
                   default: false
-                  description:  When placement_type is set to original, this flag determines if the output image should retain the original input image's size. If set to false, the output image will be scaled to 1 megapixel (1MP) while preserving the original image's aspect ratio.
+                  description: This flag is only relevant when placement_type=original. If true, the output image retains the original input image's size; otherwise, the image is scaled to 1 megapixel (1MP) while preserving its aspect ratio.
                 num_results:
                   type: integer
                   default: 4

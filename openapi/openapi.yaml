@@ -6280,7 +6280,7 @@ paths:
                 original_quality:
                   type: boolean
                   default: false
-                  description: This flag is only relevant when placement_type=original. If true, the output image retains the original input image's size; otherwise, the image is scaled to 1 megapixel (1MP) while preserving its aspect ratio.
+                  description: When true, the output image retains the original input image's size; otherwise, the image is scaled to 1 megapixel (1MP) while preserving its aspect ratio.
                 num_results:
                   type: integer
                   default: 4

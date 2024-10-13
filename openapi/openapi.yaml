@@ -4383,6 +4383,262 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   
+  /{visual_id}/objects/info:
+    get:
+      tags:
+        - Deprecated Soon
+      summary: Get Objects info
+      description: >-
+
+
+
+        **Description**
+
+
+        **This route will be deprecated soon**
+
+
+        The *Objects/Info Route* is used to retrieve useful information on the objects in a specific
+        visual that was previously uploaded to the database.
+
+        
+        Additionally, it provides the following:
+
+        
+        1) The available object actions, which are supported by the Bria API.
+
+
+        1) The Oracle value for each available action. The orcale value predicts the quality of the result, for each possible action. 
+        
+        The possible oracle values for object actions are true and false. 
+               
+        
+        This route should be used instead of the main /info route when you are only interested in 
+        information and available actions for the objects in the image. 
+        With this route, you will save runtime by only obtaining information that is relevant to your needs.
+
+      operationId: objects/info
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "92bf8ce17584de82"
+          description: visual id of the image, received after using the /upload or register route.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: The id of the object
+                    type:
+                      type: string
+                      description: In this route it will be the type of the object
+                    labels:
+                      type: array
+                      description: In this route it will always be 'object'
+                    rect:
+                      type: object
+                      description: The location of the object inside the image. x and y represent the upper left corner of the object, and by using the w (width) and h (height) you can create a rectangle around the object.
+                    actions:
+                      type: object
+                      description: The available API actions for this specific object.
+                    oracle:
+                      type: object
+                      description: The predicted quality of the available actions for this specific object
+                    bg_overlap:
+                      type: number
+                      description: The percentage of the object's surface that is mutual with the background.
+                    mask_id:
+                      type: number
+                      description: This parameter should be currently ignored and doesn't have any function. 
+              examples:
+                example:
+                  value:
+                    [
+                      {
+                          "id": "d34ef7cf0b4e1ea2e414cdff7ae9ded80162f1f93bb94df709fe29d9df3dbfb5",
+                          "type": "dining table",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 1294.921875,
+                              "y": 4143.75,
+                              "w": 2253.1640625,
+                              "h": 2071.875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.4,
+                          "mask_id": 1
+                      },
+                      {
+                          "id": "d1b004a7b3b065aa8b98b321b67806cb3e6ca09e596ad6d3f31c625e46e168e2",
+                          "type": "potted plant",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 4558.125,
+                              "y": 2667.5390625,
+                              "w": 517.96875,
+                              "h": 725.15625
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.67,
+                          "mask_id": 2
+                      },
+                      {
+                          "id": "f173a0ad62749dbeb97f8055f51d3d125d4c9c968ee3ae46754e911f3fd12000",
+                          "type": "vase",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 3366.796875,
+                              "y": 2123.671875,
+                              "w": 595.6640625,
+                              "h": 284.8828125
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.89,
+                          "mask_id": 3
+                      },
+                      {
+                          "id": "7a3bd30a268840cc3645abf7b512c3b9b8bc2d55d98aa5f7ef8c1e72348a016c",
+                          "type": "potted plant",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 3263.203125,
+                              "y": 1398.515625,
+                              "w": 854.6484375,
+                              "h": 751.0546875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 1.0,
+                          "mask_id": 4
+                      },
+                      {
+                          "id": "0289aaf067a6d7d812738a8d42d17e54ffd2fa79e0decbca46a873018a6d791a",
+                          "type": "chair",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 2900.625,
+                              "y": 3858.8671875,
+                              "w": 1502.109375,
+                              "h": 2486.25
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.0,
+                          "mask_id": 5
+                      },
+                      {
+                          "id": "0a349cbe603a786570d4eec7dd9cf64e568ef72767a5847251b32988a2b99dff",
+                          "type": "chair",
+                          "labels": [
+                              "object"
+                          ],
+                          "rect": {
+                              "x": 647.4609375,
+                              "y": 3910.6640625,
+                              "w": 1139.53125,
+                              "h": 2071.875
+                          },
+                          "actions": {
+                              "remove": [
+                                  true
+                              ],
+                              "replace": [
+                                  true
+                              ]
+                          },
+                          "oracle": {
+                              "remove": true
+                          },
+                          "bg_overlap": 0.4,
+                          "mask_id": 6
+                      }
+                  ]
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
+        '400':
+          description: One of the details does not meet specification. Please call objects/info again.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  
   /{visual_id}/objects/mask_generator:
     post:
       tags:
@@ -5091,6 +5347,169 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/objects/remove:
+    post:
+      tags:
+        - Deprecated Soon
+      summary: Erase Elements
+      description: >-
+        **Description**
+
+
+
+
+        The *Remove Object Route* is used to remove objects or areas. 
+
+
+
+        **This route will be deprecated soon and replaced soon with the '/eraser' endpoint, that doesn't require image registration.**
+
+
+
+        You can provide the area for removal in the following methods:
+        
+
+        
+        1) Call the /mask_generator endpoint, display the masks to the user, allow them to select a mask, and then send the mask_id to the objects/remove endpoint. Under the example named generated mask, you can see an example of this type of request.
+
+
+
+        2) Allow the user to create a mask manually (by using a brush, for example), and then send the mask_url to the objects/remove endpoint. Under the example named manual mask, you can see an example of this type of request. You can access the SDK that demonstrates how to implement a brush feature in your Interface via the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
+
+        
+
+
+        In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask_id at the same time. 
+
+
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+
+
+        This route returns both the URL and the sid associated with the updated image.
+
+        
+      operationId: erase
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "86f9986390596e8f"
+          description: visual id of the image the user wants to remove objects from.
+        - in: query
+          name: desired_resolution
+          schema:
+            type: string
+            example: "original"
+            enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
+          description: The desired resolution of the updated image. This parameter is optional.
+        - in: query
+          name: original_quality
+          schema:
+            type: boolean
+            example: true
+          description: If you would like to retain the quality of the original image, please set this parameter to true. This parameter is optional. This parameter can also be used as a body parameter.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                  example: "aaeec34e-9804-11ed-a479-964fdf514767.JPEG"
+                enhance:
+                  type: boolean
+                  description: Please use the value true in order to get the best result possible. 
+                  example: true
+                changes:
+                  type: array
+                  description: The requested changes to the image. In one request, you may send multiple IDs of objects, or points, or masks for removal, but you cannot combine them in one request. For example, you cannot send a point and a mask at the same time.  
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Id of the selected object in the image, which the user would like to remove. If you include a mask or a point, there is no need to use this parameter.
+                      mask_url:
+                        type: string
+                        description: A public URL that includes a mask in the following format - PNG file, a binary image in which the area that should be removed should get the value 255 (white) and the rest should get the value 0 (black). If you include an id or a point, there is no need to use this parameter.
+                      mask_id:
+                        type: integer
+                        description: When you use the /mask_generator endpoint, it returns a group of masks, each with its own unique ID. Once you present the masks to the user, and he selects a mask, you can pass its ID in order to remove that area. 
+                      mask_source:
+                        type: string
+                        enum: ["manual","generated"]
+                        description: This parameter is only relevant, if a mask_url or mask_id were used. If the mask was created using a brush (free-hand) then use the option 'manual'. If the mask was the output from the route /objects/mask_generator, use the option 'generated'.
+                      actions:
+                        type: object
+                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image.
+                        properties:
+                          remove:
+                            type: boolean
+                            description: Use the value true if you would like to remove the object
+            examples:
+                generated mask:
+                  value:
+                    {
+                      "enhance": true,
+                      "changes": [ 
+                        {
+                          "mask_id": 30,
+                          "mask_source": "generated",
+                          "actions": {
+                            "remove": true
+                            }
+                          }
+                        ]
+                      }
+                manual mask:
+                  value:
+                    {
+                      "enhance": true,
+                      "changes": [ 
+                        {
+                          "mask_url": "https://i.ibb.co/JRcgVq7/f2093906b0f041d4b2acb438a8d72084.png",
+                          "mask_source": "manual",
+                          "actions": {
+                            "remove": true
+                            }
+                          }
+                        ]
+                      }
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sid:
+                    type: string
+                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
+                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                  image_res:
+                    type: string
+                    description: URL that represents the new visual created in the request. It is a temporary URL that will expire
+                    example: "https://d1uzvjowrxhw13.cloudfront.net/api/create_results/8487fb411f3c6716_05e8a8dc-b723-11ec-be15-c28fc8b4a55b.JPEG?AWSAccessKeyId=ASIAUL5JH7ABM5GPF244&Signature=OaE%2BTJW%2FBJFDB2xGXpy%2F%2F8TYkAE%3D&x-amz-security-token=FwoGZXIvYXdzEEsaDHAX5TxTwymFAQYSwSKYBK3lKAwEipl9tjg1QQwWMdQDqS%2B0rYkexasgxxW78Vz4DvJUVPISpnTOZk4h%2Fy6%2BikLC5%2FYGY86SL8980ZHZzRgqcodDJ0n6ljB7SgbkfJnSpgx%2F8iCHzoDH%2BS7YrUjnR7e%2FUz%2B4sIbV%2BSHGn36EXTNnrm%2FOgCsiL9vqLSGFEo5R1pLYIbezxWCEWMLcDO5x9WsVoPRYW7c%2B5B%2B1Ku3qybQEBFRex4BVisJU4NTXbwQKFWMbkTjHg5vK%2FEdQn7OzmCA7SfCSHe%2FqDZIBQG0ki%2BHt%2Fs4bAYYTZpl%2FjoUJTldlltdWH2uitj%2BBeyQKcUnHrPjTY1CsAOEC6OV%2FKlZfOjbNJTvlmHc7%2BKP3iICKlCVJwvRK6%2FnmU7mUVOb%2FmgD2kIvBq5G6fNxXQlKfFGZE2lSs8HR83sp44Qz8hm60DPfK45hE0XdVnIS2jY%2F1a%2BYBmijCr4HDTgv52D53CdnOiQ%2BQ8Yld0bBZRC4aDBATcvcsDcnO4BBMY0NS1c%2BSJ6b4IMxDK2OKdanf9EYiDgzr3ebsS1m7j4NX3pEvNC99YF%2B5PQwDYhbMwlMCAG9AMs9%2FF86Al3czOJFOxV1ClBEoUKy2TgntGraCp76UoLmRrHuRq7WKQUvIj2HAXsIlyNkBg3z498M1Gh7vyD%2F7xQgA0Ny6zYeC1gBH4HmYtFlBS%2BJimmxFlCoCuyFhBmUXp7p6oBI3APuSyQYLKLmQwJIGMioiS3mUno68q7GAsD%2FPmSCM8xMeEWF8IegvlU4XWAQuNnQJLVtqwkZb1Qo%3D&Expires=1650276159"
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.     
   /erase_foreground:
     post:
       tags:

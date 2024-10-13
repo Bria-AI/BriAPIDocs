@@ -4386,7 +4386,7 @@ paths:
   /{visual_id}/objects/info:
     get:
       tags:
-        - Test
+        - Deprecated Soon
       summary: Get Objects info
       description: >-
 

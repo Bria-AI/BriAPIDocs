@@ -4383,12 +4383,6 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   
-  /{visual_id}/objects/info:
-    get:
-      tags:
-        - Deprecated Soon
-      summary: Get Objects info
-      operationId: objects/info
   
   /{visual_id}/objects/mask_generator:
     post:

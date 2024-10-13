@@ -4388,35 +4388,6 @@ paths:
       tags:
         - Deprecated Soon
       summary: Get Objects info
-      description: >-
-
-
-
-        **Description**
-
-
-        **This route will be deprecated soon**
-
-
-        The *Objects/Info Route* is used to retrieve useful information on the objects in a specific
-        visual that was previously uploaded to the database.
-
-        
-        Additionally, it provides the following:
-
-        
-        1) The available object actions, which are supported by the Bria API.
-
-
-        1) The Oracle value for each available action. The orcale value predicts the quality of the result, for each possible action. 
-        
-        The possible oracle values for object actions are true and false. 
-               
-        
-        This route should be used instead of the main /info route when you are only interested in 
-        information and available actions for the objects in the image. 
-        With this route, you will save runtime by only obtaining information that is relevant to your needs.
-
       operationId: objects/info
   
   /{visual_id}/objects/mask_generator:

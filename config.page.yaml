@@ -1,0 +1,5 @@
+type: reference-docs
+definitionId: acme
+settings:
+  pagination: section
+  jsonSampleExpandLevel: 'all'

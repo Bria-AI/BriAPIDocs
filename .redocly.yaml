@@ -18,4 +18,6 @@ referenceDocs:
       - lang: curl # Can be one of the following supported languages: "curl", "Node.js", "JavaScript".
       - lang: "Node.js"
       - lang: "JavaScript"
+features.openapi:
+  pagination: section
       

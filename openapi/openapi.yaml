@@ -133,9 +133,7 @@ info:
 
     With the response from the *Upload/Register Routes* (visual_id), the following routes can be used without any particular order:
       - `/campaign_generator` - The *Campaign Generator Route* enables the creation of customized campaigns. It allows for the generation of visual ads, including various elements like text, images, and layout, based on specific parameters provided by the user.
-      - `/info` (soon to be deprecated) - By using the *Info Route*, you can understand the possible changes for each object in the image. 
-        The following routes can be used if you do not require information for people, objects, and background, but rather only one of them:
-         - `/person/info`
+      - `/person/info` (soon to be deprecated) - By using the */person/info* route, you can understand the possible changes for every people in the image. 
       - `/person/modify` - Modify person-related elements in the image. In order to use this route you shuold first use the route /person/info.
       - `/search` - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
       - `/search_similar_images` - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.

@@ -136,8 +136,6 @@ info:
       - `/info` (soon to be deprecated) - By using the *Info Route*, you can understand the possible changes for each object in the image. 
         The following routes can be used if you do not require information for people, objects, and background, but rather only one of them:
          - `/person/info`
-         - `/objects/info` - soon to be deprecated
-         - `/background/info`- soon to be deprecated
       - `/person/modify` - Modify person-related elements in the image. In order to use this route you shuold first use the route /person/info.
       - `/search` - Utilizing the *Search Route* to look for images you uploaded or registered to Bria that match a text query. 
       - `/search_similar_images` - Utilizing the *Search Similar Images Route* to look for images you uploaded or registered to Bria that match the chosen image.

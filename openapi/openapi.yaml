@@ -3732,7 +3732,7 @@ paths:
                   description: The number of lifestyle product shots you would like to generate. You will get num_results x 10 results when placement_type=automatic and according to the number of required placements x num_results if placement_type=manual_placement.
                 exclude_elements:
                   type: string
-                  description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only, excluding special characters.
+                  description: Elements or features that should be excluded from the generated scene. This parameter is optional and is available only when fast=false. Bria currently supports descriptions in English only, excluding special characters.
                 placement_type:
                   type: string
                   description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
@@ -5653,7 +5653,7 @@ paths:
                   description: The number of results you would like to generate.
                 negative_prompt:
                   type: string
-                  description: Elements or features that should be excluded from the generated scene. This parameter is optional. Bria currently supports descriptions in English only.
+                  description: Elements or features that should be excluded from the generated scene. This parameter is optional and is available only when fast=false. Bria currently supports descriptions in English only.
                 seed:
                   type: integer
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.

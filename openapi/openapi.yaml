@@ -982,7 +982,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt and other parameters. This parameter is optional.
                 tailored_model_id:
                   type: string
-                  description: The ID of the tailored model to use for generation. This parameter is optional.
+                  description: The ID of the tailored model to use for generation. This parameter is optional. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
                 tailored_model_influence:
                   type: number
                   format: float
@@ -1264,7 +1264,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the branded model you would like to use in the request. 
+          description: The model id of the branded model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
         - in: header
           name: api_token
           schema:
@@ -1482,7 +1482,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the branded model you would like to use in the request. 
+          description: The model id of the branded model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
         - in: header
           name: api_token
           schema:
@@ -1522,6 +1522,13 @@ paths:
                   minimum: 4
                   maximum: 20
                   default: 8
+                model_influence: 
+                  type: number
+                  format: float
+                  minimum: 0.00
+                  maximum: 1.00
+                  default: 1.00
+                  description: The influence of the tailored model on the generation. This parameter is optional.
                 guidance_method_1:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']

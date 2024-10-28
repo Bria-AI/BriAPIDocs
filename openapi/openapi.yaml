@@ -963,7 +963,7 @@ paths:
                   minimum: 0.00
                   maximum: 1.00
                   default: 0.75
-                  description: The influence of the structure reference on the generated image. This parameter is optional.
+                  description: The influence of the structure reference on the generated image. This parameter is optional. Higher value means more adherence to the reference structure.
                 prompt:
                   type: string
                   description: The text prompt describing the desired output image.
@@ -989,7 +989,7 @@ paths:
                   minimum: 0.00
                   maximum: 1.00
                   default: 0.5
-                  description: The influence of the tailored model on the generation. Only relevant if tailored_model_id is provided. This parameter is optional.
+                  description: The influence of the tailored model on the generation. Only relevant if tailored_model_id is provided. This parameter is optional. Higher value gives more weight to the tailored model.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
@@ -1310,7 +1310,7 @@ paths:
                   minimum: 0.00
                   maximum: 1.00
                   default: 1.00
-                  description: The influence of the tailored model on the generation. This parameter is optional.
+                  description: The influence of the structure reference on the generated image. This parameter is optional. Higher value means more adherence to the reference structure.
                 guidance_method_1:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
@@ -1528,7 +1528,7 @@ paths:
                   minimum: 0.00
                   maximum: 1.00
                   default: 1.00
-                  description: The influence of the tailored model on the generation. This parameter is optional.
+                  description: The influence of the tailored model on the generation. Only relevant if tailored_model_id is provided. This parameter is optional. Higher value gives more weight to the tailored model.
                 guidance_method_1:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']

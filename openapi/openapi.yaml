@@ -14,10 +14,10 @@ info:
     - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
 
 
-    - **Train Your Own Branded Models**: Create and manage custom-branded models to generate images in specific styles or themes using your datasets.
+    - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
 
 
-    - **Generate Vector Graphics (beta)**: Use the base and branded models API endpoints to create versatile, editable vector graphics from text prompts.
+    - **Generate Vector Graphics (beta)**: Use the base and tailored models API endpoints to create versatile, editable vector graphics from text prompts.
 
 
     - **Enhance Product Imagery with eCommerce Suite**: Use specialized features to create professional product shots, packshots, and lifestyle images for eCommerce platforms.
@@ -42,11 +42,11 @@ info:
     
     - Enhance your prompts with the `/prompt_enhancer` route or use the built-in prompt enhancement feature in /text-to-image routes to create more detailed and vivid descriptions, resulting in richer and more diverse image outputs.
 
-    **Branded Generation**:
-    The Branded Generation API allows you to create and manage custom-branded models for generating unique visual content based on your datasets. Branded models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
+    **Tailored Generation**:
+    The Tailored Generation API allows you to create and manage custom-tailored models for generating unique visual content based on your datasets. Tailored models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
 
 
-    **Using the Branded Generation API**:
+    **Using the Tailored Generation API**:
       - **Dataset Management**: 
         - Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
         - Use the `/datasets/{dataset_id}/images` endpoint to upload new images to a dataset or retrieve existing images that belong to the dataset.
@@ -58,7 +58,7 @@ info:
         - Use the `/models/{id}/start_training` endpoint to initiate the training process. Ensure that the dataset includes the minimum required number of images and has a status of 'completed' before starting training.
         - Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
 
-    **Training a Branded Model**:
+    **Training a Tailored Model**:
       1. Create a Dataset: Use the `/datasets` endpoint to create a dataset.
       2. Upload Images: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
       3. Create a Model: Use the `/models` endpoint to create a model associated with your dataset.
@@ -772,7 +772,7 @@ paths:
         **Description**
         
 
-        The /text-to-image/hd Route is branded for projects demanding the utmost in image detail and clarity. This model allows for generating high-quality, photorealistic and artistic, images with unparalleled resolution of 1920x1080 (1:1 1536x1536) pixel, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
+        The /text-to-image/hd Route is dedicated for projects demanding the utmost in image detail and clarity. This model allows for generating high-quality, photorealistic and artistic, images with unparalleled resolution of 1920x1080 (1:1 1536x1536) pixel, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
 
 
         **Advanced Customization and Access:**
@@ -1061,7 +1061,7 @@ paths:
         **Description**
 
         
-        The /prompt_enhancer route is designed to boost users' creativity by transforming simple prompts into more detailed and vivid descriptions. This helps generate richer, more diverse images. (It is also available as a built-in flag in all of our /text-to-image routes, excluding branded generation.)
+        The /prompt_enhancer route is designed to boost users' creativity by transforming simple prompts into more detailed and vivid descriptions. This helps generate richer, more diverse images. (It is also available as a built-in flag in all of our /text-to-image routes, excluding tailored generation.)
 
         
         We recommend using this feature by offering users a range of prompts to choose from before generating an image, enabling them to explore creative ideas.
@@ -1132,17 +1132,17 @@ paths:
     post:
       tags:
         - Tailored Generation
-      summary: Generate Image - Branded model
+      summary: Generate Image - Tailored model
       description: |-
         **Description**
 
-        This route allows you to generate images using a branded model. Branded models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. You can train a branded model through the API or using the Bria platform.
+        This route allows you to generate images using a tailored model. tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. You can train a tailored model through the API or using the Bria platform.
 
-        ### Overview of Branded Model API
+        ### Overview of Tailored Model API
 
-        The Branded Model API provides a set of endpoints to manage the entire lifecycle of a branded model:
+        The Tailored Model API provides a set of endpoints to manage the entire lifecycle of a Tailored model:
 
-        1. **Dataset Management**: Create and manage datasets which will be used to train your branded models. You can:
+        1. **Dataset Management**: Create and manage datasets which will be used to train your tailored models. You can:
            - **Create and Retrieve Datasets**: Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
            - **Upload and Retrieve Images**: Use the `/datasets/{dataset_id}/images` endpoint to upload a new image to a dataset or retrieve existing images that belong to the dataset.
            - **Manage Individual Images**: Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
@@ -1160,18 +1160,18 @@ paths:
            - **Generate Vector Graphics**: Use the `/text-to-vector/tailored/{model_id}` endpoint to generate vector graphics. 
 
 
-        ### Training a Branded Model
+        ### Training a Tailored Model
 
-        To train a branded model via the API:
+        To train a tailored model via the API:
         1. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset.
         2. **Upload Images**: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
         3. **Create a Model**: Use the `/models` endpoint to create a model associated with your dataset.
         4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
-        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a branded model takes between 1-3 hours.
+        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a tailored model takes between 1-3 hours.
         6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
         7. **Generate Images**: Once the model is trained, use this route to generate images, or use the `/text-to-vector/tailored/{model_id}` route to generate vector graphics.
 
-        Alternatively, you can use the Bria platform to manage and train your branded models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
+        Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
 
         ### Guidance Methods
@@ -1264,7 +1264,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the branded model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
+          description: The model id of the tailored model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
         - in: header
           name: api_token
           schema:
@@ -1426,18 +1426,18 @@ paths:
     post:
       tags:
         - Tailored Generation
-      summary: Generate Vector Graphics - Branded (Beta)
+      summary: Generate Vector Graphics - Tailored (Beta)
       description: >-
 
 
         **Description**
 
 
-        This route allows you to generate vector graphics using a branded model.
+        This route allows you to generate vector graphics using a tailored model.
 
-        Branded models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. To see a detailed description of the branded models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
+        Tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
 
-        *Text-to-vector is compatible with branded models in the illustrative domain.
+        *Text-to-vector is compatible with tailored models in the illustrative domain.
 
 
         ### Guidance Methods
@@ -1482,7 +1482,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the branded model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
+          description: The model id of the tailored model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
         - in: header
           name: api_token
           schema:
@@ -2825,7 +2825,7 @@ paths:
       description: >-
         **Description**
 
-        Start a new training job for a specific model. Training of a branded model takes between 1-3 hours.
+        Start a new training job for a specific model. Training of a tailored model takes between 1-3 hours.
       operationId: startModelTraining
       parameters:
         - in: header
@@ -3987,7 +3987,7 @@ paths:
 
         The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
         This route facilitates the generation of templates featuring diverse layouts that incorporate elements like text, 
-        logos, and calls to action (CTA), branded to various resolutions (placements) and target audiences. 
+        logos, and calls to action (CTA), tailored to various resolutions (placements) and target audiences. 
         
         
         Ad backgrounds are expanded to fit the necessary layout specifications. 

@@ -1131,7 +1131,7 @@ paths:
   /text-to-image/tailored/{model_id}:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Generate Image - Branded model
       description: |-
         **Description**
@@ -1425,7 +1425,7 @@ paths:
   /text-to-vector/tailored/{model_id}:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Generate Vector Graphics - Branded (Beta)
       description: >-
 
@@ -1649,7 +1649,7 @@ paths:
   /tailored-gen/datasets:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Create Dataset
       description: >-
         **Description**
@@ -1752,7 +1752,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Get Datasets
       description: >-
         **Description**
@@ -1832,7 +1832,7 @@ paths:
   /tailored-gen/datasets/{id}:
     get:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Get Dataset by ID
       description: >-
         **Description**
@@ -1947,7 +1947,7 @@ paths:
           description: Internal server error.
     put:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Update Dataset
       description: >-
         **Description**
@@ -2104,7 +2104,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Delete Dataset
       description: >-
         **Description**
@@ -2148,7 +2148,7 @@ paths:
   /tailored-gen/datasets/{dataset_id}/images:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Upload Image to Dataset
       description: >-
         **Description**
@@ -2325,7 +2325,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Get Images
       description: >-
         **Description**
@@ -2405,7 +2405,7 @@ paths:
   /tailored-gen/datasets/{dataset_id}/images/{image_id}:
     get:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Get Image by ID
       description: >-
         **Description**
@@ -2487,7 +2487,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Delete Image
       description: >-
         **Description**
@@ -2549,7 +2549,7 @@ paths:
   /tailored-gen/models:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Create Model
       description: >-
         **Description**
@@ -2632,7 +2632,7 @@ paths:
           description: Internal server error.
     get:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Get Models
       description: >-
         **Description**
@@ -2701,7 +2701,7 @@ paths:
   /tailored-gen/models/{id}:
     get:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Get model by ID
       description: >-
         **Description**
@@ -2771,7 +2771,7 @@ paths:
           description: Internal server error.
     delete:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Delete model
       description: >-
         **Description**
@@ -2820,7 +2820,7 @@ paths:
   /tailored-gen/models/{id}/start_training:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Start Training
       description: >-
         **Description**
@@ -2904,7 +2904,7 @@ paths:
   /tailored-gen/models/{id}/stop_training:
     post:
       tags:
-        - Tailored-Generation
+        - Tailored Generation
       summary: Stop Training
       description: >-
         **Description**
@@ -2961,7 +2961,7 @@ paths:
   /text-to-vector/base/{model_version}:
     post:
       tags:
-        - Image-Generation
+        - Image Generation
       summary: Generate Vector Graphics - Base (Beta)
       description: >-
 
@@ -3229,7 +3229,7 @@ paths:
   /text-to-vector/fast/{model_version}:
     post:
       tags:
-        - Image-Generation
+        - Image Generation
       summary: Generate Vector Graphics - Fast (Beta)
       description: >-
 
@@ -3451,7 +3451,7 @@ paths:
   /product/cutout:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Product Cutout
       description: >
         This capability allows you to create a precise cutout of a product from any given image. This feature is especially valuable for eCommerce platforms and applications, serving as a fundamental building block for crafting a user-friendly interface. 
@@ -3516,7 +3516,7 @@ paths:
   /product/packshot:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Product Packshot
       description: >-
         The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
@@ -3586,7 +3586,7 @@ paths:
   /product/shadow:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Product Shadow
       description: >-
         The Product Shadow API allows you to add consistent and customizable shadow to a product cutout. This feature is designed to work in combination with other capabilities like product cutout,  product packshot and product lifestyle shots, enhancing the visual appeal of e-commerce and product imagery.
@@ -3688,7 +3688,7 @@ paths:
   /product/lifestyle_shot_by_text:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Lifestyle Product Shot by Text
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
@@ -3836,7 +3836,7 @@ paths:
   /product/lifestyle_shot_by_image:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Lifestyle Product Shot by Image (Coming Soon)
       description: >-
         Generates product images in enriched environments using a reference image for inspiration. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
@@ -3941,7 +3941,7 @@ paths:
   /products/consistent_shots:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Consistent Product Shots (Coming Soon)
       description: >-
         **Description**
@@ -3956,7 +3956,7 @@ paths:
   /product/contextual_keyword_extraction:
     post:
       tags:
-        - Product-Shots-Generation
+        - Product Shots Generation
       summary: Contextual Keyword Extraction (Coming Soon)
       description: >-
         **Description**
@@ -3971,7 +3971,7 @@ paths:
   /{visual_id}/campaign_generator:
     post:
       tags:
-          - Campaign-Generation
+          - Campaign Generation
       summary: Generate Campaign
       description: >-
 
@@ -4550,7 +4550,7 @@ paths:
   /{visual_id}/person/info:
     get:
       tags:
-        - Image-Modifications
+        - Image Modifications
       summary: Get Presenter info
       description: >-
 
@@ -4882,7 +4882,7 @@ paths:
   /{visual_id}/create:
     post:
       tags:
-        - Image-Modifications
+        - Image Modifications
       summary: Modify Presenter
       description: >-
 
@@ -5966,7 +5966,7 @@ paths:
   /{visual_id}/image_to_psd:
     post:
       tags:
-        - Image-Modifications
+        - Image Modifications
       summary: Delayer Image
       description: >-
 

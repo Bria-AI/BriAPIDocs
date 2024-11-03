@@ -1002,13 +1002,13 @@ paths:
                   prompt: "a baby riding a bicycle in a field of flowers"
                   structure_image_url: "URL"
                   num_results: 1
-                  sync: true
+                  sync: false
               inappropriate prompt:
                 value:
                   prompt: "sensual"
                   structure_image_url: "URL"
                   num_results: 1
-                  sync: true
+                  sync: false
       responses:
         '200':
           description: Successful operation.

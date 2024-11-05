@@ -937,7 +937,6 @@ paths:
         
         
         - **Versatile Input/Output Pairings**:
-            
             - Convert illustrations, sketches, or photos into new illustrative outputs.
             
             
@@ -960,12 +959,12 @@ paths:
         Empower creative platforms and editing tools with advanced levels of control and flexibility for generating visual content.
       
         - **Maintain Spatial Consistency**
-          - Structure reference image
+          Structure reference image
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/Untitled+design+(10)+(1).png" width="200" height="200"/>
           
           
-          - Generated Visual (combined into a gif)
+          Generated Visual (combined into a gif)
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/ezgif-3-6a1c2d26ed+(1).gif" width="200" height="200"/>
         - **Convert Sketches to Illustrations**

@@ -996,7 +996,7 @@ paths:
                   description: The influence of the tailored model on the generation. Only relevant if tailored_model_id is provided. This parameter is optional. Higher value gives more weight to the tailored model.
                 steps_num:
                   type: integer
-                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional. When fast=false, the default value is 30, the minimum is 20 and the maximum is 50. 
                   minimum: 4
                   default: 12
                   maximum: 20

@@ -975,7 +975,7 @@ paths:
                   maximum: 4
                 sync:
                   type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional.
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional. When fast=false or when num_results=4, please use sync=false. 
                   default: true
                 fast: 
                   type: boolean

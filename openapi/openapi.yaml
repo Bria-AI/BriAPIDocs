@@ -939,9 +939,7 @@ paths:
         - **Versatile Input/Output Pairings**:
             - Convert illustrations, sketches, or photos into new illustrative outputs.
             
-            
             - Transform photos into variations that maintain the original layout.
-            
             
         - **Adjustable Structure Influence**: Control how much the input image's structure impacts the output on a scale from 0 to 1, allowing for diverse creative results.
         
@@ -959,6 +957,7 @@ paths:
         Empower creative platforms and editing tools with advanced levels of control and flexibility for generating visual content.
       
         - **Maintain Spatial Consistency**
+          
           Structure reference image
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/Untitled+design+(10)+(1).png" width="200" height="200"/>

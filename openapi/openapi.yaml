@@ -926,16 +926,101 @@ paths:
       tags:
         - Image Generation
       summary: Generate Image with Reference (Coming Soon)
-      description: >
-        The /reimagine endpoint enables to generate new images based on various types of reference images, guided by a text prompt. This powerful feature allows for the creation of images that incorporate elements from existing visuals, such as structure, style, or specific attributes.
-
-
-
-        Currently, the endpoint focuses on using the structure of a reference image to guide the generation process. This is particularly useful for creating gaming visuals, illustrations, and other artistic content that builds upon existing artwork or designs.
-
-
-
-        Future updates may expand the capabilities to include different types of references and combinations, enhancing the versatility and creative potential of the image generation process.
+      description: >-
+        **Description**
+        
+        The `/reimagine` endpoint in Bria’s API allows guiding image generation not just with prompts but also by using an input image. This feature retains the original structure and depth of the input while incorporating new materials, colors, and textures to create fresh visuals.
+      
+        ### Key Benefits
+        
+        - **Simplified Structure Guidance**: Use a reference image to replicate its outline and depth, reducing the need for complex prompts and minimizing trial and error.
+        
+        
+        - **Versatile Input/Output Pairings**:
+            
+            
+            - Convert illustrations, sketches, or photos into new illustrative outputs.
+            
+            
+            - Transform photos into variations that maintain the original layout.
+            
+            
+        - **Adjustable Structure Influence**: Control how much the input image's structure impacts the output on a scale from 0 to 1, allowing for diverse creative results.
+        
+        
+        - **Aspect Ratio Preservation**: Ensures the output maintains the reference image's aspect ratio for layout consistency. The output resolution is approximately 1 megapixel.
+        
+        
+        - **Seamless Integration with Tailored Generation**: Combine structural references with tailored endpoints to include unique IP characteristics in the generated outputs.
+      
+        ### Potential Use Cases
+        
+        **Enhanced Creative Control for Platforms & Editing Tools**
+      
+      
+        Empower creative platforms and editing tools with advanced levels of control and flexibility for generating visual content.
+      
+        - **Maintain Spatial Consistency**
+          - Structure reference image
+          
+          - <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/Untitled+design+(10)+(1).png" width="200" height="200"/>
+          
+          
+          - Generated Visual (combined into a gif)
+          
+          - <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/ezgif-3-6a1c2d26ed+(1).gif" width="200" height="200"/>
+        - **Convert Sketches to Illustrations**
+          - Structure reference image
+          
+          - <img src="example-image-url1.png" width="200" height="200"/>
+          
+          - prompt:
+          
+          - structure_ref_influence:
+          
+          - Generated Visual
+          
+          - <img src="example-image-url1.png" width="200" height="200"/>
+        - **Generate Diverse Variations**
+          - Structure reference image
+          
+          - <img src="example-image-url1.png" width="200" height="200"/>
+          
+          - prompt:
+          
+          - structure_ref_influence:
+          
+          - Generated Visual
+          
+          - <img src="example-image-url1.png" width="200" height="200"/>
+        - **Stylize Typography and Logos**
+          - Structure reference image
+          
+          - <img src="example-image-url1.png" width="200" height="200"/>
+          
+          - prompt:
+          
+          - structure_ref_influence:
+          
+          - Generated Visual
+          
+          - <img src="example-image-url1.png" width="200" height="200"/>
+      
+        **Interoperability with Tailored Generation**
+      
+        - **Reskin Gaming Assets**: Maintain the structure and detail of assets while updating textures and colors for fresh looks without altering the original shape or layout.
+        
+        
+        - **Iterate on Gaming Asset Designs**: Simplifies design iteration for gaming assets, enabling rapid exploration and refinement.
+        
+        
+        - **Customize Marketing Assets**: Transform marketing visuals while preserving their composition, adding new styles and elements with structural guidance.
+        
+        
+        - **Adapt User-Generated Content**: Repurpose user-generated content for marketing campaigns, making it fit seamlessly with brand aesthetics.
+      
+      
+        **For practical tips and a deeper dive, view our comprehensive guide [here](https://www.notion.so/134ba153467980a28d25de394f651c4a?pvs=21).**
 
       operationId: reimagine
       parameters:
@@ -975,7 +1060,7 @@ paths:
                   maximum: 4
                 sync:
                   type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional. When fast=false or when num_results=4, please use sync=false. 
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional.
                   default: true
                 fast: 
                   type: boolean

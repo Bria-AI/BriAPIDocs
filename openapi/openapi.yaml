@@ -938,7 +938,6 @@ paths:
         
         - **Versatile Input/Output Pairings**:
             
-            
             - Convert illustrations, sketches, or photos into new illustrative outputs.
             
             
@@ -963,12 +962,12 @@ paths:
         - **Maintain Spatial Consistency**
           - Structure reference image
           
-          - <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/Untitled+design+(10)+(1).png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/Untitled+design+(10)+(1).png" width="200" height="200"/>
           
           
           - Generated Visual (combined into a gif)
           
-          - <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/ezgif-3-6a1c2d26ed+(1).gif" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/ezgif-3-6a1c2d26ed+(1).gif" width="200" height="200"/>
         - **Convert Sketches to Illustrations**
           - Structure reference image
           

@@ -938,7 +938,6 @@ paths:
         
         - **Versatile Input/Output Pairings**:
             - Convert illustrations, sketches, or photos into new illustrative outputs.
-            
             - Transform photos into variations that maintain the original layout.
             
         - **Adjustable Structure Influence**: Control how much the input image's structure impacts the output on a scale from 0 to 1, allowing for diverse creative results.
@@ -967,41 +966,41 @@ paths:
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/ezgif-3-6a1c2d26ed+(1).gif" width="200" height="200"/>
         - **Convert Sketches to Illustrations**
-          - Structure reference image
+          Structure reference image
           
-          - <img src="example-image-url1.png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/iStock-1507967542+(1).jpg" height="200"/>
           
-          - prompt:
+          prompt: A watercolor painting of a lively urban street featuring a red vintage car parked in front of multi-story buildings, where soft, fluid brushstrokes capture the subtle gradients in the building facades, with warm earth tones blending into cool blues and grays for the shadows, giving the scene a nostalgic and dreamy atmosphere.
           
-          - structure_ref_influence:
+          structure_ref_influence: 0.75
           
-          - Generated Visual
+          Generated Visual
           
-          - <img src="example-image-url1.png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/A_watercolor_painting_of_a_lively_urban_street_featuring_a_red_vintage_car_parke_undefined+(2).png" height="200"/>
         - **Generate Diverse Variations**
-          - Structure reference image
+          Structure reference image
           
-          - <img src="example-image-url1.png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/cute-scottish-straight-kitten-playing-with-balls-o-2023-11-27-05-13-57-utc+(1)+(1).jpg" height="200"/>
           
-          - prompt:
+          prompt: A ginger kitten sits on a textured beige surface, surrounded by soft balls of yarn.
           
-          - structure_ref_influence:
+          structure_ref_influence: 0.75
           
-          - Generated Visual
+          Generated Visual
           
-          - <img src="example-image-url1.png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/seed_1405021285.png" height="200"/>
         - **Stylize Typography and Logos**
-          - Structure reference image
+          Structure reference image
           
-          - <img src="example-image-url1.png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/BRIA+(1)+(1).png" width="200" height="200"/>
           
-          - prompt:
+          prompt: curled orange peel.
           
-          - structure_ref_influence:
+          structure_ref_influence: 0.1
           
-          - Generated Visual
+          Generated Visual
           
-          - <img src="example-image-url1.png" width="200" height="200"/>
+          <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/curled_orange_peel_undefined+(1).png" width="200" height="200"/>
       
         **Interoperability with Tailored Generation**
       
@@ -1017,7 +1016,7 @@ paths:
         - **Adapt User-Generated Content**: Repurpose user-generated content for marketing campaigns, making it fit seamlessly with brand aesthetics.
       
       
-        **For practical tips and a deeper dive, view our comprehensive guide [here](https://www.notion.so/134ba153467980a28d25de394f651c4a?pvs=21).**
+        **For practical tips, view our guide [here](https://www.notion.so/134ba153467980a28d25de394f651c4a?pvs=21).**
 
       operationId: reimagine
       parameters:

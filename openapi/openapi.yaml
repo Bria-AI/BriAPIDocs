@@ -966,6 +966,7 @@ paths:
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/ezgif-3-6a1c2d26ed+(1).gif" width="200" height="200"/>
         - **Convert Sketches to Illustrations**
+          
           Structure reference image
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/iStock-1507967542+(1).jpg" height="200"/>
@@ -978,6 +979,7 @@ paths:
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/A_watercolor_painting_of_a_lively_urban_street_featuring_a_red_vintage_car_parke_undefined+(2).png" height="200"/>
         - **Generate Diverse Variations**
+          
           Structure reference image
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/cute-scottish-straight-kitten-playing-with-balls-o-2023-11-27-05-13-57-utc+(1)+(1).jpg" height="200"/>
@@ -990,6 +992,7 @@ paths:
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/seed_1405021285.png" height="200"/>
         - **Stylize Typography and Logos**
+          
           Structure reference image
           
           <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/reimagine/BRIA+(1)+(1).png" width="200" height="200"/>

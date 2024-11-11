@@ -1059,12 +1059,12 @@ paths:
                   maximum: 4
                 sync:
                   type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional.
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional. When fast=false, it is reomcmned to use sync=false. 
                   default: true
                 fast: 
                   type: boolean
                   default: true
-                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. The false, the regular mode will be utilized. 
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. 
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt and other parameters. This parameter is optional.
@@ -1378,7 +1378,7 @@ paths:
                   description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
-                  description: How many images you would like to generate. 
+                  description: How many images you would like to generate. This parameter is optional. When fast=false, only num_results 1, 2 are supported.
                   minimum: 1
                   maximum: 4
                   default: 4
@@ -1389,14 +1389,18 @@ paths:
                   enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
                 sync:
                   type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. 
                   default: false
+                fast: 
+                  type: boolean
+                  default: true
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. 
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 steps_num:
                   type: integer
-                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional. When fast=false, the default value is 30, the minimum is 20 and the maximum is 50. 
                   minimum: 4
                   maximum: 20
                   default: 8
@@ -1596,7 +1600,7 @@ paths:
                   description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
                 num_results:
                   type: integer
-                  description: How many images you would like to generate. 
+                  description: How many images you would like to generate. This parameter is optional. When fast=false, only num_results 1, 2 are supported. 
                   minimum: 1
                   maximum: 4
                   default: 4
@@ -1607,14 +1611,18 @@ paths:
                   enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
                 sync:
                   type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
-                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready. This parameter is optional. When fast=false, it is reomcmned to use sync=false. 
+                  default: true
+                fast: 
+                  type: boolean
+                  default: true
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. 
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
                 steps_num:
                   type: integer
-                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional. When fast=false, the default value is 30, the minimum is 20 and the maximum is 50.
                   minimum: 4
                   maximum: 20
                   default: 8

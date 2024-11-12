@@ -5360,7 +5360,7 @@ paths:
         **Description**
 
 
-        The *Remove BG* Route can be used to remove the background of an image.
+        The *Remove BG* Route can be used to remove the background of an image. This route leverages Bria's newest model, RMBG 2.0. For more details and to explore the model, check out the [Hugging Face demo](https://huggingface.co/spaces/briaai/BRIA-RMBG-2.0).
 
 
         **The main difference between the regular and this isolated background removal endpoint is that you can use this endpoint without uploading or registering the image to Bria.**

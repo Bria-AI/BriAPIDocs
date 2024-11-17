@@ -470,6 +470,8 @@ paths:
           description: Unsupported Media Type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '422':
           description: Unprocessable Entity. The URL does not point to a valid image or is inaccessible.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /text-to-image/fast/{model_version}:
@@ -759,6 +761,8 @@ paths:
           description: Unsupported Media Type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '422':
           description: Unprocessable Entity. The URL does not point to a valid image or is inaccessible.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /text-to-image/hd/{model_version}:
@@ -919,6 +923,8 @@ paths:
           description: Bad request.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /reimagine:
@@ -1144,6 +1150,8 @@ paths:
           description: Unsupported Media Type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '422':
           description: Unprocessable Entity. The URL does not point to a valid image or is inaccessible.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /prompt_enhancer:
@@ -1221,6 +1229,8 @@ paths:
                               }
         '400':
           description: Bad request.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
 
@@ -1519,6 +1529,8 @@ paths:
           description: Bad request.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
           
@@ -1747,6 +1759,8 @@ paths:
           description: Unsupported Media Type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '422':
           description: Unprocessable Entity. The URL does not point to a valid image or is inaccessible.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
 
@@ -1852,6 +1866,8 @@ paths:
           description: Bad request.
         '401':
           description: Unauthorized.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
     get:
@@ -1931,6 +1947,8 @@ paths:
                   value: []
         '401':
           description: Unauthorized.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/datasets/{id}:
@@ -2047,6 +2065,8 @@ paths:
           description: Unauthorized.
         '404':
           description: Dataset with the specified ID does not exist.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
     put:
@@ -2247,6 +2267,8 @@ paths:
                 conflict_example:
                   value:
                     error: "Cannot delete a dataset that is used by a model that is in training or has the status 'ready'."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/datasets/{dataset_id}/images:
@@ -2425,6 +2447,8 @@ paths:
                     description: Error message.
               example:
                 error: "The provided image_url does not lead to an accessible image."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
     get:
@@ -2504,6 +2528,8 @@ paths:
                   value: []
         '404':
           description: Dataset with the specified ID does not exist.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/datasets/{dataset_id}/images/{image_id}:
@@ -2587,6 +2613,8 @@ paths:
                 image_not_found:
                   value:
                     error: "Image with the specified ID does not exist."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
     delete:
@@ -2648,6 +2676,8 @@ paths:
                 dataset_completed:
                   value:
                     error: "Cannot delete an image from a completed dataset."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/models:
@@ -2732,6 +2762,8 @@ paths:
                     description: Error message.
               example:
                 error: "Dataset with the specified ID does not exist."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
     get:
@@ -2800,6 +2832,8 @@ paths:
                   value: []
         '401':
           description: Unauthorized.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/models/{id}:
@@ -2871,6 +2905,8 @@ paths:
                     description: Error message.
               example:
                 error: "Model with the specified ID does not exist."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
     delete:
@@ -2919,6 +2955,8 @@ paths:
                     description: Error message.
               example:
                 error: "Model with the specified ID does not exist."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/models/{id}/start_training:
@@ -3003,6 +3041,8 @@ paths:
                     description: Error message.
               example:
                 error: "The dataset status is not ‘completed’."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /tailored-gen/models/{id}/stop_training:
@@ -3060,6 +3100,8 @@ paths:
                 model_not_in_training:
                   value:
                     error: "Model is not currently in training."
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /text-to-vector/base/{model_version}:
@@ -3328,6 +3370,8 @@ paths:
           description: Bad request.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
   /text-to-vector/fast/{model_version}:
@@ -3548,6 +3592,8 @@ paths:
           description: Bad request.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
 
@@ -3611,6 +3657,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -3681,6 +3729,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -3782,6 +3832,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -3930,6 +3982,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -4035,6 +4089,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -4338,6 +4394,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -4580,6 +4638,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -4645,6 +4705,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -4979,6 +5041,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -5194,6 +5258,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -5254,6 +5320,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -5345,6 +5413,8 @@ paths:
           description: Not found. Image could not be found at the provided URL.
         '415':
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '500':
@@ -5445,6 +5515,8 @@ paths:
           description: Unsupported media type.
         '460':
           description: Failed to download image.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -5511,6 +5583,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -5635,6 +5709,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -5790,6 +5866,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -5900,6 +5978,8 @@ paths:
           description: The input image's resolution is too low.
         '460':
           description: Failed to download image.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -5968,6 +6048,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -6036,6 +6118,8 @@ paths:
           description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
         '413':
           description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '460':
           description: Failed to download image.
         '451':
@@ -6154,6 +6238,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':
@@ -6250,6 +6336,8 @@ paths:
           description: Specified Image does not exist.
         '405':
           description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
         '506':

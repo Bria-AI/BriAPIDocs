@@ -253,7 +253,7 @@ paths:
       
         To use a guidance method, include the following parameters in your request:
       
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
         - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
         
@@ -356,34 +356,6 @@ paths:
                 guidance_method_2_image_file:
                   type: string
                   description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_3:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_3_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_3_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_3. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_4:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_4_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_4_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_4. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
             examples:
               valid prompt:
                 value:
@@ -582,7 +554,7 @@ paths:
       
         To use a guidance method, include the following parameters in your request:
       
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
         - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
         
@@ -675,34 +647,6 @@ paths:
                 guidance_method_2_image_file:
                   type: string
                   description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_3:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_3_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_3_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_3. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_4:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_4_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_4_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_4. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
             examples:
               valid prompt:
                 value:
@@ -1354,7 +1298,7 @@ paths:
       
         To use a guidance method, include the following parameters in your request:
       
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
         - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
         
@@ -1449,34 +1393,6 @@ paths:
                 guidance_method_2_image_file:
                   type: string
                   description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_3:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_3_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_3_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_3. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_4:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_4_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_4_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_4. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
             examples:
               valid prompt:
                 value:
@@ -1578,7 +1494,7 @@ paths:
       
         To use a guidance method, include the following parameters in your request:
       
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
         - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
         
@@ -1673,34 +1589,6 @@ paths:
                 guidance_method_2_image_file:
                   type: string
                   description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_3:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_3_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_3_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_3. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_4:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_4_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_4_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_4. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
             examples:
               valid prompt:
                 value:
@@ -3166,7 +3054,7 @@ paths:
       
         To use a guidance method, include the following parameters in your request:
       
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
         - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
         
@@ -3262,34 +3150,6 @@ paths:
                 guidance_method_2_image_file:
                   type: string
                   description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_3:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_3_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_3_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_3. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_4:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_4_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_4_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_4. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
             examples:
               valid prompt:
                 value:
@@ -3427,7 +3287,7 @@ paths:
       
         To use a guidance method, include the following parameters in your request:
       
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2, 3, or 4). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
         - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
         
@@ -3512,34 +3372,6 @@ paths:
                 guidance_method_2_image_file:
                   type: string
                   description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_3:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_3_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_3_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_3. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_4:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.
-                guidance_method_4_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_4_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_4. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
             examples:
               valid prompt:
                 value:

@@ -3801,7 +3801,7 @@ paths:
                     type: array
                     items:
                       type: array
-                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. When placement_type=automatic, each set of 10 results will use the following predefined placements, according to this order upper_left, upper_right, bottom_left, bottom_right, right_center, left_center, upper_center, bottom_center, center_vertical, center_horizontal. This means that the first result URL will include a result using the placement upper_left and so on. 
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the session id of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. When placement_type=automatic, each set of 10 results will use the following predefined placements, according to this order upper_left, upper_right, bottom_left, bottom_right, right_center, left_center, upper_center, bottom_center, center_vertical, center_horizontal. This means that the first result URL will include a result using the placement upper_left and so on. 
                 example:
                   result: [['result_url', 244184855]]
         '400':
@@ -3896,7 +3896,7 @@ paths:
                     type: array
                     items:
                       type: array
-                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the sid of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+                    description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the session id of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request.
                 example:
                   result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
         '400':

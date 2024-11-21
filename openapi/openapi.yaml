@@ -3829,7 +3829,7 @@ paths:
         - Product Shots Generation
       summary: Lifestyle Product Shot by Image (Coming Soon)
       description: >-
-        Generates product images in enriched environments using a reference image for inspiration. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
+        Generates product images in enriched environments using a reference image for inspiration. 
       operationId: productLifestyleShotByImage
       parameters:
         - in: header
@@ -3850,40 +3850,31 @@ paths:
                 sync:
                   type: boolean
                   default: false
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. When placement_type is automatic, sync has to be false.
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. 
                 image_url:
                   type: string
                   description: The URL of the product shot to be placed in a lifestyle shot. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
                   type: string
                   description: The product shot file to be placed in a lifestyle shot, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                reference_image_url:
-                  type: string
-                  description: The URL of the reference image to be used for generating the lifestyle shot. If both reference_image_url and reference_image_file are provided, reference_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                reference_image_file:
-                  type: string
-                  description: The reference image file to be used for generating the lifestyle shot, in base64 format. Used if reference_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                num_results:
-                  type: integer
-                  default: 1
-                  description: The number of lifestyle product shots you would like to generate. When placement_type is automatic or manual_placement, num_results should be 1. You will get 10 results when automatic and according to the number of required placements if manual_placement.
-                placement_type:
-                  type: string
-                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
-                  enum: ["original", "automatic", "manual_placement", "manual_padding"]
-                shot_size:
-                  type: array
-                  items:
-                    type: integer
-                  default: [1000,1000]
-                  description: The desired size of the final product shot. For optimal results, the total number of pixels should be around 1,000,000. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
-                manual_placement_selection:
+                ref_image_urls:
                   type: array
                   items:
                     type: string
-                    enum: ["upper_left", "upper_right", "bottom_left", "bottom_right", "right_center", "left_center", "upper_center", "bottom_center", "center_vertical", "center_horizontal"]
-                  default: ["upper_left"]
-                  description: If you've selected placement_type=manual_placement, you should use this parameter to specify which placements/positions you would like to use from the list. You can select more than one placement in one request.
+                  description: The URL of the reference image to be used for generating the lifestyle shot. Only a single refernce image is supported at the moment. If both ref_image_urls and ref_image_files are provided, ref_image_urls will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                ref_image_files:
+                  type: array
+                  items:
+                    type: string
+                  description: The reference image file to be used for generating the lifestyle shot, in base64 format. Only a single refernce image is supported at the moment. Used if ref_image_urls is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                num_results:
+                  type: integer
+                  default: 4
+                  description: The number of lifestyle product shots you would like to generate. 
+                placement_type:
+                  type: string
+                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                  enum: ["original", "manual_padding"]
                 padding_values:
                   type: array
                   items:
@@ -3891,11 +3882,8 @@ paths:
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [left, right, top, bottom]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
             example:
-              num_results: 1
-              sync: false
               image_url: "URL"
-              reference_image_url: "REFERENCE_URL"
-              fast: true
+              ref_image_urls: ["REFERENCE_URL"]
       responses:
         '200':
           description: Successful operation.

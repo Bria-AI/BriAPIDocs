@@ -5239,7 +5239,115 @@ paths:
           description: Failed to download image.
         '500':
           description: Internal server error. An error occurred on the server.
-  
+  /gen_fill:
+    post:
+      tags:
+        - Image Modifications
+      summary: GenFill 
+      description: >-
+
+        **Description**
+
+
+        The *Eraser Route* enables the removal of elements or specific areas from a given image.
+
+
+        You can define the area to be removed by providing a mask that outlines the region to be erased. There are two main ways recommended to generate these masks:
+        
+        1. Masks can be created by allowing users to draw directly on the image with a brush, for example. To access the SDK that demonstrates how to implement a brush feature in your interface, please refer to the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
+        
+        2. By using the `/objects/mask_generator` route, which will generate all the possible masks for an image.
+
+
+        This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>, and the HF demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-2.3-ControlNet-Eraser-API" target="_blank">here</a>
+
+        
+        Additionally, ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
+        
+
+      operationId: gen_fill
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp.
+                mask_url:   
+                  type: string
+                  description: The URL of the binary mask image that represents the area that will be cleaned. If both mask_url and mask_file are provided, mask_url will be used. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                mask_file:
+                  type: string
+                  description: The file of the binary mask image that represents the area that will be cleaned, in base64 format. This parameter is used if mask_url is not provided. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate the object within the masked region.
+                negative_prompt:
+                  type: string
+                  description: The prompt you would like to use to specify details or attributes to avoid in the object generated within the masked region.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. When using any Guidance Method, please use the value 1. 
+                  minimum: 1
+                  default: 4
+                  maximum: 4
+                sync:
+                  type: boolean
+                  default: false
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. It is recommended to use sync=false for optimal performance. When generating more than 1 result, you should use the value false. 
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                  
+            examples:
+              send using url:
+                value:
+                  image_url: 'URL'
+                  mask_url: 'URL'
+                  prompt: 'object description'
+              send using base64 string:
+                value:
+                  file: 'base64_encoded_string_for_image'
+                  mask_file: 'base64_encoded_string_for_image'
+                  prompt: 'object description'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '460':
+          description: Failed to download image.
+        '500':
+          description: Internal server error. An error occurred on the server.
+
   /background/remove:
     post:
       tags:

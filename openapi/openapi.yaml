@@ -113,6 +113,8 @@ info:
     - `/erase_foreground` - Erase the foreground from a provided image.
 
     - `/eraser` - Erase elements from an image using manually created or auto-generated masks. 
+
+    - `/gen_fill` (coming soon) -  GenFill generates objects in a specific region of an image, using a mask and a textual prompt.
         
     - `/caption` - Generate a caption describing the given image.
 
@@ -5243,7 +5245,7 @@ paths:
     post:
       tags:
         - Image Modifications
-      summary: GenFill 
+      summary: GenFill (Coming Soon)
       description: >-
 
         **Description**

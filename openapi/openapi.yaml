@@ -5260,10 +5260,7 @@ paths:
         Masks can be created by allowing users to draw directly on the image with a brush, for example. To access the SDK that demonstrates how to implement a brush feature in your interface, please refer to the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
 
 
-        This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>, and the HF demo space can be found <a href="" target="_blank">here</a>
-        
-
-        Additionally, ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
+        This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>.
         
 
       operationId: gen_fill

@@ -5287,10 +5287,10 @@ paths:
                   description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp.
                 mask_url:   
                   type: string
-                  description: The URL of the binary mask image that represents the area that will be cleaned. If both mask_url and mask_file are provided, mask_url will be used. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  description: The URL of the binary mask image that represents the area in which the object will be generated. If both mask_url and mask_file are provided, mask_url will be used. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
                 mask_file:
                   type: string
-                  description: The file of the binary mask image that represents the area that will be cleaned, in base64 format. This parameter is used if mask_url is not provided. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  description: The file of the binary mask image that represents the area in which the object will be generated, in base64 format. This parameter is used if mask_url is not provided. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
                 prompt:
                   type: string
                   description: The prompt you would like to use to generate the object within the masked region.

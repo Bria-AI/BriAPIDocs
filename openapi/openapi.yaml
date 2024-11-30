@@ -26,6 +26,9 @@ info:
     - **Modify and Transform Images**: Bring your own images and modify them using various routes to suit your needs.
     
     
+    - **Edit Videos (New!)**: Transform video content with advanced AI capabilties, starting with **Background Removal**, and more features coming soon.
+    
+    
     This document provides an overview of the API's capabilities and guides users on how to effectively implement them.
 
 
@@ -90,6 +93,15 @@ info:
 
     
 
+    ### Video Editing:
+    
+    Bria's new **Video Editing** product suite empowers users to transform video content effortlessly. 
+    
+    The first feature, **Background Removal**, allows users to remove backgrounds from videos while retaining the original resolution and framerate. 
+    
+    This capability supports a variety of formats, including `mp4`, `avi`, and `mov`. More features will be introduced soon, expanding the suite to meet diverse video editing needs.
+    
+    
 
     ### Modifying Images
     
@@ -4222,6 +4234,82 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
+  
+  /video/background/remove:
+    post:
+      tags:
+        - Video Editing (Coming Soon)
+      summary: Remove Background from Video
+      description: >
+        **Description**
+
+
+        This endpoint allows users to remove the background from videos. It supports various video file formats and retains the original video's framerate and resolution in the output.
+
+
+        **Supported Inputs**:
+        
+        - File types: `mp4`, `avi`, `mov`, `gif`, `webm`
+        
+        - Framerate: All framerates are supported; the original video's framerate is preserved in the output.
+        
+        - Resolutions: No limit; the output resolution matches the input resolution.
+
+
+        **Output**:
+        - File type: `mov`
+        
+        - Framerate: Matches the original video.
+        
+        - Resolution: Matches the original video.
+      operationId: removeVideoBackground
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+          description: API token associated with the organization.
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                video_url:
+                  type: string
+                  description: A publicly accessible URL of the video to process.
+                video_file:
+                  type: string
+                  format: binary
+                  description: The video file to upload and process. Either `video_url` or `video_file` must be provided.
+            example:
+                video_url: "https://example.com/processed_video.mov"
+      responses:
+        '200':
+          description: Background successfully removed.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL of the video with the background removed.
+              example:
+                result_url: "https://example.com/processed_video.mov"
+        '400':
+          description: Bad request. Invalid input parameters.
+        '415':
+          description: Unsupported Media Type. Invalid file type. Supported file types are `mp4`, `avi`, `mov`, `gif`, `webm`.
+        '422':
+          description: Unprocessable Entity. The URL does not point to a valid video or is inaccessible.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+
   /register:
     post:
       tags:

@@ -4285,7 +4285,7 @@ paths:
                   format: binary
                   description: The video file to upload and process. Either `video_url` or `video_file` must be provided.
             example:
-                video_url: "https://example.com/processed_video.mov"
+                video_url: "https://example.com/input_video.mp4"
       responses:
         '200':
           description: Background successfully removed.

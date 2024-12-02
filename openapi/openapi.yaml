@@ -4257,7 +4257,7 @@ paths:
 
 
         **Output**:
-        - File type: `mov`
+        - File type: `webm`
         
         - Framerate: Matches the original video.
         
@@ -4280,10 +4280,6 @@ paths:
                 video_url:
                   type: string
                   description: A publicly accessible URL of the video to process.
-                video_file:
-                  type: string
-                  format: binary
-                  description: The video file to upload and process. Either `video_url` or `video_file` must be provided.
             example:
                 video_url: "https://example.com/input_video.mp4"
       responses:
@@ -4298,7 +4294,7 @@ paths:
                     type: string
                     description: URL of the video with the background removed.
               example:
-                result_url: "https://example.com/processed_video.mov"
+                result_url: "https://example.com/processed_video.webm"
         '400':
           description: Bad request. Invalid input parameters.
         '415':
@@ -5333,7 +5329,7 @@ paths:
     post:
       tags:
         - Image Modifications
-      summary: GenFill (Coming Soon)
+      summary: GenFill
       description: >-
 
         **Description**

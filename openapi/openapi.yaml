@@ -5329,7 +5329,7 @@ paths:
     post:
       tags:
         - Image Modifications
-      summary: GenFill
+      summary: Generative Fill
       description: >-
 
         **Description**

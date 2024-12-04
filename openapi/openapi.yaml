@@ -5330,13 +5330,25 @@ paths:
           schema:
             type: string
           required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "92bf8ce17584de82"
-          description: visual id of the image, received after using the /upload or register route.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+            examples:
+              send using url:
+                value:
+                  image_url: 'URL'
+              send using base64 string:
+                value:
+                  file: 'base64_encoded_string_for_image'
       responses:
         '200':
           description: Successful operation.
@@ -5912,7 +5924,6 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   
-
   # search routes
   /caption:
     post:

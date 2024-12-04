@@ -172,6 +172,7 @@ externalDocs:
 servers:
   - url: https://engine.prod.bria-api.com/v1
 paths:
+  # image generation routes
   /text-to-image/base/{model_version}:
     post:
       tags:
@@ -1191,7 +1192,444 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
+  /text-to-vector/base/{model_version}:
+    post:
+      tags:
+        - Image Generation
+      summary: Generate Vector Graphics - Base (Beta)
+      description: >-
 
+
+        **Description**
+
+
+        The /text-to-vector/base route offers the ability to generate high-quality, editable vector graphic assets from textual prompts at scale. This endpoint allows for generating quality vector graphics such as icons, logos, and other illustrations.
+
+
+        **Examples:**
+
+
+        **prompt**: A sticker of a cute kitten
+
+
+        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/dcNzBYR/kitten-2.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/WcgDjsx/kitten-4.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/YT66fGv/kitten-5.png" width="200" height="200"/>
+
+
+        **prompt**: A beautiful butterfly
+
+
+         <img src="https://i.ibb.co/1sRxRvp/butterfly-1.png" width="266" height="200"/><img src="https://i.ibb.co/Gxm7X9J/4-butterflies.png" width="266" height="200"/>
+
+
+         On the left, a generated vector illustration. On the right, the same illustration after being re-colored in a vector editor
+
+
+
+         ### Guidance Methods
+      
+        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
+      
+      
+        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
+      
+      
+        Currently, we support the following guidance methods:
+      
+        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
+        
+        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
+        
+        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
+        
+        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
+      
+        **Using Guidance Methods**
+      
+        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. 
+      
+        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
+      
+        To use a guidance method, include the following parameters in your request:
+      
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        
+        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
+        
+        - `guidance_method_X_image_file`: Provide the base64-encoded input image
+      
+      
+        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
+
+
+      operationId: text-to-vector/base
+      parameters:
+        - in: path
+          name: model_version
+          schema:
+            type: string
+            enum: ["2.3"]
+          required: true
+          description: The model version you would like to use in the request. 
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. When using any Guidance Method, please use the value 1. 
+                  minimum: 1
+                  default: 4
+                  maximum: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                sync:
+                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  default: false
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                negative_prompt:
+                  type: string
+                  description: Specify here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  minimum: 20
+                  default: 30
+                  maximum: 50
+                text_guidance_scale:
+                  type: number
+                  format: float
+                  description: Determines how closely the generated image should adhere to the input text description. This parameter is optional.
+                  minimum: 1.0
+                  maximum: 10.0
+                  default: 5.0
+                guidance_method_1:
+                  type: string
+                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                guidance_method_1_scale:
+                  type: number
+                  format: float
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 1.0
+                  description: The impact of the guidance.
+                guidance_method_1_image_file:
+                  type: string
+                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_1. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
+                guidance_method_2:
+                  type: string
+                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                guidance_method_2_scale:
+                  type: number
+                  format: float
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 1.0
+                  description: The impact of the guidance.
+                guidance_method_2_image_file:
+                  type: string
+                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
+            examples:
+              valid prompt:
+                value:
+                  prompt: "A simplistic flat icon of a megaphone"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
+        '209':
+          description: Successful operation, a model version that is no longer available was requested. The request was redirected to the latest model version. 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+  /text-to-vector/fast/{model_version}:
+    post:
+      tags:
+        - Image Generation
+      summary: Generate Vector Graphics - Fast (Beta)
+      description: >-
+
+
+        **Description**
+
+
+        The /text-to-vector/fast route is optimized for speed, enabling rapid vector graphics creation without compromising quality. This endpoint allows for generating high-quality vector graphics such as icons, logos, and other illustrations.
+
+
+        **Examples:**
+
+
+        **prompt**: An icon of a bird with a blue head and yellow beak against a solid background
+        
+
+        <img src="https://i.ibb.co/DG73T97/bird-icon-1.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/WcySnrr/bird-icon-3.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/hsLcs04/bird-icon-2.png" width="200" height="200"/>
+        <img src="https://i.ibb.co/6R99kxp/bird-icon-4.png" width="200" height="200"/>
+
+
+        ### Guidance Methods
+      
+        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
+      
+      
+        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
+      
+      
+        Currently, we support the following guidance methods:
+      
+        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
+        
+        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
+        
+        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
+        
+        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
+      
+        **Using Guidance Methods**
+        
+      
+        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. 
+      
+        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
+      
+        To use a guidance method, include the following parameters in your request:
+      
+        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
+        
+        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
+        
+        - `guidance_method_X_image_file`: Provide the base64-encoded input image
+      
+      
+        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
+
+      operationId: text-to-vector/fast
+      parameters:
+        - in: path
+          name: model_version
+          schema:
+            type: string
+            enum: ["2.3"]
+          required: true
+          description: The model version you would like to use in the request. 
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                prompt:
+                  type: string
+                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
+                num_results:
+                  type: integer
+                  description: How many images you would like to generate. 
+                  minimum: 1
+                  maximum: 4
+                  default: 4
+                aspect_ratio:
+                  type: string
+                  description: The aspect ratio of the image. 
+                  default: "1:1"
+                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
+                sync:
+                  type: boolean
+                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
+                  default: false
+                seed:
+                  type: integer
+                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
+                steps_num:
+                  type: integer
+                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
+                  minimum: 4
+                  maximum: 10
+                  default: 8
+                guidance_method_1:
+                  type: string
+                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                guidance_method_1_scale:
+                  type: number
+                  format: float
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 1.0
+                  description: The impact of the guidance.
+                guidance_method_1_image_file:
+                  type: string
+                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_1. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
+                guidance_method_2:
+                  type: string
+                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                guidance_method_2_scale:
+                  type: number
+                  format: float
+                  minimum: 0.0
+                  maximum: 1.0
+                  default: 1.0
+                  description: The impact of the guidance.
+                guidance_method_2_image_file:
+                  type: string
+                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
+            examples:
+              valid prompt:
+                value:
+                  prompt: "A simplistic flat icon of a megaphone"
+                  num_results: 1
+                  sync: true
+              inappropriate prompt:
+                value:
+                  prompt: "sensual"
+                  num_results: 1
+                  sync: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
+                    items:
+                      type: object
+                      properties:
+                        seed:
+                          type: integer
+                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
+                        urls:
+                          type: string
+                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
+              examples:
+                valid prompt:
+                  value:
+                    results:  [
+                                {
+                                  "seed": 1525972691,
+                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
+                                }
+                              ]
+                inappropriate prompt:
+                  value:
+                    results:  [
+                                {
+                                  "description": "Query doesn't stand with Bria's ethic rules",
+                                  "error_code": "408"
+                                }
+                              ]
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+
+  # tailored routes
   /text-to-image/tailored/{model_id}:
     post:
       tags:
@@ -1463,7 +1901,6 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
-          
   /text-to-vector/tailored/{model_id}:
     post:
       tags:
@@ -1665,7 +2102,6 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
-
   /tailored-gen/datasets:
     post:
       tags:
@@ -3006,444 +3442,8 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
-  /text-to-vector/base/{model_version}:
-    post:
-      tags:
-        - Image Generation
-      summary: Generate Vector Graphics - Base (Beta)
-      description: >-
 
-
-        **Description**
-
-
-        The /text-to-vector/base route offers the ability to generate high-quality, editable vector graphic assets from textual prompts at scale. This endpoint allows for generating quality vector graphics such as icons, logos, and other illustrations.
-
-
-        **Examples:**
-
-
-        **prompt**: A sticker of a cute kitten
-
-
-        <img src="https://i.ibb.co/FBd4Cwj/sticker-of-a-cute-kitten-ec34b3c9918ecec1.png" width="200" height="200"/>
-        <img src="https://i.ibb.co/dcNzBYR/kitten-2.png" width="200" height="200"/>
-        <img src="https://i.ibb.co/WcgDjsx/kitten-4.png" width="200" height="200"/>
-        <img src="https://i.ibb.co/YT66fGv/kitten-5.png" width="200" height="200"/>
-
-
-        **prompt**: A beautiful butterfly
-
-
-         <img src="https://i.ibb.co/1sRxRvp/butterfly-1.png" width="266" height="200"/><img src="https://i.ibb.co/Gxm7X9J/4-butterflies.png" width="266" height="200"/>
-
-
-         On the left, a generated vector illustration. On the right, the same illustration after being re-colored in a vector editor
-
-
-
-         ### Guidance Methods
-      
-        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
-      
-      
-        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
-      
-      
-        Currently, we support the following guidance methods:
-      
-        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
-        
-        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
-        
-        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
-        
-        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
-      
-        **Using Guidance Methods**
-      
-        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. 
-      
-        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
-      
-        To use a guidance method, include the following parameters in your request:
-      
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
-        
-        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
-        
-        - `guidance_method_X_image_file`: Provide the base64-encoded input image
-      
-      
-        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
-
-
-      operationId: text-to-vector/base
-      parameters:
-        - in: path
-          name: model_version
-          schema:
-            type: string
-            enum: ["2.3"]
-          required: true
-          description: The model version you would like to use in the request. 
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                prompt:
-                  type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
-                num_results:
-                  type: integer
-                  description: How many images you would like to generate. When using any Guidance Method, please use the value 1. 
-                  minimum: 1
-                  default: 4
-                  maximum: 4
-                aspect_ratio:
-                  type: string
-                  description: The aspect ratio of the image. 
-                  default: "1:1"
-                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
-                sync:
-                  type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
-                  default: false
-                seed:
-                  type: integer
-                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                negative_prompt:
-                  type: string
-                  description: Specify here elements that you didn't ask in the prompt, but are being generated, and you would like to exclude. This parameter is optional. Bria currently supports prompts in English only.
-                steps_num:
-                  type: integer
-                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
-                  minimum: 20
-                  default: 30
-                  maximum: 50
-                text_guidance_scale:
-                  type: number
-                  format: float
-                  description: Determines how closely the generated image should adhere to the input text description. This parameter is optional.
-                  minimum: 1.0
-                  maximum: 10.0
-                  default: 5.0
-                guidance_method_1:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
-                guidance_method_1_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_1_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_1. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_2:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
-                guidance_method_2_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_2_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-            examples:
-              valid prompt:
-                value:
-                  prompt: "A simplistic flat icon of a megaphone"
-                  num_results: 1
-                  sync: true
-              inappropriate prompt:
-                value:
-                  prompt: "sensual"
-                  num_results: 1
-                  sync: true
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
-                    items:
-                      type: object
-                      properties:
-                        seed:
-                          type: integer
-                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
-                        urls:
-                          type: string
-                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
-              examples:
-                valid prompt:
-                  value:
-                    results:  [
-                                {
-                                  "seed": 1525972691,
-                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
-                                }
-                              ]
-                inappropriate prompt:
-                  value:
-                    results:  [
-                                {
-                                  "description": "Query doesn't stand with Bria's ethic rules",
-                                  "error_code": "408"
-                                }
-                              ]
-        '209':
-          description: Successful operation, a model version that is no longer available was requested. The request was redirected to the latest model version. 
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
-                    items:
-                      type: object
-                      properties:
-                        seed:
-                          type: integer
-                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
-                        urls:
-                          type: string
-                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
-              examples:
-                valid prompt:
-                  value:
-                    results:  [
-                                {
-                                  "seed": 1525972691,
-                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
-                                }
-                              ]
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '500':
-          description: Internal server error.
-  /text-to-vector/fast/{model_version}:
-    post:
-      tags:
-        - Image Generation
-      summary: Generate Vector Graphics - Fast (Beta)
-      description: >-
-
-
-        **Description**
-
-
-        The /text-to-vector/fast route is optimized for speed, enabling rapid vector graphics creation without compromising quality. This endpoint allows for generating high-quality vector graphics such as icons, logos, and other illustrations.
-
-
-        **Examples:**
-
-
-        **prompt**: An icon of a bird with a blue head and yellow beak against a solid background
-        
-
-        <img src="https://i.ibb.co/DG73T97/bird-icon-1.png" width="200" height="200"/>
-        <img src="https://i.ibb.co/WcySnrr/bird-icon-3.png" width="200" height="200"/>
-        <img src="https://i.ibb.co/hsLcs04/bird-icon-2.png" width="200" height="200"/>
-        <img src="https://i.ibb.co/6R99kxp/bird-icon-4.png" width="200" height="200"/>
-
-
-        ### Guidance Methods
-      
-        This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
-      
-      
-        Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
-      
-      
-        Currently, we support the following guidance methods:
-      
-        1. **controlnet_canny**: Extracts edge information from the input image to guide generation based on structural outlines.
-        
-        2. **controlnet_depth**: Derives depth information from the input image to influence spatial arrangement in generated images.
-        
-        3. **controlnet_recoloring**: Uses grayscale version of the input image to guide recoloring while preserving geometry.
-        
-        4. **controlnet_color_grid**: Extracts a 16x16 color grid from the input image to guide the overall color scheme of generated images.
-      
-        **Using Guidance Methods**
-        
-      
-        You can specify up to four guidance methods in a single request. Each method requires an accompanying image and a scale parameter to determine its impact on the generation inference. 
-      
-        **Note**: When using multiple guidance methods, all input images must have the same aspect ratio, which will determine the aspect ratio of the generated results.
-      
-        To use a guidance method, include the following parameters in your request:
-      
-        - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
-        
-        - `guidance_method_X_scale`: Set the impact of the guidance (0.0 to 1.0)
-        
-        - `guidance_method_X_image_file`: Provide the base64-encoded input image
-      
-      
-        By leveraging these guidance methods, you can achieve more precise control over the generated images, tailoring them to your specific needs and creative vision. 
-
-      operationId: text-to-vector/fast
-      parameters:
-        - in: path
-          name: model_version
-          schema:
-            type: string
-            enum: ["2.3"]
-          required: true
-          description: The model version you would like to use in the request. 
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                prompt:
-                  type: string
-                  description: The prompt you would like to use to generate images. Bria currently supports prompts in English only, excluding special characters.
-                num_results:
-                  type: integer
-                  description: How many images you would like to generate. 
-                  minimum: 1
-                  maximum: 4
-                  default: 4
-                aspect_ratio:
-                  type: string
-                  description: The aspect ratio of the image. 
-                  default: "1:1"
-                  enum: ["1:1","2:3","3:2","3:4","4:3","4:5","5:4","9:16","16:9"]
-                sync:
-                  type: boolean
-                  description: Determines the response mode. When true, responses are synchronous. With false, responses are asynchronous, immediately providing URLs for images that are generated in the background. Use polling for the URLs to retrieve images once ready.
-                  default: false
-                seed:
-                  type: integer
-                  description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                steps_num:
-                  type: integer
-                  description: The number of iterations the model goes through to refine the generated image. This parameter is optional.
-                  minimum: 4
-                  maximum: 10
-                  default: 8
-                guidance_method_1:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
-                guidance_method_1_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_1_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_1. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-                guidance_method_2:
-                  type: string
-                  enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
-                guidance_method_2_scale:
-                  type: number
-                  format: float
-                  minimum: 0.0
-                  maximum: 1.0
-                  default: 1.0
-                  description: The impact of the guidance.
-                guidance_method_2_image_file:
-                  type: string
-                  description: The image that should be used as guidance, in base64 format, with the method defined in guidance_method_2. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB. If more then one guidance method is used, all guidance images must be of the same aspect ratio, and this will be the aspect ratio of the generated results. If guidance_method_1 is selected, an image must be provided.
-            examples:
-              valid prompt:
-                value:
-                  prompt: "A simplistic flat icon of a megaphone"
-                  num_results: 1
-                  sync: true
-              inappropriate prompt:
-                value:
-                  prompt: "sensual"
-                  num_results: 1
-                  sync: true
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    description: there are multiple objects in this array (based on the amount specified in num_results) and each object represents a single image. 
-                    items:
-                      type: object
-                      properties:
-                        seed:
-                          type: integer
-                          description: If you want to recreate the result again, you should use in the request the prompt and the seed of the response. 
-                        urls:
-                          type: string
-                          description: This is the URL where the generated image can be found. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via this URL if sync=false.
-              examples:
-                valid prompt:
-                  value:
-                    results:  [
-                                {
-                                  "seed": 1525972691,
-                                  "urls": "https://bria-temp.s3.amazonaws.com/api/generate_image/a_4k_symmetrical_portrait_of_a_woman_traveling_in_the_world_realistic_soft_natural_lighting_85mm_lens_photography_dramatic_lighting_photo_realism_High_contrast_shadows/seed_1109401663.jpg?AWSAccessKeyId=ASIAUL5JH7ABJT4HG6MN&Signature=DOKLVPYHKHbe7bA3hEl262EabLk%3D&x-amz-security-token=FwoGZXIvYXdzEND%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDEl1%2FfpVCJkRvEKkJyKYBBTbjfsDBPKMZsYVU8tO3MMNCxvwAgtzUCvoxqOtEXYmVfCABwvF3jgvXCHup%2BdG3QYV7jHEfAgBLWI%2BMGI%2F%2FntPwdsdsMTxKhSJgymaUq8n8O4GmCSExT5o34U1uhAFpr2YPbrQWdYfuo%2FKIWGTHoBbikLf14yb1sa%2FicwMeVItzrTk%2FSvPAuJCSJh3Mnq%2BlXSSuviKpyMB226UjZPZ6zUYnSwwDHlQFueVRTJopaPvDh8LBlFQIiZqSxRDFqZDCC00rVv17pbD2tRT0kpVoAhE2QXIGzKiErsPJwsWYhOSra2idSUI3gRCHcJpvuTz2ZNBlY1G%2B%2BzJ%2B07LAkXQT4ppBbpO%2BUvo8pN4aTDvvsztgp2pK6wjWCKUBsRcdhpJ96W%2FzK5BepEflzbG%2BWyVaUuIgpd4OAVY4ieR%2BEDPCVqwb2J3tHWPLK1mnLFAKF5%2Fe68pnRpfLHqjl5h03IK5xbWWJZOCThQx%2FHJtA8EWqNUF372GmAKhfpDvc%2BxitjeV5ym4HZRBeCYTiPnM190yLNklriyXxzLFUxWp28B3mm77%2BFK82%2B3PYxWmFPn9WAWZ%2Fa9FszXNfJ7q%2FtjzvophCsww9psYvhgM9LTgXXUgM6CgVL1OP5qxUAEYuV5Hrg3QSWKchrYh0aMrjrOygBxIXhBj6VDkvVdqg4snlS0cTdgjFZTHDZBvFwLN380Vn0233AV%2FjSJGJzyCKPGR5aAGMirgAQFta0KzQHT52sAvNtD6xfYgB1LU6TLR7AL7Ei%2BmPgZ77VVPe8dRuh8%3D&Expires=1680245340"
-                                }
-                              ]
-                inappropriate prompt:
-                  value:
-                    results:  [
-                                {
-                                  "description": "Query doesn't stand with Bria's ethic rules",
-                                  "error_code": "408"
-                                }
-                              ]
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '500':
-          description: Internal server error.
-
-
+  # product-shot routes
   /product/cutout:
     post:
       tags:
@@ -3686,7 +3686,6 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-
   /product/lifestyle_shot_by_text:
     post:
       tags:
@@ -3836,7 +3835,6 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-         
   /product/lifestyle_shot_by_image:
     post:
       tags:
@@ -3931,7 +3929,6 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-          
   /products/consistent_shots:
     post:
       tags:
@@ -3946,7 +3943,6 @@ paths:
       responses:
         '200':
           description: Successful operation.
-          
   /product/contextual_keyword_extraction:
     post:
       tags:
@@ -3961,7 +3957,8 @@ paths:
       responses:
         '200':
           description: Successful operation.
-          
+
+  # campaign gen routes          
   /{visual_id}/campaign_generator:
     post:
       tags:
@@ -4235,6 +4232,7 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   
+  # video editing routes
   /video/background/remove:
     post:
       tags:
@@ -4306,934 +4304,7 @@ paths:
         '500':
           description: Internal server error.
 
-  /register:
-    post:
-      tags:
-        - Image Onboarding
-      summary: Register Image
-      description: >-
-
-        **Description**
-
-
-        A new visual can be registered to Bria without being uploaded to the database using the *Register Route*.
-        
-        This route returns a visual identification to the user. This is the recommended method to onboard images to Bria, when needed.
-        
-        
-        It's the first step for consuming the Bria API for new visuals (instead of using the /upload route).
-
-
-        **Response**
-
-          
-          The visual id in the response of the *Register Route* must be kept by the
-        user in order to query image info, modify the image and use the search routes.
-
-
-        ```{ "visual_id": "9ea9a4d2d19977a7c" }```
-
-
-        The *visual_id* in the response of the /upload route will be used for all
-        other routes.
-        Store the visual_id in your database and map it to your image identification method for easy reference
-
-
-        **Constraints**
-
-
-        Files should not be larger than 12MB. The status code 413 will be returned if the file exceeds its
-        maximum size.
-        
-        
-        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
-        
-      operationId: register
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                org_image_key:
-                  type: string
-                  description: The internal image id in your API, of the image you would like to register to Bria. If accessing your images requires authentication, you will be able to register them using org_image_key only after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
-                image_url:
-                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url and org_image_key will be saved but not used. Images can only be registered using an image_url if they do not require authentication.
-                  type: string
-                is_private:   
-                  description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
-                  type: string
-                  default: true
-            examples:
-                only image_url:
-                  value:
-                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                only org_image_key:
-                  value:
-                    org_image_key: "12345acbd"
-                image_url & org_image_key:
-                  value:
-                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
-                    org_image_key: "12345acbd"
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  visual_id:
-                    type: string
-                    description: Unique visual identification
-        '208':
-          description: Image already registered.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  visual_id:
-                    type: string
-                    description: Unique visual identification
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '460':
-          description: Failed to download image.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.   
-  /{visual_id}/remove_image:
-    post:
-      tags:
-        - Image Onboarding
-      summary: Remove Image
-      description: >-
-
-        **Description**
-
-
-        With this route, you can remove an image from the gallery of your organization. The image won't be removed from Bria.
-
-        
-      operationId: remove_image
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          schema:
-            type: string
-          required: true
-          example: "b3cecc33cc31cc31"
-      responses:
-        '200':
-          description: Successful operation.
-        '400':
-          description: Bad request.
-        '405':
-          description: Method not allowed.
-        '460':
-          description: Failed to download image.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-    
-  /{visual_id}/objects/mask_generator:
-    post:
-      tags:
-        - Image Modifications
-      summary: Get Masks
-      description: >-
-
-
-
-        **Description**
-
-
-        ***Note: This API route requires the image to be registered via the `/register` route.***
-
-
-        The *Objects/Mask Generator Route* is used to generate all possible masks for an image, creating a full segmentation of the image.
-        
-
-        The response contains a zip file named as the visual_id of the provided image.
-        
-        
-        There are k mask files in the zip, each named with the visual_id and mask_id.
-        
-
-        The zip file contains an additional file whose name ends with "panoptic". It's not an image, it's a panoptic map. It can be transformed into a regular matrix.
-        
-        
-        Each point in the image (x,y) is mapped to the mask that applies to that point. In the panoptic map, each pixel's grayscale value includes the mask_id. 
-        
-
-        You can display those masks to the user, let them pick one or more masks, and use objects/remove route to remove the masked area.
-
-
-        In order to use the objects/remove route on the mask the user selected, you should provide the mask_id, and use the parameter mask_source=generated.
-
-        
-        You can see below an example of the content of the zip:
-
-        
-              92bf8ce17584de82_panoptic.png
-      
-              
-              92bf8ce17584de82_1.png
-      
-              
-              92bf8ce17584de82_2.png
-      
-              
-              92bf8ce17584de82_3.png
-      
-              
-              ...
-      
-              
-              92bf8ce17584de82_86.png
-
-
-        You can access the SDK that demonstrates how to use this endpoint in a UI in the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/50a062867092788aaa9612f2cc69f7692567115a/mask_hover_ui" target="_blank">link</a>.
-
-      operationId: objects/mask_generator
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-            example: "92bf8ce17584de82"
-          description: visual id of the image, received after using the /upload or register route.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  objects_masks:
-                    type: string
-                    example: "https://bria-image-repository.s3.amazonaws.com/mask2click/masks/92bf8ce17584de82.zip?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=vCX%2BHEAnGmUolwLxKfPBBKPUZaM%3D&Expires=1690732111"
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-  /caption:
-    post:
-      tags:
-        - AI Search
-      summary: Get Caption
-      description: >-
-
-
-        **Description**
-
-
-
-        The *Caption Route* is used to get a caption that describes the given image.
-        
-
-      operationId: caption
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        required: false
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                image_url:   
-                  type: string
-                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                file:
-                  type: string
-                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  results:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        caption:
-                          type: string
-                          example: "woman walking on a bridge in the jungle"
-        '400':
-          description: Bad request. Missing or invalid parameters.
-        '401':
-          description: Unauthorized. Invalid API key or authentication token.
-        '404':
-          description: Not found. Image could not be found at the provided URL.
-        '415':
-          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
-        '413':
-          description: Payload too large. Image file size exceeds the 12MB limit.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '460':
-          description: Failed to download image.
-        '451':
-          description: Unavailable for legal reasons.
-        '500':
-          description: Internal server error. An error occurred on the server.
-  /{visual_id}/person/info:
-    get:
-      tags:
-        - Image Modifications
-      summary: Get Presenter info
-      description: >-
-
-
-
-        **Description**
-
-
-        ***Note: This API route requires the image to be registered via the `/register` route.***
-
-
-        The *Person/Info Route* is used to retrieve useful information on the people in a specific
-        visual that was previously uploaded to the database.
-
-        
-        Additionally, it provides a description of each person within the scene 
-        along with its available changes, which are supported by the Bria API. 
-
-        
-        This route should be used instead of the main /info route when you are only interested in 
-        information and available actions for the people in the image. 
-        With this route, you will save time by only obtaining information that is relevant to your needs.
-
-      operationId: person/info
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          example: "f49943971e3039c7"
-          description: visual id of the image, received after using the /upload or register route.
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    actions:
-                      type: object
-                      description: The available API actions for this specific person.
-                    id:
-                      type: string
-                      description: The id of the person
-                    labels:
-                      type: array
-                      description: The known information about the person, such as age range and gender
-                    oracle:
-                      type: object
-                      description: The predicted quality of the available actions for this specific person
-                    rect:
-                      type: object
-                      description: The location of the face inside the image. x and y represent the upper left corner of the face, and by using the w (width) and h (height) you can create a rectangle around the face.
-                    type:
-                      type: string
-                      description: In this route it will allways be 'person'
-              examples:
-                example:
-                  value:
-                    [
-                      {
-                        actions:{
-                           "age":[
-                              "mid-20",
-                              "mid-40",
-                              "mid-60"
-                           ],
-                           "Beard":[
-                              "shaved",
-                              "medium",
-                              "full"
-                           ],
-                           "diversity":[
-                              "original",
-                              "africa",
-                              "korea",
-                              "india",
-                              "japan",
-                              "sweden",
-                              "germany",
-                              "russia",
-                              "mexico",
-                              "brazil",
-                              "england",
-                              "spain",
-                              "france",
-                              "unsplash"
-                           ],
-                           "expression":[
-                              "happy",
-                              "surprised",
-                              "dreaming",
-                              "angry",
-                              "fear",
-                              "contempt",
-                              "disgusted",
-                              "sad",
-                              "smile"
-                           ],
-                           "gender":[
-                              "femininity",
-                              "masculinity"
-                           ],
-                           "glasses":[
-                              "light",
-                              "none",
-                              "heavy"
-                           ],
-                           "hair_line":[
-                              "high",
-                              "low"
-                           ],
-                           "haircolor":[
-                              "black",
-                              "brown",
-                              "red",
-                              "blond",
-                              "gray"
-                           ],
-                           "makeup":[
-                              "light",
-                              "heavy",
-                              "none"
-                           ]
-                        },
-                        id:"c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
-                        labels:[
-                           "age_14-26",
-                           "glasses",
-                           "Female"
-                        ],
-                        oracle:{
-                           "age":{
-                              "age":"low"
-                           },
-                           "Beard":{
-                              "Beard":"low"
-                           },
-                           "diversity":{
-                              "africa":"low",
-                              "brazil":"low",
-                              "england":"low",
-                              "france":"low",
-                              "germany":"low",
-                              "india":"low",
-                              "japan":"low",
-                              "korea":"low",
-                              "mexico":"low",
-                              "russia":"low",
-                              "spain":"low",
-                              "sweden":"low"
-                           },
-                           "expression":{
-                              "angry":"high",
-                              "calm":"high",
-                              "contempt":"high",
-                              "disgusted":"high",
-                              "dreaming":"high",
-                              "fear":"high",
-                              "happy":"high",
-                              "surprised":"high"
-                           },
-                           "gender":{
-                              "gender":"low"
-                           },
-                           "glasses":{
-                              "glasses":"low"
-                           },
-                           "hair_line":{
-                              "hair_line":"low"
-                           },
-                           "haircolor":{
-                              "haircolor":"low"
-                           }
-                        },
-                        rect:{
-                           "h":375.98625326156616,
-                           "w":280.4049072265625,
-                           "x":1134.1341552734375,
-                           "y":290.6307406425476
-                        },
-                        type:"person"
-                     },
-                     {
-                        actions:{
-                           "age":[
-                              "mid-20",
-                              "mid-40",
-                              "mid-60"
-                           ],
-                           "Beard":[
-                              "shaved",
-                              "medium",
-                              "full"
-                           ],
-                           "diversity":[
-                              "original",
-                              "africa",
-                              "korea",
-                              "india",
-                              "japan",
-                              "sweden",
-                              "germany",
-                              "russia",
-                              "mexico",
-                              "brazil",
-                              "england",
-                              "spain",
-                              "france",
-                              "unsplash"
-                           ],
-                           "expression":[
-                              "happy",
-                              "surprised",
-                              "dreaming",
-                              "angry",
-                              "fear",
-                              "contempt",
-                              "disgusted",
-                              "sad",
-                              "smile"
-                           ],
-                           "gender":[
-                              "femininity",
-                              "masculinity"
-                           ],
-                           "glasses":[
-                              "light",
-                              "none",
-                              "heavy"
-                           ],
-                           "hair_line":[
-                              "high",
-                              "low"
-                           ],
-                           "haircolor":[
-                              "black",
-                              "brown",
-                              "red",
-                              "blond",
-                              "gray"
-                           ],
-                           "makeup":[
-                              "light",
-                              "heavy",
-                              "none"
-                           ]
-                        },
-                        id:"d74da71f722b45de5f18f93e9dd7fc64a50a5a5dda001985ab9c2374807182b8",
-                        labels:[
-                           "age_26-42",
-                           "happy",
-                           "Female"
-                        ],
-                        oracle:{
-                           "age":{
-                              "age":"high"
-                           },
-                           "Beard":{
-                              "Beard":"high"
-                           },
-                           "diversity":{
-                              "africa":"high",
-                              "brazil":"high",
-                              "england":"high",
-                              "france":"high",
-                              "germany":"high",
-                              "india":"high",
-                              "japan":"high",
-                              "korea":"high",
-                              "mexico":"high",
-                              "russia":"high",
-                              "spain":"high",
-                              "sweden":"high"
-                           },
-                           "expression":{
-                              "angry":"high",
-                              "calm":"high",
-                              "contempt":"high",
-                              "disgusted":"high",
-                              "dreaming":"high",
-                              "fear":"high",
-                              "happy":"high",
-                              "surprised":"high"
-                           },
-                           "gender":{
-                              "gender":"high"
-                           },
-                           "glasses":{
-                              "glasses":"high"
-                           },
-                           "hair_line":{
-                              "hair_line":"high"
-                           },
-                           "haircolor":{
-                              "haircolor":"high"
-                           }
-                        },
-                        rect:{
-                           "h":354.8530983924866,
-                           "w":282.885498046875,
-                           "x":555.80419921875,
-                           "y":486.4655692577362
-                        },
-                        type:"person"
-                     }
-                  ]    
-        '205':
-          description: File hasn’t finished onboarding. Please call /info again until you get 200.
-        '400':
-          description: One of the details does not meet specification. Please call person/info again.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-  /{visual_id}/create:
-    post:
-      tags:
-        - Image Modifications
-      summary: Modify Presenter
-      description: >-
-
-
-        **Description**
-
-
-        ***Note: This API route requires the image to be registered via the `/register` route.***
-
-
-        The *Create Route* is used to create a new visual, based on the changes
-        requested by the user for a previously uploaded visual.
-        
-        
-        You can also use this route on a modified image by providing the sid from the response of the previously used route.
-
-
-        This route returns both the URL and the sid associated with the updated image.
-
-
-        Before making any modifications, please call the /info or person/info route to obtain information on the available presenters in the image, the available modifications, and their oracle values.
-
-
-        You should always include all the required changes in the request if you want to use multiple changes on a single person. It is not supported to make one request on a person with one change, take the SId from the result, and then use it in another request with a different change.
-
-
-        When you want to make changes on multiple people, you can make one request with all the desired changes on all the relevant people or make one request with all the desired changes on one person and then use the sid from the response in the request on the other person. 
-
-      operationId: create
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: visual_id
-          required: true
-          schema:
-            type: string
-          example: "8487fb411f3c6716"
-          description: visual id of the image the user wants to create a new visual from.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                sid:
-                  type: string
-                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
-                desired_resolution:
-                  type: string
-                  description: The desired resolution of the updated image. This parameter is optional.
-                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
-                changes:
-                  type: array
-                  description: The requested changes to the original visual.
-                  items:
-                    type: object
-                    properties: 
-                      id:
-                        type: string
-                        description: Id of the selected object in the image, to which the user would like to make changes.
-                      actions:
-                        type: object
-                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
-                        properties: 
-                          age:
-                            type: string
-                            enum: ["mid-20", "mid-40", "mid-60"]
-                            description: Changing the age of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
-                          diversity:
-                            type: string
-                            enum:
-                              - africa
-                              - korea
-                              - india
-                              - japan
-                              - sweden
-                              - germany
-                              - russia
-                              - mexico
-                              - brazil
-                              - england
-                              - spain
-                              - france
-                            description: Changing the diversity of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1. 
-                          expression:
-                            type: string
-                            enum:
-                              - happy
-                              - surprised
-                              - dreaming
-                              - angry
-                              - fear
-                              - contempt
-                              - disgusted
-                              - sad
-                            description: Changing the expression of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1.5. 
-                          glasses:
-                            type: string
-                            enum: ["light", "heavy", "none"]
-                            description: Changing the glasses of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 6. Only integer values are acceptable.
-                          haircolor:
-                            type: string
-                            enum: ["black", "brown", "red", "blond", "gray"]
-                            description: Changing the hair color of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 4. Only integer values are acceptable.
-                          gender:
-                            type: string
-                            enum: ["femininity","masculinity"]
-                            description: Changing the gender of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
-                          makeup:
-                            type: string
-                            enum: ["light", "heavy", "none"]
-                            description: Changing the makeup of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
-                          hair_line:
-                            type: string
-                            enum: ["high", "low"]
-                            description: Changing the hair line of a selected person. It is possible to use one of the enum values or to provide a value between -20 and 20. Decimal values are acceptable.
-                          Beard:
-                            type: string
-                            enum: ["shaved", "medium", "full"]
-                            description: Changing the facial hair of a selected person. It is possible to use one of the enum values or to provide a value between -2 and 2. Decimal values are acceptable.
-            examples:
-              Using enum values:
-                value:
-                  changes:
-                    [
-                      {
-                        "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
-                        "actions": {
-                          "age": "mid-60",
-                          "diversity": "france",
-                          "expression": "happy"
-                        }
-                      }
-                    ]
-              Using continuous numeric values:
-                value:
-                  changes:
-                    [
-                      {
-                        "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
-                        "actions": {
-                          "age": {"key":"age","value":6.2},
-                          "diversity": {"key":"france","value":0.8},
-                          "expression": {"key":"happy","value":0.6}
-                        }
-                      }
-                    ]
-              Using enum values and continuous numeric values:
-                value:
-                  changes:
-                    [
-                      {
-                        "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
-                        "actions": {
-                          "age": {"key":"age","value":6.2},
-                          "diversity": "france",
-                          "expression": {"key":"happy","value":0.6}
-                        }
-                      }
-                    ]
-              Multiple People:
-                value:
-                  changes:
-                    [
-                      {
-                        "id": "person_1",
-                        "actions": {
-                          "age": {"key":"age","value":6.2},
-                          "diversity": "france",
-                          "expression": {"key":"happy","value":0.6}
-                        }
-                      },
-                      {
-                        "id": "person_1",
-                        "actions": {
-                          "age": {"key":"age","value":6.2},
-                          "diversity": "france",
-                          "expression": {"key":"happy","value":0.6}
-                        }
-                      }
-                    ]
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  image_res:
-                    type: string
-                    description: URL that represents the new visual created in the request. It is a temporary URL that will expire
-                    example: "https://d1uzvjowrxhw13.cloudfront.net/api/create_results/8487fb411f3c6716_05e8a8dc-b723-11ec-be15-c28fc8b4a55b.JPEG?AWSAccessKeyId=ASIAUL5JH7ABM5GPF244&Signature=OaE%2BTJW%2FBJFDB2xGXpy%2F%2F8TYkAE%3D&x-amz-security-token=FwoGZXIvYXdzEEsaDHAX5TxTwymFAQYSwSKYBK3lKAwEipl9tjg1QQwWMdQDqS%2B0rYkexasgxxW78Vz4DvJUVPISpnTOZk4h%2Fy6%2BikLC5%2FYGY86SL8980ZHZzRgqcodDJ0n6ljB7SgbkfJnSpgx%2F8iCHzoDH%2BS7YrUjnR7e%2FUz%2B4sIbV%2BSHGn36EXTNnrm%2FOgCsiL9vqLSGFEo5R1pLYIbezxWCEWMLcDO5x9WsVoPRYW7c%2B5B%2B1Ku3qybQEBFRex4BVisJU4NTXbwQKFWMbkTjHg5vK%2FEdQn7OzmCA7SfCSHe%2FqDZIBQG0ki%2BHt%2Fs4bAYYTZpl%2FjoUJTldlltdWH2uitj%2BBeyQKcUnHrPjTY1CsAOEC6OV%2FKlZfOjbNJTvlmHc7%2BKP3iICKlCVJwvRK6%2FnmU7mUVOb%2FmgD2kIvBq5G6fNxXQlKfFGZE2lSs8HR83sp44Qz8hm60DPfK45hE0XdVnIS2jY%2F1a%2BYBmijCr4HDTgv52D53CdnOiQ%2BQ8Yld0bBZRC4aDBATcvcsDcnO4BBMY0NS1c%2BSJ6b4IMxDK2OKdanf9EYiDgzr3ebsS1m7j4NX3pEvNC99YF%2B5PQwDYhbMwlMCAG9AMs9%2FF86Al3czOJFOxV1ClBEoUKy2TgntGraCp76UoLmRrHuRq7WKQUvIj2HAXsIlyNkBg3z498M1Gh7vyD%2F7xQgA0Ny6zYeC1gBH4HmYtFlBS%2BJimmxFlCoCuyFhBmUXp7p6oBI3APuSyQYLKLmQwJIGMioiS3mUno68q7GAsD%2FPmSCM8xMeEWF8IegvlU4XWAQuNnQJLVtqwkZb1Qo%3D&Expires=1650276159"
-                  sid:
-                    type: string
-                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
-                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
-        '400':
-          description: Bad request.
-        '404':
-          description: Specified Image does not exist.
-        '405':
-          description: Method not allowed.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '500':
-          description: Internal server error.
-        '506':
-          description: Insufficient data. The given input is not supported by the Bria API.
-  /erase_foreground:
-    post:
-      tags:
-        - Image Modifications
-      summary: Erase Foreground 
-      description: >-
-
-
-        **Description**
-
-
-
-        This route is used to erase the foreground from a provided image, while generating the area behind it. 
-      operationId: erase_foreground
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                image_url:   
-                  type: string
-                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                file:
-                  type: string
-                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-              example:
-                image_url: 'URL'
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  result_url:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "URL"
-        '400':
-          description: Bad request. Missing or invalid parameters.
-        '401':
-          description: Unauthorized. Invalid API key or authentication token.
-        '404':
-          description: Not found. Image could not be found at the provided URL.
-        '415':
-          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
-        '413':
-          description: Payload too large. Image file size exceeds the 12MB limit.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '460':
-          description: Failed to download image.
-        '451':
-          description: Unavailable for legal reasons.
-        '500':
-          description: Internal server error. An error occurred on the server.
+  # image modifications route
   /eraser:
     post:
       tags:
@@ -5429,7 +4500,70 @@ paths:
           description: Failed to download image.
         '500':
           description: Internal server error. An error occurred on the server.
+  /erase_foreground:
+    post:
+      tags:
+        - Image Modifications
+      summary: Erase Foreground 
+      description: >-
 
+
+        **Description**
+
+
+
+        This route is used to erase the foreground from a provided image, while generating the area behind it. 
+      operationId: erase_foreground
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+              example:
+                image_url: 'URL'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /background/remove:
     post:
       tags:
@@ -6136,6 +5270,725 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
+  /{visual_id}/objects/mask_generator:
+    post:
+      tags:
+        - Image Modifications
+      summary: Get Masks
+      description: >-
+
+
+
+        **Description**
+
+
+        ***Note: This API route requires the image to be registered via the `/register` route.***
+
+
+        The *Objects/Mask Generator Route* is used to generate all possible masks for an image, creating a full segmentation of the image.
+        
+
+        The response contains a zip file named as the visual_id of the provided image.
+        
+        
+        There are k mask files in the zip, each named with the visual_id and mask_id.
+        
+
+        The zip file contains an additional file whose name ends with "panoptic". It's not an image, it's a panoptic map. It can be transformed into a regular matrix.
+        
+        
+        Each point in the image (x,y) is mapped to the mask that applies to that point. In the panoptic map, each pixel's grayscale value includes the mask_id. 
+        
+
+        You can display those masks to the user, let them pick one or more masks, and use objects/remove route to remove the masked area.
+
+
+        In order to use the objects/remove route on the mask the user selected, you should provide the mask_id, and use the parameter mask_source=generated.
+
+        
+        You can see below an example of the content of the zip:
+
+        
+              92bf8ce17584de82_panoptic.png
+      
+              
+              92bf8ce17584de82_1.png
+      
+              
+              92bf8ce17584de82_2.png
+      
+              
+              92bf8ce17584de82_3.png
+      
+              
+              ...
+      
+              
+              92bf8ce17584de82_86.png
+
+
+        You can access the SDK that demonstrates how to use this endpoint in a UI in the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/50a062867092788aaa9612f2cc69f7692567115a/mask_hover_ui" target="_blank">link</a>.
+
+      operationId: objects/mask_generator
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+            example: "92bf8ce17584de82"
+          description: visual id of the image, received after using the /upload or register route.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  objects_masks:
+                    type: string
+                    example: "https://bria-image-repository.s3.amazonaws.com/mask2click/masks/92bf8ce17584de82.zip?AWSAccessKeyId=AKIAUL5JH7ABJXXBAV6D&Signature=vCX%2BHEAnGmUolwLxKfPBBKPUZaM%3D&Expires=1690732111"
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/person/info:
+    get:
+      tags:
+        - Image Modifications
+      summary: Get Presenter info
+      description: >-
+
+
+
+        **Description**
+
+
+        ***Note: This API route requires the image to be registered via the `/register` route.***
+
+
+        The *Person/Info Route* is used to retrieve useful information on the people in a specific
+        visual that was previously uploaded to the database.
+
+        
+        Additionally, it provides a description of each person within the scene 
+        along with its available changes, which are supported by the Bria API. 
+
+        
+        This route should be used instead of the main /info route when you are only interested in 
+        information and available actions for the people in the image. 
+        With this route, you will save time by only obtaining information that is relevant to your needs.
+
+      operationId: person/info
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "f49943971e3039c7"
+          description: visual id of the image, received after using the /upload or register route.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    actions:
+                      type: object
+                      description: The available API actions for this specific person.
+                    id:
+                      type: string
+                      description: The id of the person
+                    labels:
+                      type: array
+                      description: The known information about the person, such as age range and gender
+                    oracle:
+                      type: object
+                      description: The predicted quality of the available actions for this specific person
+                    rect:
+                      type: object
+                      description: The location of the face inside the image. x and y represent the upper left corner of the face, and by using the w (width) and h (height) you can create a rectangle around the face.
+                    type:
+                      type: string
+                      description: In this route it will allways be 'person'
+              examples:
+                example:
+                  value:
+                    [
+                      {
+                        actions:{
+                           "age":[
+                              "mid-20",
+                              "mid-40",
+                              "mid-60"
+                           ],
+                           "Beard":[
+                              "shaved",
+                              "medium",
+                              "full"
+                           ],
+                           "diversity":[
+                              "original",
+                              "africa",
+                              "korea",
+                              "india",
+                              "japan",
+                              "sweden",
+                              "germany",
+                              "russia",
+                              "mexico",
+                              "brazil",
+                              "england",
+                              "spain",
+                              "france",
+                              "unsplash"
+                           ],
+                           "expression":[
+                              "happy",
+                              "surprised",
+                              "dreaming",
+                              "angry",
+                              "fear",
+                              "contempt",
+                              "disgusted",
+                              "sad",
+                              "smile"
+                           ],
+                           "gender":[
+                              "femininity",
+                              "masculinity"
+                           ],
+                           "glasses":[
+                              "light",
+                              "none",
+                              "heavy"
+                           ],
+                           "hair_line":[
+                              "high",
+                              "low"
+                           ],
+                           "haircolor":[
+                              "black",
+                              "brown",
+                              "red",
+                              "blond",
+                              "gray"
+                           ],
+                           "makeup":[
+                              "light",
+                              "heavy",
+                              "none"
+                           ]
+                        },
+                        id:"c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
+                        labels:[
+                           "age_14-26",
+                           "glasses",
+                           "Female"
+                        ],
+                        oracle:{
+                           "age":{
+                              "age":"low"
+                           },
+                           "Beard":{
+                              "Beard":"low"
+                           },
+                           "diversity":{
+                              "africa":"low",
+                              "brazil":"low",
+                              "england":"low",
+                              "france":"low",
+                              "germany":"low",
+                              "india":"low",
+                              "japan":"low",
+                              "korea":"low",
+                              "mexico":"low",
+                              "russia":"low",
+                              "spain":"low",
+                              "sweden":"low"
+                           },
+                           "expression":{
+                              "angry":"high",
+                              "calm":"high",
+                              "contempt":"high",
+                              "disgusted":"high",
+                              "dreaming":"high",
+                              "fear":"high",
+                              "happy":"high",
+                              "surprised":"high"
+                           },
+                           "gender":{
+                              "gender":"low"
+                           },
+                           "glasses":{
+                              "glasses":"low"
+                           },
+                           "hair_line":{
+                              "hair_line":"low"
+                           },
+                           "haircolor":{
+                              "haircolor":"low"
+                           }
+                        },
+                        rect:{
+                           "h":375.98625326156616,
+                           "w":280.4049072265625,
+                           "x":1134.1341552734375,
+                           "y":290.6307406425476
+                        },
+                        type:"person"
+                     },
+                     {
+                        actions:{
+                           "age":[
+                              "mid-20",
+                              "mid-40",
+                              "mid-60"
+                           ],
+                           "Beard":[
+                              "shaved",
+                              "medium",
+                              "full"
+                           ],
+                           "diversity":[
+                              "original",
+                              "africa",
+                              "korea",
+                              "india",
+                              "japan",
+                              "sweden",
+                              "germany",
+                              "russia",
+                              "mexico",
+                              "brazil",
+                              "england",
+                              "spain",
+                              "france",
+                              "unsplash"
+                           ],
+                           "expression":[
+                              "happy",
+                              "surprised",
+                              "dreaming",
+                              "angry",
+                              "fear",
+                              "contempt",
+                              "disgusted",
+                              "sad",
+                              "smile"
+                           ],
+                           "gender":[
+                              "femininity",
+                              "masculinity"
+                           ],
+                           "glasses":[
+                              "light",
+                              "none",
+                              "heavy"
+                           ],
+                           "hair_line":[
+                              "high",
+                              "low"
+                           ],
+                           "haircolor":[
+                              "black",
+                              "brown",
+                              "red",
+                              "blond",
+                              "gray"
+                           ],
+                           "makeup":[
+                              "light",
+                              "heavy",
+                              "none"
+                           ]
+                        },
+                        id:"d74da71f722b45de5f18f93e9dd7fc64a50a5a5dda001985ab9c2374807182b8",
+                        labels:[
+                           "age_26-42",
+                           "happy",
+                           "Female"
+                        ],
+                        oracle:{
+                           "age":{
+                              "age":"high"
+                           },
+                           "Beard":{
+                              "Beard":"high"
+                           },
+                           "diversity":{
+                              "africa":"high",
+                              "brazil":"high",
+                              "england":"high",
+                              "france":"high",
+                              "germany":"high",
+                              "india":"high",
+                              "japan":"high",
+                              "korea":"high",
+                              "mexico":"high",
+                              "russia":"high",
+                              "spain":"high",
+                              "sweden":"high"
+                           },
+                           "expression":{
+                              "angry":"high",
+                              "calm":"high",
+                              "contempt":"high",
+                              "disgusted":"high",
+                              "dreaming":"high",
+                              "fear":"high",
+                              "happy":"high",
+                              "surprised":"high"
+                           },
+                           "gender":{
+                              "gender":"high"
+                           },
+                           "glasses":{
+                              "glasses":"high"
+                           },
+                           "hair_line":{
+                              "hair_line":"high"
+                           },
+                           "haircolor":{
+                              "haircolor":"high"
+                           }
+                        },
+                        rect:{
+                           "h":354.8530983924866,
+                           "w":282.885498046875,
+                           "x":555.80419921875,
+                           "y":486.4655692577362
+                        },
+                        type:"person"
+                     }
+                  ]    
+        '205':
+          description: File hasn’t finished onboarding. Please call /info again until you get 200.
+        '400':
+          description: One of the details does not meet specification. Please call person/info again.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  /{visual_id}/create:
+    post:
+      tags:
+        - Image Modifications
+      summary: Modify Presenter
+      description: >-
+
+
+        **Description**
+
+
+        ***Note: This API route requires the image to be registered via the `/register` route.***
+
+
+        The *Create Route* is used to create a new visual, based on the changes
+        requested by the user for a previously uploaded visual.
+        
+        
+        You can also use this route on a modified image by providing the sid from the response of the previously used route.
+
+
+        This route returns both the URL and the sid associated with the updated image.
+
+
+        Before making any modifications, please call the /info or person/info route to obtain information on the available presenters in the image, the available modifications, and their oracle values.
+
+
+        You should always include all the required changes in the request if you want to use multiple changes on a single person. It is not supported to make one request on a person with one change, take the SId from the result, and then use it in another request with a different change.
+
+
+        When you want to make changes on multiple people, you can make one request with all the desired changes on all the relevant people or make one request with all the desired changes on one person and then use the sid from the response in the request on the other person. 
+
+      operationId: create
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          required: true
+          schema:
+            type: string
+          example: "8487fb411f3c6716"
+          description: visual id of the image the user wants to create a new visual from.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sid:
+                  type: string
+                  description: This session id was obtained from the response of a route that had been applied to this visual id. If you have used another route on the provided visual before, and you would like the current route to modify the result of that route, please provide this information. This parameter is optional.
+                desired_resolution:
+                  type: string
+                  description: The desired resolution of the updated image. This parameter is optional.
+                  enum: ["original", "nhd", "svga", "xga", "had", "wuxga", "uwfhd", "wqxga", "uwqhd", "uhd"]
+                changes:
+                  type: array
+                  description: The requested changes to the original visual.
+                  items:
+                    type: object
+                    properties: 
+                      id:
+                        type: string
+                        description: Id of the selected object in the image, to which the user would like to make changes.
+                      actions:
+                        type: object
+                        description: The changes the user wishes to perform for this object in the image. Each action the user chooses to use must be included in the info route response for this object and image. This is essential for the /create request to be successful.
+                        properties: 
+                          age:
+                            type: string
+                            enum: ["mid-20", "mid-40", "mid-60"]
+                            description: Changing the age of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
+                          diversity:
+                            type: string
+                            enum:
+                              - africa
+                              - korea
+                              - india
+                              - japan
+                              - sweden
+                              - germany
+                              - russia
+                              - mexico
+                              - brazil
+                              - england
+                              - spain
+                              - france
+                            description: Changing the diversity of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1. 
+                          expression:
+                            type: string
+                            enum:
+                              - happy
+                              - surprised
+                              - dreaming
+                              - angry
+                              - fear
+                              - contempt
+                              - disgusted
+                              - sad
+                            description: Changing the expression of a selected person. It is possible to use one of the enum values or to provide in addition to the enum a value between 0 and 1.5. 
+                          glasses:
+                            type: string
+                            enum: ["light", "heavy", "none"]
+                            description: Changing the glasses of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 6. Only integer values are acceptable.
+                          haircolor:
+                            type: string
+                            enum: ["black", "brown", "red", "blond", "gray"]
+                            description: Changing the hair color of a selected person. It is possible to use one of the enum values or to provide a value between 0 and 4. Only integer values are acceptable.
+                          gender:
+                            type: string
+                            enum: ["femininity","masculinity"]
+                            description: Changing the gender of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
+                          makeup:
+                            type: string
+                            enum: ["light", "heavy", "none"]
+                            description: Changing the makeup of a selected person. It is possible to use one of the enum values or to provide a value between -10 and 10. Decimal values are acceptable.
+                          hair_line:
+                            type: string
+                            enum: ["high", "low"]
+                            description: Changing the hair line of a selected person. It is possible to use one of the enum values or to provide a value between -20 and 20. Decimal values are acceptable.
+                          Beard:
+                            type: string
+                            enum: ["shaved", "medium", "full"]
+                            description: Changing the facial hair of a selected person. It is possible to use one of the enum values or to provide a value between -2 and 2. Decimal values are acceptable.
+            examples:
+              Using enum values:
+                value:
+                  changes:
+                    [
+                      {
+                        "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
+                        "actions": {
+                          "age": "mid-60",
+                          "diversity": "france",
+                          "expression": "happy"
+                        }
+                      }
+                    ]
+              Using continuous numeric values:
+                value:
+                  changes:
+                    [
+                      {
+                        "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
+                        "actions": {
+                          "age": {"key":"age","value":6.2},
+                          "diversity": {"key":"france","value":0.8},
+                          "expression": {"key":"happy","value":0.6}
+                        }
+                      }
+                    ]
+              Using enum values and continuous numeric values:
+                value:
+                  changes:
+                    [
+                      {
+                        "id": "c6bbe1cd719300c11e5c581889e9383245a0c1d923f210a3445e8ea5a25500e0",
+                        "actions": {
+                          "age": {"key":"age","value":6.2},
+                          "diversity": "france",
+                          "expression": {"key":"happy","value":0.6}
+                        }
+                      }
+                    ]
+              Multiple People:
+                value:
+                  changes:
+                    [
+                      {
+                        "id": "person_1",
+                        "actions": {
+                          "age": {"key":"age","value":6.2},
+                          "diversity": "france",
+                          "expression": {"key":"happy","value":0.6}
+                        }
+                      },
+                      {
+                        "id": "person_1",
+                        "actions": {
+                          "age": {"key":"age","value":6.2},
+                          "diversity": "france",
+                          "expression": {"key":"happy","value":0.6}
+                        }
+                      }
+                    ]
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  image_res:
+                    type: string
+                    description: URL that represents the new visual created in the request. It is a temporary URL that will expire
+                    example: "https://d1uzvjowrxhw13.cloudfront.net/api/create_results/8487fb411f3c6716_05e8a8dc-b723-11ec-be15-c28fc8b4a55b.JPEG?AWSAccessKeyId=ASIAUL5JH7ABM5GPF244&Signature=OaE%2BTJW%2FBJFDB2xGXpy%2F%2F8TYkAE%3D&x-amz-security-token=FwoGZXIvYXdzEEsaDHAX5TxTwymFAQYSwSKYBK3lKAwEipl9tjg1QQwWMdQDqS%2B0rYkexasgxxW78Vz4DvJUVPISpnTOZk4h%2Fy6%2BikLC5%2FYGY86SL8980ZHZzRgqcodDJ0n6ljB7SgbkfJnSpgx%2F8iCHzoDH%2BS7YrUjnR7e%2FUz%2B4sIbV%2BSHGn36EXTNnrm%2FOgCsiL9vqLSGFEo5R1pLYIbezxWCEWMLcDO5x9WsVoPRYW7c%2B5B%2B1Ku3qybQEBFRex4BVisJU4NTXbwQKFWMbkTjHg5vK%2FEdQn7OzmCA7SfCSHe%2FqDZIBQG0ki%2BHt%2Fs4bAYYTZpl%2FjoUJTldlltdWH2uitj%2BBeyQKcUnHrPjTY1CsAOEC6OV%2FKlZfOjbNJTvlmHc7%2BKP3iICKlCVJwvRK6%2FnmU7mUVOb%2FmgD2kIvBq5G6fNxXQlKfFGZE2lSs8HR83sp44Qz8hm60DPfK45hE0XdVnIS2jY%2F1a%2BYBmijCr4HDTgv52D53CdnOiQ%2BQ8Yld0bBZRC4aDBATcvcsDcnO4BBMY0NS1c%2BSJ6b4IMxDK2OKdanf9EYiDgzr3ebsS1m7j4NX3pEvNC99YF%2B5PQwDYhbMwlMCAG9AMs9%2FF86Al3czOJFOxV1ClBEoUKy2TgntGraCp76UoLmRrHuRq7WKQUvIj2HAXsIlyNkBg3z498M1Gh7vyD%2F7xQgA0Ny6zYeC1gBH4HmYtFlBS%2BJimmxFlCoCuyFhBmUXp7p6oBI3APuSyQYLKLmQwJIGMioiS3mUno68q7GAsD%2FPmSCM8xMeEWF8IegvlU4XWAQuNnQJLVtqwkZb1Qo%3D&Expires=1650276159"
+                  sid:
+                    type: string
+                    example: "aaeec35e-9904-21ed-a479-964fdf514767.JPEG"
+                    description: This session id represents the result of the current route request. If you wish to use this result in other routes, please provide this sid in their input.
+        '400':
+          description: Bad request.
+        '404':
+          description: Specified Image does not exist.
+        '405':
+          description: Method not allowed.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+  
+
+  # search routes
+  /caption:
+    post:
+      tags:
+        - AI Search
+      summary: Get Caption
+      description: >-
+
+
+        **Description**
+
+
+
+        The *Caption Route* is used to get a caption that describes the given image.
+        
+
+      operationId: caption
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        caption:
+                          type: string
+                          example: "woman walking on a bridge in the jungle"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
   /search:
     get:
       tags:
@@ -6348,6 +6201,155 @@ paths:
           description: Method not allowed.
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.
+
+  # image onboarding
+  /register:
+    post:
+      tags:
+        - Image Onboarding
+      summary: Register Image
+      description: >-
+
+        **Description**
+
+
+        A new visual can be registered to Bria without being uploaded to the database using the *Register Route*.
+        
+        This route returns a visual identification to the user. This is the recommended method to onboard images to Bria, when needed.
+        
+        
+        It's the first step for consuming the Bria API for new visuals (instead of using the /upload route).
+
+
+        **Response**
+
+          
+          The visual id in the response of the *Register Route* must be kept by the
+        user in order to query image info, modify the image and use the search routes.
+
+
+        ```{ "visual_id": "9ea9a4d2d19977a7c" }```
+
+
+        The *visual_id* in the response of the /upload route will be used for all
+        other routes.
+        Store the visual_id in your database and map it to your image identification method for easy reference
+
+
+        **Constraints**
+
+
+        Files should not be larger than 12MB. The status code 413 will be returned if the file exceeds its
+        maximum size.
+        
+        
+        The Bria API currently supports only JPEG and PNG files in RGB, RGBA, or CMYK color modes. When the file is of a different type or color mode, the status code 415 will be returned.
+        
+      operationId: register
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                org_image_key:
+                  type: string
+                  description: The internal image id in your API, of the image you would like to register to Bria. If accessing your images requires authentication, you will be able to register them using org_image_key only after giving Bria the API authentication information. It is also possible to register images using an org_image_key, without any authentication data.
+                image_url:
+                  description: The URL of the image you would like to register to Bria. The URL should lead to an image publicly available online. Either an org_image_key or an image_url should be provided. If both are provided, then the route will use image_url and org_image_key will be saved but not used. Images can only be registered using an image_url if they do not require authentication.
+                  type: string
+                is_private:   
+                  description: The image can be included in the Bria public gallery (is_private=false) or only in the Bria gallery of your organization (is_private=true). This parameter is optional and the default value is true.
+                  type: string
+                  default: true
+            examples:
+                only image_url:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                only org_image_key:
+                  value:
+                    org_image_key: "12345acbd"
+                image_url & org_image_key:
+                  value:
+                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                    org_image_key: "12345acbd"
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  visual_id:
+                    type: string
+                    description: Unique visual identification
+        '208':
+          description: Image already registered.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  visual_id:
+                    type: string
+                    description: Unique visual identification
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '460':
+          description: Failed to download image.
+        '500':
+          description: Internal server error.
+        '506':
+          description: Insufficient data. The given input is not supported by the Bria API.   
+  /{visual_id}/remove_image:
+    post:
+      tags:
+        - Image Onboarding
+      summary: Remove Image
+      description: >-
+
+        **Description**
+
+
+        With this route, you can remove an image from the gallery of your organization. The image won't be removed from Bria.
+
+        
+      operationId: remove_image
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: visual_id
+          schema:
+            type: string
+          required: true
+          example: "b3cecc33cc31cc31"
+      responses:
+        '200':
+          description: Successful operation.
+        '400':
+          description: Bad request.
+        '405':
+          description: Method not allowed.
+        '460':
+          description: Failed to download image.
         '500':
           description: Internal server error.
         '506':

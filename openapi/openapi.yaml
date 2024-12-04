@@ -5264,7 +5264,7 @@ paths:
           description: Unavailable for legal reasons.
         '500':
           description: Internal server error. An error occurred on the server.
-  /{visual_id}/objects/mask_generator:
+  /objects/mask_generator:
     post:
       tags:
         - Image Modifications

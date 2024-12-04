@@ -3962,19 +3962,13 @@ paths:
   /{visual_id}/campaign_generator:
     post:
       tags:
-          - Campaign Generation
+          - Campaign Generation (coming soon)
       summary: Generate Campaign
       description: >-
 
 
         **Description**
         
-
-        ***Note: This API route requires the image to be registered via the `/register` route.***
-
-
-        ***Note: This API route and functionality can be accessed only after a consultation with our sales and support team. Please reach out to us at support@bria.ai for more information and assistance.***
-
 
         The campaign_generator Route enables users to create visual campaigns for various ad channels using a visual_id. 
         This route facilitates the generation of templates featuring diverse layouts that incorporate elements like text, 

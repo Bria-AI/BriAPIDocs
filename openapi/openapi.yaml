@@ -4271,7 +4271,7 @@ paths:
               properties:
                 video_url:
                   type: string
-                  description: A publicly accessible URL of the video to process.
+                  description: A publicly accessible URL of the video to process. The input video time limit is up to 1 minute.
             example:
                 video_url: "https://example.com/input_video.mp4"
       responses:

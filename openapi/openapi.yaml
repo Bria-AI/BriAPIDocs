@@ -3869,16 +3869,20 @@ paths:
                 file:
                   type: string
                   description: The product shot file to be placed in a lifestyle shot, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                ref_image_urls:
+                ref_image_url:
                   type: array
                   items:
                     type: string
-                  description: The URL of the reference image to be used for generating the lifestyle shot. Only a single refernce image is supported at the moment. If both ref_image_urls and ref_image_files are provided, ref_image_urls will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                ref_image_files:
+                  description: The URL of the reference image to be used for generating the lifestyle shot. If both ref_image_url and ref_image_file are provided, ref_image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                ref_image_file:
                   type: array
                   items:
                     type: string
-                  description: The reference image file to be used for generating the lifestyle shot, in base64 format. Only a single refernce image is supported at the moment. Used if ref_image_urls is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                  description: The reference image file to be used for generating the lifestyle shot, in base64 format. Only a single refernce image is supported at the moment. Used if ref_image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                enhance_ref_image:
+                  type: boolean
+                  default: true
+                  description: When set to true, additional logic processes the included reference image to make adjustments for optimal results.
                 num_results:
                   type: integer
                   default: 4
@@ -4790,12 +4794,18 @@ paths:
                   type: boolean
                   default: true
                   description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized.
-                image_url:   
+                image_url:
                   type: string
                   description: The URL of the image to which a new background should be generated. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 file:
                   type: string
                   description: The product of the image to which a new background should be generated, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                ref_image_url:
+                  type: string
+                  description: The URL of the reference image to be used for generating the new background. If both ref_image_url and ref_image_file are provided, ref_image_url will be used. Accepted formats are jpeg, jpg, png, webp.
+                ref_image_file:
+                  type: string
+                  description: The reference image file to be used for generating the new background. If both ref_image_url and ref_image_file are provided, ref_image_url will be used. Accepted formats are jpeg, jpg, png, webp.
                 bg_prompt:
                   type: string
                   description: Text description of the new scene or background for the provided image. Bria currently supports prompts in English only, excluding special characters.
@@ -4803,6 +4813,10 @@ paths:
                   type: boolean
                   default: true
                   description: When true, an additional logic takes the bg_prompt that was included and adjusts it to achieve optimal results. Built with Meta Llama 3.
+                enhance_ref_image:
+                  type: boolean
+                  default: true
+                  description: When set to true, additional logic processes the included reference image to make adjustments for optimal results.
                 original_quality:
                   type: boolean
                   default: false

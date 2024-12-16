@@ -3889,8 +3889,25 @@ paths:
                   description: The number of lifestyle product shots you would like to generate. 
                 placement_type:
                   type: string
-                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
-                  enum: ["original", "manual_padding"]
+                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                  enum: ["original", "automatic", "manual_placement", "manual_padding"]
+                original_quality:
+                  type: boolean
+                  default: false
+                  description:  This flag is only relevant when placement_type=original. If true, the output image retains the original input image's size (and not the reference image size); otherwise, the image is scaled to 1 megapixel (1MP) while preserving its aspect ratio.
+                shot_size:
+                  type: array
+                  items:
+                    type: integer
+                  default: [1000,1000]
+                  description: The desired size of the final product shot. For optimal results, the total number of pixels should be around 1,000,000. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                manual_placement_selection:
+                  type: array
+                  items:
+                    type: string
+                    enum: ["upper_left", "upper_right", "bottom_left", "bottom_right", "right_center", "left_center", "upper_center", "bottom_center", "center_vertical", "center_horizontal"]
+                  default: ["upper_left"]
+                  description: If you've selected placement_type=manual_placement, you should use this parameter to specify which placements/positions you would like to use from the list. You can select more than one placement in one request.
                 padding_values:
                   type: array
                   items:
@@ -4771,7 +4788,6 @@ paths:
         
         <img src="https://i.ibb.co/1zvT5h4/unnamed-14.jpg" width="200"/> <img src="https://i.ibb.co/MkVDxc8/unnamed-15.jpg" width="200"/>
         <img src="https://i.ibb.co/pfgQ34p/unnamed-16.jpg" width="200"/> 
-        
       operationId: background/replace
       parameters:
         - in: header
@@ -4802,13 +4818,13 @@ paths:
                   description: The product of the image to which a new background should be generated, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
                 ref_image_url:
                   type: string
-                  description: The URL of the reference image to be used for generating the new background. If both ref_image_url and ref_image_file are provided, ref_image_url will be used. Accepted formats are jpeg, jpg, png, webp.
+                  description: The URL of the reference image to be used for generating the new background. Either ref_image_url or bg_prompt has to be provided but not both. If both ref_image_url and ref_image_file are provided, ref_image_url will be used. Accepted formats are jpeg, jpg, png, webp.
                 ref_image_file:
                   type: string
                   description: The reference image file to be used for generating the new background. If both ref_image_url and ref_image_file are provided, ref_image_url will be used. Accepted formats are jpeg, jpg, png, webp.
                 bg_prompt:
                   type: string
-                  description: Text description of the new scene or background for the provided image. Bria currently supports prompts in English only, excluding special characters.
+                  description: Text description of the new scene or background for the provided image. Either ref_image_url or bg_prompt has to be provided but not both. Bria currently supports prompts in English only, excluding special characters.
                 refine_prompt:
                   type: boolean
                   default: true

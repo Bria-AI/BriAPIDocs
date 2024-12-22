@@ -23,7 +23,7 @@ info:
     - **Enhance Product Imagery with eCommerce Suite**: Use specialized features to create professional product shots, packshots, and lifestyle images for eCommerce platforms.
 
     
-    - **Modify and Transform Images**: Bring your own images and modify them using various routes to suit your needs.
+    - **Edit and Transform Images**: Bring your own images and edit them using various routes to suit your needs.
     
     
     - **Edit Videos (New!)**: Transform video content with advanced AI capabilties, starting with **Background Removal**, and more features coming soon.
@@ -103,9 +103,9 @@ info:
     
     
 
-    ### Modifying Images
+    ### Editing Images
     
-    Bria supports both isolated and registration-required routes for modifying images:
+    Bria supports both isolated and registration-required routes for editing images:
 
 
     **Isolated Routes** (no registration required):
@@ -4319,11 +4319,11 @@ paths:
         '500':
           description: Internal server error.
 
-  # image modifications route
+  # image editing route
   /eraser:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Eraser 
       description: >-
 
@@ -4523,7 +4523,7 @@ paths:
   /erase_foreground:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Erase Foreground 
       description: >-
 
@@ -4587,7 +4587,7 @@ paths:
   /background/remove:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Remove Background
       description: >-
 
@@ -4688,7 +4688,7 @@ paths:
   /background/blur:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Blur Background
       description: >-
 
@@ -4758,7 +4758,7 @@ paths:
   /background/replace:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Generate Background
       description: >-
 
@@ -4893,7 +4893,7 @@ paths:
   /image_expansion:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Expand Image
       description: >-
 
@@ -5050,7 +5050,7 @@ paths:
   /image/increase_resolution:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Increase Resolution
       description: >-
 
@@ -5160,7 +5160,7 @@ paths:
   /{visual_id}/image_to_psd:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Delayer Image
       description: >-
 
@@ -5230,7 +5230,7 @@ paths:
   /crop:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Crop out foreground
       description: >-
 
@@ -5302,7 +5302,7 @@ paths:
   /objects/mask_generator:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Get Masks
       description: >-
 
@@ -5410,7 +5410,7 @@ paths:
   /{visual_id}/person/info:
     get:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Get Presenter info
       description: >-
 
@@ -5744,7 +5744,7 @@ paths:
   /{visual_id}/create:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Modify Presenter
       description: >-
 

@@ -3692,10 +3692,13 @@ paths:
         - Product Shots Generation
       summary: Lifestyle Product Shot by Text
       description: >-
-        Creates enriched product shots by placing them in various environments using textual descriptions. Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
+        Creates enriched product shots by placing them in various environments using textual descriptions. 
+        
+        
+        Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
 
 
-        The following interactive <a href="https://colab.research.google.com/drive/1TNVR4n5wvLdJKPigkUg8wk7t8S_3b9t1?usp=sharing" target="_blank">Colab notebook</a> demonstrates how to use this API effectively. Explore the example code and try it out for yourself to fully appreciate the potential of this suite.
+        This capability is based on our BRIA 2.3 ControlNet BG-Gen. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">here</a>. HF demo space of this pipeline can be found <a href="https://huggingface.co/spaces/briaai/Product-Shot-Generation" target="_blank">here</a>.
       operationId: productLifestyleShotByText
       parameters:
         - in: header
@@ -3841,7 +3844,13 @@ paths:
         - Product Shots Generation
       summary: Lifestyle Product Shot by Image (Coming Soon)
       description: >-
-        Generates product images in enriched environments using a reference image for inspiration. 
+        Generates enriched product shots by placing them in visually compelling environments, guided by a reference image. 
+        
+        
+        Additionally, you can change the image size of the final result as well as the positioning of the product in the image. This will enable you to create new and unique variations of your original image.
+
+
+        This capability is powered by BRIA 2.3 ControlNet BG-Gen (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">HF model card</a>) and BRIA 2.3 IP-Adapter (<a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-BG-Gen" target="_blank">HF model card</a>). You can explore the Hugging Face demo space for this pipeline <a href="https://huggingface.co/spaces/briaai/Product-Shot-Generation" target="_blank">here</a>.
       operationId: productLifestyleShotByImage
       parameters:
         - in: header
@@ -4430,7 +4439,7 @@ paths:
         Masks can be created by allowing users to draw directly on the image with a brush, for example. To access the SDK that demonstrates how to implement a brush feature in your interface, please refer to the following <a href="https://github.com/Bria-AI/js-api-sdk/blob/main/manual_brush_ui" target="_blank">link</a>.
 
 
-        This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>.
+        This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>. And the HF demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-Generative-Fill-API" target="_blank">here</a>.
         
 
       operationId: gen_fill

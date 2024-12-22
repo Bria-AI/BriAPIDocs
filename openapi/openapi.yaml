@@ -3893,9 +3893,10 @@ paths:
                   default: true
                   description: When set to true, additional logic processes the included reference image to make adjustments for optimal results.
                 ref_image_influence:
-                  # type: float
-                  # minimum: 0
-                  # maximum: 1
+                  type: number
+                  format: float
+                  minimum: 0
+                  maximum: 1
                   description: Controls the influence of the reference image on the generated output. A value of 0.0 minimizes the effect of the reference image, while a value of 1.0 maximizes the resemblance to the reference image.
                 num_results:
                   type: integer

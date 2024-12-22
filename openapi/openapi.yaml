@@ -4414,7 +4414,7 @@ paths:
   /gen_fill:
     post:
       tags:
-        - Image Modifications
+        - Image Editing
       summary: Generative Fill
       description: >-
 

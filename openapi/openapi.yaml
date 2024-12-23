@@ -3842,7 +3842,7 @@ paths:
     post:
       tags:
         - Product Shots Generation
-      summary: Lifestyle Product Shot by Image (Coming Soon)
+      summary: Lifestyle Product Shot by Image
       description: >-
         Generates enriched product shots by placing them in visually compelling environments, guided by a reference image. 
         

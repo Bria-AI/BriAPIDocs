@@ -32,6 +32,11 @@ info:
     This document provides an overview of the API's capabilities and guides users on how to effectively implement them.
 
 
+    ### Sandbox
+    
+    Try out BRIA's API endpoints directly in our sandbox environment <a href="https://platform.bria.ai/apps/text-to-image/base" target="_blank">here.</a>
+
+
     ### Using Bria for Image Generation
 
     **Image Generation**:
@@ -178,9 +183,11 @@ paths:
       tags:
         - Image Generation
       summary: Generate Image - Base model
-      description: >-
+      description: >-     
+
         **Description**
       
+
         The /text-to-image/base Route empowers users to create stunning images directly from textual prompts. This pipeline allows for generating high-quality, photorealistic and artistic, images with a resolution of up to 1024x1024 pixels, supporting a variety of aspect ratios natively to accommodate diverse creative needs.
       
       

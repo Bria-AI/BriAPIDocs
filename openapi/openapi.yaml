@@ -1663,6 +1663,9 @@ paths:
       tags:
         - Tailored Generation
       summary: Generate Image - Tailored model
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-image/tailored" 
       description: |-
         **Description**
 
@@ -1934,6 +1937,9 @@ paths:
       tags:
         - Tailored Generation
       summary: Generate Vector Graphics - Tailored (Beta)
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-vector/tailored" 
       description: >-
 
 

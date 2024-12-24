@@ -4439,6 +4439,9 @@ paths:
       tags:
         - Image Editing
       summary: Generative Fill
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/gen-fill"
       description: >-
 
         **Description**

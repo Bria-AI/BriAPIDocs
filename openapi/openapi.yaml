@@ -183,6 +183,9 @@ paths:
       tags:
         - Image Generation
       summary: Generate Image - Base model
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-image/base"
       description: >-     
 
         **Description**
@@ -472,7 +475,10 @@ paths:
     post:
       tags:
         - Image Generation
-      summary: Generate Image - fast model 
+      summary: Generate Image - fast model
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-image/fast" 
       description: >-
 
 
@@ -736,6 +742,9 @@ paths:
       tags:
         - Image Generation
       summary: Generate Image - HD model
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-image/hd" 
       description: >-
 
 
@@ -898,6 +907,9 @@ paths:
       tags:
         - Image Generation
       summary: Reimagine
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/generate-image-with-reference"
       description: >-
         **Description**
         
@@ -1125,6 +1137,9 @@ paths:
       tags:
         - Image Generation
       summary: Prompt enhancement
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/prompt-enhancement"
       description: >-
 
 
@@ -1204,6 +1219,9 @@ paths:
       tags:
         - Image Generation
       summary: Generate Vector Graphics - Base (Beta)
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-vector/base"
       description: >-
 
 
@@ -1446,6 +1464,9 @@ paths:
       tags:
         - Image Generation
       summary: Generate Vector Graphics - Fast (Beta)
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/text-to-vector/fast"
       description: >-
 
 

@@ -4347,7 +4347,10 @@ paths:
     post:
       tags:
         - Image Editing
-      summary: Eraser 
+      summary: Eraser
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/eraser" 
       description: >-
 
         **Description**
@@ -4615,6 +4618,9 @@ paths:
       tags:
         - Image Editing
       summary: Remove Background
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/remove-background"
       description: >-
 
         **Description**
@@ -4716,6 +4722,9 @@ paths:
       tags:
         - Image Editing
       summary: Blur Background
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/blur-background"
       description: >-
 
 
@@ -4786,6 +4795,9 @@ paths:
       tags:
         - Image Editing
       summary: Generate Background
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/generate-background"
       description: >-
 
 
@@ -4921,6 +4933,9 @@ paths:
       tags:
         - Image Editing
       summary: Expand Image
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/expand-image"
       description: >-
 
 
@@ -5078,6 +5093,9 @@ paths:
       tags:
         - Image Editing
       summary: Increase Resolution
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/increase-resolution"
       description: >-
 
 
@@ -5188,6 +5206,9 @@ paths:
       tags:
         - Image Editing
       summary: Delayer Image
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/delayer-image"
       description: >-
 
 
@@ -5258,6 +5279,9 @@ paths:
       tags:
         - Image Editing
       summary: Crop out foreground
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/crop-out-foreground"
       description: >-
 
 
@@ -5330,6 +5354,9 @@ paths:
       tags:
         - Image Editing
       summary: Get Masks
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/get-masks"
       description: >-
 
 

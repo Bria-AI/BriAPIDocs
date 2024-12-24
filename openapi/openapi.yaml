@@ -3477,6 +3477,9 @@ paths:
       tags:
         - Product Shots Generation
       summary: Product Cutout
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/product-cutout"
       description: >
         This capability allows you to create a precise cutout of a product from any given image. This feature is especially valuable for eCommerce platforms and applications, serving as a fundamental building block for crafting a user-friendly interface. 
 
@@ -3544,6 +3547,9 @@ paths:
       tags:
         - Product Shots Generation
       summary: Product Packshot
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/product-packshot"
       description: >-
         The Product Pack Shot feature is designed to create professional standard pack shots. The output is a 2000x2000 px image, with the product size and location according to best practices. This feature can allow users to take any photo of a product and transform it into a professional pack shot, placing the product on a clean, seamless background, typically white but customizable to any color.
 
@@ -3616,6 +3622,9 @@ paths:
       tags:
         - Product Shots Generation
       summary: Product Shadow
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/product-shadow"
       description: >-
         The Product Shadow API allows you to add consistent and customizable shadow to a product cutout. This feature is designed to work in combination with other capabilities like product cutout,  product packshot and product lifestyle shots, enhancing the visual appeal of e-commerce and product imagery.
 
@@ -3719,6 +3728,9 @@ paths:
       tags:
         - Product Shots Generation
       summary: Lifestyle Product Shot by Text
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/lifestyle-product-shot-by-text"
       description: >-
         Creates enriched product shots by placing them in various environments using textual descriptions. 
         
@@ -3871,6 +3883,9 @@ paths:
       tags:
         - Product Shots Generation
       summary: Lifestyle Product Shot by Image
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/lifestyle-product-shot-by-image"
       description: >-
         Generates enriched product shots by placing them in visually compelling environments, guided by a reference image. 
         
@@ -4297,6 +4312,9 @@ paths:
       tags:
         - Video Editing
       summary: Remove Background from Video
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/remove-video-background"
       description: >
         **Description**
 

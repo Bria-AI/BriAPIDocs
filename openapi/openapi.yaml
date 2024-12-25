@@ -4700,70 +4700,6 @@ paths:
           description: Failed to download image.
         '500':
           description: Internal server error. An error occurred on the server.
-  /erase_foreground:
-    post:
-      tags:
-        - Image Editing
-      summary: Erase Foreground 
-      description: >-
-
-
-        **Description**
-
-
-
-        This route is used to erase the foreground from a provided image, while generating the area behind it. 
-      operationId: erase_foreground
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                image_url:   
-                  type: string
-                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                file:
-                  type: string
-                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-              example:
-                image_url: 'URL'
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  result_url:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "URL"
-        '400':
-          description: Bad request. Missing or invalid parameters.
-        '401':
-          description: Unauthorized. Invalid API key or authentication token.
-        '404':
-          description: Not found. Image could not be found at the provided URL.
-        '415':
-          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
-        '413':
-          description: Payload too large. Image file size exceeds the 12MB limit.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '460':
-          description: Failed to download image.
-        '451':
-          description: Unavailable for legal reasons.
-        '500':
-          description: Internal server error. An error occurred on the server.
   /background/remove:
     post:
       tags:
@@ -4868,85 +4804,6 @@ paths:
           description: Internal server error.
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.   
-  /background/blur:
-    post:
-      tags:
-        - Image Editing
-      summary: Blur Background
-      externalDocs:
-        description: "Try it in the Sandbox"
-        url: "https://platform.bria.ai/apps/blur-background"
-      description: >-
-
-
-        **Description**
-
-
-
-        The *background/blur Route* is used to create a blur effect on the background of an image. 
-      operationId: blur_bg
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                image_url:   
-                  type: string
-                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                file:
-                  type: string
-                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
-                scale:
-                  type: integer
-                  minimum: 1
-                  maximum: 5
-                  default: 5
-                  description: A scale for determining how blurry the background of the image should be. The options are 1, 2, 3, 4, 5. This parameter is optional.
-                force_rmbg:
-                  type: boolean
-                  default: false
-                  description: 
-                    Forces background removal, even if the original image already contains an alpha channel.  
-                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
-              example:
-                image_url: 'URL'
-      responses:
-        '200':
-          description: Successful operation.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  result_url:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "URL"
-        '400':
-          description: Bad request. Missing or invalid parameters.
-        '401':
-          description: Unauthorized. Invalid API key or authentication token.
-        '404':
-          description: Not found. Image could not be found at the provided URL.
-        '415':
-          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
-        '413':
-          description: Payload too large. Image file size exceeds the 12MB limit.
-        '429':
-          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
-        '460':
-          description: Failed to download image.
-        '451':
-          description: Unavailable for legal reasons.
-        '500':
-          description: Internal server error. An error occurred on the server.
   /background/replace:
     post:
       tags:
@@ -5073,6 +4930,149 @@ paths:
                     description: The array contains the results created in the request. In each result, the first value represents the URL of the result, the second value represents the seed, and the third value represents the sessions id of the result. Bria recognizes offensive and inappropriate images. The URL will lead to a 0-byte file if an image like that is generated. It will take a few seconds for the image to become available via the URL if sync=false. You can recreate the same result in the future by using the seed as part of the request. The sid (session id) represents the result of the current route request.
                 example:
                   result: [['result_url', 244184855, 'ef3d9a20-4d5d-11ee-8741-8e22fc45bbfc.JPEG']]
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
+  /erase_foreground:
+    post:
+      tags:
+        - Image Editing
+      summary: Erase Foreground 
+      description: >-
+
+
+        **Description**
+
+
+
+        This route is used to erase the foreground from a provided image, while generating the area behind it. 
+      operationId: erase_foreground
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+              example:
+                image_url: 'URL'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
+        '400':
+          description: Bad request. Missing or invalid parameters.
+        '401':
+          description: Unauthorized. Invalid API key or authentication token.
+        '404':
+          description: Not found. Image could not be found at the provided URL.
+        '415':
+          description: Unsupported media type. Invalid file type. Supported file types are jpeg, jpg, png, webp.
+        '413':
+          description: Payload too large. Image file size exceeds the 12MB limit.
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '460':
+          description: Failed to download image.
+        '451':
+          description: Unavailable for legal reasons.
+        '500':
+          description: Internal server error. An error occurred on the server.
+  /background/blur:
+    post:
+      tags:
+        - Image Editing
+      summary: Blur Background
+      externalDocs:
+        description: "Try it in the Sandbox"
+        url: "https://platform.bria.ai/apps/blur-background"
+      description: >-
+
+
+        **Description**
+
+
+
+        The *background/blur Route* is used to create a blur effect on the background of an image. 
+      operationId: blur_bg
+      parameters:
+        - in: header
+          name: api_token
+          schema:
+            type: string
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:   
+                  type: string
+                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                file:
+                  type: string
+                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                scale:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+                  default: 5
+                  description: A scale for determining how blurry the background of the image should be. The options are 1, 2, 3, 4, 5. This parameter is optional.
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
+              example:
+                image_url: 'URL'
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result_url:
+                    type: string
+                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
+                    example: "URL"
         '400':
           description: Bad request. Missing or invalid parameters.
         '401':

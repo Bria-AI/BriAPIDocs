@@ -3514,6 +3514,12 @@ paths:
                 file:
                   type: string
                   description: The image file containing the product to be cut out, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp. Maximum file size 12MB.
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
             example:
               sku: "12345"
               image_url: "URL"
@@ -3588,6 +3594,12 @@ paths:
                   type: string
                   description: The background hex color code for the pack shot. Optionally, use 'transparent' for a transparent background. This parameter is optional.
                   default: "#FFFFFF"
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
             example:
               sku: "12345"
               image_url: "URL"
@@ -3695,6 +3707,12 @@ paths:
                   type: integer
                   description: (For floating shadows) Controls the height of the elliptical shadow, in pixels that could be positive and negative. This parameter is optional.
                   default: 70
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
             example:
               sku: "12345"
               image_url: "URL"
@@ -3843,6 +3861,12 @@ paths:
                     type: integer
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [left, right, top, bottom]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
             examples:
               Original placement:
                 value:
@@ -4031,6 +4055,12 @@ paths:
                     type: integer
                   default: [0,0,0,0]
                   description: The desired padding in pixels around the product, when using placement_type=manual_padding. The order of the values is [left, right, top, bottom]. For optimal results, the total number of pixels, including padding, should be around 1,000,000. It is recommended to first use the product cutout API, get the cutout and understand the size of the result, and then define the required padding and use the cutout as an input for this API.
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
             example:
               image_url: "URL"
               ref_image_urls: ["REFERENCE_URL"]
@@ -4879,6 +4909,12 @@ paths:
                   maximum: 5
                   default: 5
                   description: A scale for determining how blurry the background of the image should be. The options are 1, 2, 3, 4, 5. This parameter is optional.
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
               example:
                 image_url: 'URL'
       responses:
@@ -5005,6 +5041,12 @@ paths:
                   type: integer
                   default: 4
                   description: The number of results you would like to generate.
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
                 negative_prompt:
                   type: string
                   description: Elements or features that should be excluded from the generated scene. This parameter is optional and is available only when fast=false. Bria currently supports descriptions in English only.
@@ -5438,6 +5480,12 @@ paths:
                   type: integer
                   description: Cropping the object with padding around it. Currently, padding is applied to all four borders of the remaining region. This parameter is optional.
                   default: 0
+                force_rmbg:
+                  type: boolean
+                  default: false
+                  description: 
+                    Forces background removal, even if the original image already contains an alpha channel.  
+                    Useful for refining existing foreground/background separation or ignoring unnecessary alpha channels.  
             example:
               image_url: 'URL'
       responses:

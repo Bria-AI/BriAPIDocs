@@ -4415,8 +4415,6 @@ paths:
 
         
         Additionally, ComfyUI nodes that enable running this API route can be found <a href="https://github.com/Bria-AI/ComfyUI-BRIA-API" target="_blank">here</a>
-        
-
       operationId: eraser
       parameters:
         - in: header
@@ -4438,10 +4436,16 @@ paths:
                   description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp.
                 mask_url:   
                   type: string
-                  description: The URL of the binary mask image that represents the area that will be cleaned. If both mask_url and mask_file are provided, mask_url will be used. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  description: The URL of the binary mask image that represents the area that will be cleaned. 
+                  If both mask_url and mask_file are provided, mask_url will be used. Accepted formats - jpeg, jpg, png, webp. 
+                  The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
                 mask_file:
                   type: string
-                  description: The file of the binary mask image that represents the area that will be cleaned, in base64 format. This parameter is used if mask_url is not provided. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  description: The file of the binary mask image that represents the area that will be cleaned, in base64 format. 
+                  This parameter is used if mask_url is not provided. Accepted formats - jpeg, jpg, png, webp. 
+                  The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
                 mask_type:
                   type: string
                   default: 'manual'
@@ -4505,8 +4509,6 @@ paths:
 
 
         This capability is powered by our fast ControlNet inpainting model. HF model card is available <a href="https://huggingface.co/briaai/BRIA-2.3-ControlNet-Inpainting" target="_blank">here</a>. And the HF demo space can be found <a href="https://huggingface.co/spaces/briaai/BRIA-Generative-Fill-API" target="_blank">here</a>.
-        
-
       operationId: gen_fill
       parameters:
         - in: header
@@ -4522,16 +4524,28 @@ paths:
               properties:
                 image_url:   
                   type: string
-                  description: The URL of the input image. If both image_url and image_file are provided, image_url will be used. Accepted formats are jpeg, jpg, png, webp.
+                  description: |
+                    The URL of the input image. If both image_url and image_file are provided, image_url will be used. 
+                    Accepted formats are jpeg, jpg, png, webp.
                 file:
                   type: string
-                  description: The file of the input image, in base64 format. Used if image_url is not provided. Accepted formats are jpeg, jpg, png, webp.
+                  description: |
+                    The file of the input image, in base64 format. Used if image_url is not provided. 
+                    Accepted formats are jpeg, jpg, png, webp.
                 mask_url:   
                   type: string
-                  description: The URL of the binary mask image that represents the area in which the object will be generated. If both mask_url and mask_file are provided, mask_url will be used. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  description: |
+                    The URL of the binary mask image that represents the area in which the object will be generated. 
+                    If both mask_url and mask_file are provided, mask_url will be used. Accepted formats are jpeg, jpg, png, webp.  
+                    The area in which the object will be generated should have the value **255 (white)**, while the rest of the image should have the value **0 (black)**.  
+                    **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
                 mask_file:
                   type: string
-                  description: The file of the binary mask image that represents the area in which the object will be generated, in base64 format. This parameter is used if mask_url is not provided. Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black).
+                  description: |
+                    The file of the binary mask image that represents the area in which the object will be generated, in base64 format. 
+                    This parameter is used if mask_url is not provided. Accepted formats are jpeg, jpg, png, webp.  
+                    The area in which the object will be generated should have the value **255 (white)**, while the rest of the image should have the value **0 (black)**.  
+                    **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
                 mask_type:
                   type: string
                   default: 'manual'
@@ -4556,7 +4570,6 @@ paths:
                 seed:
                   type: integer
                   description: You can choose whether you want your generated results to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
-                  
             examples:
               send using url:
                 value:
@@ -4576,10 +4589,22 @@ paths:
               schema:
                 type: object
                 properties:
-                  result_url:
-                    type: string
-                    description: URL that represents the updated visual created in the request. It is a temporary URL that will expire
-                    example: "URL"
+                  urls:
+                    type: array
+                    items:
+                      type: string
+                    description: |
+                      An array of URLs representing the updated visuals generated by the request. 
+                      These URLs are temporary and will eventually expire.
+                    example: ["RESULT_URL_1", "RESULT_URL_2"]
+                  seed:
+                    type: array
+                    items:
+                      type: integer
+                    description: |
+                      An array of integers representing the seeds used to generate each result. 
+                      These seeds ensure reproducibility and are compatible with the results URL structure.
+                    example: [12345, 67890]
         '400':
           description: Bad request. Missing or invalid parameters.
         '401':

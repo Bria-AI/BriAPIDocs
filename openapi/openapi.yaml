@@ -4441,13 +4441,13 @@ paths:
                   description: 
                     The URL of the binary mask image that represents the area that will be cleaned. If both mask_url and mask_file are provided, mask_url will be used.
                     Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black). 
-                    **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
+                    **Note:** The input image and mask must have the same aspect ratio.
                 mask_file:
                   type: string
                   description: 
                     The file of the binary mask image that represents the area that will be cleaned, in base64 format. This parameter is used if mask_url is not provided. 
                     Accepted formats - jpeg, jpg, png, webp. The area to be removed should have the value 255 (white), while the rest of the image should have the value 0 (black). 
-                    **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
+                    **Note:** The input image and mask must have the same aspect ratio.
                 mask_type:
                   type: string
                   default: 'manual'
@@ -4536,15 +4536,15 @@ paths:
                   description: 
                     The URL of the binary mask image that represents the area in which the object will be generated.  
                     If both mask_url and mask_file are provided, mask_url will be used. Accepted formats are jpeg, jpg, png, webp. 
-                    The area in which the object will be generated should have the value **255 (white)**, while the rest of the image should have the value **0 (black)**.  
-                    **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
+                    The area in which the object will be generated should have the value 255 (white), while the rest of the image should have the value 0 (black).  
+                    **Note:** The input image and mask must have the same aspect ratio.
                 mask_file:
                   type: string
                   description:
                     The file of the binary mask image that represents the area in which the object will be generated, in base64 format. 
                     This parameter is used if mask_url is not provided. Accepted formats are jpeg, jpg, png, webp.  
-                    The area in which the object will be generated should have the value **255 (white)**, while the rest of the image should have the value **0 (black)**.  
-                    **Note:** The input image and mask must have the **same aspect ratio** to ensure proper alignment.
+                    The area in which the object will be generated should have the value 255 (white), while the rest of the image should have the value 0 (black).  
+                    **Note:** The input image and mask must have the same aspect ratio.
                 mask_type:
                   type: string
                   default: 'manual'

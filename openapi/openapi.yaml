@@ -3792,8 +3792,19 @@ paths:
                   description: Elements or features that should be excluded from the generated scene. This parameter is optional and is available only when fast=false. Bria currently supports descriptions in English only, excluding special characters.
                 placement_type:
                   type: string
-                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
-                  enum: ["original", "automatic", "manual_placement", "manual_padding"]
+                  description: 
+                    This parameter allows you to control the positioning of the product in the image. 
+
+                    - `original` will preserve the original position of the product in the image. 
+
+                    - `automatic` will generate results with the 10 recommended positions for the product. 
+
+                    - `manual_placement` will allow you to select predefined positions, using the parameter `manual_placement_selection`. 
+
+                    - `custom_coordinates` Provides precise control over the size and position of the image using the parameters `foreground_image_size` and `foreground_image_location`. This includes positions outside the canvas, which may result in cropping. 
+
+                    - `manual_padding` will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                  enum: ["original", "automatic", "manual_placement", "manual_padding", "custom_coordinates"]
                 original_quality:
                   type: boolean
                   default: false
@@ -3804,6 +3815,21 @@ paths:
                     type: integer
                   default: [1000,1000]
                   description: The desired size of the final product shot. For optimal results, the total number of pixels should be around 1,000,000. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                foreground_image_size:
+                  type: array
+                  items:
+                    type: integer
+                  description: 
+                    Specifies the desired dimensions of the foreground image within the generated output.  
+                    The size is defined as an array of integers representing [width, height] in pixels.
+                foreground_image_location:
+                  type: array
+                  items:
+                    type: integer
+                  description:
+                     Specifies the desired [x, y] coordinates for positioning the foreground image within the full shot.  
+                     The coordinates represent the upper-left corner of the foreground image.
+                     Values can extend outside the shot, in which case the input image will be cropped accordingly.                
                 manual_placement_selection:
                   type: array
                   items:
@@ -3954,8 +3980,19 @@ paths:
                   description: The number of lifestyle product shots you would like to generate. 
                 placement_type:
                   type: string
-                  description: This parameter allows you to control the positioning of the product in the image. Choosing 'original' will preserve the original position of the product in the image. Choosing 'automatic' will generate results with the 10 recommended positions for the product. Choosing 'manual_placement' will allow you to select predefined positions (using the parameter 'manual_placement_selection'). Selecting 'manual_padding' will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
-                  enum: ["original", "automatic", "manual_placement", "manual_padding"]
+                  description: 
+                    This parameter allows you to control the positioning of the product in the image. 
+
+                    - `original` will preserve the original position of the product in the image. 
+
+                    - `automatic` will generate results with the 10 recommended positions for the product. 
+
+                    - `manual_placement` will allow you to select predefined positions, using the parameter `manual_placement_selection`. 
+
+                    - `custom_coordinates` Provides precise control over the size and position of the image using the parameters `foreground_image_size` and `foreground_image_location`. This includes positions outside the canvas, which may result in cropping. 
+
+                    - `manual_padding` will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                  enum: ["original", "automatic", "manual_placement", "manual_padding", "custom_coordinates"]
                 original_quality:
                   type: boolean
                   default: false
@@ -3966,6 +4003,21 @@ paths:
                     type: integer
                   default: [1000,1000]
                   description: The desired size of the final product shot. For optimal results, the total number of pixels should be around 1,000,000. This parameter is only relevant when placement_type=automatic or placement_type=manual_placement.
+                foreground_image_size:
+                  type: array
+                  items:
+                    type: integer
+                  description: 
+                    Specifies the desired dimensions of the foreground image within the generated output.  
+                    The size is defined as an array of integers representing [width, height] in pixels.
+                foreground_image_location:
+                  type: array
+                  items:
+                    type: integer
+                  description:
+                     Specifies the desired [x, y] coordinates for positioning the foreground image within the full shot.  
+                     The coordinates represent the upper-left corner of the foreground image.
+                     Values can extend outside the shot, in which case the input image will be cropped accordingly.                
                 manual_placement_selection:
                   type: array
                   items:

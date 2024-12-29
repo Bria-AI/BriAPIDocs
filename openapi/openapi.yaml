@@ -5452,10 +5452,9 @@ paths:
 
 
 
-        The *Crop Route* is used to crop an image without a background tightly around the remaining region of interest.
-        
-        
-        You can utilize Bria's /background/remove endpoint and then use the result of that route in the/crop route.
+        The Crop Route is used to remove the background from an image and crop tightly around the foreground or remaining region of interest. It supports both images with and without a background.
+
+
       operationId: crop
       parameters:
         - in: header

@@ -2776,7 +2776,7 @@ paths:
       operationId: getDatasetsByProject
       parameters:
         - in: path
-          name: id
+          name: project_id
           schema:
             type: string
           required: true
@@ -3172,7 +3172,7 @@ paths:
       operationId: cloneDataset
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -3345,7 +3345,7 @@ paths:
       operationId: uploadImage
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -3494,7 +3494,7 @@ paths:
       operationId: getImages
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -3582,7 +3582,7 @@ paths:
       operationId: regenerateAllCaptions
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -3654,7 +3654,7 @@ paths:
       operationId: getImage
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -3753,7 +3753,7 @@ paths:
       operationId: updateImageCaption
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -3876,7 +3876,7 @@ paths:
       operationId: deleteImage
       parameters:
         - in: path
-          name: id
+          name: dataset_id
           schema:
             type: string
           required: true
@@ -4183,7 +4183,7 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error
-  /tailored-gen/models/{id}:
+  /tailored-gen/models/{model_id}:
     get:
       tags:
         - Tailored Generation
@@ -4192,7 +4192,7 @@ paths:
       operationId: getModel
       parameters:
         - in: path
-          name: project_id
+          name: model_id
           required: true
           schema:
             type: integer

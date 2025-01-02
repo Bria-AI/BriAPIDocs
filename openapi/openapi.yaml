@@ -2165,45 +2165,71 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error.
-  /tailored-gen/datasets:
+  /tailored-gen/projects:
     post:
       tags:
         - Tailored Generation
-      summary: Create Dataset
-      description: >-
-        **Description**
-  
-        This endpoint allows the creation of a new dataset that will belong to the organization associated with the used API token. The dataset will be created with a default status of "draft".
-      operationId: createDataset
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
+      summary: Create Project
+      description: Create a new project within the organization. A project encompasses all models trained and datasets created for the IP defined in the project.
+      operationId: createProject
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                use_case:
+                project_name:
                   type: string
-                  enum: [illustrative_style, illustrative_single_object]
-                  description: Specifies the use case of the dataset. 
-                  example: "illustrative_style"
-                style_description:
+                  description: Name of the project (required)
+                project_description:
                   type: string
-                  description: Description of the visual style. This is currently required but might change in the future.
-                  example: "A 2d vibrant and colorful flat illustration."
-                name:
+                  description: Description of the project (optional)
+                ip_name:
                   type: string
-                  description: Name of the dataset.
-                  example: "My Illustrations"
+                  description: Name of the IP (required for defined_character)
+                ip_description:
+                  type: string
+                  description: Description of the IP (required for defined_character/object/variants)
+                ip_medium:
+                  type: string
+                  enum:
+                    - photography
+                    - illustration
+                  description: |
+                    Medium of the IP (required)
+                    * photography (coming soon, not available at the moment)
+                    * illustration
+                ip_type:
+                  type: string
+                  enum:
+                    - multi_object_set
+                    - object_variants
+                    - defined_object
+                    - icons
+                    - defined_character
+                    - character_variants
+                    - stylized_scene
+                    - other
+                  description: |
+                    Type of the IP (required):
+                    * multi_object_set: Multiple distinct objects that share a mutual style, design language, or color scheme. These objects are often isolated on a solid background.
+                    * object_variants: Variations of the same object type, designed with consistent style, structure, and coloring, showcasing different interpretations. These objects are often isolated on a solid background.
+                    * defined_object: A specific object, such as a product, that can be reproduced consistently in various scenarios while maintaining its exact identity and defining characteristics. This will be valid only when ip_medium = photography, once photography is available.
+                    * icons: A collection of small, visually distinct illustrations, such as symbols or graphical elements, designed with a cohesive style and used to represent concepts, actions, or objects in interfaces, applications, or visual communication materials.
+                    * defined_character: A specific predefined character or person that can be reproduced consistently in different situations, poses, or actions, preserving their identity and unique traits.
+                    * character_variants: Multiple characters sharing the same structure, style, and color palette, with the ability to create new characters that adhere to these shared characteristics while introducing unique elements.
+                    * stylized_scene: A complete scene or environment, such as a gaming background or a series of photos with a shared color palette, created with a cohesive style, look, and feel.
+                    * other: For IP types that don't fit into the above categories
+            example:
+              project_name: "Branded Character"
+              ip_name: "Adventure Series Characters"
+              ip_description: "A set of adventure game characters with unique personalities"
+              ip_medium: "illustration"
+              ip_type: "defined_character"
       responses:
         '201':
-          description: Dataset successfully created.
+          description: Project successfully created
           content:
             application/json:
               schema:
@@ -2211,85 +2237,60 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the dataset.
-                  use_case:
+                    description: Unique identifier for the project
+                  project_name:
                     type: string
-                    description: Specifies the use case of the dataset.
-                  style_description:
+                    description: Name of the project
+                  project_description:
                     type: string
-                    description: Description of the visual style.
-                  name:
+                    description: Description of the project
+                  ip_name:
                     type: string
-                    description: Name of the dataset.
+                    description: Name of the IP
+                  ip_description:
+                    type: string
+                    description: Description of the IP
+                  ip_medium:
+                    type: string
+                    description: Medium of the IP
+                  ip_type:
+                    type: string
+                    description: Type of the IP
                   status:
                     type: string
-                    description: Status of the dataset. 
-                  images:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          description: Unique identifier for the image.
-                        name:
-                          type: string
-                          description: Name of the image.
-                        caption:
-                          type: string
-                          description: Caption for the image describing the illustration.
-                        file_url:
-                          type: string
-                          description: URL of the image file.
-                        created_at:
-                          type: string
-                          format: date-time
-                          description: Timestamp when the image was created.
+                    enum: [active]
+                    description: Status of the project
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the dataset was created.
-                  updated_at:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the dataset was last updated.
+                    description: Timestamp when the project was created
               example:
                 id: 123
-                use_case: "illustrative_style"
-                style_description: "A 2d vibrant and colorful flat illustration."
-                name: "My Illustrations"
-                status: "draft"
-                images_count: 0
-                images: []
+                project_name: "Branded Character"
+                project_description: ""
+                ip_name: "Lora"
+                ip_description: "A female character with purple hair"
+                ip_medium: "illustration"
+                ip_type: "defined_character"
+                status: "active"
                 created_at: "2024-05-26T12:00:00Z"
-                updated_at: null
         '400':
-          description: Bad request.
+          description: Bad request - validation error
         '401':
-          description: Unauthorized.
+          description: Unauthorized
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     get:
       tags:
         - Tailored Generation
-      summary: Get Datasets
-      description: >-
-        **Description**
-  
-        Retrieve a list of datasets that belong to the organization associated with the used API token. If no datasets are found, an empty array is returned.
-      operationId: getDatasets
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
+      summary: Get Projects
+      description: Retrieve all projects within the organization. If there are no projects, returns an empty array.
+      operationId: getProjects
       responses:
         '200':
-          description: Successful operation.
+          description: Successfully retrieved projects
           content:
             application/json:
               schema:
@@ -2299,85 +2300,93 @@ paths:
                   properties:
                     id:
                       type: integer
-                      description: Unique identifier for the dataset.
-                    use_case:
+                      description: Unique identifier for the project
+                    project_name:
                       type: string
-                      description: Specifies the use case of the dataset.
-                    style_description:
+                      description: Name of the project
+                    project_description:
                       type: string
-                      description: Description of the visual style.
-                    name:
+                      description: Description of the project
+                    ip_name:
                       type: string
-                      description: Name of the dataset.
-                    images_count:
-                      type: integer
-                      description: Number of images in the dataset.
+                      description: Name of the IP
+                    ip_description:
+                      type: string
+                      description: Description of the IP
+                    ip_medium:
+                      type: string
+                      description: Medium of the IP
+                      enum:
+                        - photography
+                        - illustration
+                    ip_type:
+                      type: string
+                      description: Type of the IP
+                      enum:
+                        - multi_object_set
+                        - object_variants
+                        - defined_object
+                        - icons
+                        - defined_character
+                        - character_variants
+                        - stylized_scene
+                        - other
                     status:
                       type: string
-                      description: Status of the dataset.
+                      description: Status of the project
+                      enum: [active]
                     created_at:
                       type: string
                       format: date-time
-                      description: Timestamp when the dataset was created.
+                      description: Timestamp when the project was created
                     updated_at:
                       type: string
                       format: date-time
-                      description: Timestamp when the dataset was last updated.
-              examples:
-                multiple_datasets:
-                  summary: Example with multiple datasets
-                  value: 
-                    - id: 123
-                      use_case: "illustrative_style"
-                      style_description: "A 2d vibrant and colorful flat illustration."
-                      name: "My Illustrations"
-                      images_count: 10
-                      status: "completed"
-                      created_at: "2024-05-26T12:00:00Z"
-                      updated_at: null
-                    - id: 124
-                      use_case: "illustrative_single_object"
-                      style_description: "A 2d illustration of a bear"
-                      name: "Character bear"
-                      images_count: 5
-                      status: "draft"
-                      created_at: "2024-05-26T12:00:00Z"
-                      updated_at: null
-                no_datasets:
-                  summary: Example with no datasets
-                  value: []
+                      description: Timestamp when the project was last updated
+              example:
+                - id: 123
+                  project_name: "Branded Character"
+                  project_description: ""
+                  ip_name: "Lora"
+                  ip_description: "A female character with purple hair"
+                  ip_medium: "illustration"
+                  ip_type: "defined_character"
+                  status: "active"
+                  created_at: "2024-05-26T12:00:00Z"
+                  updated_at: "2024-05-26T14:30:00Z"
+                - id: 124
+                  project_name: "Branded icons"
+                  project_description: ""
+                  ip_name: ""
+                  ip_description: ""
+                  ip_medium: "illustration"
+                  ip_type: "icons"
+                  status: "active"
+                  created_at: "2024-05-27T09:00:00Z"
+                  updated_at: "2024-05-27T10:15:00Z"
         '401':
-          description: Unauthorized.
+          description: Unauthorized
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
-  /tailored-gen/datasets/{id}:
+          description: Internal server error
+  /tailored-gen/projects/{id}:
     get:
       tags:
         - Tailored Generation
-      summary: Get Dataset by ID
-      description: >-
-        **Description**
-  
-        Retrieve a specific dataset by its ID. The response includes all the details of the dataset and an array of associated images.
-      operationId: getDatasetById
+      summary: Get Project by ID
+      description: Retrieve full project information including project name and description, IP name and description, IP medium (photography/illustration), IP type, status, and timestamps.
+      operationId: getProjectById
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset to retrieve.
+          description: Project ID
       responses:
         '200':
-          description: Successful operation.
+          description: Successfully retrieved project
           content:
             application/json:
               schema:
@@ -2385,139 +2394,100 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the dataset.
-                  use_case:
+                    description: Unique identifier for the project
+                  project_name:
                     type: string
-                    description: Specifies the use case of the dataset.
-                  style_description:
+                    description: Name of the project
+                  project_description:
                     type: string
-                    description: Description of the visual style.
-                  name:
+                    description: Description of the project
+                  ip_name:
                     type: string
-                    description: Name of the dataset.
+                    description: Name of the IP
+                  ip_description:
+                    type: string
+                    description: Description of the IP
+                  ip_medium:
+                    type: string
+                    description: Medium of the IP
+                    enum:
+                      - photography
+                      - illustration
+                  ip_type:
+                    type: string
+                    description: Type of the IP
+                    enum:
+                      - multi_object_set
+                      - object_variants
+                      - defined_object
+                      - icons
+                      - defined_character
+                      - character_variants
+                      - stylized_scene
+                      - other
                   status:
                     type: string
-                    description: Status of the dataset.
-                  images:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                          description: Unique identifier for the image.
-                        name:
-                          type: string
-                          description: Name of the image.
-                        caption:
-                          type: string
-                          description: Caption for the image describing the illustration.
-                        file_url:
-                          type: string
-                          description: URL of the image file.
-                        created_at:
-                          type: string
-                          format: date-time
-                          description: Timestamp when the image was created.
+                    description: Status of the project
+                    enum: [active]
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the dataset was created.
-                  updated_at:
-                    type: string
-                    format: date-time
-                    description: Timestamp when the dataset was last updated.
-              examples:
-                dataset_with_images:
-                  summary: Example of a dataset with images
-                  value:
-                    id: 123
-                    use_case: "illustrative_style"
-                    style_description: "A 2d vibrant and colorful flat illustration."
-                    name: "My Illustrations"
-                    status: "draft"
-                    images:
-                      - id: 123
-                        name: "Illustration1"
-                        caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                        file_url: "https://example.com/image1.png"
-                        created_at: "2024-05-26T12:00:00Z"
-                        updated_at: null
-                      - id: 124
-                        name: "Illustration2"
-                        caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
-                        file_url: "https://example.com/image2.png"
-                        created_at: "2024-05-26T12:00:00Z"
-                        updated_at: null
-                    created_at: "2024-05-26T12:00:00Z"
-                    updated_at: null
-                dataset_without_images:
-                  summary: Example of a dataset without images
-                  value:
-                    id: "dataset124"
-                    use_case: "illustrative_single_object"
-                    style_description: "A 2d illustration of a bear."
-                    name: "Character bear"
-                    status: "draft"
-                    images: []
-                    created_at: "2024-05-26T12:00:00Z"
-                    updated_at: null
+                    description: Timestamp when the project was created
+              example:
+                id: 123
+                project_name: "Branded Character"
+                project_description: ""
+                ip_name: "Lora"
+                ip_description: "A female character with purple hair"
+                ip_medium: "illustration"
+                ip_type: "defined_character"
+                status: "active"
+                created_at: "2024-05-26T12:00:00Z"
         '401':
-          description: Unauthorized.
+          description: Unauthorized
         '404':
-          description: Dataset with the specified ID does not exist.
+          description: Project not found
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     put:
       tags:
         - Tailored Generation
-      summary: Update Dataset
-      description: >-
-        **Description**
-  
-        Update the details of a specific dataset by its ID. If the status of the dataset is `completed`, the `style_description` and `use_case` cannot be updated. Additionally, if the status is `completed`, it cannot be returned to `draft` if a model has already been trained based on it.
-      operationId: updateDataset
+      summary: Update Project
+      description: Update a specific project
+      operationId: updateProject
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset to update.
+          description: Project ID
       requestBody:
+        required: true
         content:
           application/json:
             schema:
               type: object
               properties:
-                use_case:
+                project_name:
                   type: string
-                  description: Specifies the use case of the dataset. Accepted values are "illustrative_style" and "illustrative_single_object".
-                  example: "illustrative_style"
-                style_description:
+                  description: New project name (optional)
+                project_description:
                   type: string
-                  description: Description of the visual style.
-                  example: "A 2d vibrant and colorful flat illustration."
-                name:
+                  description: New project description (optional)
+                ip_name:
                   type: string
-                  description: Name of the dataset.
-                  example: "Updated Illustrations"
-                status:
+                  description: New IP name (optional)
+                ip_description:
                   type: string
-                  enum: [COMPLETED]
-                  description: Status of the dataset.
-                  example: "COMPLETED"
+                  description: New IP description (optional)
+            example:
+              ip_description: "A girl with purple hair"
       responses:
         '200':
-          description: Successful operation.
+          description: Project successfully updated
           content:
             application/json:
               schema:
@@ -2525,205 +2495,799 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the dataset.
-                  use_case:
+                    description: Unique identifier for the project
+                  project_name:
                     type: string
-                    description: Specifies the use case of the dataset.
-                  style_description:
+                    description: Name of the project
+                  project_description:
                     type: string
-                    description: Description of the visual style.
-                  name:
+                    description: Description of the project
+                  ip_name:
                     type: string
-                    description: Name of the dataset.
+                    description: Name of the IP
+                  ip_description:
+                    type: string
+                    description: Description of the IP
+                  ip_medium:
+                    type: string
+                    description: Medium of the IP
+                    enum:
+                      - photography
+                      - illustration
+                  ip_type:
+                    type: string
+                    description: Type of the IP
+                    enum:
+                      - multi_object_set
+                      - object_variants
+                      - defined_object
+                      - icons
+                      - defined_character
+                      - character_variants
+                      - stylized_scene
+                      - other
                   status:
                     type: string
-                    description: Status of the dataset.
+                    description: Status of the project
+                    enum: [active]
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the project was created
+              example:
+                id: 123
+                project_name: "Branded Character"
+                project_description: ""
+                ip_name: "Lora"
+                ip_description: "A girl with purple hair"
+                ip_medium: "illustration"
+                ip_type: "defined_character"
+                status: "active"
+                created_at: "2024-05-26T12:00:00Z"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+    delete:
+      tags:
+        - Tailored Generation
+      summary: Delete Project
+      description: Permanently delete a project and all its associated resources, including all datasets, images, and models. This action cannot be undone. Training models must be stopped before deletion.
+      operationId: deleteProject
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Project ID
+      responses:
+        '204':
+          description: Project successfully deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+        '409':
+          description: Cannot delete project while models are in training
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+  /tailored-gen/datasets:
+    post:
+      tags:
+        - Tailored Generation
+      summary: Create Dataset
+      description: |
+        Create a new dataset.
+        
+        Constraints:
+        * Dataset must have at least 1 image to be completed
+        * Maximum of 200 images per dataset
+      operationId: createDataset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                project_id:
+                  type: integer
+                  description: Associated project ID (required)
+                name:
+                  type: string
+                  description: Dataset name (required)
+            example:
+              project_id: 123
+              name: "dataset v1"
+      responses:
+        '201':
+          description: Dataset successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the dataset
+                  project_id:
+                    type: integer
+                    description: Associated project ID
+                  name:
+                    type: string
+                    description: Dataset name
+                  caption_prefix:
+                    type: string
+                    description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                  status:
+                    type: string
+                    description: Status of the dataset
+                    enum: [draft]
+                  captions_update_status:
+                    type: string
+                    description: Status of captions update process
+                    enum: [empty,in_progress, completed]
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was last updated
+              example:
+                id: 456
+                project_id: 123
+                name: "dataset v1"
+                caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                status: "draft"
+                captions_update_status: "empty"
+                created_at: "2024-05-26T12:00:00Z"
+                updated_at: "2024-05-26T12:00:00Z"
+        '400':
+          description: Bad request - validation error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+    get:
+      tags:
+        - Tailored Generation
+      summary: Get Datasets
+      description: Retrieve a list of all datasets. If there are no datasets, returns an empty array.
+      operationId: getDatasets
+      responses:
+        '200':
+          description: Successfully retrieved datasets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique identifier for the dataset
+                    project_id:
+                      type: integer
+                      description: Associated project ID
+                    name:
+                      type: string
+                      description: Dataset name
+                    caption_prefix:
+                      type: string
+                      description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                    status:
+                      type: string
+                      description: Status of the dataset
+                      enum: [draft, completed]
+                    captions_update_status:
+                      type: string
+                      description: Status of captions update process
+                      enum: [empty,in_progress, completed]
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the dataset was created
+                    updated_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the dataset was last updated
+              example:
+                - id: 456
+                  project_id: 123
+                  name: "dataset v1"
+                  caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                  status: "completed"
+                  captions_update_status: "empty"
+                  created_at: "2024-05-26T12:00:00Z"
+                  updated_at: "2024-05-26T14:30:00Z"
+                - id: 457
+                  project_id: 124
+                  name: "dataset v2"
+                  caption_prefix: "An illustration of a character named Max, a male character with spiky black hair,"
+                  status: "draft"
+                  captions_update_status: "empty"
+                  created_at: "2024-05-27T09:00:00Z"
+                  updated_at: "2024-05-27T09:00:00Z"
+        '401':
+          description: Unauthorized
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+  /tailored-gen/projects/{project_id}/datasets:
+    get:
+      tags:
+        - Tailored Generation
+      summary: Get Datasets by Project
+      description: Retrieve all datasets for a specific project
+      operationId: getDatasetsByProject
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          schema:
+            type: integer
+          description: Project ID
+        - in: query
+          name: include_models
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: If true, a list of model objects using the dataset should be included in the response under the parameter 'models'
+        - in: query
+          name: include_models_ids
+          required: false
+          schema:
+            type: boolean
+            default: false
+          description: If true, a list of model ids using the dataset should be included in the response under the parameter 'model_ids'
+      responses:
+        '200':
+          description: Successfully retrieved datasets
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique identifier for the dataset
+                    project_id:
+                      type: integer
+                      description: Associated project ID
+                    name:
+                      type: string
+                      description: Dataset name
+                    caption_prefix:
+                      type: string
+                      description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                    images_count:
+                      type: integer
+                      description: Number of images in the dataset
+                    status:
+                      type: string
+                      description: Status of the dataset
+                      enum: [draft, completed]
+                    captions_update_status:
+                      type: string
+                      description: Status of captions update process
+                      enum: [empty,in_progress, completed]
+                    models:
+                      type: array
+                      description: List of model objects using this dataset. Only included when include_models=true
+                      items:
+                        type: object
+                    model_ids:
+                      type: array
+                      description: List of model IDs using this dataset. Only included when include_models_ids=true
+                      items:
+                        type: string
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the dataset was created
+                    updated_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the dataset was last updated
+              example:
+                - id: 456
+                  project_id: 123
+                  name: "dataset v1"
+                  caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                  images_count: 15
+                  status: "completed"
+                  captions_update_status: "empty"
+                  created_at: "2024-05-26T12:00:00Z"
+                  updated_at: "2024-05-26T14:30:00Z"
+                - id: 457
+                  project_id: 123
+                  name: "dataset v2"
+                  caption_prefix: "An illustration of a character named Max, a male character with spiky black hair,"
+                  images_count: 8
+                  status: "draft"
+                  captions_update_status: "empty"
+                  created_at: "2024-05-27T09:00:00Z"
+                  updated_at: "2024-05-27T09:00:00Z"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+  /tailored-gen/datasets/{id}:
+    get:
+      tags:
+        - Tailored Generation
+      summary: Get Dataset by ID
+      description: Retrieve a specific dataset
+      operationId: getDatasetById
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Dataset ID
+      responses:
+        '200':
+          description: Successfully retrieved dataset
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the dataset
+                  project_id:
+                    type: integer
+                    description: Associated project ID
+                  name:
+                    type: string
+                    description: Dataset name
+                  caption_prefix:
+                    type: string
+                    description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                  status:
+                    type: string
+                    description: Status of the dataset
+                    enum: [draft, completed]
+                  captions_update_status:
+                    type: string
+                    description: Status of captions update process
+                    enum: [empty,in_progress, completed]
+                  images_count:
+                    type: integer
+                    description: Number of images in the dataset
                   images:
                     type: array
+                    description: Array of images in the dataset
                     items:
                       type: object
                       properties:
                         id:
                           type: integer
-                          description: Unique identifier for the image.
-                        name:
-                          type: string
-                          description: Name of the image.
+                          description: Unique identifier for the image
+                        dataset_id:
+                          type: integer
+                          description: ID of the dataset this image belongs to
                         caption:
                           type: string
-                          description: Caption for the image describing the illustration.
+                          description: Once an image is uploaded, a caption is generated automatically. The caption is a natural continuation of the caption_prefix.
+                        caption_source:
+                          type: string
+                          description: Source of the caption
+                          enum: [automatic, manual]
+                        image_name:
+                          type: string
+                          description: Name of the image
                         image_url:
                           type: string
-                          description: URL of the image.
+                          description: URL of the original image file
                         thumbnail_url:
                           type: string
-                          description: URL of the image thumbnail.
+                          description: URL of the image thumbnail
                         created_at:
                           type: string
                           format: date-time
-                          description: Timestamp when the image was created.
+                          description: Timestamp when the image was created
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the image was last updated
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the dataset was created.
+                    description: Timestamp when the dataset was created
                   updated_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the dataset was last updated.
-              examples:
-                dataset_with_images:
-                  summary: Example of a dataset with images
-                  value:
-                    id: 123
-                    use_case: "illustrative_style"
-                    style_description: "A 2d vibrant and colorful flat illustration."
-                    name: "My Illustrations"
-                    status: "draft"
-                    images:
-                      - id: 123
-                        name: "Illustration1"
-                        caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                        image_url: "https://example.com/image1.png"
-                        thumbnail_url: "https://example.com/image1_thumbnail.png"
-                        created_at: "2024-05-26T12:00:00Z"
-                        updated_at: null
-                      - id: 124
-                        name: "Illustration2"
-                        caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
-                        image_url: "https://example.com/image2.png"
-                        thumbnail_url: "https://example.com/image2_thumbnail.png"
-                        created_at: "2024-05-26T12:00:00Z"
-                        updated_at: null
-                    created_at: "2024-05-26T12:00:00Z"
-                    updated_at: "2024-05-26T12:00:00Z"
-        '400':
-          description: Bad request.
+                    description: Timestamp when the dataset was last updated
+              example:
+                id: 456
+                project_id: 123
+                name: "dataset v1"
+                caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                status: "completed"
+                captions_update_status: "empty"
+                images_count: 2
+                images:
+                  - id: 789
+                    dataset_id: 456
+                    caption: "standing in a confident pose wearing a blue dress"
+                    caption_source: "automatic"
+                    image_name: "lora_standing.png"
+                    image_url: "https://api.example.com/files/lora_standing.png"
+                    thumbnail_url: "https://api.example.com/files/lora_standing_thumb.png"
+                    created_at: "2024-05-26T12:30:00Z"
+                    updated_at: "2024-05-26T12:30:00Z"
+                  - id: 790
+                    dataset_id: 456
+                    caption: "sitting on a chair with a gentle smile"
+                    caption_source: "automatic"
+                    image_name: "lora_sitting.png"
+                    image_url: "https://api.example.com/files/lora_sitting.png"
+                    thumbnail_url: "https://api.example.com/files/lora_sitting_thumb.png"
+                    created_at: "2024-05-26T12:45:00Z"
+                    updated_at: "2024-05-26T12:45:00Z"
+                created_at: "2024-05-26T12:00:00Z"
+                updated_at: "2024-05-26T14:30:00Z"
         '401':
-          description: Unauthorized.
+          description: Unauthorized
         '404':
-          description: Dataset with the specified ID does not exist.
-        '409':
-          description: Conflict.
+          description: Dataset not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Tailored Generation
+      summary: Update Dataset
+      description: |
+        Update a dataset.
+        
+        In order to use a dataset in a model training, its status must be set to completed.
+        
+        Once a dataset status is changed to completed:
+        * Images cannot be added or removed
+        * Image captions cannot be edited
+        * Caption prefix cannot be modified
+        
+        It is recommended to use the route Clone Dataset As Draft in order to create a new version of a dataset.
+        
+        Constraints:
+        * Cannot update caption_prefix if dataset status is completed
+        * Dataset must have at least 1 image to be marked as completed
+      operationId: updateDataset
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Dataset ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New dataset name (optional)
+                caption_prefix:
+                  type: string
+                  description: New caption prefix (optional). Cannot be updated if dataset status is completed. If the user has updated the caption prefix, it is crucial to Regenerate All Captions using the endpoint PUT /datasets/{dataset_id}/images/ 
+                status:
+                  type: string
+                  description: Dataset status (optional). Can be set to completed to enable usage in model training
+                  enum: [draft, completed]
+            example:
+              status: "completed"
+      responses:
+        '200':
+          description: Dataset successfully updated
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  id:
+                    type: integer
+                    description: Unique identifier for the dataset
+                  project_id:
+                    type: integer
+                    description: Associated project ID
+                  name:
                     type: string
-                    description: Error message.
+                    description: Dataset name
+                  caption_prefix:
+                    type: string
+                    description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                  status:
+                    type: string
+                    description: Status of the dataset
+                    enum: [draft, completed]
+                  captions_update_status:
+                    type: string
+                    description: Status of captions update process
+                    enum: [empty,in_progress, completed]
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was last updated
+              example:
+                id: 456
+                project_id: 123
+                name: "dataset v1"
+                caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                status: "completed"
+                captions_update_status: "empty"
+                created_at: "2024-05-26T12:00:00Z"
+                updated_at: "2024-05-26T15:30:00Z"
+        '400':
+          description: Bad request - validation error
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
+        '409':
+          description: Conflict error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: Error message explaining the conflict
               examples:
-                status_conflict:
+                caption_prefix_error:
                   value:
-                    error: "The status of a completed dataset cannot be changed to draft if a model has already been trained based on it."
-                use_case_conflict:
+                    message: "Cannot update caption prefix for a completed dataset"
+                completion_error:
                   value:
-                    error: "The use_case cannot be updated for a completed dataset."
-                style_description_conflict:
-                  value:
-                    error: "The style_description cannot be updated for a completed dataset."
-                image_count_conflict:
-                  value:
-                    error: "A dataset with the use case 'illustrative_style' must have between 20 and 200 images to be marked as 'completed'. A dataset with the use case 'illustrative_single_object' must have between 10 and 20 images to be marked as 'completed'."
+                    message: "Cannot mark dataset as completed. Dataset must have at least 1 image"
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     delete:
       tags:
         - Tailored Generation
       summary: Delete Dataset
-      description: >-
-        **Description**
-  
-        Delete a specific dataset. Changes status to deleted.
+      description: Delete a specific dataset. Deletes all associated images.
       operationId: deleteDataset
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset to delete.
+          description: Dataset ID
       responses:
         '204':
-          description: Dataset successfully deleted.
+          description: Dataset successfully deleted
+        '401':
+          description: Unauthorized
         '404':
-          description: Dataset with the specified ID does not exist.
+          description: Dataset not found
         '409':
-          description: Conflict.
+          description: Cannot delete a dataset that is used by a model that is in training
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+  /tailored-gen/datasets/{dataset_id}/clone:
+    post:
+      tags:
+        - Tailored Generation
+      summary: Clone Dataset As Draft
+      description: Create a new draft dataset based on existing one. This is useful when you would like to use the same dataset again for another training, but with some modification (create a variation).
+      operationId: cloneDataset
+      parameters:
+        - in: path
+          name: dataset_id
+          required: true
+          schema:
+            type: integer
+          description: Dataset ID to clone
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New dataset name. Defaults to "Copy of [original name]"
+                description:
+                  type: string
+                  description: New dataset description. Defaults to original description
+            example:
+              name: "Copy of dataset v1 - modified version"
+              description: "Modified version with additional poses"
+      responses:
+        '201':
+          description: Dataset successfully cloned
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  id:
+                    type: integer
+                    description: Unique identifier for the dataset
+                  project_id:
+                    type: integer
+                    description: Associated project ID
+                  name:
                     type: string
-                    description: Error message.
-              examples:
-                conflict_example:
-                  value:
-                    error: "Cannot delete a dataset that is used by a model that is in training or has the status 'ready'."
+                    description: Dataset name
+                  caption_prefix:
+                    type: string
+                    description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                  status:
+                    type: string
+                    description: Status of the dataset
+                    enum: [draft]
+                  captions_update_status:
+                    type: string
+                    description: Status of captions update process
+                    enum: [empty, in_progress, completed]
+                  images_count:
+                    type: integer
+                    description: Number of images in the dataset
+                  images:
+                    type: array
+                    description: Array of images in the dataset
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: Unique identifier for the image
+                        dataset_id:
+                          type: integer
+                          description: ID of the dataset this image belongs to
+                        caption:
+                          type: string
+                          description: Once an image is uploaded, a caption is generated automatically. The caption is a natural continuation of the caption_prefix.
+                        caption_source:
+                          type: string
+                          description: Source of the caption
+                          enum: [automatic]
+                        image_name:
+                          type: string
+                          description: Name of the image
+                        image_url:
+                          type: string
+                          description: URL of the original image file
+                        thumbnail_url:
+                          type: string
+                          description: URL of the image thumbnail
+                        created_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the image was created
+                        updated_at:
+                          type: string
+                          format: date-time
+                          description: Timestamp when the image was last updated
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was last updated
+              example:
+                id: 457
+                project_id: 123
+                name: "Copy of dataset v1 - modified version"
+                caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                status: "draft"
+                captions_update_status: "empty"
+                images_count: 2
+                images:
+                  - id: 791
+                    dataset_id: 457
+                    caption: "standing in a confident pose wearing a blue dress"
+                    caption_source: "automatic"
+                    image_name: "lora_standing.png"
+                    image_url: "https://api.example.com/files/lora_standing.png"
+                    thumbnail_url: "https://api.example.com/files/lora_standing_thumb.png"
+                    created_at: "2024-05-26T15:30:00Z"
+                    updated_at: "2024-05-26T15:30:00Z"
+                  - id: 792
+                    dataset_id: 457
+                    caption: "sitting on a chair with a gentle smile"
+                    caption_source: "automatic"
+                    image_name: "lora_sitting.png"
+                    image_url: "https://api.example.com/files/lora_sitting.png"
+                    thumbnail_url: "https://api.example.com/files/lora_sitting_thumb.png"
+                    created_at: "2024-05-26T15:30:00Z"
+                    updated_at: "2024-05-26T15:30:00Z"
+                created_at: "2024-05-26T15:30:00Z"
+                updated_at: "2024-05-26T15:30:00Z"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Dataset not found
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
   /tailored-gen/datasets/{dataset_id}/images:
     post:
       tags:
         - Tailored Generation
-      summary: Upload Image to Dataset
-      description: >-
-        **Description**
+      summary: Upload Image
+      description: |
+        Upload new image to a dataset.
+        
+        Constraints:
+        * Dataset must have at least 1 image
+        * Dataset cannot exceed 200 images
+        * Cannot upload to a completed dataset
   
-        Upload a new image to a specific dataset. One of the following parameters, `file` or `image_url`, must be provided.
-
-        
         **Upload a new image using the image file**
-
         
-          In our documentation request example, we demonstrate how to upload a new image using the image URL.
-          
-          
-          If you want to use an image from a file, follow the example below:
-
-      
-              import requests
-      
-              url = "/tailored-gen/datasets/{dataset_id}/images"
-      
-              payload = {}
-              files=[
-                ('file',('image_name.jpeg',open('/path_to_local_file/image_name.jpeg','rb'),'image/jpeg'))
-              ]
-              headers = {
-                'api_token': 'xxxx'
-              }
-      
-              response = requests.request("POST", url, headers=headers, data=payload, files=files)
-      
-              print(response.text)
-       
-
+        In our documentation request example, we demonstrate how to upload a new image using the image URL.
+        
+        If you want to use an image from a file, follow the example below:
+        
+            import requests
+  
+            url = "https://engine.prod.bria-api.com/v1/tailored-gen/datasets/{dataset_id}/images"
+  
+            payload = {}
+            files=[
+              ('file',('image_name.jpeg',open('/path_to_local_file/image_name.jpeg','rb'),'image/jpeg'))
+            ]
+            headers = {
+              'api_token': 'xxxx'
+            }
+  
+            response = requests.request("POST", url, headers=headers, data=payload, files=files)
       operationId: uploadImage
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: dataset_id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset to which the image will be uploaded.
+          description: Dataset ID
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -2732,86 +3296,87 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: Image file to upload. Either `file` or `image_url` must be provided.
+                  description: Image file to upload (required if image_url not provided)
                 image_url:
                   type: string
-                  description: URL of the image to upload. Either `file` or `image_url` must be provided.
+                  description: URL of image to upload (required if file not provided)
                 image_name:
                   type: string
-                  description: Name of the image. If not provided, the file name will be used. If neither is available, a default name will be set. This field is only relevant when an image_url is provided.
-            examples:
-                image url:
-                  value:
-                    image_url: "https://i.natgeofe.com/n/548467d8-c5f1-4551-9f58-6817a8d2c45e/NationalGeographic_2572187_square.jpg"
+                  description: Custom name for the image (optional)
+            example:
+              image_url: "https://example.com/images/character_pose.jpg"
+              image_name: "character_standing_pose.jpg"
       responses:
         '201':
-          description: Image successfully uploaded.
+          description: Image successfully uploaded
           content:
-            application/x-www-form-urlencoded:
+            application/json:
               schema:
                 type: object
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the image.
+                    description: Unique identifier for the image
                   dataset_id:
                     type: integer
-                    description: ID of the dataset to which the image belongs.
+                    description: ID of the dataset this image belongs to
                   caption:
                     type: string
-                    description: Caption for the image.
-                  file_name:
+                    description: Once an image is uploaded, a caption is generated automatically. The caption is a natural continuation of the caption_prefix.
+                  caption_source:
                     type: string
-                    description: Name of the image file.
+                    description: Source of the caption
+                    enum: [automatic, manual]
+                  image_name:
+                    type: string
+                    description: Name of the image
                   image_url:
                     type: string
-                    description: URL of the image.
+                    description: URL of the original image file
                   thumbnail_url:
                     type: string
-                    description: URL of the image thumbnail.
+                    description: URL of the image thumbnail
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the image was created.
+                    description: Timestamp when the image was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was last updated
               example:
-                id: 123
-                dataset_id: 123
-                caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                file_name: "Illustration1.png"
-                image_url: "https://example.com/image1.png"
-                thumbnail_url: "https://example.com/image1_thumbnail.png"
-                created_at: "2024-05-26T12:00:00Z"
+                id: 789
+                dataset_id: 456
+                caption: "standing in a confident pose wearing a blue dress"
+                caption_source: "automatic"
+                image_name: "lora_standing.png"
+                image_url: "https://api.example.com/files/lora_standing.png"
+                thumbnail_url: "https://api.example.com/files/lora_standing_thumb.png"
+                created_at: "2024-05-26T12:30:00Z"
+                updated_at: "2024-05-26T12:30:00Z"
         '400':
-          description: Bad request.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              example:
-                error: "Either file or image_url must be provided."
+          description: Bad request - validation error
+        '401':
+          description: Unauthorized
         '404':
-          description: Dataset with the specified ID does not exist.
+          description: Dataset not found
         '409':
-          description: Conflict.
+          description: Conflict error
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  message:
                     type: string
-                    description: Error message.
+                    description: Error message explaining the conflict
               examples:
-                dataset_completed:
+                completed_dataset:
                   value:
-                    error: "Cannot upload an image to a completed dataset."
-                upper_limit_exceeded:
+                    message: "Cannot upload an image to a completed dataset"
+                max_images:
                   value:
-                    error: "Cannot upload more images. A dataset with the use case 'illustrative_style' can have a maximum of 200 images. A dataset with the use case 'illustrative_single_object' can have a maximum of 20 images."
+                    message: "Maximum number of images (200) reached"
         '412':
           description: Precondition Failed.
           content:
@@ -2851,32 +3416,23 @@ paths:
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     get:
       tags:
         - Tailored Generation
       summary: Get Images
-      description: >-
-        **Description**
-
-        Retrieve a list of images in a specific dataset.
+      description: Retrieve all images in a specific dataset. If there are no images, returns an empty array.
       operationId: getImages
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: dataset_id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset for which to retrieve images.
+          description: Dataset ID
       responses:
         '200':
-          description: Successful operation.
+          description: Successfully retrieved images
           content:
             application/json:
               schema:
@@ -2886,85 +3442,80 @@ paths:
                   properties:
                     id:
                       type: integer
-                      description: Unique identifier for the image.
+                      description: Unique identifier for the image
                     dataset_id:
                       type: integer
-                      description: ID of the dataset to which the image belongs.
+                      description: ID of the dataset this image belongs to
                     caption:
                       type: string
-                      description: Caption for the image.
-                    file_name:
+                      description: Caption describing the image
+                    caption_source:
                       type: string
-                      description: Name of the image file.
+                      description: Source of the caption. 'unknown' value only appears for images that were uploaded using an old version of Tailored Generation.
+                      enum: [automatic, manual, unknown]
+                    image_name:
+                      type: string
+                      description: Name of the image
                     image_url:
                       type: string
-                      description: URL of the image.
+                      description: URL of the original image file
                     thumbnail_url:
                       type: string
-                      description: URL of the image thumbnail.
+                      description: URL of the image thumbnail
                     created_at:
                       type: string
                       format: date-time
-                      description: Timestamp when the image was created.
-              examples:
-                multiple_images:
-                  summary: Example with multiple images
-                  value:
-                    - id: 123
-                      dataset_id: 123
-                      caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                      file_name: "Illustration1.png"
-                      image_url: "https://example.com/image1.png"
-                      thumbnail_url: "https://example.com/image1_thumbnail.png"
-                      created_at: "2024-05-26T12:00:00Z"
-                    - id: 123
-                      dataset_id: 123
-                      caption: "A colorful 2D illustration depicting a busy city street with various shops and people."
-                      file_name: "Illustration2.png"
-                      image_url: "https://example.com/image2.png"
-                      thumbnail_url: "https://example.com/image2_thumbnail.png"
-                      created_at: "2024-05-26T12:00:00Z"
-                no_images:
-                  summary: Example with no images
-                  value: []
+                      description: Timestamp when the image was created
+                    updated_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the image was last updated
+              example:
+                - id: 789
+                  dataset_id: 456
+                  caption: "standing in a confident pose wearing a blue dress"
+                  caption_source: "automatic"
+                  image_name: "lora_standing.png"
+                  image_url: "https://api.example.com/files/lora_standing.png"
+                  thumbnail_url: "https://api.example.com/files/lora_standing_thumb.png"
+                  created_at: "2024-05-26T12:30:00Z"
+                  updated_at: "2024-05-26T12:30:00Z"
+                - id: 790
+                  dataset_id: 456
+                  caption: "sitting on a chair with a gentle smile"
+                  caption_source: "manual"
+                  image_name: "lora_sitting.png"
+                  image_url: "https://api.example.com/files/lora_sitting.png"
+                  thumbnail_url: "https://api.example.com/files/lora_sitting_thumb.png"
+                  created_at: "2024-05-26T12:45:00Z"
+                  updated_at: "2024-05-26T13:15:00Z"
+        '401':
+          description: Unauthorized
         '404':
-          description: Dataset with the specified ID does not exist.
+          description: Dataset not found
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
-  /tailored-gen/datasets/{dataset_id}/images/{image_id}:
-    get:
+          description: Internal server error
+    put:
       tags:
         - Tailored Generation
-      summary: Get Image by ID
-      description: >-
-        **Description**
-
-        Retrieve a specific image by its ID.
-      operationId: getImageById
+      summary: Regenerate All Captions
+      description: |
+        Regenerate captions for all images in dataset. This action is crucial after the user updates the caption_prefix, and then it's recommended to regenerate all the captions of all images, to have full compatibility with the new caption_prefix.
+        
+        This is an asynchronous operation. Once this endpoint is called, Get Dataset by ID should be sampled until the captions_update_status changes to 'completed'.
+      operationId: regenerateAllCaptions
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: dataset_id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset to which the image belongs.
-        - in: path
-          name: image_id
-          schema:
-            type: integer
-          required: true
-          description: The ID of the image to retrieve.
+          description: Dataset ID
       responses:
-        '200':
-          description: Successful operation.
+        '202':
+          description: Caption regeneration process started
           content:
             application/json:
               schema:
@@ -2972,36 +3523,236 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the image.
-                  dataset_id:
+                    description: Unique identifier for the dataset
+                  project_id:
                     type: integer
-                    description: ID of the dataset to which the image belongs.
-                  caption:
+                    description: Associated project ID
+                  name:
                     type: string
-                    description: Caption for the image.
-                  file_name:
+                    description: Dataset name
+                  caption_prefix:
                     type: string
-                    description: Name of the image file.
-                  image_url:
+                    description: Text automatically prepended to all image captions in the dataset. Each image caption should naturally continues this prefix. A default prefix is automatically created but can be modified, and this same prefix is later used as the default generation prefix during image generation.
+                  status:
                     type: string
-                    description: URL of the image.
-                  thumbnail_url:
+                    description: Status of the dataset
+                    enum: [draft, completed]
+                  captions_update_status:
                     type: string
-                    description: URL of the image thumbnail.
+                    description: Status of captions update process
+                    enum: [empty, in_progress, completed]
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the image was created.
+                    description: Timestamp when the dataset was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the dataset was last updated
               example:
-                id: 123
-                dataset_id: 123
-                caption: "A vibrant 2D illustration of a sunny day with children playing in a park."
-                file_name: "Illustration1.png"
-                image_url: "https://example.com/image2.png"
-                thumbnail_url: "https://example.com/image2_thumbnail.png"
+                id: 456
+                project_id: 123
+                name: "dataset v1"
+                caption_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                status: "draft"
+                captions_update_status: "in_progress"
                 created_at: "2024-05-26T12:00:00Z"
+                updated_at: "2024-05-26T15:45:00Z"
+        '401':
+          description: Unauthorized
         '404':
-          description: Not Found.
+          description: Dataset not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+  /tailored-gen/datasets/{dataset_id}/images/{image_id}:
+    get:
+      tags:
+        - Tailored Generation
+      summary: Get Image by ID
+      description: Retrieve full image information including caption (which naturally continues the dataset's caption_prefix), caption source (automatic/manual/unknown), image name, URL and thumbnail URL, dataset ID, and timestamps.
+      operationId: getImage
+      parameters:
+        - in: path
+          name: dataset_id
+          required: true
+          schema:
+            type: integer
+          description: Dataset ID
+        - in: path
+          name: image_id
+          required: true
+          schema:
+            type: integer
+          description: Image ID
+      responses:
+        '200':
+          description: Successfully retrieved image
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the image
+                  dataset_id:
+                    type: integer
+                    description: ID of the dataset this image belongs to
+                  caption:
+                    type: string
+                    description: Caption describing the image
+                  caption_source:
+                    type: string
+                    description: Source of the caption. 'unknown' value only appears for images that were uploaded using an old version of Tailored Generation.
+                    enum: [automatic, manual, unknown]
+                  image_name:
+                    type: string
+                    description: Name of the image
+                  image_url:
+                    type: string
+                    description: URL of the original image file
+                  thumbnail_url:
+                    type: string
+                    description: URL of the image thumbnail
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was last updated
+              example:
+                id: 789
+                dataset_id: 456
+                caption: "standing in a confident pose wearing a blue dress"
+                caption_source: "automatic"
+                image_name: "lora_standing.png"
+                image_url: "https://api.example.com/files/lora_standing.png"
+                thumbnail_url: "https://api.example.com/files/lora_standing_thumb.png"
+                created_at: "2024-05-26T12:30:00Z"
+                updated_at: "2024-05-26T12:30:00Z"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Image or dataset not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Tailored Generation
+      summary: Update Image Caption
+      description: |
+        Update the caption of a specific image. There are two mutually exclusive ways to update a caption:
+  
+        1. Provide a new caption text:
+           * Use the `caption` parameter
+           * This will set `caption_source` to "manual"
+           * Reflects a human-written caption
+  
+        2. Request automatic caption regeneration:
+           * Set `regenerate_caption` to true
+           * This will set `caption_source` to "automatic"
+           * A new caption will be generated automatically based on the image and caption_prefix
+           * For the same caption_prefix, regenerate_caption will always return the same caption
+           * Useful for resetting captions or regenerating them after changing the caption_prefix
+  
+        Note: You cannot provide both parameters simultaneously as they represent different update approaches.
+  
+        Constraints:
+        * Cannot update captions in a completed dataset
+        * Cannot provide both caption and regenerate_caption in the same request
+      operationId: updateImageCaption
+      parameters:
+        - in: path
+          name: dataset_id
+          required: true
+          schema:
+            type: integer
+          description: Dataset ID
+        - in: path
+          name: image_id
+          required: true
+          schema:
+            type: integer
+          description: Image ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                caption:
+                  type: string
+                  description: New caption text. When provided, sets caption_source to "manual"
+                regenerate_caption:
+                  type: boolean
+                  default: false
+                  description: When true, generates new caption automatically and sets caption_source to "automatic"
+            examples:
+              manual_caption:
+                summary: Update with manual caption
+                value:
+                  caption: "standing confidently in a defensive pose wearing armor"
+              regenerate_caption:
+                summary: Request automatic caption regeneration
+                value:
+                  regenerate_caption: true
+      responses:
+        '200':
+          description: Caption successfully updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: Unique identifier for the image
+                  dataset_id:
+                    type: integer
+                    description: ID of the dataset this image belongs to
+                  caption:
+                    type: string
+                    description: Updated caption for the image
+                  caption_source:
+                    type: string
+                    description: Source of the updated caption
+                    enum: [automatic, manual]
+                  image_name:
+                    type: string
+                    description: Name of the image
+                  image_url:
+                    type: string
+                    description: URL of the original image file
+                  thumbnail_url:
+                    type: string
+                    description: URL of the image thumbnail
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was created
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the image was last updated
+              example:
+                id: 789
+                dataset_id: 456
+                caption: "standing confidently in a defensive pose wearing armor"
+                caption_source: "manual"
+                image_name: "lora_standing.png"
+                image_url: "https://api.example.com/files/lora_standing.png"
+                thumbnail_url: "https://api.example.com/files/lora_standing_thumb.png"
+                created_at: "2024-05-26T12:30:00Z"
+                updated_at: "2024-05-26T15:45:00Z"
+        '400':
+          description: Bad request - Both caption and regenerate_caption provided
           content:
             application/json:
               schema:
@@ -3009,96 +3760,76 @@ paths:
                 properties:
                   error:
                     type: string
-                    description: Error message.
-              examples:
-                image_not_found:
-                  value:
-                    error: "Image with the specified ID does not exist."
+                    description: Error message
+              example:
+                error: "Cannot provide both caption and regenerate_caption parameters"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Image or dataset not found
+        '409':
+          description: Cannot update caption in a completed dataset
+        '410':
+          description: Dataset deleted
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     delete:
       tags:
         - Tailored Generation
       summary: Delete Image
-      description: >-
-        **Description**
-
-        Delete a specific image.
+      description: |
+        Permanently remove an image from a dataset. This will also delete the image files and associated thumbnails. 
+        
+        Constraints:
+        * Cannot delete images from completed datasets
       operationId: deleteImage
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: dataset_id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the dataset to which the image belongs.
+          description: Dataset ID
         - in: path
           name: image_id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the image to delete.
+          description: Image ID
       responses:
         '204':
-          description: Image successfully deleted. 
+          description: Image successfully deleted
+        '401':
+          description: Unauthorized
         '404':
-          description: Not Found.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              examples:
-                image_not_found:
-                  value:
-                    error: "Image with the specified ID does not exist."
+          description: Image or dataset not found
         '409':
-          description: Conflict.
+          description: Cannot delete an image from a completed dataset
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  message:
                     type: string
-                    description: Error message.
-              examples:
-                dataset_completed:
-                  value:
-                    error: "Cannot delete an image from a completed dataset."
+                    description: Error message explaining the conflict
+              example:
+                message: "Cannot delete an image from a completed dataset"
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
   /tailored-gen/models:
     post:
       tags:
         - Tailored Generation
       summary: Create Model
-      description: >-
-        **Description**
-
-        Create a new model.
+      description: Create new model. A dataset can be used to train multiple models with different training versions (e.g., one light and one max). The model will belong to the same project as its dataset.
       operationId: createModel
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -3106,19 +3837,28 @@ paths:
               properties:
                 name:
                   type: string
-                  description: Name of the model.
-                  example: "My Model"
-                description:
-                  type: string
-                  description: Description of the model.
-                  example: "This model is designed for generating illustrative style images."
+                  description: Name of the model (required)
                 dataset_id:
                   type: integer
-                  description: ID of the dataset to be used for training the model.
-                  example: 123
+                  description: ID of the dataset to use (required)
+                training_version:
+                  type: string
+                  enum: ["light", "max"]
+                  description: |
+                    Training version (required):
+                    * Light: Choose this version when you need fast generation times and compatibility with our structure reference feature.
+                    * Max: Best for complex IPs requiring high fidelity and precise prompt alignment. Choose this version when accurate replication of specific attributes is your top priority.
+                description:
+                  type: string
+                  description: Description of the model (optional)
+            example:
+              name: "Lora Character Model"
+              dataset_id: 456
+              training_version: "max"
+              description: "A model trained on Lora character illustrations"
       responses:
         '201':
-          description: Model successfully created.
+          description: Model successfully created
           content:
             application/json:
               schema:
@@ -3126,66 +3866,63 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the model.
+                    description: Unique identifier for the model
                   name:
                     type: string
-                    description: Name of the model.
+                    description: Name of the model
                   description:
                     type: string
-                    description: Description of the model.
+                    description: Description of the model
                   status:
                     type: string
-                    description: Status of the model.
-                    example: "Created"
+                    description: Status of the model
+                    enum: [created]
+                  training_version:
+                    type: string
+                    description: Training version
+                    enum: ["light", "max"]
+                  generation_prefix:
+                    type: string
+                    description: Text drawn from the dataset's caption_prefix that is automatically prepended to generation prompts to maintain consistency. It matches the dataset's caption_prefix. It can be bypassed during generation by setting include_generation_prefix=false. This field is empty upon model creation, and filled after the training starts.
+                  project_id:
+                    type: integer
+                    description: ID of the project this model belongs to
                   dataset_id:
                     type: integer
-                    description: ID of the dataset used for training the model.
+                    description: ID of the dataset used for training
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the model was created.
+                    description: Timestamp when the model was created
               example:
-                id: 123
-                name: "My Model"
-                description: "This model is designed for generating illustrative style images."
-                status: "Created"
-                dataset_id: 123
+                id: 789
+                name: "Lora Character Model"
+                description: "A model trained on Lora character illustrations"
+                status: "created"
+                training_version: "max"
+                generation_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                project_id: 123
+                dataset_id: 456
                 created_at: "2024-05-26T12:00:00Z"
+        '400':
+          description: Bad request - validation error
+        '401':
+          description: Unauthorized
         '404':
-          description: Dataset with the specified ID does not exist.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              example:
-                error: "Dataset with the specified ID does not exist."
+          description: Dataset not found
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     get:
       tags:
         - Tailored Generation
       summary: Get Models
-      description: >-
-        **Description**
-
-        Retrieve a list of models. If there are no models, an empty array is being returned.
+      description: Retrieve a list of models. If there are no models, an empty array is returned.
       operationId: getModels
-      parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
       responses:
         '200':
-          description: Successful operation.
+          description: Successfully retrieved models
           content:
             application/json:
               schema:
@@ -3195,74 +3932,163 @@ paths:
                   properties:
                     id:
                       type: integer
-                      description: Unique identifier for the model.
+                      description: Unique identifier for the model
                     name:
                       type: string
-                      description: Name of the model.
+                      description: Name of the model
                     description:
                       type: string
-                      description: Description of the model.
+                      description: Description of the model
                     status:
                       type: string
-                      description: Status of the model.
+                      description: Status of the model
+                      enum: [Created, InProgress, Completed, Failed, Stopping, Stopped]
+                    training_version:
+                      type: string
+                      description: Training version
+                      enum: ["light", "max"]
+                    generation_prefix:
+                      type: string
+                      description: Text drawn from the dataset's caption_prefix that is automatically prepended to generation prompts to maintain consistency. It matches the dataset's caption_prefix. It can be bypassed during generation by setting include_generation_prefix=false.
+                    project_id:
+                      type: integer
+                      description: ID of the project this model belongs to
                     dataset_id:
                       type: integer
-                      description: ID of the dataset used for training the model.
+                      description: ID of the dataset used for training
                     created_at:
                       type: string
                       format: date-time
-                      description: Timestamp when the model was created.
-              examples:
-                multiple_models:
-                  summary: Example with multiple models
-                  value:
-                    - id: 123
-                      name: "My Model"
-                      description: "This model is designed for generating illustrative style images."
-                      status: "Created"
-                      dataset_id: 123
-                      created_at: "2024-05-26T12:00:00Z"
-                    - id: 124
-                      name: "Another Model"
-                      description: "This model is designed for generating character style images."
-                      status: "Training In Progress"
-                      dataset_id: 124
-                      created_at: "2024-05-26T12:00:00Z"
-                no_models:
-                  summary: Example with no models
-                  value: []
+                      description: Timestamp when the model was created
+              example:
+                - id: 789
+                  name: "Lora Character Model"
+                  description: "A model trained on Lora character illustrations"
+                  status: "Completed"
+                  training_version: "max"
+                  generation_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                  project_id: 123
+                  dataset_id: 456
+                  created_at: "2024-05-26T12:00:00Z"
+                - id: 790
+                  name: "Max Character Model"
+                  description: "A model trained for faster generation"
+                  status: "InProgress"
+                  training_version: "max"
+                  generation_prefix: "An illustration of a character named Max, a male character with spiky black hair,"
+                  project_id: 123
+                  dataset_id: 457
+                  created_at: "2024-05-27T09:00:00Z"
         '401':
-          description: Unauthorized.
+          description: Unauthorized
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
+  /tailored-gen/projects/{project_id}/models:
+    get:
+      tags:
+        - Tailored Generation
+      summary: Get Models by Project
+      description: Retrieve all models for a project. If there are no models, an empty array is returned.
+      operationId: getModelsByProject
+      parameters:
+        - in: path
+          name: project_id
+          required: true
+          schema:
+            type: integer
+          description: Project ID
+      responses:
+        '200':
+          description: Successfully retrieved models
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      description: Unique identifier for the model
+                    name:
+                      type: string
+                      description: Name of the model
+                    description:
+                      type: string
+                      description: Description of the model
+                    status:
+                      type: string
+                      description: Status of the model
+                      enum: [Created, InProgress, Completed, Failed, Stopping, Stopped]
+                    training_version:
+                      type: string
+                      description: Training version
+                      enum: ["light", "max"]
+                    generation_prefix:
+                      type: string
+                      description: Text drawn from the dataset's caption_prefix that is automatically prepended to generation prompts to maintain consistency. It matches the dataset's caption_prefix. It can be bypassed during generation by setting include_generation_prefix=false.
+                    project_id:
+                      type: integer
+                      description: ID of the project this model belongs to
+                    dataset_id:
+                      type: integer
+                      description: ID of the dataset used for training
+                    created_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the model was created
+                    updated_at:
+                      type: string
+                      format: date-time
+                      description: Timestamp when the model was last updated
+              example:
+                - id: 789
+                  name: "Lora Character Model"
+                  description: "A model trained on Lora character illustrations"
+                  status: "Completed"
+                  training_version: "max"
+                  generation_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                  project_id: 123
+                  dataset_id: 456
+                  created_at: "2024-05-26T12:00:00Z"
+                  updated_at: "2024-05-26T14:30:00Z"
+                - id: 790
+                  name: "Max Character Model"
+                  description: "A model trained for faster generation"
+                  status: "InProgress"
+                  training_version: "max"
+                  generation_prefix: "An illustration of a character named Max, a male character with spiky black hair,"
+                  project_id: 123
+                  dataset_id: 457
+                  created_at: "2024-05-27T09:00:00Z"
+                  updated_at: "2024-05-27T09:00:00Z"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Project not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
   /tailored-gen/models/{id}:
     get:
       tags:
         - Tailored Generation
-      summary: Get model by ID
-      description: >-
-        **Description**
-
-        Retrieve a specific model by its ID.
-      operationId: getModelById
+      summary: Get Model by ID
+      description: Retrieve full model information including name, description, status (Created/InProgress/Completed/Failed/Stopping/Stopped), training version (Light/Max), generation prefix, project ID, dataset ID, and timestamps.
+      operationId: getModel
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the model to retrieve.
+          description: Model ID
       responses:
         '200':
-          description: Successful operation.
+          description: Successfully retrieved model
           content:
             application/json:
               schema:
@@ -3270,122 +4096,194 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the model.
+                    description: Unique identifier for the model
                   name:
                     type: string
-                    description: Name of the model.
+                    description: Name of the model
                   description:
                     type: string
-                    description: Description of the model.
+                    description: Description of the model
                   status:
                     type: string
-                    description: Status of the model.
+                    description: Status of the model
+                    enum: [Created, InProgress, Completed, Failed, Stopping, Stopped]
+                  training_version:
+                    type: string
+                    description: Training version
+                    enum: ["light", "max"]
+                  generation_prefix:
+                    type: string
+                    description: Text drawn from the dataset's caption_prefix that is automatically prepended to generation prompts to maintain consistency. It matches the dataset's caption_prefix. It can be bypassed during generation by setting include_generation_prefix=false.
+                  project_id:
+                    type: integer
+                    description: ID of the project this model belongs to
                   dataset_id:
                     type: integer
-                    description: ID of the dataset used for training the model.
+                    description: ID of the dataset used for training
                   created_at:
                     type: string
                     format: date-time
-                    description: Timestamp when the model was created.
+                    description: Timestamp when the model was created
               example:
-                id: 123
-                name: "My Model"
-                description: "This model is designed for generating illustrative style images."
-                status: "Created"
-                dataset_id: 123
+                id: 789
+                name: "Lora Character Model"
+                description: "A model trained on Lora character illustrations"
+                status: "Completed"
+                training_version: "max"
+                generation_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                project_id: 123
+                dataset_id: 456
                 created_at: "2024-05-26T12:00:00Z"
+        '401':
+          description: Unauthorized
         '404':
-          description: Model with the specified ID does not exist.
+          description: Model not found
+        '429':
+          description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
+        '500':
+          description: Internal server error
+    put:
+      tags:
+        - Tailored Generation
+      summary: Update Model
+      description: Update a model's name and description. Other model attributes such as training version and dataset cannot be modified after creation.
+      operationId: updateModel
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: Model ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: New model name (optional)
+                description:
+                  type: string
+                  description: New model description (optional)
+            example:
+              name: "Updated Lora Character Model"
+              description: "An updated model trained on Lora character illustrations"
+      responses:
+        '200':
+          description: Model successfully updated
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  id:
+                    type: integer
+                    description: Unique identifier for the model
+                  name:
                     type: string
-                    description: Error message.
+                    description: Name of the model
+                  description:
+                    type: string
+                    description: Description of the model
+                  status:
+                    type: string
+                    description: Status of the model
+                    enum: [Created, InProgress, Completed, Failed, Stopping, Stopped]
+                  training_version:
+                    type: string
+                    description: Training version
+                    enum: ["light", "max"]
+                  generation_prefix:
+                    type: string
+                    description: Text drawn from the dataset's caption_prefix that is automatically prepended to generation prompts to maintain consistency. It matches the dataset's caption_prefix. It can be bypassed during generation by setting include_generation_prefix=false.
+                  project_id:
+                    type: integer
+                    description: ID of the project this model belongs to
+                  dataset_id:
+                    type: integer
+                    description: ID of the dataset used for training
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the model was created
               example:
-                error: "Model with the specified ID does not exist."
+                id: 789
+                name: "Updated Lora Character Model"
+                description: "An updated model trained on Lora character illustrations"
+                status: "Completed"
+                training_version: "max"
+                generation_prefix: "An illustration of a character named Lora, a female character with purple hair,"
+                project_id: 123
+                dataset_id: 456
+                created_at: "2024-05-26T12:00:00Z"
+        '401':
+          description: Unauthorized
+        '404':
+          description: Model not found
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
     delete:
       tags:
         - Tailored Generation
-      summary: Delete model
-      description: >-
-        **Description**
-
-        Delete a specific model.
+      summary: Delete Model
+      description: Delete a specific model. Changes status to Deleted.
       operationId: deleteModel
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the model to delete.
+          description: Model ID
       responses:
         '204':
-          description: Model successfully deleted. 
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  status:
-                    type: string
-                    description: Status of the model.
-                    example: "Deleted"
+          description: Model successfully deleted
+        '401':
+          description: Unauthorized
         '404':
-          description: Model with the specified ID does not exist.
+          description: Model not found
+        '409':
+          description: Cannot delete a model that is currently in training
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  error:
+                  message:
                     type: string
-                    description: Error message.
+                    description: Error message explaining the conflict
               example:
-                error: "Model with the specified ID does not exist."
+                message: "Cannot delete model while it is in training"
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
   /tailored-gen/models/{id}/start_training:
     post:
       tags:
         - Tailored Generation
       summary: Start Training
-      description: >-
-        **Description**
-
-        Start a new training job for a specific model. Training of a tailored model takes between 1-3 hours.
-      operationId: startModelTraining
+      description: |
+        Start model training (1-3 hours duration). The associated dataset must have status 'completed' before training can begin.
+        
+        Constraints:
+        * Dataset must be in 'completed' status
+      operationId: startTraining
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the model for which to start the training job.
+          description: Model ID
       responses:
         '200':
-          description: Training job successfully started.
+          description: Training successfully started
           content:
             application/json:
               schema:
@@ -3393,119 +4291,53 @@ paths:
                 properties:
                   id:
                     type: integer
-                    description: Unique identifier for the model.
+                    description: Unique identifier for the model
                   status:
                     type: string
-                    description: Status of the model.
-                    example: "Training In Progress"
+                    description: Status of the model
+                    enum: [InProgress]
               example:
-                id: 123
-                status: "Training In Progress"
+                id: 789
+                status: "InProgress"
+        '401':
+          description: Unauthorized
         '404':
-          description: Model with the specified ID does not exist.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              example:
-                error: "Model with the specified ID does not exist."
+          description: Model not found
         '409':
-          description: Conflict.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              examples:
-                training_already_started:
-                  value:
-                    error: "Training already started for the specified model."
-                training_cannot_be_resumed:
-                  value:
-                    error: "Training job cannot be resumed once stopped."
+          description: Training already started/cannot be resumed
         '412':
-          description: Precondition Failed.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              example:
-                error: "The dataset status is not ‘completed’."
+          description: Dataset status must be 'completed' to start training
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
+          description: Internal server error
   /tailored-gen/models/{id}/stop_training:
     post:
       tags:
         - Tailored Generation
       summary: Stop Training
-      description: >-
-        **Description**
-
-        Stop a specific training job for a model.
-      operationId: stopTrainingJob
+      description: Stop an ongoing model training process. Once stopped, training cannot be resumed - a new model would need to be created and trained.
+      operationId: stopTraining
       parameters:
-        - in: header
-          name: api_token
-          schema:
-            type: string
-          required: true
-          description: API token associated with the organization.
         - in: path
           name: id
+          required: true
           schema:
             type: integer
-          required: true
-          description: The ID of the model for which to stop the training job.
+          description: Model ID
       responses:
         '200':
-          description: Training job successfully stopped.
+          description: Training job successfully stopped
+        '401':
+          description: Unauthorized
         '404':
-          description: Model with the specified ID does not exist.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              example:
-                error: "Model with the specified ID does not exist."
+          description: Model not found
         '409':
-          description: Conflict.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-                    description: Error message.
-              examples:
-                job_already_stopped:
-                  value:
-                    error: "Training job already stopped."
-                model_not_in_training:
-                  value:
-                    error: "Model is not currently in training."
+          description: Training already stopped/not in training
         '429':
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
-          description: Internal server error.
-
+          description: Internal server error
   # product-shot routes
   /product/cutout:
     post:

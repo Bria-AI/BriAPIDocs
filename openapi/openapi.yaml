@@ -3582,16 +3582,16 @@ paths:
       operationId: regenerateAllCaptions
       parameters:
         - in: path
-          name: dataset_id
-          required: true
+          name: id
           schema:
-            type: integer
+            type: string
+          required: true
           description: Dataset ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '202':
           description: Caption regeneration process started
@@ -3654,10 +3654,10 @@ paths:
       operationId: getImage
       parameters:
         - in: path
-          name: dataset_id
-          required: true
+          name: id
           schema:
-            type: integer
+            type: string
+          required: true
           description: Dataset ID
         - in: path
           name: image_id
@@ -3666,10 +3666,10 @@ paths:
             type: integer
           description: Image ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved image
@@ -3753,10 +3753,10 @@ paths:
       operationId: updateImageCaption
       parameters:
         - in: path
-          name: dataset_id
-          required: true
+          name: id
           schema:
-            type: integer
+            type: string
+          required: true
           description: Dataset ID
         - in: path
           name: image_id
@@ -3765,10 +3765,10 @@ paths:
             type: integer
           description: Image ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -3876,10 +3876,10 @@ paths:
       operationId: deleteImage
       parameters:
         - in: path
-          name: dataset_id
-          required: true
+          name: id
           schema:
-            type: integer
+            type: string
+          required: true
           description: Dataset ID
         - in: path
           name: image_id
@@ -3888,10 +3888,10 @@ paths:
             type: integer
           description: Image ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '204':
           description: Image successfully deleted
@@ -3924,10 +3924,10 @@ paths:
       operationId: createModel
       parameters:
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -4022,10 +4022,10 @@ paths:
       operationId: getModels
       parameters:
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved models
@@ -4106,10 +4106,10 @@ paths:
             type: integer
           description: Project ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved models
@@ -4192,16 +4192,16 @@ paths:
       operationId: getModel
       parameters:
         - in: path
-          name: id
+          name: project_id
           required: true
           schema:
             type: integer
           description: Model ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved model
@@ -4266,16 +4266,16 @@ paths:
       operationId: updateModel
       parameters:
         - in: path
-          name: id
+          name: project_id
           required: true
           schema:
             type: integer
           description: Model ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:
@@ -4356,16 +4356,16 @@ paths:
       operationId: deleteModel
       parameters:
         - in: path
-          name: id
+          name: project_id
           required: true
           schema:
             type: integer
           description: Model ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '204':
           description: Model successfully deleted
@@ -4402,16 +4402,16 @@ paths:
       operationId: startTraining
       parameters:
         - in: path
-          name: id
+          name: project_id
           required: true
           schema:
             type: integer
           description: Model ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Training successfully started
@@ -4451,16 +4451,16 @@ paths:
       operationId: stopTraining
       parameters:
         - in: path
-          name: id
+          name: project_id
           required: true
           schema:
             type: integer
           description: Model ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Training job successfully stopped

@@ -14,7 +14,7 @@ info:
     - **Generate Images Using Bria Models**: Utilize pre-trained Bria models to generate high-quality images based on text prompts.
 
 
-    - **Train Your Own Tailored Models**: Create and manage custom-tailored models to generate images in specific styles or themes using your datasets.
+    - **Train Your Own Tailored Models**: Create models that preserve and faithfully reproduce your visual IP, ensuring consistency across all generated outputs.
 
 
     - **Generate Vector Graphics (beta)**: Use the base and tailored models API endpoints to create versatile, editable vector graphics from text prompts.
@@ -51,31 +51,33 @@ info:
     - Enhance your prompts with the `/prompt_enhancer` route or use the built-in prompt enhancement feature in /text-to-image routes to create more detailed and vivid descriptions, resulting in richer and more diverse image outputs.
 
     **Tailored Generation**:
-    The Tailored Generation API allows you to create and manage custom-tailored models for generating unique visual content based on your datasets. Tailored models can be trained using the API or through the Bria platform [here](https://platform.bria.ai/console/tailored-generation).
+    The Tailored Generation API allows you to manage and train Tailored Models that preserve and faithfully reproduce your visual IP (photos, illustrations, vectors). You can train Tailored Models through our Console or implement training on your platform via API. Check out our Console [here](https://platform.bria.ai/console/tailored-generation).
 
+    ### Training Process Overview
 
-    **Using the Tailored Generation API**:
-      - **Dataset Management**: 
-        - Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
-        - Use the `/datasets/{dataset_id}/images` endpoint to upload new images to a dataset or retrieve existing images that belong to the dataset.
-        - Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
-      - **Model Management**: 
-        - Use the `/models` endpoint to create a new model or retrieve all models that belong to the client organization.
-        - Use the `/models/{id}` endpoint to retrieve a specific model by its ID or delete a specific model.
-      - **Training Management**: 
-        - Use the `/models/{id}/start_training` endpoint to initiate the training process. Ensure that the dataset includes the minimum required number of images and has a status of 'completed' before starting training.
-        - Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
-
-    **Training a Tailored Model**:
-      1. Create a Dataset: Use the `/datasets` endpoint to create a dataset.
-      2. Upload Images: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
-      3. Create a Model: Use the `/models` endpoint to create a model associated with your dataset.
-      4. Complete the Dataset: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
-      5. Start Training: Initiate the training process using the `/models/{id}/start_training` endpoint.
-      6. Monitor Training: Optionally, you can check the training status to monitor progress.
-      7. Generate Images: Once the model is trained, use the `/text-to-image/tailored/{model_id}` route to generate images.
-
+    To train a tailored generation model:
     
+    1. **Create a Project**: Use the `/projects` endpoint to create a project and define your IP type and medium.
+    
+    2. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset within your project.
+    
+    3. **Upload Images**: Upload images to your dataset using the `/datasets/{dataset_id}/images` endpoint. Images must be 1024x1024px minimum.
+    
+    4. **Prepare Dataset**: Review auto-generated captions and use the `/datasets/{id}` endpoint to set status to 'completed'.
+    
+    5. **Create Model**: Use the `/models` endpoint to create a model, selecting light or max training version.
+    
+    6. **Start Training**: Initiate training using the `/models/{id}/start_training` endpoint. Training takes 1-3 hours.
+    
+    7. **Monitor Progress**: Check training status using the `/models/{id}` endpoint until status shows 'Completed'.
+    
+    8. **Generate Images**: Once trained, your model can be used in multiple ways:
+      - Use the `/text-to-image/tailored/{model_id}` endpoint for text-to-image generation
+      - Use the `/text-to-vector/tailored/{model_id}` endpoint for vector graphics
+      - Use the `/reimagine/tailored/{model_id}` endpoint for image variations
+      - Access through the Bria platform interface
+    
+        
     ### eCommerce Suite
 
     Bria offers a variety of solutions for products and apps in the eCommerce industry, which allow to enhance product imagery for online stores and product catalogs. 
@@ -930,7 +932,7 @@ paths:
         - **Aspect Ratio Preservation**: Ensures the output maintains the reference image's aspect ratio for layout consistency. The output resolution is approximately 1 megapixel.
         
         
-        - **Seamless Integration with Tailored Generation**: Combine structural references with tailored endpoints to include unique IP characteristics in the generated outputs.
+        - **Seamless Integration with Tailored Generation**: Combine structural references with tailored models to include unique IP characteristics in the generated outputs. At the moment, tailored models trained using the 'Max' training version, are not supported in this endpoint.
       
         ### Potential Use Cases
         
@@ -1054,7 +1056,7 @@ paths:
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt and other parameters. This parameter is optional.
                 tailored_model_id:
                   type: string
-                  description: The ID of the tailored model to use for generation. This parameter is optional. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
+                  description: The ID of the tailored model to use for generation. This parameter is optional. At the moment, tailored models trained using the 'Max' training version, are not supported in this endpoint.
                 tailored_model_influence:
                   type: number
                   format: float
@@ -1062,6 +1064,10 @@ paths:
                   maximum: 1.00
                   default: 0.5
                   description: The influence of the tailored model on the generation. Only relevant if tailored_model_id is provided. This parameter is optional. Higher value gives more weight to the tailored model.
+                include_generation_prefix:
+                  type: boolean
+                  default: true
+                  Description: This is relevant only when a tailored model is being used. When true, the model's generation prefix is automatically prepended to your prompt to maintain consistency with the training data, while false allows you to override the training prefix and write the complete prompt yourself, including any preferred prefix text.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional. When fast=false, the default value is 30, the minimum is 20 and the maximum is 50. 
@@ -1720,6 +1726,9 @@ paths:
         ### Guidance Methods
       
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
+
+
+        At the moment, tailored models trained using the 'Max' training version, do not support generation with guidance methods.
       
       
         Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
@@ -1807,7 +1816,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the tailored model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
+          description: The model id of the tailored model you would like to use in the request. 
         - in: header
           name: api_token
           schema:
@@ -1841,7 +1850,7 @@ paths:
                 fast: 
                   type: boolean
                   default: true
-                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. 
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. At the moment, tailored models trained using the 'Max' training version, do not support fast generation.
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
@@ -1858,10 +1867,14 @@ paths:
                   maximum: 1.00
                   default: 1.00
                   description: The influence of the structure reference on the generated image. This parameter is optional. Higher value means more adherence to the reference structure.
+                include_generation_prefix:
+                  type: boolean
+                  default: true
+                  description: When true, the model's generation prefix is automatically prepended to your prompt to maintain consistency with the training data, while false allows you to override the training prefix and write the complete prompt yourself, including any preferred prefix text.
                 guidance_method_1:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional.  At the moment, tailored models trained using the 'Max' training version, do not support generation with guidance methods.
                 guidance_method_1_scale:
                   type: number
                   format: float
@@ -1875,7 +1888,7 @@ paths:
                 guidance_method_2:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. At the moment, tailored models trained using the 'Max' training version, do not support generation with guidance methods. 
                 guidance_method_2_scale:
                   type: number
                   format: float
@@ -1956,9 +1969,8 @@ paths:
         **Description**
 
 
-        This route allows you to generate vector graphics using a tailored model.
-
-        Tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
+        This route allows you to generate vector graphics using a Tailored Model. Tailored Models are trained on your visual IP (illustrations, photos, vectors) to preserve and faithfully reproduce specific IP elements or guidelines, ensuring consistency across all generated outputs.
+        To see a detailed description of the tailored models' functionalities, please refer to the /text-to-image/tailored/{model_id} route documentation.
 
         *Text-to-vector is compatible with tailored models in the illustrative domain.
 
@@ -1968,6 +1980,9 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation. These methods condition the model on additional inputs derived from user-provided images, allowing for more precise and controlled image generation.
       
       
+        At the moment, tailored models trained using the 'Max' training version, do not support generation with guidance methods.
+
+        
         Importantly, users can provide any image they want as input. Our pipeline automatically transforms the input image according to the selected guidance method. For example, if you choose the depth guidance method, our pipeline will extract a depth map from your provided image and use it during the generation inference.
       
       
@@ -2005,7 +2020,7 @@ paths:
           schema:
             type: string
           required: true
-          description: The model id of the tailored model you would like to use in the request. Both legacy (long, provided in the Bria console) and new (short, available via the 'Get Models' API) model ID formats are supported.
+          description: The model id of the tailored model you would like to use in the request. 
         - in: header
           name: api_token
           schema:
@@ -2039,7 +2054,7 @@ paths:
                 fast: 
                   type: boolean
                   default: true
-                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. 
+                  description: Determines the generation mode. When true, the generation will utilize the fast mode which provides the best balance between speed and quality. When false, the regular mode will be utilized. At the moment, tailored models trained using the 'Max' training version, do not support fast generation.
                 seed:
                   type: integer
                   description: You can choose whether you want your generated result to be random or predictable. You can recreate the same result in the future by using the seed value of a result from the response with the prompt, model type and model version. You can exclude this parameter if you are not interested in recreating your results. This parameter is optional.
@@ -2056,10 +2071,14 @@ paths:
                   maximum: 1.00
                   default: 1.00
                   description: The influence of the tailored model on the generation. Only relevant if tailored_model_id is provided. This parameter is optional. Higher value gives more weight to the tailored model.
+                include_generation_prefix:
+                  type: boolean
+                  default: true
+                  description: When true, the model's generation prefix is automatically prepended to your prompt to maintain consistency with the training data, while false allows you to override the training prefix and write the complete prompt yourself, including any preferred prefix text.
                 guidance_method_1:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. At the moment, tailored models trained using the 'Max' training version, do not support generation with guidance methods.
                 guidance_method_1_scale:
                   type: number
                   format: float
@@ -2073,7 +2092,7 @@ paths:
                 guidance_method_2:
                   type: string
                   enum: ['controlnet_canny','controlnet_depth','controlnet_recoloring', 'controlnet_color_grid']
-                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. 
+                  description: Which guidance type you would like to include in the generation. Up to 4 guidance methods can be combined during a single inference. This parameter is optional. At the moment, tailored models trained using the 'Max' training version, do not support generation with guidance methods.
                 guidance_method_2_scale:
                   type: number
                   format: float

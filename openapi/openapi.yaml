@@ -2172,6 +2172,12 @@ paths:
       summary: Create Project
       description: Create a new project within the organization. A project encompasses all models trained and datasets created for the IP defined in the project.
       operationId: createProject
+      parameters:
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -2288,6 +2294,12 @@ paths:
       summary: Get Projects
       description: Retrieve all projects within the organization. If there are no projects, returns an empty array.
       operationId: getProjects
+      parameters:
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved projects
@@ -2384,6 +2396,11 @@ paths:
           schema:
             type: integer
           description: Project ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved project
@@ -2464,6 +2481,11 @@ paths:
           schema:
             type: integer
           description: Project ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -2565,6 +2587,11 @@ paths:
           schema:
             type: integer
           description: Project ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '204':
           description: Project successfully deleted
@@ -2590,6 +2617,12 @@ paths:
         * Dataset must have at least 1 image to be completed
         * Maximum of 200 images per dataset
       operationId: createDataset
+      parameters:
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -2667,6 +2700,12 @@ paths:
       summary: Get Datasets
       description: Retrieve a list of all datasets. If there are no datasets, returns an empty array.
       operationId: getDatasets
+      parameters:
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved datasets
@@ -2742,6 +2781,11 @@ paths:
           schema:
             type: integer
           description: Project ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
         - in: query
           name: include_models
           required: false
@@ -2848,6 +2892,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved dataset
@@ -2987,6 +3036,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -3091,6 +3145,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '204':
           description: Dataset successfully deleted
@@ -3118,6 +3177,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID to clone
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: false
         content:
@@ -3286,6 +3350,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -3430,6 +3499,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved images
@@ -3513,6 +3587,11 @@ paths:
           schema:
             type: integer
           description: Dataset ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '202':
           description: Caption regeneration process started
@@ -3586,6 +3665,11 @@ paths:
           schema:
             type: integer
           description: Image ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved image
@@ -3680,6 +3764,11 @@ paths:
           schema:
             type: integer
           description: Image ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -3798,6 +3887,11 @@ paths:
           schema:
             type: integer
           description: Image ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '204':
           description: Image successfully deleted
@@ -3828,6 +3922,12 @@ paths:
       summary: Create Model
       description: Create new model. A dataset can be used to train multiple models with different training versions (e.g., one light and one max). The model will belong to the same project as its dataset.
       operationId: createModel
+      parameters:
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -3920,6 +4020,12 @@ paths:
       summary: Get Models
       description: Retrieve a list of models. If there are no models, an empty array is returned.
       operationId: getModels
+      parameters:
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved models
@@ -3999,6 +4105,11 @@ paths:
           schema:
             type: integer
           description: Project ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved models
@@ -4086,6 +4197,11 @@ paths:
           schema:
             type: integer
           description: Model ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Successfully retrieved model
@@ -4155,6 +4271,11 @@ paths:
           schema:
             type: integer
           description: Model ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       requestBody:
         required: true
         content:
@@ -4240,6 +4361,11 @@ paths:
           schema:
             type: integer
           description: Model ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '204':
           description: Model successfully deleted
@@ -4281,6 +4407,11 @@ paths:
           schema:
             type: integer
           description: Model ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Training successfully started
@@ -4325,6 +4456,11 @@ paths:
           schema:
             type: integer
           description: Model ID
+        - in: header
+            name: api_token
+            schema:
+              type: string
+            required: true
       responses:
         '200':
           description: Training job successfully stopped

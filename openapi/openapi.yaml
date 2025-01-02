@@ -1669,40 +1669,50 @@ paths:
       description: |-
         **Description**
 
-        This route allows you to generate images using a tailored model. tailored models are trained using your own datasets to create unique illustrative visual styles or single-subject illustrations. You can train a tailored model through the API or using the Bria platform.
+        This route allows you to generate images using a Tailored Model. Tailored models are trained on a visual IP (illustrations, photos, vectors) to faithfully reproduce specific IP elements or guidelines. You can train an engine through our Console or implement training on your platform via API.
 
-        ### Overview of Tailored Model API
-
-        The Tailored Model API provides a set of endpoints to manage the entire lifecycle of a Tailored model:
-
-        1. **Dataset Management**: Create and manage datasets which will be used to train your tailored models. You can:
-           - **Create and Retrieve Datasets**: Use the `/datasets` endpoint to create a new dataset or retrieve existing datasets that belong to the client organization.
-           - **Upload and Retrieve Images**: Use the `/datasets/{dataset_id}/images` endpoint to upload a new image to a dataset or retrieve existing images that belong to the dataset.
-           - **Manage Individual Images**: Use the `/datasets/{dataset_id}/images/{image_id}` endpoint to get or delete a specific image from a dataset.
-
-        2. **Model Management**: Create and manage models based on your datasets. You can:
-           - **Create and Retrieve Models**: Use the `/models` endpoint to create a new model or retrieve all models that belong to the client organization.
-           - **Get and Delete Specific Models**: Use the `/models/{id}` endpoint to retrieve a specific model by its ID or delete a specific model.
-
-        3. **Training Management**: Start and stop training jobs for your models. You can:
-           - **Start Training**: Use the `/models/{id}/start_training` endpoint to initiate the training process. Note that the dataset must include the minimum required number of images and have a status of 'completed' before training can start.
-           - **Stop Training**: Use the `/models/{id}/stop_training` endpoint to stop a training job for a model.
-
-        4. **Image Generation**: Generate images using a trained model. You can:
-           - **Generate Images**: Use the `/text-to-image/tailored/{model_id}` endpoint to generate images.
-           - **Generate Vector Graphics**: Use the `/text-to-vector/tailored/{model_id}` endpoint to generate vector graphics. 
+        ### Overview of Tailored Generation API
+        The Tailored Generation API provides a set of endpoints to manage the entire lifecycle of a tailored generation project:
+        
+        1. **Project Management**: Create and manage projects which define the IP characteristics:
+           - **Create and Retrieve Projects**: Use the `/projects` endpoints to create a new project or retrieve existing projects that belong to your organization.
+           - **Define IP Type**: Specify the IP type (e.g., multi_object_set, defined_character, stylized_scene) and medium (currently illustration, with photography coming soon).
+           - **Manage Project Details**: Use the `/projects/{id}` endpoints to update or delete specific projects.
+        
+        2. **Dataset Management**: Create and manage datasets within your projects. You can:
+           - **Create and Retrieve Datasets**: Use the `/datasets` endpoints to create new datasets or retrieve existing ones.
+           - **Upload and Manage Images**: Use the `/datasets/{dataset_id}/images` endpoints to upload images and manage their captions.
+           - **Clone Datasets**: Create variations of existing datasets using the clone functionality.
+        
+        3. **Model Management**: Create and train models based on your datasets:
+           - **Create and Retrieve Models**: Use the `/models` endpoints to create new models or list existing ones.
+           - **Choose Training Version**: Select between "light" (for fast generation and structure reference compatibility) or "max" (for superior prompt alignment and enhanced learning capabilities).
+           - **Monitor and Control**: Manage the model lifecycle including training start/stop and status monitoring.
 
 
-        ### Training a Tailored Model
-
-        To train a tailored model via the API:
-        1. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset.
-        2. **Upload Images**: Upload your images to this dataset using the `/datasets/{dataset_id}/images` endpoint.
-        3. **Create a Model**: Use the `/models` endpoint to create a model associated with your dataset.
-        4. **Complete the Dataset**: Ensure the dataset meets the minimum image requirements and change its status to 'completed'.
-        5. **Start Training**: Initiate the training process using the `/models/{id}/start_training` endpoint. Training of a tailored model takes between 1-3 hours.
-        6. **Monitor Training**: Optionally, you can check the training status to monitor progress.
-        7. **Generate Images**: Once the model is trained, use this route to generate images, or use the `/text-to-vector/tailored/{model_id}` route to generate vector graphics.
+            ### Training Process Overview
+            
+            To train a tailored generation model:
+            
+            1. **Create a Project**: Use the `/projects` endpoint to create a project and define your IP type and medium.
+            
+            2. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset within your project.
+            
+            3. **Upload Images**: Upload images to your dataset using the `/datasets/{dataset_id}/images` endpoint. Images must be 1024x1024px minimum.
+            
+            4. **Prepare Dataset**: Review auto-generated captions and use the `/datasets/{id}` endpoint to set status to 'completed'.
+            
+            5. **Create Model**: Use the `/models` endpoint to create a model, selecting light or max training version.
+            
+            6. **Start Training**: Initiate training using the `/models/{id}/start_training` endpoint. Training takes 1-3 hours.
+            
+            7. **Monitor Progress**: Check training status using the `/models/{id}` endpoint until status shows 'Completed'.
+            
+            8. **Generate Images**: Once trained, your model can be used in multiple ways:
+               - Use the `/text-to-image/tailored/{model_id}` endpoint for text-to-image generation
+               - Use the `/text-to-vector/tailored/{model_id}` endpoint for vector graphics
+               - Use the `/reimagine` endpoint for generating with structure guidense 
+               - Access through the Bria platform interface
 
         Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 

@@ -1067,7 +1067,7 @@ paths:
                 include_generation_prefix:
                   type: boolean
                   default: true
-                  Description: This is relevant only when a tailored model is being used. When true, the model's generation prefix is automatically prepended to your prompt to maintain consistency with the training data, while false allows you to override the training prefix and write the complete prompt yourself, including any preferred prefix text.
+                  description: This is relevant only when a tailored model is being used. When true, the model's generation prefix is automatically prepended to your prompt to maintain consistency with the training data, while false allows you to override the training prefix and write the complete prompt yourself, including any preferred prefix text.
                 steps_num:
                   type: integer
                   description: The number of iterations the model goes through to refine the generated image. This parameter is optional. When fast=false, the default value is 30, the minimum is 20 and the maximum is 50. 

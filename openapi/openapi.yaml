@@ -2702,10 +2702,10 @@ paths:
       operationId: getDatasets
       parameters:
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved datasets

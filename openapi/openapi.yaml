@@ -2776,16 +2776,16 @@ paths:
       operationId: getDatasetsByProject
       parameters:
         - in: path
-          name: project_id
-          required: true
+          name: id
           schema:
-            type: integer
+            type: string
+          required: true
           description: Project ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
         - in: query
           name: include_models
           required: false

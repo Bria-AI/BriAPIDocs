@@ -2294,12 +2294,12 @@ paths:
       summary: Get Projects
       description: Retrieve all projects within the organization. If there are no projects, returns an empty array.
       operationId: getProjects
-      parameters:
+      parameters: 
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved projects

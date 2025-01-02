@@ -2174,10 +2174,10 @@ paths:
       operationId: createProject
       parameters:
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       requestBody:
         required: true
         content:

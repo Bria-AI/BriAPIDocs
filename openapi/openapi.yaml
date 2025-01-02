@@ -2888,15 +2888,15 @@ paths:
       parameters:
         - in: path
           name: id
-          required: true
           schema:
-            type: integer
+            type: string
+          required: true
           description: Dataset ID
         - in: header
-            name: api_token
-            schema:
-              type: string
-            required: true
+          name: api_token
+          schema:
+            type: string
+          required: true
       responses:
         '200':
           description: Successfully retrieved dataset

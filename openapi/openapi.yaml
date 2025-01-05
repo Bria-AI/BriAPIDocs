@@ -2170,7 +2170,34 @@ paths:
       tags:
         - Tailored Generation
       summary: Create Project
-      description: Create a new project within the organization. A project encompasses all models trained and datasets created for the IP defined in the project.
+      description: |
+        Create a new project within the organization. A project encompasses all models trained and datasets created for the IP defined in the project.
+
+        The following IP types are supported:
+        
+        **Multi-Object Set**
+        A collection of different objects sharing a common style, design language, or color scheme. Objects are typically isolated on solid backgrounds.
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/tailored_gen/multi_object_set.png" alt="Example of multi-object set showing different objects with consistent style" />
+        
+        **Object Variants**
+        Multiple variations of the same object type, maintaining consistent style and structure while showing different interpretations. Objects are typically isolated on solid backgrounds.
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/tailored_gen/object_variants.png" alt="Example of object variants showing different versions of the same object" />
+        
+        **Icons**
+        A collection of cohesive, small-scale illustrations or symbols designed to represent concepts, actions, or objects in interfaces and applications. Maintains consistent visual style across the set.
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/tailored_gen/icons.png" alt="Example of icon set with consistent design language" />
+        
+        **Defined Character**
+        A specific character that maintains consistent identity and unique traits while being reproduced in different poses, situations, and actions.
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/tailored_gen/defined_character.png" alt="Example of defined character in different poses" />
+        
+        **Character Variants**
+        Multiple characters sharing the same fundamental structure, style, and color palette, allowing creation of new characters that fit within the established design system.
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/tailored_gen/character_variants.png" alt="Example of character variants showing different characters with consistent style" />
+        
+        **Stylized Scene**
+        Complete environments or scenes created with a consistent visual style, look, and feel.
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/api_doc/tailored_gen/stylized_scene.png" alt="Example of stylized scene showing cohesive environment" />
       operationId: createProject
       parameters:
         - in: header
@@ -2204,7 +2231,7 @@ paths:
                     - illustration
                   description: |
                     Medium of the IP (required)
-                    * photography (coming soon, not available at the moment)
+                    * photography (Beta)
                     * illustration
                 ip_type:
                   type: string
@@ -2221,8 +2248,8 @@ paths:
                     Type of the IP (required):
                     * multi_object_set: Multiple distinct objects that share a mutual style, design language, or color scheme. These objects are often isolated on a solid background.
                     * object_variants: Variations of the same object type, designed with consistent style, structure, and coloring, showcasing different interpretations. These objects are often isolated on a solid background.
-                    * defined_object: A specific object, such as a product, that can be reproduced consistently in various scenarios while maintaining its exact identity and defining characteristics. This will be valid only when ip_medium = photography, once photography is available.
-                    * icons: A collection of small, visually distinct illustrations, such as symbols or graphical elements, designed with a cohesive style and used to represent concepts, actions, or objects in interfaces, applications, or visual communication materials.
+                    * defined_object: A specific object, such as a product, that can be reproduced consistently in various scenarios while maintaining its exact identity and defining characteristics. This is valid only when ip_medium = photography (Beta).
+                    * icons: A collection of small, visually distinct illustrations, such as symbols or graphical elements, designed with a cohesive style and used to represent concepts, actions, or objects in interfaces, applications, or visual communication materials. This is valid only when ip_medium = illustration.
                     * defined_character: A specific predefined character or person that can be reproduced consistently in different situations, poses, or actions, preserving their identity and unique traits.
                     * character_variants: Multiple characters sharing the same structure, style, and color palette, with the ability to create new characters that adhere to these shared characteristics while introducing unique elements.
                     * stylized_scene: A complete scene or environment, such as a gaming background or a series of photos with a shared color palette, created with a cohesive style, look, and feel.

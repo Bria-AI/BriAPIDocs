@@ -2238,7 +2238,6 @@ paths:
                   enum:
                     - multi_object_set
                     - object_variants
-                    - defined_object
                     - icons
                     - defined_character
                     - character_variants
@@ -2246,12 +2245,11 @@ paths:
                     - other
                   description: |
                     Type of the IP (required):
-                    * multi_object_set: Multiple distinct objects that share a mutual style, design language, or color scheme. These objects are often isolated on a solid background.
-                    * object_variants: Variations of the same object type, designed with consistent style, structure, and coloring, showcasing different interpretations. These objects are often isolated on a solid background.
-                    * defined_object: A specific object, such as a product, that can be reproduced consistently in various scenarios while maintaining its exact identity and defining characteristics. This is valid only when ip_medium = photography (Beta).
+                    * multi_object_set: Multiple distinct objects that share a mutual style, design language, or color scheme. These objects are often isolated on a solid background. This is currently valid only when ip_medium = illustration.
+                    * object_variants: Variations of the same object type, designed with consistent style, structure, and coloring, showcasing different interpretations. These objects are often isolated on a solid background. This is currently valid only when ip_medium = illustration.
                     * icons: A collection of small, visually distinct illustrations, such as symbols or graphical elements, designed with a cohesive style and used to represent concepts, actions, or objects in interfaces, applications, or visual communication materials. This is valid only when ip_medium = illustration.
                     * defined_character: A specific predefined character or person that can be reproduced consistently in different situations, poses, or actions, preserving their identity and unique traits.
-                    * character_variants: Multiple characters sharing the same structure, style, and color palette, with the ability to create new characters that adhere to these shared characteristics while introducing unique elements.
+                    * character_variants: Multiple characters sharing the same structure, style, and color palette, with the ability to create new characters that adhere to these shared characteristics while introducing unique elements. This is currently valid only when ip_medium = illustration.
                     * stylized_scene: A complete scene or environment, such as a gaming background or a series of photos with a shared color palette, created with a cohesive style, look, and feel.
                     * other: For IP types that don't fit into the above categories
             example:
@@ -3352,7 +3350,7 @@ paths:
         - For best results, use 1:1 aspect ratio or ensure main content is centered
         
         Dataset Guidelines:
-        - Recommended: 5-50 images for optimal results
+        - Recommended: 5-50 images for optimal results when using Max training version, 15-100 for optimal results when using Light training version
         - Maximum supported: 200 images
         - Ensure consistency in style, structure, and visual elements
         - Balance diversity in content (poses, scenes, objects) while maintaining consistency in key elements (style, colors, theme)
@@ -3983,7 +3981,7 @@ paths:
                   description: |
                     Training version (required):
                     * Light: Choose this version when you need fast generation times and compatibility with our structure reference feature.
-                    * Max: Best for complex IPs requiring high fidelity and precise prompt alignment. Choose this version when accurate replication of specific attributes is your top priority.
+                    * Max: Best for complex IPs requiring high fidelity and precise prompt alignment. Choose this version when accurate replication of specific attributes is your top priority. This version is currently not available when ip_medium=photography. 
                 description:
                   type: string
                   description: Description of the model (optional)

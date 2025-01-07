@@ -73,8 +73,8 @@ info:
     
     8. **Generate Images**: Once trained, your model can be used in multiple ways:
       - Use the `/text-to-image/tailored/{model_id}` endpoint for text-to-image generation
-      - Use the `/text-to-vector/tailored/{model_id}` endpoint for vector graphics
-      - Use the `/reimagine/tailored/{model_id}` endpoint for image variations
+      - Use the `/text-to-vector/tailored/{model_id}` endpoint for generating illustrative vector graphics
+      - Use the `/reimagine/tailored/{model_id}` endpoint for generating using a structure refernce image
       - Access through the Bria platform interface
     
         
@@ -1677,8 +1677,8 @@ paths:
 
         This route allows you to generate images using a Tailored Model. Tailored models are trained on a visual IP (illustrations, photos, vectors) to faithfully reproduce specific IP elements or guidelines. You can train an engine through our Console or implement training on your platform via API.
 
-        ### Overview of Tailored Generation API
-        The Tailored Generation API provides a set of endpoints to manage the entire lifecycle of a tailored generation project:
+        ### Overview of Tailored Generation Training API
+        The Tailored Generation Training API provides a set of endpoints to manage the entire lifecycle of a tailored generation project:
         
         1. **Project Management**: Create and manage projects which define the IP characteristics:
            - **Create and Retrieve Projects**: Use the `/projects` endpoints to create a new project or retrieve existing projects that belong to your organization.
@@ -1696,31 +1696,31 @@ paths:
            - **Monitor and Control**: Manage the model lifecycle including training start/stop and status monitoring.
 
 
-            ### Training Process Overview
+        ### Training Process Overview
         
-            To train a tailored generation model:
+        To train a tailored model:
             
-            1. **Create a Project**: Use the `/projects` endpoint to create a project and define your IP type and medium.
+        1. **Create a Project**: Use the `/projects` endpoint to create a project and define your IP type and medium.
             
-            2. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset within your project.
+        2. **Create a Dataset**: Use the `/datasets` endpoint to create a dataset within your project.
             
-            3. **Upload Images**: Upload images to your dataset using the `/datasets/{dataset_id}/images` endpoint. Images must be 1024x1024px minimum.
+        3. **Upload Images**: Upload images to your dataset using the `/datasets/{dataset_id}/images` endpoint. Images must be 1024x1024px minimum.
             
-            4. **Prepare Dataset**: Review auto-generated captions and use the `/datasets/{id}` endpoint to set status to 'completed'.
+        4. **Prepare Dataset**: Review auto-generated captions and use the `/datasets/{id}` endpoint to set status to 'completed'.
             
-            5. **Create Model**: Use the `/models` endpoint to create a model, selecting light or max training version.
+        5. **Create Model**: Use the `/models` endpoint to create a model, selecting light or max training version.
             
-            6. **Start Training**: Initiate training using the `/models/{id}/start_training` endpoint. Training takes 1-3 hours.
+        6. **Start Training**: Initiate training using the `/models/{id}/start_training` endpoint. Training takes 1-3 hours.
             
-            7. **Monitor Progress**: Check training status using the `/models/{id}` endpoint until status shows 'Completed'.
+        7. **Monitor Progress**: Check training status using the `/models/{id}` endpoint until status shows 'Completed'.
             
-            8. **Generate Images**: Once trained, your model can be used in multiple ways:
-              - Use the `/text-to-image/tailored/{model_id}` endpoint for text-to-image generation
-              - Use the `/text-to-vector/tailored/{model_id}` endpoint for vector graphics
-              - Use the `/reimagine/tailored/{model_id}` endpoint for image variations
-              - Access through the Bria platform interface
+        8. **Generate Images**: Once trained, your model can be used in multiple ways:
+          - Use the `/text-to-image/tailored/{model_id}` endpoint for text-to-image generation
+          - Use the `/text-to-vector/tailored/{model_id}` endpoint for generating illustrative vector graphics
+          - Use the `/reimagine/tailored/{model_id}` endpoint for generating using a structure reference images
+          - Access through the Bria platform interface
     
-            Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
+        Alternatively, you can use the Bria platform to manage and train your tailored models through a user-friendly interface. Access the Bria platform [here](https://platform.bria.ai/console/tailored-generation).          
 
 
         ### Guidance Methods

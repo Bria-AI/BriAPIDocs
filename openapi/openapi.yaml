@@ -412,7 +412,6 @@ paths:
                     The mode to apply to the image guidance. 
                     - `regular`: Uses both content and style from the provided image for the generation.
                     - `style_only`: Uses only the style from the provided image.
-                  required: false
                 image_prompt_file:
                   type: string
                   required: false

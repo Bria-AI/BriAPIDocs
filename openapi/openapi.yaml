@@ -5293,15 +5293,15 @@ paths:
                   description: 
                     This parameter allows you to control the positioning of the product in the image. 
 
-                    - "original" will preserve the original position of the product in the image. 
+                    - **original** will preserve the original position of the product in the image. 
 
-                    - "automatic" will generate results with 7 of the recommended positions for the product (all except the upper ones).
+                    - **automatic** will generate results with 7 of the recommended positions for the product (all except the upper ones).
 
-                    - "manual_placement" will allow you to select predefined positions, using the parameter "manual_placement_selection". 
+                    - **manual_placement** will allow you to select predefined positions, using the parameter "manual_placement_selection". 
 
-                    - "custom_coordinates" Provides precise control over the size and position of the image using the parameters "foreground_image_size" and "foreground_image_location". This includes positions outside the canvas, which may result in cropping. 
+                    - **custom_coordinates** Provides precise control over the size and position of the image using the parameters "foreground_image_size" and "foreground_image_location". This includes positions outside the canvas, which may result in cropping. 
 
-                    - "manual_padding" will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                    - **manual_padding** will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
                   enum: ["original", "automatic", "manual_placement", "manual_padding", "custom_coordinates"]
                 original_quality:
                   type: boolean
@@ -5487,15 +5487,15 @@ paths:
                   description: 
                     This parameter allows you to control the positioning of the product in the image. 
 
-                    - "original" will preserve the original position of the product in the image. 
+                    - **original** will preserve the original position of the product in the image. 
 
-                    - "automatic" will generate results with 7 of the recommended positions for the product (all except the upper ones).
+                    - **automatic** will generate results with 7 of the recommended positions for the product (all except the upper ones).
 
-                    - "manual_placement" will allow you to select predefined positions, using the parameter "manual_placement_selection". 
+                    - **manual_placement** will allow you to select predefined positions, using the parameter "manual_placement_selection". 
 
-                    - "custom_coordinates" Provides precise control over the size and position of the image using the parameters "foreground_image_size" and "foreground_image_location". This includes positions outside the canvas, which may result in cropping. 
+                    - **custom_coordinates** Provides precise control over the size and position of the image using the parameters "foreground_image_size" and "foreground_image_location". This includes positions outside the canvas, which may result in cropping. 
 
-                    - "manual_padding" will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
+                    - **manual_padding** will allow you to control the position and size of the image by defining the desired padding in pixels around the product.
                   enum: ["original", "automatic", "manual_placement", "manual_padding", "custom_coordinates"]
                 original_quality:
                   type: boolean

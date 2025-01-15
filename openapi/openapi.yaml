@@ -5295,7 +5295,7 @@ paths:
 
                     - "original" will preserve the original position of the product in the image. 
 
-                    - "automatic" will generate results with 7 of the recommended positions for the product. (all except to the upper ones)
+                    - "automatic" will generate results with 7 of the recommended positions for the product (all except the upper ones).
 
                     - "manual_placement" will allow you to select predefined positions, using the parameter "manual_placement_selection". 
 
@@ -5489,7 +5489,7 @@ paths:
 
                     - "original" will preserve the original position of the product in the image. 
 
-                    - "automatic" will generate results with the 10 recommended positions for the product. 
+                    - "automatic" will generate results with 7 of the recommended positions for the product (all except the upper ones).
 
                     - "manual_placement" will allow you to select predefined positions, using the parameter "manual_placement_selection". 
 

@@ -414,7 +414,6 @@ paths:
                     - `style_only`: Uses only the style from the provided image.
                 image_prompt_file:
                   type: string
-                  required: false
                   description: |
                     The image file to be used as guidance for the IP-Adapter, in base64 format. Accepted formats are jpeg, jpg, png, webp.
                     Maximum file size 12MB.
@@ -780,7 +779,6 @@ paths:
                   default: 1.0
                   description: |
                     The impact of the provided image on the generated results. A value between 0.0 (no impact) and 1.0 (full impact).
-                  required: false
             examples:
               valid prompt:
                 value:
@@ -1563,10 +1561,8 @@ paths:
                     The mode to apply to the image guidance. 
                     - `regular`: Uses both content and style from the provided image for the generation.
                     - `style_only`: Uses only the style from the provided image.
-                  required: false
                 image_prompt_file:
                   type: string
-                  required: false
                   description: |
                     The image file to be used as guidance for the IP-Adapter, in base64 format. Accepted formats are jpeg, jpg, png, webp.
                     Maximum file size 12MB.
@@ -1578,7 +1574,6 @@ paths:
                   description: |
                     A list of URLs of images that should be used as guidance for the IP-Adapter. Accepted formats are jpeg, jpg, png, webp.
                     The URLs should point to accessible, publicly available images.
-                  required: false
                 image_prompt_scale:
                   type: number
                   format: float
@@ -1587,7 +1582,6 @@ paths:
                   default: 1.0
                   description: |
                     The impact of the provided image on the generated results. A value between 0.0 (no impact) and 1.0 (full impact).
-                  required: false
             examples:
               valid prompt:
                 value:
@@ -1891,10 +1885,8 @@ paths:
                     The mode to apply to the image guidance. 
                     - `regular`: Uses both content and style from the provided image for the generation.
                     - `style_only`: Uses only the style from the provided image.
-                  required: false
                 image_prompt_file:
                   type: string
-                  required: false
                   description: |
                     The image file to be used as guidance for the IP-Adapter, in base64 format. Accepted formats are jpeg, jpg, png, webp.
                     Maximum file size 12MB.
@@ -1906,7 +1898,6 @@ paths:
                   description: |
                     A list of URLs of images that should be used as guidance for the IP-Adapter. Accepted formats are jpeg, jpg, png, webp.
                     The URLs should point to accessible, publicly available images.
-                  required: false
                 image_prompt_scale:
                   type: number
                   format: float
@@ -1915,7 +1906,7 @@ paths:
                   default: 1.0
                   description: |
                     The impact of the provided image on the generated results. A value between 0.0 (no impact) and 1.0 (full impact).
-                  required: false
+                  
             examples:
               valid prompt:
                 value:
@@ -2240,10 +2231,8 @@ paths:
                     The mode to apply to the image guidance. 
                     - `regular`: Uses both content and style from the provided image for the generation.
                     - `style_only`: Uses only the style from the provided image.
-                  required: false
                 image_prompt_file:
                   type: string
-                  required: false
                   description: |
                     The image file to be used as guidance for the IP-Adapter, in base64 format. Accepted formats are jpeg, jpg, png, webp.
                     Maximum file size 12MB.
@@ -2255,7 +2244,6 @@ paths:
                   description: |
                     A list of URLs of images that should be used as guidance for the IP-Adapter. Accepted formats are jpeg, jpg, png, webp.
                     The URLs should point to accessible, publicly available images.
-                  required: false
                 image_prompt_scale:
                   type: number
                   format: float
@@ -2264,7 +2252,6 @@ paths:
                   default: 1.0
                   description: |
                     The impact of the provided image on the generated results. A value between 0.0 (no impact) and 1.0 (full impact).
-                  required: false
             examples:
               valid prompt:
                 value:
@@ -2543,10 +2530,8 @@ paths:
                     The mode to apply to the image guidance. 
                     - `regular`: Uses both content and style from the provided image for the generation.
                     - `style_only`: Uses only the style from the provided image.
-                  required: false
                 image_prompt_file:
                   type: string
-                  required: false
                   description: |
                     The image file to be used as guidance for the IP-Adapter, in base64 format. Accepted formats are jpeg, jpg, png, webp.
                     Maximum file size 12MB.
@@ -2558,7 +2543,6 @@ paths:
                   description: |
                     A list of URLs of images that should be used as guidance for the IP-Adapter. Accepted formats are jpeg, jpg, png, webp.
                     The URLs should point to accessible, publicly available images.
-                  required: false
                 image_prompt_scale:
                   type: number
                   format: float
@@ -2567,7 +2551,6 @@ paths:
                   default: 1.0
                   description: |
                     The impact of the provided image on the generated results. A value between 0.0 (no impact) and 1.0 (full impact).
-                  required: false
 
             examples:
               valid prompt:

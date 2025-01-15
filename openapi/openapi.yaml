@@ -283,7 +283,7 @@ paths:
           - **style_only**: Focuses only on the style of the input image, allowing the model to generate images based on the provided aesthetic without altering the content.
 
         **Using IP-Adapter**  
-          <table>
+        <table>
           <tr>
             <th>Guidance Method</th>
             <th>Prompt</th>
@@ -294,17 +294,17 @@ paths:
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a lion laid on a table.</td>
             <td>regular</td>
-            <td>0.8</td>
+            <td>0.85</td>
             <td style="width: 150px;"><img src="https://images.pexels.com/photos/3246665/pexels-photo-3246665.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/image.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a bird.</td>
             <td>style</td>
-            <td>0.8</td>
+            <td>1</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/photo-1575995872537-3793d29d972c.avif" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/seed_627499055.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
@@ -639,7 +639,7 @@ paths:
           - **style_only**: Focuses only on the style of the input image, allowing the model to generate images based on the provided aesthetic without altering the content.
 
         **Using IP-Adapter**  
-          <table>
+        <table>
           <tr>
             <th>Guidance Method</th>
             <th>Prompt</th>
@@ -650,17 +650,17 @@ paths:
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a lion laid on a table.</td>
             <td>regular</td>
-            <td>0.8</td>
+            <td>0.85</td>
             <td style="width: 150px;"><img src="https://images.pexels.com/photos/3246665/pexels-photo-3246665.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/image.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a bird.</td>
             <td>style</td>
-            <td>0.8</td>
+            <td>1</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/photo-1575995872537-3793d29d972c.avif" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/seed_627499055.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
@@ -1440,7 +1440,7 @@ paths:
           - **style_only**: Focuses only on the style of the input image, allowing the model to generate images based on the provided aesthetic without altering the content.
 
         **Using IP-Adapter**  
-          <table>
+        <table>
           <tr>
             <th>Guidance Method</th>
             <th>Prompt</th>
@@ -1451,17 +1451,17 @@ paths:
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a lion laid on a table.</td>
             <td>regular</td>
-            <td>0.8</td>
+            <td>0.85</td>
             <td style="width: 150px;"><img src="https://images.pexels.com/photos/3246665/pexels-photo-3246665.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/image.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a bird.</td>
             <td>style</td>
-            <td>0.8</td>
+            <td>1</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/photo-1575995872537-3793d29d972c.avif" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/seed_627499055.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
@@ -1785,17 +1785,17 @@ paths:
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a lion laid on a table.</td>
             <td>regular</td>
-            <td>0.8</td>
+            <td>0.85</td>
             <td style="width: 150px;"><img src="https://images.pexels.com/photos/3246665/pexels-photo-3246665.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/image.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a bird.</td>
             <td>style</td>
-            <td>0.8</td>
+            <td>1</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/photo-1575995872537-3793d29d972c.avif" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/seed_627499055.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
@@ -2105,7 +2105,6 @@ paths:
           - **style_only**: Focuses only on the style of the input image, allowing the model to generate images based on the provided aesthetic without altering the content.
 
         **Using IP-Adapter**  
-          
         <table>
           <tr>
             <th>Guidance Method</th>
@@ -2117,21 +2116,21 @@ paths:
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a lion laid on a table.</td>
             <td>regular</td>
-            <td>0.8</td>
+            <td>0.85</td>
             <td style="width: 150px;"><img src="https://images.pexels.com/photos/3246665/pexels-photo-3246665.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/image.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a bird.</td>
             <td>style</td>
-            <td>0.8</td>
+            <td>1</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/photo-1575995872537-3793d29d972c.avif" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/seed_627499055.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
-        </table> 
+        </table>
 
       operationId: text-to-image/tailored
       parameters:
@@ -2405,7 +2404,7 @@ paths:
           - **style_only**: Focuses only on the style of the input image, allowing the model to generate images based on the provided aesthetic without altering the content.
 
         **Using IP-Adapter**  
-          <table>
+        <table>
           <tr>
             <th>Guidance Method</th>
             <th>Prompt</th>
@@ -2416,17 +2415,17 @@ paths:
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a lion laid on a table.</td>
             <td>regular</td>
-            <td>0.8</td>
+            <td>0.85</td>
             <td style="width: 150px;"><img src="https://images.pexels.com/photos/3246665/pexels-photo-3246665.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/image.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
           <tr>
             <td>IP-adapter</td>
-            <td>a steaming coffee mug</td>
+            <td>A drawing of a bird.</td>
             <td>style</td>
-            <td>0.8</td>
+            <td>1</td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/photo-1575995872537-3793d29d972c.avif" alt="Input Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
             <td style="width: 150px;"><img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/seed_627499055.png" alt="Output Image" style="width: 150px; height: 150px; object-fit: contain;"></td>
           </tr>
@@ -4957,6 +4956,7 @@ paths:
           description: Request limit exceeded. Your account has reached its maximum allowed requests. Please upgrade your plan or try again later.
         '500':
           description: Internal server error
+  
   # product-shot routes
   /product/cutout:
     post:
@@ -5295,7 +5295,7 @@ paths:
 
                     - "original" will preserve the original position of the product in the image. 
 
-                    - "automatic" will generate results with the 10 recommended positions for the product. 
+                    - "automatic" will generate results with 7 of the recommended positions for the product. (all except to the upper ones)
 
                     - "manual_placement" will allow you to select predefined positions, using the parameter "manual_placement_selection". 
 

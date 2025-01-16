@@ -211,7 +211,7 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation.  These methods condition the model on additional inputs derived from user-provided images.
 
         
-        **Control Nets**:
+        **ControlNets**:
 
         A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
         
@@ -268,7 +268,7 @@ paths:
         </table>
         
 
-        To use **Control Nets** guidance method, include the following parameters in your request:
+        To use **ControlNets** guidance method, include the following parameters in your request:
         
         - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
@@ -565,7 +565,7 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation.  These methods condition the model on additional inputs derived from user-provided images.
 
         
-          **Control Nets**:
+          **ControlNets**:
 
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
@@ -624,7 +624,7 @@ paths:
         </table>
         
 
-        To use **Control Nets** guidance method, include the following parameters in your request:
+        To use **ControlNets** guidance method, include the following parameters in your request:
         
         - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
@@ -1366,7 +1366,7 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation.  These methods condition the model on additional inputs derived from user-provided images.
 
         
-          **Control Nets**:
+          **ControlNets**:
 
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
@@ -1425,7 +1425,7 @@ paths:
         </table>
         
 
-        To use **Control Nets** guidance method, include the following parameters in your request:
+        To use **ControlNets** guidance method, include the following parameters in your request:
         
         - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
@@ -1700,7 +1700,7 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation.  These methods condition the model on additional inputs derived from user-provided images.
 
         
-          **Control Nets**:
+          **ControlNets**:
 
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
@@ -1759,7 +1759,7 @@ paths:
         </table>
         
 
-        To use **Control Nets** guidance method, include the following parameters in your request:
+        To use **ControlNets** guidance method, include the following parameters in your request:
         
         - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
@@ -2031,7 +2031,7 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation.  These methods condition the model on additional inputs derived from user-provided images.
 
         
-          **Control Nets**:
+          **ControlNets**:
 
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
@@ -2090,7 +2090,7 @@ paths:
         </table>
         
 
-        To use **Control Nets** guidance method, include the following parameters in your request:
+        To use **ControlNets** guidance method, include the following parameters in your request:
         
         - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         
@@ -2332,7 +2332,7 @@ paths:
         This API supports various guidance methods to provide greater control over text-to-image generation.  These methods condition the model on additional inputs derived from user-provided images.
 
         
-        **Control Nets**:
+        **ControlNets**:
 
         A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
         
@@ -2389,7 +2389,7 @@ paths:
         </table>
         
 
-        To use **Control Nets** guidance method, include the following parameters in your request:
+        To use **ControlNets** guidance method, include the following parameters in your request:
         
         - `guidance_method_X`: Specify the guidance method (where X is 1, 2). If the paramter guidance_method_2 is used, so does guidance_method_1 has to be used, and so on. If you would like to use only one method, use the paratmer guidance_method_1
         

@@ -213,6 +213,7 @@ paths:
         
         **ControlNets**:
 
+
         A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
         
         - **controlnet_canny**: Uses edge information from the input image to guide generation based on structural outlines.
@@ -566,6 +567,7 @@ paths:
 
         
           **ControlNets**:
+
 
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
@@ -1368,6 +1370,7 @@ paths:
         
           **ControlNets**:
 
+
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
           - **controlnet_canny**: Uses edge information from the input image to guide generation based on structural outlines.
@@ -1702,6 +1705,7 @@ paths:
         
           **ControlNets**:
 
+
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
           - **controlnet_canny**: Uses edge information from the input image to guide generation based on structural outlines.
@@ -2033,6 +2037,7 @@ paths:
         
           **ControlNets**:
 
+
           A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
           
           - **controlnet_canny**: Uses edge information from the input image to guide generation based on structural outlines.
@@ -2333,6 +2338,7 @@ paths:
 
         
         **ControlNets**:
+
 
         A set of methods that allow conditioning the model on additional inputs, providing detailed control over image generation.
         

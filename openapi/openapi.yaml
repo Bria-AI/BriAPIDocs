@@ -5654,16 +5654,15 @@ paths:
               type: object
               properties:
                 template_id:
-                  type: [string,number]
+                  type: string
                   description: The ID of the template.
                   required: true
                 brand_id:
-                  required: false
                   type: string
                   description: The ID of the brand.
-                background_color:
+                canvas_color:
+                  default: #FFFFFF
                   type: string
-                  required: false
                   description: Canvas background color in hex format.
                 smart_image:
                   type: object
@@ -5673,12 +5672,10 @@ paths:
                   properties:
                     main_object_url:
                       type: string
-                      required: true
                       description: URL of the main smart image object.
                     background:
                       description: >
                         Background object to determine the operation type and its associated input.
-                      default: #FFFFFF
                       type: object
                       properties:
                         operation:
@@ -5699,26 +5696,22 @@ paths:
                     properties:
                       layer_type:
                           type: string
-                          required: true
                           description: The element type, either "text" or "image".
                           enum: [text, image]
                       content_type:
                         type: string
-                        required: true
                         description: >
                           The heading level configuration for the text. This allows the same text to be inserted into multiple elements across scenes.
 
                           Value should be in the format - `Heading *`, `Body *`, `Image *` when * can be replaced with any number between 1-5.
                       content:
                         type: string
-                        required: true
                         description: >
                           Content of the text or image, if `content_type` is set to `text` it should be a string, and if `content_type` is `image` it should be an image URL.
 
                           To ignore this element, set this parameter to an empty string.
                       id:
                         type: string
-                        required: false
                         description: Unique identifier for the element.
                       text_configs:
                         type: object
@@ -5727,7 +5720,6 @@ paths:
                         properties:
                           highlight_color:
                             type: string
-                            required: false
                             description: Color to highlight the text.
                           strikethrough:
                             type: boolean

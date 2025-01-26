@@ -5740,8 +5740,6 @@ paths:
                                   y:
                                     type: number
                                     description: Shadow's y-axis offset.
-                required:
-                  - template_id
             example:
               template_id: "123"
               smart_image:

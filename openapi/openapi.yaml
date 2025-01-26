@@ -5698,12 +5698,10 @@ paths:
                     type: object
                     properties:
                       layer_type:
-                        type: string
-                        required: true
-                        description: The element type eigher text or an image.
-                        enum:
-                            - text
-                            - image
+                          type: string
+                          required: true
+                          description: The element type, either "text" or "image".
+                          enum: [text, image]
                       content_type:
                         type: string
                         required: true

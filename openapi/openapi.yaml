@@ -5624,7 +5624,7 @@ paths:
         BRIA's Campaign Generation API provides a unique and scalable solution for producing professional-grade ads while minimizing the need for time-consuming design work.
 
         
-        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/Campaign.png" width="400"/>
+        <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/Campaign.jpg" width="400"/>
 
         
         **Smart Image Feature**  
@@ -5654,21 +5654,31 @@ paths:
               type: object
               properties:
                 template_id:
-                  type: string
+                  type: [string,number]
                   description: The ID of the template.
+                  required: true
                 brand_id:
+                  required: false
                   type: string
-                  description: The ID of the brand (optional).
+                  description: The ID of the brand.
                 background_color:
                   type: string
-                  description: Canvas background color in hex format (optional).
+                  required: false
+                  description: Canvas background color in hex format.
                 smart_image:
                   type: object
+                  reuqired: false
+                  description: >
+                    Smart image object for generating an image based on the embedded image, including the main object and its background definition (expand or replace).
                   properties:
                     main_object_url:
                       type: string
+                      required: true
                       description: URL of the main smart image object.
                     background:
+                      description: >
+                        Background object to determine the operation type and its associated input.
+                      default: #FFFFFF
                       type: object
                       properties:
                         operation:
@@ -5683,26 +5693,43 @@ paths:
                           description: Background prompt or hex color for the image’s background.
                 elements:
                   type: array
+                  description: List of text/images objects
                   items:
                     type: object
                     properties:
                       layer_type:
                         type: string
-                        description: The element type.
-                      id:
-                        type: string
-                        description: Unique identifier for the element (optional).
+                        required: true
+                        description: The element type eigher text or an image.
+                        enum:
+                            - text
+                            - image
                       content_type:
                         type: string
-                        description: Heading or body configuration.
+                        required: true
+                        description: >
+                          The heading level configuration for the text. This allows the same text to be inserted into multiple elements across scenes.
+
+                          Value should be in the format - `Heading *`, `Body *`, `Image *` when * can be replaced with any number between 1-5.
                       content:
                         type: string
-                        description: Content of the text or image.
+                        required: true
+                        description: >
+                          Content of the text or image, if `content_type` is set to `text` it should be a string, and if `content_type` is `image` it should be an image URL.
+
+                          To ignore this element, set this parameter to an empty string.
+                      id:
+                        type: string
+                        required: false
+                        description: Unique identifier for the element.
                       text_configs:
                         type: object
+                        description: >
+                          Text configs object to set text configuration to be applied to the text element
                         properties:
                           highlight_color:
                             type: string
+                            required: false
                             description: Color to highlight the text.
                           strikethrough:
                             type: boolean

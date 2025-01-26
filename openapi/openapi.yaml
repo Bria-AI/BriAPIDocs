@@ -5656,7 +5656,6 @@ paths:
                 template_id:
                   type: string
                   description: The ID of the template.
-                  required: true
                 brand_id:
                   type: string
                   description: The ID of the brand.
@@ -5666,7 +5665,6 @@ paths:
                   description: Canvas background color in hex format.
                 smart_image:
                   type: object
-                  reuqired: false
                   description: >
                     Smart image object for generating an image based on the embedded image, including the main object and its background definition (expand or replace).
                   properties:

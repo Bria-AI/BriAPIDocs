@@ -5740,6 +5740,23 @@ paths:
                                   y:
                                     type: number
                                     description: Shadow's y-axis offset.
+                          fix_text_box: 
+                            type: object
+                            description: >-
+                              The “Fix text box” object allows you to specify the text box dimensions and the max font size and it will resize the content text within the text box.
+                            properties:
+                              width:
+                                type: number
+                                format: float
+                                description: The width of the text box in pixels
+                              height:
+                                type: number
+                                format: float
+                                description: The height of the text box in pixels
+                              max_font_size:
+                                type: number
+                                format: int
+                                description: The maximum font size to ensure that, during rescaling, the font size does not exceed this value.
             example:
               template_id: "123"
               smart_image:

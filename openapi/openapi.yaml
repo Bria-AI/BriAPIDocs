@@ -5793,7 +5793,7 @@ paths:
                 properties:
                   result:
                     type: array
-                    description: An list of objects, where each object contains an image URL corresponding to a scene in the template, the scene's name, and its resolution.
+                    description: A list of objects, where each object contains an image URL corresponding to a scene in the template, the scene's name, and its resolution.
                     items:
                       type: object
                       properties:

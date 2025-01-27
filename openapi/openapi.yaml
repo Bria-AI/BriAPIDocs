@@ -5793,7 +5793,7 @@ paths:
                 properties:
                   result:
                     type: array
-                    description: An array of objects, where each object contains an image URL corresponding to a scene in the template, the scene's name, and its resolution.
+                    description: An list of objects, where each object contains an image URL corresponding to a scene in the template, the scene's name, and its resolution.
                     items:
                       type: object
                       properties:
@@ -5837,11 +5837,12 @@ paths:
           description: API token associated with the organization.
       responses:
         '200':
-          description: The list of brands, where each brand is an object containing the following properties - ID, name, description, and creation date.
+          description: Successfully retrieved list of brands.
           content:
             application/json:
               schema:
                 type: array
+                description: The list of brands, where each brand is an object containing the following properties - ID, name, description, and creation date.
                 items:
                   type: object
                   properties:
@@ -5871,10 +5872,11 @@ paths:
           description: API token associated with the organization.
       responses:
         '200':
-          description: The list of templates, where each template is an object containing the following properties - ID, name, description, creation date, number of scenes and a preview.
+          description: Successfully retrieved list of templates.
           content:
             application/json:
               schema:
+                description: The list of templates, where each template is an object containing the following properties - ID, name, description, creation date, number of scenes and a preview.
                 type: array
                 items:
                   type: object
@@ -5882,8 +5884,6 @@ paths:
                     id:
                       type: integer
                     name:
-                      type: string
-                    description:
                       type: string
                     created_at:
                       type: string
@@ -5915,11 +5915,12 @@ paths:
           description: The ID of the template.
       responses:
         '200':
-          description: The requested template ID object, containing its ID, scene number, and the elements object.
+          description: Successfully retrieved template details.
           content:
             application/json:
               schema:
                 type: object
+                description: A list of objects providing information about the different scenes in the template, including each scene's ID, scene number, and its elements.
                 properties:
                   id:
                     type: string

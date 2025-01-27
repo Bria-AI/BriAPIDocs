@@ -5658,7 +5658,7 @@ paths:
                   description: The ID of the template to be used for generating the campaign scenes.
                 brand_id:
                   type: string
-                  description: The ID of the brand.
+                  description: The ID of the brand to be used across all scenes in the template.
                 canvas_color:
                   default: "#FFFFFF"
                   type: string

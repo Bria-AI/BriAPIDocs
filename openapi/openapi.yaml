@@ -5808,7 +5808,7 @@ paths:
                         name:
                           type: string
                           description: The name of the scene from the template used to generate the image.
-                          example: "scene_2"
+                          example: "scene_name"
                         url:
                           type: string
                           description: The URL to download the generated scene result as a .png image.

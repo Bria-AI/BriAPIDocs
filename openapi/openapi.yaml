@@ -5655,7 +5655,7 @@ paths:
               properties:
                 template_id:
                   type: string
-                  description: The ID of the template.
+                  description: The ID of the template to be used for generating the campaign scenes.
                 brand_id:
                   type: string
                   description: The ID of the brand.
@@ -5666,11 +5666,11 @@ paths:
                 smart_image:
                   type: object
                   description: >
-                    Smart image object for generating an image based on the embedded image, including the main object and its background definition (expand or replace).
+                    Smart image object for generating an image based on the embedded image, including the main object and its background definition (`expand` or `generate_by_text`).
                   properties:
                     main_object_url:
                       type: string
-                      description: URL of the main smart image object.
+                      description: URL of the main image that will be embedded within the smart image.
                     background:
                       description: >
                         Background object to determine the operation type and its associated input.
@@ -5686,6 +5686,8 @@ paths:
                         input:
                           type: string
                           description: Background prompt or hex color for the image’s background.
+                  required:
+                    - main_object_url
                 elements:
                   type: array
                   description: List of text/images objects
@@ -5736,9 +5738,11 @@ paths:
                                 properties:
                                   x:
                                     type: number
+                                    format: int
                                     description: Shadow's x-axis offset.
                                   y:
                                     type: number
+                                    format: int
                                     description: Shadow's y-axis offset.
                           fix_text_box: 
                             type: object

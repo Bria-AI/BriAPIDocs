@@ -5826,7 +5826,7 @@ paths:
         - Campaign Generation (Coming soon)
       summary: Get Brands
       description: >
-       Get a list of brands that can be used to customize your campaign with the brand's colors, fonts, and logos. Brands are created in BRIA’s Campaign Editor application by the organization's Admins.
+        Get a list of brands that can be used to customize your campaign with the brand's colors, fonts, and logos. Brands are created in BRIA’s Campaign Editor application by the organization's Admins.
       operationId: getBrands
       parameters:
         - in: header
@@ -5876,8 +5876,8 @@ paths:
           content:
             application/json:
               schema:
-                description: The list of templates, where each template is an object containing the following properties - ID, name, description, creation date, number of scenes and a preview.
                 type: array
+                description: The list of templates, where each template is an object containing the following properties - ID, name, description, creation date, number of scenes, and a preview.
                 items:
                   type: object
                   properties:
@@ -5941,7 +5941,7 @@ paths:
           description: Unauthorized. Invalid API key or authentication token.
         '404':
           description: Template not found for the provided template ID.
-  
+
   # video editing routes
   /video/background/remove:
     post:

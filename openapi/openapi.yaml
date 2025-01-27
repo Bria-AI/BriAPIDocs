@@ -5627,6 +5627,11 @@ paths:
         <img src="https://bria-datasets.s3.us-east-1.amazonaws.com/temp_exp_or/Campaign.jpg" width="400"/>
 
         
+        **Tempalte**  
+
+        Templates enable to repurpose and reuse well-design ads that share the same style, content and branded elements.It consists of multiple ads (“scenes”) and includes configurations for customizing the content at scale.
+
+
         **Smart Image Feature**  
         
         A standout feature of BRIA's Campaign Generation API is its ability to seamlessly embed objects, products, and presenter images into another image (a "smart image"). This AI-powered capability allows for generating diverse backgrounds for the embedded image or extending the background to fit the ad's design perfectly.

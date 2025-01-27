@@ -5800,15 +5800,18 @@ paths:
                         name:
                           type: string
                           description: The name of the scene from the template used to generate the image.
+                          example: "scene_2"
                         url:
                           type: string
                           description: The URL to download the generated scene result as a .png image.
+                          example: "IMAGE_URL"
                         resolution:
                           type: array
                           description: The resolution of the generated image, represented as [width, height].
                           items:
                             type: number
                             format: int
+                          example: [1000,1000]
         '400':
           description: Bad request.
         '401':

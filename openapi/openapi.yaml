@@ -5846,8 +5846,8 @@ paths:
           content:
             application/json:
               schema:
-                type: array
                 description: The list of brands, where each brand is an object containing the following properties - ID, name, description, and creation date.
+                type: array
                 items:
                   type: object
                   properties:

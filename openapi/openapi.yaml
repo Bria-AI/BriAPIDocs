@@ -5826,7 +5826,7 @@ paths:
         - Campaign Generation (Coming soon)
       summary: Get Brands
       description: >
-        Get a list of brands that can be used to customize your campaign with the brand's colors, fonts, and logos. Brands are created in BRIA’s Campaign Editor application by the organization's Admins.
+        Get the list of brands created by your organization, used to customize campaigns with colors, fonts, and logos. Brands are managed in BRIA’s Campaign Editor by your organization's Admins.
       operationId: getBrands
       parameters:
         - in: header
@@ -5861,7 +5861,7 @@ paths:
       tags:
         - Campaign Generation (Coming soon)
       summary: Get List of Templates
-      description: Retrieve a list of templates available for campaign generation.
+      description: Get the list of templates created by your organization, available for use in campaign generation.
       operationId: getTemplates
       parameters:
         - in: header

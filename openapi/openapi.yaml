@@ -5685,7 +5685,7 @@ paths:
                             - generate_by_text
                         input:
                           type: string
-                          description: Background prompt or hex color for the image’s background.
+                          description: Background prompt or hex color for the image’s background. If the operation chosen is "expand" this parameter is ignored.
                   required:
                     - main_object_url
                 elements:

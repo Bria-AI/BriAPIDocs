@@ -5618,6 +5618,9 @@ paths:
         - Campaign Generation (Coming soon)
       summary: Generate a Campaign
       description: >
+        **Contact Us in order to get access to the Campaign Generation API and iframe** [Click here to reach out](https://bria.ai/contact-us)
+        
+        
         The Campaign Generation API enables the creation of multiple ads (scenes) in various sizes and resolutions, all unified by the same branding, style, and messaging. This is essential for testing different ad variations, repurposing successful ad formats, and significantly reducing the manual effort required to create multiple ads. 
 
         

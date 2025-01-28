@@ -5799,7 +5799,7 @@ paths:
               schema:
                 type: object
                 properties:
-                  result:
+                  results:
                     type: array
                     description: A list of objects, where each object contains an image URL corresponding to a scene in the template, the scene's name, and its resolution.
                     items:
@@ -5834,7 +5834,7 @@ paths:
         - Campaign Generation (Coming soon)
       summary: Get Brands
       description: >
-        Get the list of brands created by your organization, used to customize campaigns with colors, fonts, and logos. Brands are managed in BRIA’s Campaign Editor by your organization's Admins.
+        Get the list of brands associated with your token, used to customize campaigns with colors, fonts, and logos.
       operationId: getBrands
       parameters:
         - in: header
@@ -5868,8 +5868,9 @@ paths:
     get:
       tags:
         - Campaign Generation (Coming soon)
-      summary: Get List of Templates
-      description: Get the list of templates created by your organization, available for use in campaign generation.
+      summary: Get Templates
+      description: >
+        Get the list of templates associated with your token, used for campaign generation.
       operationId: getTemplates
       parameters:
         - in: header
@@ -5905,7 +5906,7 @@ paths:
     get:
       tags:
         - Campaign Generation (Coming soon)
-      summary: Get Template Information
+      summary: Get Template info by ID
       description: Retrieve details for a specific template by template ID.
       operationId: getTemplateInfo
       parameters:
@@ -5927,14 +5928,16 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                type: array
                 description: A list of objects providing information about the different scenes in the template, including each scene's ID, scene number, and its elements.
-                properties:
-                  id:
-                    type: string
-                  scene_number:
-                    type: integer
-                  elements:
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    scene_number:
+                      type: integer
+                    elements:
                     type: array
                     items:
                       type: object

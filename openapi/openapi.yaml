@@ -7739,6 +7739,7 @@ paths:
         '506':
           description: Insufficient data. The given input is not supported by the Bria API.
   
+  
   # search routes
   /caption:
     post:

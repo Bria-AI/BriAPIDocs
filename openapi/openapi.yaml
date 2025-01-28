@@ -51,7 +51,7 @@ info:
     - Enhance your prompts with the `/prompt_enhancer` route or use the built-in prompt enhancement feature in /text-to-image routes to create more detailed and vivid descriptions, resulting in richer and more diverse image outputs.
 
     **Tailored Generation**:  
-    
+
     The Tailored Generation API allows you to manage and train Tailored Models that preserve and faithfully reproduce your visual IP (photos, illustrations, vectors). You can train Tailored Models through our Console or implement training on your platform via API. Check out our Console <a href="https://platform.bria.ai/console/tailored-generation" target="_blank">here</a>.
 
     ### Training Process Overview
@@ -5613,7 +5613,7 @@ paths:
           description: Successful operation.
 
   # campaign gen routes          
-  /campaign_api/generate:
+  /campaign-gen/create:
     post:
       tags:
         - Campaign Generation
@@ -5829,7 +5829,7 @@ paths:
           description: Value error in the request body.
         '500':
           description: Internal server error.
-  /campaign_api/brands:
+  /campaign-gen/brands:
     get:
       tags:
         - Campaign Generation
@@ -5865,7 +5865,7 @@ paths:
                       type: string
         '401':
           description: Unauthorized. Invalid API key or authentication token.
-  /campaign_api/templates:
+  /campaign-gen/templates:
     get:
       tags:
         - Campaign Generation
@@ -5903,7 +5903,7 @@ paths:
                       type: string
         '401':
           description: Unauthorized. Invalid API key or authentication token.
-  /campaign_api/templates/{template_id}:
+  /campaign-gen/templates/{template_id}:
     get:
       tags:
         - Campaign Generation

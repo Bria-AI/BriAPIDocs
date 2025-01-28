@@ -99,6 +99,20 @@ info:
     
     - `/lifestyle_shot_by_image`: Generate product images in enriched environments using a reference image for inspiration, allowing for creative and unique presentations.
 
+
+    ### Campaign API Suite
+
+    Bria's Campaign API suite streamlines the process of creating, managing, and customizing advertising campaigns, providing powerful tools for scalable and efficient campaign generation.
+
+    These solutions include:
+
+    - `/create`: Generate advertising campaigns using Template IDs and content inputs, enabling rapid creation of professional-grade ad variations.
+
+    - `/brands`: Retrieve a list of brands along with their associated logos, colors, and fonts, providing the building blocks for brand-aligned campaigns.
+
+    - `/templates`: Access a list of templates, including their IDs, names, number of scenes, and a preview of the first scene, to assist in campaign planning and selection.
+
+    - `/templates/{template_id}`: Fetch detailed JSON data for a specific template, including all its elements, enabling precise customization and adaptation.
     
 
     ### Video Editing

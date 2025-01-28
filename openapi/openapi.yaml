@@ -50,7 +50,7 @@ info:
     
     - Enhance your prompts with the `/prompt_enhancer` route or use the built-in prompt enhancement feature in /text-to-image routes to create more detailed and vivid descriptions, resulting in richer and more diverse image outputs.
 
-    **Tailored Generation**:
+    **Tailored Generation**:  
     The Tailored Generation API allows you to manage and train Tailored Models that preserve and faithfully reproduce your visual IP (photos, illustrations, vectors). You can train Tailored Models through our Console or implement training on your platform via API. Check out our Console <a href="https://platform.bria.ai/console/tailored-generation" target="_blank">here</a>.
 
     ### Training Process Overview

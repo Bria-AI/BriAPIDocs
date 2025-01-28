@@ -5867,7 +5867,7 @@ paths:
   /campaign_api/templates:
     get:
       tags:
-        - Campaign Generation (Coming soon)
+        - Campaign Generation
       summary: Get Templates
       description: >
         Get the list of templates associated with your token, used for campaign generation.

@@ -5940,14 +5940,14 @@ paths:
                     elements:
                       type: array
                       items:
-                      type: object
-                      properties:
-                        layer_type:
-                          type: string
-                        content_type:
-                          type: string
-                        content:
-                          type: string
+                        type: object
+                        properties:
+                          layer_type:
+                            type: string
+                          content_type:
+                            type: string
+                          content:
+                            type: string
         '401':
           description: Unauthorized. Invalid API key or authentication token.
         '404':

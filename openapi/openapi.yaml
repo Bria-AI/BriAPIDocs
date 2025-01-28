@@ -133,7 +133,7 @@ info:
 
     - `/eraser` - Erase elements from an image using manually created or auto-generated masks. 
 
-    - `/gen_fill` (coming soon) -  GenFill generates objects in a specific region of an image, using a mask and a textual prompt.
+    - `/gen_fill` -  GenFill generates objects in a specific region of an image, using a mask and a textual prompt.
         
     - `/caption` - Generate a caption describing the given image.
 
@@ -5615,7 +5615,7 @@ paths:
   /campaign_api/generate:
     post:
       tags:
-        - Campaign Generation (Coming soon)
+        - Campaign Generation
       summary: Generate a Campaign
       description: >
         **Contact Us in order to get access to the Campaign Generation API and iframe** [Click here to reach out](https://bria.ai/contact-us)
@@ -5831,7 +5831,7 @@ paths:
   /campaign_api/brands:
     get:
       tags:
-        - Campaign Generation (Coming soon)
+        - Campaign Generation
       summary: Get Brands
       description: >
         Get the list of brands associated with your token, used to customize campaigns with colors, fonts, and logos.
@@ -5905,7 +5905,7 @@ paths:
   /campaign_api/templates/{template_id}:
     get:
       tags:
-        - Campaign Generation (Coming soon)
+        - Campaign Generation
       summary: Get Template info by ID
       description: Retrieve details for a specific template by template ID.
       operationId: getTemplateInfo

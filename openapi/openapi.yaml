@@ -5627,7 +5627,7 @@ paths:
           description: Successful operation.
 
   # campaign gen routes          
-  /campaign-gen/create:
+  /campaign_api/create:
     post:
       tags:
         - Campaign Generation
@@ -5843,7 +5843,7 @@ paths:
           description: Value error in the request body.
         '500':
           description: Internal server error.
-  /campaign-gen/brands:
+  /campaign_api/brands:
     get:
       tags:
         - Campaign Generation
@@ -5879,7 +5879,7 @@ paths:
                       type: string
         '401':
           description: Unauthorized. Invalid API key or authentication token.
-  /campaign-gen/templates:
+  /campaign_api/templates:
     get:
       tags:
         - Campaign Generation
@@ -5917,7 +5917,7 @@ paths:
                       type: string
         '401':
           description: Unauthorized. Invalid API key or authentication token.
-  /campaign-gen/templates/{template_id}:
+  /campaign_api/templates/{template_id}:
     get:
       tags:
         - Campaign Generation
